@@ -1,0 +1,75 @@
+mutation CheckInPlayer($input: CheckInPlayerInput!) {
+  checkInPlayer(input: $input) {
+    registration {
+      id
+      status
+    }
+    seatAssignment {
+      id
+      tournamentId
+      clubTableId
+      userId
+      seatNumber
+      stackSize
+      isCurrent
+      assignedAt
+    }
+    message
+  }
+}
+
+mutation AssignPlayerToSeat($input: AssignPlayerToSeatInput!) {
+  assignPlayerToSeat(input: $input) {
+    id
+    tournamentId
+    clubTableId
+    userId
+    seatNumber
+    stackSize
+    isCurrent
+    assignedAt
+  }
+}
+
+mutation MovePlayer($input: MovePlayerInput!) {
+  movePlayer(input: $input) {
+    id
+    tournamentId
+    clubTableId
+    userId
+    seatNumber
+    stackSize
+    isCurrent
+    assignedAt
+  }
+}
+
+mutation UpdateStackSize($input: UpdateStackSizeInput!) {
+  updateStackSize(input: $input) {
+    id
+    tournamentId
+    clubTableId
+    userId
+    seatNumber
+    stackSize
+    isCurrent
+    assignedAt
+  }
+}
+
+mutation BalanceTables($input: BalanceTablesInput!) {
+  balanceTables(input: $input) {
+    id
+    tournamentId
+    clubTableId
+    userId
+    seatNumber
+    stackSize
+    isCurrent
+    assignedAt
+  }
+}
+
+mutation EliminatePlayer($tournamentId: ID!, $userId: ID!, $notes: String) {
+  eliminatePlayer(tournamentId: $tournamentId, userId: $userId, notes: $notes)
+}

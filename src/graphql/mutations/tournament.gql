@@ -1,0 +1,96 @@
+mutation AssignTableToTournament($input: AssignTableToTournamentInput!) {
+  assignTableToTournament(input: $input) {
+    id
+    tournamentId
+    tableNumber
+    maxSeats
+  }
+}
+
+mutation RegisterForTournament($input: RegisterForTournamentInput!) {
+  registerForTournament(input: $input) {
+    id
+    tournamentId
+    userId
+    registrationTime
+    status
+    notes
+  }
+}
+
+mutation AddTournamentEntry($input: AddTournamentEntryInput!) {
+  addTournamentEntry(input: $input) {
+    id
+    tournamentId
+    userId
+    entryType
+    amountCents
+    chipsReceived
+    recordedBy
+    notes
+    createdAt
+    updatedAt
+  }
+}
+
+mutation DeleteTournamentEntry($entryId: ID!) {
+  deleteTournamentEntry(entryId: $entryId)
+}
+
+mutation EnterTournamentResults($input: EnterTournamentResultsInput!) {
+  enterTournamentResults(input: $input) {
+    success
+    results {
+      id
+      tournamentId
+      userId
+      finalPosition
+      prizeCents
+      points
+      notes
+      createdAt
+    }
+    deal {
+      id
+      tournamentId
+      dealType
+      affectedPositions
+      customPayouts {
+        userId
+        amountCents
+      }
+      totalAmountCents
+      notes
+      createdBy
+    }
+  }
+}
+
+mutation UpdateTournamentStatus($input: UpdateTournamentStatusInput!) {
+  updateTournamentStatus(input: $input) {
+    id
+    title
+    liveStatus
+    status
+  }
+}
+
+mutation CancelRegistration($input: CancelRegistrationInput!) {
+  cancelRegistration(input: $input) {
+    registration {
+      id
+      status
+    }
+    promotedPlayer {
+      registration {
+        id
+        status
+      }
+      user {
+        id
+        firstName
+        lastName
+      }
+    }
+  }
+}

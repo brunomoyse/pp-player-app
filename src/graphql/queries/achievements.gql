@@ -1,0 +1,31 @@
+query GetMyAchievements {
+  myAchievements {
+    id
+    progress
+    unlockedAt
+    isLocked
+    achievement {
+      id
+      code
+      nameKey
+      descriptionKey
+      category
+      icon
+      tier
+      thresholdValue
+    }
+  }
+}
+
+query GetAchievementsCatalog {
+  achievements {
+    id
+    code
+    nameKey
+    descriptionKey
+    category
+    icon
+    tier
+    thresholdValue
+  }
+}

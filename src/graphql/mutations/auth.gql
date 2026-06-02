@@ -1,0 +1,32 @@
+mutation LoginUser($input: UserLoginInput!) {
+  loginUser(input: $input) {
+    token
+    user {
+      id
+      email
+      username
+      firstName
+      lastName
+      role
+      managedClub {
+        id
+        name
+      }
+    }
+  }
+}
+
+mutation RegisterUser($input: UserRegistrationInput!) {
+  registerUser(input: $input) {
+    id
+    email
+    username
+    firstName
+    lastName
+    role
+    managedClub {
+      id
+      name
+    }
+  }
+}

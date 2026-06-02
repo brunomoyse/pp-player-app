@@ -1,0 +1,95 @@
+subscription TournamentClockUpdates($tournamentId: ID!) {
+  tournamentClockUpdates(tournamentId: $tournamentId) {
+    id
+    tournamentId
+    status
+    currentLevel
+    timeRemainingSeconds
+    levelStartedAt
+    levelEndTime
+    totalPauseDurationSeconds
+    autoAdvance
+    currentStructure {
+      id
+      tournamentId
+      levelNumber
+      smallBlind
+      bigBlind
+      ante
+      durationMinutes
+      isBreak
+      breakDurationMinutes
+    }
+    nextStructure {
+      id
+      tournamentId
+      levelNumber
+      smallBlind
+      bigBlind
+      ante
+      durationMinutes
+      isBreak
+      breakDurationMinutes
+    }
+  }
+}
+
+subscription TournamentRegistrations($tournamentId: ID!) {
+  tournamentRegistrations(tournamentId: $tournamentId) {
+    tournamentId
+    player {
+      user {
+        id
+        firstName
+        lastName
+        username
+        email
+      }
+      registration {
+        id
+        registrationTime
+        status
+        notes
+      }
+    }
+    eventType
+  }
+}
+
+subscription SeatingChanges($clubId: ID!) {
+  clubSeatingChanges(clubId: $clubId) {
+    eventType
+    tournamentId
+    clubId
+    affectedAssignment {
+      id
+      tournamentId
+      clubTableId
+      userId
+      seatNumber
+      stackSize
+      isCurrent
+      assignedAt
+    }
+    affectedPlayer {
+      id
+      firstName
+      lastName
+      username
+    }
+    message
+    timestamp
+  }
+}
+
+subscription UserNotifications {
+  userNotifications {
+    id
+    userId
+    notificationType
+    title
+    message
+    tournamentId
+    createdAt
+  }
+}

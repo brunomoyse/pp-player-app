@@ -1,0 +1,35 @@
+query GetTournamentClock($tournamentId: ID!) {
+  tournamentClock(tournamentId: $tournamentId) {
+    id
+    tournamentId
+    status
+    currentLevel
+    timeRemainingSeconds
+    levelStartedAt
+    levelEndTime
+    totalPauseDurationSeconds
+    autoAdvance
+    currentStructure {
+      id
+      tournamentId
+      levelNumber
+      smallBlind
+      bigBlind
+      ante
+      durationMinutes
+      isBreak
+      breakDurationMinutes
+    }
+    nextStructure {
+      id
+      tournamentId
+      levelNumber
+      smallBlind
+      bigBlind
+      ante
+      durationMinutes
+      isBreak
+      breakDurationMinutes
+    }
+  }
+}

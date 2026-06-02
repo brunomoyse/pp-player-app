@@ -1,0 +1,56 @@
+query GetTournamentSeatingChart($tournamentId: UUID!) {
+  tournamentSeatingChart(tournamentId: $tournamentId) {
+    tournament {
+      id
+      title
+    }
+    tables {
+      table {
+        id
+        tableNumber
+        maxSeats
+      }
+      seats {
+        assignment {
+          seatNumber
+          stackSize
+        }
+        player {
+          firstName
+          lastName
+        }
+      }
+    }
+    unassignedPlayers {
+      id
+      firstName
+      lastName
+    }
+  }
+}
+
+query GetTableSeatAssignments($clubTableId: UUID!) {
+  tableSeatAssignments(clubTableId: $clubTableId) {
+    assignment {
+      id
+      seatNumber
+      stackSize
+      assignedAt
+    }
+    player {
+      id
+      firstName
+      lastName
+    }
+  }
+}
+
+query GetSeatingHistory($tournamentId: UUID!, $limit: Int) {
+  tournamentSeatingHistory(tournamentId: $tournamentId, limit: $limit) {
+    id
+    seatNumber
+    stackSize
+    isCurrent
+    assignedAt
+  }
+}

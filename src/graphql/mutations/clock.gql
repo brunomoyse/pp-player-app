@@ -1,0 +1,90 @@
+mutation CreateTournamentClock($tournamentId: ID!) {
+  createTournamentClock(tournamentId: $tournamentId) {
+    id
+    tournamentId
+    status
+    currentLevel
+    autoAdvance
+  }
+}
+
+mutation StartTournamentClock($tournamentId: ID!) {
+  startTournamentClock(tournamentId: $tournamentId) {
+    id
+    status
+    currentLevel
+    timeRemainingSeconds
+    levelStartedAt
+    levelEndTime
+  }
+}
+
+mutation PauseTournamentClock($tournamentId: ID!) {
+  pauseTournamentClock(tournamentId: $tournamentId) {
+    id
+    status
+    currentLevel
+    timeRemainingSeconds
+    totalPauseDurationSeconds
+  }
+}
+
+mutation ResumeTournamentClock($tournamentId: ID!) {
+  resumeTournamentClock(tournamentId: $tournamentId) {
+    id
+    status
+    currentLevel
+    timeRemainingSeconds
+    levelStartedAt
+    levelEndTime
+  }
+}
+
+mutation AdvanceTournamentLevel($tournamentId: ID!) {
+  advanceTournamentLevel(tournamentId: $tournamentId) {
+    id
+    status
+    currentLevel
+    timeRemainingSeconds
+    levelStartedAt
+    levelEndTime
+    currentStructure {
+      id
+      levelNumber
+      smallBlind
+      bigBlind
+      ante
+      durationMinutes
+      isBreak
+    }
+    nextStructure {
+      id
+      levelNumber
+      smallBlind
+      bigBlind
+      ante
+      durationMinutes
+      isBreak
+    }
+  }
+}
+
+mutation RevertTournamentLevel($tournamentId: ID!) {
+  revertTournamentLevel(tournamentId: $tournamentId) {
+    id
+    status
+    currentLevel
+    timeRemainingSeconds
+    levelStartedAt
+    levelEndTime
+    currentStructure {
+      id
+      levelNumber
+      smallBlind
+      bigBlind
+      ante
+      durationMinutes
+      isBreak
+    }
+  }
+}

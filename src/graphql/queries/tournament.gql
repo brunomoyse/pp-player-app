@@ -1,0 +1,255 @@
+query GetTournaments($clubId: UUID, $from: DateTime, $to: DateTime, $status: TournamentStatus, $pagination: PaginationInput) {
+  tournaments(clubId: $clubId, from: $from, to: $to, status: $status, pagination: $pagination) {
+    items {
+      id
+      title
+      description
+      clubId
+      startTime
+      endTime
+      buyInCents
+      rakeCents
+      seatCap
+      status
+      liveStatus
+      createdAt
+      updatedAt
+    }
+    totalCount
+    pageSize
+    offset
+    hasNextPage
+  }
+}
+
+query GetTournament($id: UUID!) {
+  tournament(id: $id) {
+    id
+    title
+    description
+    startTime
+    endTime
+    buyInCents
+    rakeCents
+    status
+    liveStatus
+    lateRegistrationLevel
+    structure {
+      id
+      tournamentId
+      levelNumber
+      smallBlind
+      bigBlind
+      ante
+      durationMinutes
+      isBreak
+      breakDurationMinutes
+    }
+    clock {
+      id
+      tournamentId
+      status
+      currentLevel
+      timeRemainingSeconds
+      levelStartedAt
+      levelEndTime
+      totalPauseDurationSeconds
+      autoAdvance
+      currentStructure {
+        id
+        tournamentId
+        levelNumber
+        smallBlind
+        bigBlind
+        ante
+        durationMinutes
+        isBreak
+        breakDurationMinutes
+      }
+      nextStructure {
+        id
+        tournamentId
+        levelNumber
+        smallBlind
+        bigBlind
+        ante
+        durationMinutes
+        isBreak
+        breakDurationMinutes
+      }
+    }
+    registrations {
+      id
+      userId
+      registrationTime
+      status
+      notes
+    }
+  }
+}
+
+query GetTournamentStructure($tournamentId: ID!) {
+  tournamentStructure(tournamentId: $tournamentId) {
+    id
+    tournamentId
+    levelNumber
+    smallBlind
+    bigBlind
+    ante
+    durationMinutes
+    isBreak
+    breakDurationMinutes
+  }
+}
+
+query GetTournamentPlayers($tournamentId: UUID!, $pagination: PaginationInput) {
+  tournamentPlayers(tournamentId: $tournamentId, pagination: $pagination) {
+    items {
+      registration {
+        id
+        registrationTime
+        status
+        notes
+        waitlistPosition
+      }
+      user {
+        id
+        firstName
+        lastName
+        username
+        email
+        role
+      }
+    }
+    totalCount
+    pageSize
+    offset
+    hasNextPage
+  }
+}
+
+query GetTournamentPayout($tournamentId: ID!) {
+  tournamentPayout(tournamentId: $tournamentId) {
+    id
+    tournamentId
+    templateId
+    playerCount
+    totalPrizePool
+    positions {
+      position
+      percentage
+      amountCents
+    }
+    createdAt
+    updatedAt
+  }
+}
+
+query GetTournamentEntries($tournamentId: ID!) {
+  tournamentEntries(tournamentId: $tournamentId) {
+    id
+    tournamentId
+    userId
+    entryType
+    amountCents
+    chipsReceived
+    recordedBy
+    notes
+    createdAt
+    updatedAt
+  }
+}
+
+query GetTournamentEntryStats($tournamentId: ID!) {
+  tournamentEntryStats(tournamentId: $tournamentId) {
+    tournamentId
+    totalEntries
+    totalAmountCents
+    uniquePlayers
+    initialCount
+    rebuyCount
+    reEntryCount
+    addonCount
+  }
+}
+
+query GetLeaderboard($period: LeaderboardPeriod, $pagination: PaginationInput, $clubId: UUID) {
+  leaderboard(period: $period, pagination: $pagination, clubId: $clubId) {
+    items {
+      user {
+        id
+        firstName
+        lastName
+        username
+        email
+      }
+      rank
+      totalTournaments
+      totalBuyIns
+      totalWinnings
+      netProfit
+      totalItm
+      itmPercentage
+      roiPercentage
+      averageFinish
+      firstPlaces
+      finalTables
+      points
+    }
+    totalCount
+    pageSize
+    offset
+    hasNextPage
+  }
+}
+
+query GetMyTournamentStatistics {
+  myTournamentStatistics {
+    last7Days {
+      totalItm
+      totalTournaments
+      totalWinnings
+      totalBuyIns
+      itmPercentage
+      roiPercentage
+    }
+    last30Days {
+      totalItm
+      totalTournaments
+      totalWinnings
+      totalBuyIns
+      itmPercentage
+      roiPercentage
+    }
+    lastYear {
+      totalItm
+      totalTournaments
+      totalWinnings
+      totalBuyIns
+      itmPercentage
+      roiPercentage
+    }
+  }
+}
+
+query GetMyRecentTournamentResults($limit: Int) {
+  myRecentTournamentResults(limit: $limit) {
+    result {
+      id
+      tournamentId
+      userId
+      finalPosition
+      prizeCents
+      points
+      notes
+      createdAt
+    }
+    tournament {
+      id
+      title
+      startTime
+      buyInCents
+      rakeCents
+    }
+  }
+}

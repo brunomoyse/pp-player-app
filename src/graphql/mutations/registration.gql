@@ -1,0 +1,20 @@
+mutation SelfCheckIn($input: SelfCheckInInput!) {
+  selfCheckIn(input: $input) {
+    registration {
+      id
+      tournamentId
+      userId
+      registrationTime
+      status
+    }
+    seatAssignment {
+      id
+      clubTableId
+      userId
+      seatNumber
+      stackSize
+    }
+    message
+    wasRegistered
+  }
+}
