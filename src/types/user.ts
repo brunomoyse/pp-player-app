@@ -40,9 +40,9 @@ export interface AuthPayload {
 export interface UserRegistrationInput {
     email: string;
     password: string;
-    firstName: string;
-    lastName: string;
     username?: string;
+    firstName?: string;
+    lastName?: string;
 }
 
 export interface UserLoginInput {

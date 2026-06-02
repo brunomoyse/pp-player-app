@@ -1,8 +1,9 @@
 import { type ReactNode } from 'react';
-import { ScrollView, View } from 'react-native';
+import { RefreshControl, ScrollView, View } from 'react-native';
 import { SafeAreaView, type Edge } from 'react-native-safe-area-context';
 
 import { cn } from '@/lib/cn';
+import { colors } from '@/theme/tokens';
 
 export interface ScreenProps {
   children: ReactNode;
@@ -11,6 +12,9 @@ export interface ScreenProps {
   className?: string;
   contentClassName?: string;
   edges?: Edge[];
+  /** Enable pull-to-refresh (scroll mode only). */
+  refreshing?: boolean;
+  onRefresh?: () => void;
 }
 
 export function Screen({
@@ -19,12 +23,24 @@ export function Screen({
   className,
   contentClassName,
   edges = ['top'],
+  refreshing,
+  onRefresh,
 }: ScreenProps) {
   const body = scroll ? (
     <ScrollView
       className="flex-1"
       contentContainerClassName={cn('p-4 gap-4', contentClassName)}
-      keyboardShouldPersistTaps="handled">
+      keyboardShouldPersistTaps="handled"
+      refreshControl={
+        onRefresh ? (
+          <RefreshControl
+            refreshing={!!refreshing}
+            onRefresh={onRefresh}
+            tintColor={colors.gold}
+            colors={[colors.gold]}
+          />
+        ) : undefined
+      }>
       {children}
     </ScrollView>
   ) : (

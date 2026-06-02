@@ -17,4 +17,6 @@ export type { ClockDisplayProps, ClockLevel } from './ClockDisplay';
 export { SeatingCard } from './SeatingCard';
 export type { SeatingCardProps } from './SeatingCard';
 export { ErrorBoundary } from './ErrorBoundary';
+export { EditProfileModal } from './EditProfileModal';
+export type { EditProfileModalProps } from './EditProfileModal';
 export { Placeholder } from './Placeholder';
