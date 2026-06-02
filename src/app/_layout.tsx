@@ -1,4 +1,5 @@
 import '@/global.css';
+import '@/i18n';
 
 import {
   Inter_400Regular,
@@ -16,17 +17,20 @@ import {
 } from '@expo-google-fonts/space-grotesk';
 import { useFonts } from 'expo-font';
 import { Stack, ThemeProvider, DarkTheme } from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
-import * as SplashScreen from 'expo-splash-screen';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import { useAuthStore } from '@/stores/useAuthStore';
 import { colors } from '@/theme/tokens';
 
 SplashScreen.preventAutoHideAsync();
 
-// Force the dark gold-on-charcoal palette regardless of OS appearance.
 const PPDarkTheme = {
   ...DarkTheme,
+  dark: true,
   colors: {
     ...DarkTheme.colors,
     background: colors.bg,
@@ -34,6 +38,7 @@ const PPDarkTheme = {
     text: colors.text,
     border: colors.border,
     primary: colors.gold,
+    notification: colors.gold,
   },
 };
 
@@ -49,22 +54,37 @@ export default function RootLayout() {
     JetBrainsMono_500Medium,
   });
 
+  const initialize = useAuthStore((s) => s.initialize);
+
   useEffect(() => {
-    if (fontsLoaded || fontError) {
-      SplashScreen.hideAsync();
-    }
+    initialize();
+  }, [initialize]);
+
+  useEffect(() => {
+    if (fontsLoaded || fontError) SplashScreen.hideAsync();
   }, [fontsLoaded, fontError]);
 
-  if (!fontsLoaded && !fontError) {
-    return null;
-  }
+  if (!fontsLoaded && !fontError) return null;
 
   return (
-    <ThemeProvider value={PPDarkTheme}>
-      <StatusBar style="light" />
-      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.bg } }}>
-        <Stack.Screen name="index" />
-      </Stack>
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1, backgroundColor: colors.bg }}>
+      <SafeAreaProvider>
+        <ThemeProvider value={PPDarkTheme}>
+          <StatusBar style="light" />
+          <Stack
+            screenOptions={{
+              headerShown: false,
+              contentStyle: { backgroundColor: colors.bg },
+              animation: 'slide_from_right',
+            }}>
+            <Stack.Screen name="(tabs)" />
+            <Stack.Screen name="login" options={{ presentation: 'modal' }} />
+            <Stack.Screen name="register" options={{ presentation: 'modal' }} />
+            <Stack.Screen name="tournament/[id]" />
+            <Stack.Screen name="achievements" />
+          </Stack>
+        </ThemeProvider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }

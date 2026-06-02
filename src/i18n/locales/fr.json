@@ -1,0 +1,511 @@
+{
+  "app": {
+    "title": "PocketPair"
+  },
+  "nav": {
+    "home": "Accueil",
+    "events": "Évènements",
+    "mySeats": "Mes Places",
+    "leaders": "Leaders",
+    "me": "Moi",
+    "login": "Connexion"
+  },
+  "auth": {
+    "login": "Connexion",
+    "register": "S'inscrire",
+    "email": "Email",
+    "password": "Mot de passe",
+    "username": "Nom d'utilisateur",
+    "confirmPassword": "Confirmer le mot de passe",
+    "rememberMe": "Se souvenir de moi",
+    "forgotPassword": "Mot de passe oublié ?",
+    "continueWithGoogle": "Continuer avec Google",
+    "orContinueWith": "ou continuer avec",
+    "noAccount": "Vous n'avez pas de compte ?",
+    "alreadyHaveAccount": "Vous avez déjà un compte ?",
+    "continueAsGuest": "Continuer en invité",
+    "welcomeBack": "Bon retour",
+    "joinCommunity": "Rejoignez notre communauté",
+    "createAccount": "Créer un compte",
+    "emailRequired": "Email requis",
+    "emailInvalid": "Veuillez entrer un email valide",
+    "passwordRequired": "Mot de passe requis",
+    "passwordTooShort": "Le mot de passe doit contenir au moins 6 caractères",
+    "usernameRequired": "Nom d'utilisateur requis",
+    "usernameInvalid": "Le nom d'utilisateur doit contenir 3-20 caractères avec seulement des lettres, chiffres et traits de soulignement",
+    "passwordsDoNotMatch": "Les mots de passe ne correspondent pas",
+    "passwordRequirements": "Exigences du mot de passe :",
+    "passwordLength": "Au moins 8 caractères",
+    "passwordLowercase": "Une lettre minuscule",
+    "passwordUppercase": "Une lettre majuscule",
+    "passwordNumber": "Un chiffre",
+    "passwordRequirementsNotMet": "Le mot de passe ne respecte pas les exigences",
+    "agreeToTerms": "J'accepte les",
+    "termsAndConditions": "Conditions Générales",
+    "termsRequired": "Conditions Requises",
+    "mustAcceptTerms": "Vous devez accepter les conditions générales pour vous inscrire",
+    "termsContent": "En créant un compte, vous acceptez nos Conditions de Service et notre Politique de Confidentialité. Nous nous engageons à protéger votre vie privée et à assurer un environnement de jeu sûr.",
+    "registrationSuccess": "Inscription Réussie !",
+    "welcomeMessage": "Bienvenue {username} ! Votre compte a été créé avec succès.",
+    "loginFailed": "Connexion échouée. Veuillez vérifier vos identifiants.",
+    "registrationFailed": "Inscription échouée. Veuillez réessayer.",
+    "googleAuth": "Authentification Google",
+    "googleAuthInfo": "Ceci vous redirigera vers Google pour vous connecter. Continuer ?",
+    "forgotPasswordInfo": "Entrez votre adresse email et nous vous enverrons un lien pour réinitialiser votre mot de passe.",
+    "sendResetLink": "Envoyer le lien de réinitialisation",
+    "loginToRegister": "Connectez-vous pour vous inscrire",
+    "showPassword": "Afficher le mot de passe",
+    "hidePassword": "Masquer le mot de passe",
+    "acceptTerms": "Accepter les conditions générales"
+  },
+  "common": {
+    "ok": "OK",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "continue": "Continuer",
+    "nice": "Super !",
+    "pullToRefresh": "Tirez pour actualiser",
+    "note": "Note",
+    "loading": "Chargement...",
+    "errorLoading": "Erreur de chargement des données",
+    "tryAgainLater": "Veuillez réessayer plus tard",
+    "retry": "Réessayer",
+    "guest": "Invité",
+    "player": "Joueur",
+    "yes": "Oui",
+    "no": "Non",
+    "copied": "Copié",
+    "notYetAvailable": "Cette fonctionnalité n'est pas encore disponible",
+    "language": "Langue",
+    "back": "Retour"
+  },
+  "home": {
+    "welcome": "Bienvenue",
+    "welcomeBack": "Bon retour",
+    "explorePocketPair": "Explorez PocketPair",
+    "browseClubs": "Parcourir tous les clubs",
+    "trackYourEdge": "Suivez votre avantage, {username}",
+    "unlockFeatures": "Votre poker, maîtrisé",
+    "ctaDescription": "Suivez vos performances, inscrivez-vous aux tournois et rivalisez avec les joueurs de toute la Belgique",
+    "selectClub": "Sélectionner un club",
+    "kpis": {
+      "itm": "ITM",
+      "roi": "ROI",
+      "cashes": "Gains"
+    },
+    "actions": {
+      "upcoming": "À venir",
+      "upcomingSubtitle": "Voir les tournois programmés",
+      "myRegistrations": "Mes inscriptions",
+      "myRegistrationsSubtitle": "Gérer vos places",
+      "leaderboard": "Classement",
+      "leaderboardSubtitle": "Voir les meilleurs joueurs"
+    },
+    "progress": {
+      "title": "Progrès sur {range}",
+      "subtitle": "Suivi de vos performances",
+      "chartPlaceholder": "Le graphique des performances apparaîtra ici",
+      "timeLabels": {
+        "7d": "7J",
+        "30d": "30J",
+        "1y": "1A"
+      }
+    },
+    "tournaments": {
+      "title": "Prochains Tournois",
+      "seeAll": "Voir tout",
+      "spotsLeft": "{count} places restantes",
+      "full": "Complet",
+      "register": "S'inscrire"
+    },
+    "results": {
+      "title": "Résultats récents",
+      "seeAll": "Voir tout",
+      "buyIn": "Buy-in",
+      "cash": "Gain"
+    },
+    "streak": "Série de {count} ITM",
+    "nextAchievements": "Prochains succès"
+  },
+  "events": {
+    "title": "Évènements",
+    "search": {
+      "placeholder": "Rechercher tournois..."
+    },
+    "filters": {
+      "lowStakes": "Petites Mises",
+      "midStakes": "Mises Moyennes",
+      "highStakes": "Grosses Mises",
+      "deepstack": "Deepstack",
+      "turbo": "Turbo",
+      "freezeout": "Freezeout"
+    },
+    "categories": {
+      "upcoming": "À venir",
+      "live": "En direct",
+      "completed": "Terminés"
+    },
+    "types": {
+      "deepstack": "Deepstack",
+      "turbo": "Turbo",
+      "freezeout": "Freezeout",
+      "bounty": "Bounty"
+    },
+    "status": {
+      "not_started": "Pas commencé",
+      "registration_open": "Inscriptions ouvertes",
+      "late_registration": "Inscription tardive",
+      "in_progress": "En cours",
+      "break": "Pause",
+      "final_table": "Table finale",
+      "finished": "Terminé"
+    },
+    "buyIn": "Buy-in",
+    "rake": "Rake",
+    "guarantee": "GTD",
+    "maxPlayers": "Max {count} joueurs",
+    "spotsLeft": "{count} places restantes",
+    "joinWaitlist": "Rejoindre la file d'attente",
+    "onWaitlist": "En file d'attente",
+    "waitlistPosition": "Position {position} en file d'attente",
+    "full": "Complet",
+    "register": "S'inscrire",
+    "unregister": "Se désinscrire",
+    "viewLive": "Voir en direct",
+    "results": "Résultats",
+    "registration": "Inscription",
+    "registrationCloses": "Inscription ferme",
+    "blindsStructure": "Structure des Blinds",
+    "level": "Niveau",
+    "smallBlind": "Petite Blind",
+    "bigBlind": "Grosse Blind",
+    "ante": "Ante",
+    "duration": "Durée",
+    "minutes": "{count} min",
+    "dateTime": "Date et Heure",
+    "structure": "Structure",
+    "players": "Joueurs",
+    "tournamentClock": "Clock",
+    "timeRemaining": "Temps Restant",
+    "smallBigBlind": "Petite / Grosse Blind",
+    "nextLevel": "Niveau Suivant",
+    "tableAssignment": "Attribution des Tables",
+    "viewAllTables": "Voir Toutes les Tables",
+    "table": "Table",
+    "seat": "Siège",
+    "chipStack": "Tapis",
+    "moreTables": "+{count} tables de plus",
+    "playersLeft": "Joueurs Restants",
+    "stillInPlay": "Encore en Jeu",
+    "breakTime": "Temps de Pause",
+    "onBreak": "En Pause",
+    "break": "Pause",
+    "averageStack": "Tapis Moyen",
+    "prizePool": "Prize Pool",
+    "finalResults": "Résultats Finaux",
+    "completed": "Terminé",
+    "totalPlayers": "Total Joueurs",
+    "yourResult": "Votre Résultat",
+    "payout": "Gain",
+    "noPayout": "Aucun gain",
+    "netProfit": "Profit Net",
+    "completeResults": "Résultats Complets",
+    "showLess": "Voir Moins",
+    "showAll": "Voir Tout",
+    "position": "Position",
+    "player": "Joueur",
+    "loadingDetails": "Chargement des détails du tournoi...",
+    "empty": {
+      "title": "Aucun tournoi trouvé",
+      "subtitle": "Revenez plus tard pour de nouveaux événements"
+    }
+  },
+  "mySeats": {
+    "title": "Mes Places",
+    "stats": {
+      "registered": "Inscrit",
+      "investment": "Investissement",
+      "upcoming": "À venir"
+    },
+    "filters": {
+      "canCancel": "Annulable",
+      "lateReg": "Inscr. tardive",
+      "highStakes": "Grosses Mises",
+      "deepstack": "Deepstack",
+      "turbo": "Turbo"
+    },
+    "categories": {
+      "upcoming": "À venir",
+      "live": "En direct",
+      "completed": "Terminés"
+    },
+    "types": {
+      "deepstack": "Deepstack",
+      "turbo": "Turbo",
+      "freezeout": "Freezeout",
+      "bounty": "Bounty"
+    },
+    "status": {
+      "upcoming": "À venir",
+      "live": "En direct",
+      "completed": "Terminé",
+      "not_started": "Pas commencé",
+      "registration_open": "Inscriptions ouvertes",
+      "late_registration": "Inscription tardive",
+      "in_progress": "En cours",
+      "break": "Pause",
+      "final_table": "Table finale",
+      "finished": "Terminé"
+    },
+    "buyIn": "Buy-in",
+    "tableNotAssigned": "Table non assignée",
+    "position": "Position",
+    "registeredOn": "Inscrit le",
+    "investment": "Investissement",
+    "cancel": "Annuler",
+    "modify": "Modifier",
+    "viewLive": "Voir en direct",
+    "viewResult": "Voir résultat",
+    "empty": {
+      "title": "Aucune inscription trouvée",
+      "subtitle": "Vous ne vous êtes pas encore inscrit à des tournois",
+      "browseEvents": "Parcourir les événements"
+    },
+    "cancelConfirmTitle": "Annuler l'inscription",
+    "cancelConfirmMessage": "Êtes-vous sûr de vouloir annuler votre inscription à {name} ?",
+    "shareMessage": "Découvrez mon inscription à {name} sur PocketPair !",
+    "registrationStatus": {
+      "REGISTERED": "Inscrit",
+      "CHECKED_IN": "Enregistré",
+      "SEATED": "Assis",
+      "BUSTED": "Éliminé",
+      "WAITLISTED": "En attente",
+      "CANCELLED": "Annulé",
+      "NO_SHOW": "Absent"
+    },
+    "qrCode": {
+      "title": "Code QR d'enregistrement",
+      "instructions": "Montrez ce code QR au directeur du tournoi pour vous enregistrer",
+      "error": "Échec de la génération du code QR",
+      "showQR": "Afficher QR"
+    }
+  },
+  "checkIn": {
+    "scanQR": {
+      "title": "Scanner le QR d'enregistrement",
+      "instructions": "Positionnez le code QR dans le cadre pour scanner",
+      "orEnterManually": "Ou entrez le code manuellement",
+      "enterCodePlaceholder": "Entrez le code d'enregistrement",
+      "manualEntryLabel": "Entrez le code d'enregistrement",
+      "submit": "Soumettre",
+      "errors": {
+        "noElement": "Élément du scanner introuvable",
+        "cameraAccess": "Impossible d'accéder à la caméra. Veuillez accorder l'autorisation."
+      }
+    },
+    "success": {
+      "title": "Enregistré!",
+      "message": "Enregistrement réussi avec le code: {code}"
+    }
+  },
+  "leaderboard": {
+    "title": "Classement",
+    "yourRank": "Votre classement actuel",
+    "points": "Points",
+    "tournaments": "tournois",
+    "itm": "ITM",
+    "avgFinish": "fin moy.",
+    "periods": {
+      "week": "Semaine",
+      "month": "Mois",
+      "year": "Année",
+      "allTime": "Tout Temps"
+    },
+    "categories": {
+      "overall": "Général",
+      "profit": "Profit",
+      "volume": "Volume"
+    },
+    "filters": {
+      "verified": "Vérifiés",
+      "club": "Même Club",
+      "highVolume": "Gros Volume",
+      "recent": "Récents"
+    },
+    "loadMore": "Charger Plus de Joueurs",
+    "empty": {
+      "title": "Aucun joueur trouvé",
+      "subtitle": "Essayez d'ajuster vos filtres"
+    },
+    "guestTitle": "Rejoignez la Compétition",
+    "guestSubtitle": "Connectez-vous pour voir votre classement et rivaliser avec d'autres joueurs",
+    "loginToCompete": "Se Connecter pour Rivaliser",
+    "pointsCalculation": {
+      "title": "Calcul des Points",
+      "howCalculated": "Comment les Points du Classement sont Calculés",
+      "baseFormula": "Formule de Base :",
+      "formula": "Points = (Taille du Field × Poids Buy-in × Multiplicateur Position)",
+      "factors": "Facteurs :",
+      "fieldSize": "Taille du Field :",
+      "fieldSizeDesc": "Plus de joueurs = plus de points disponibles",
+      "buyinWeight": "Poids du Buy-in :",
+      "buyinWeightDesc": "Les tournois à enjeux plus élevés valent plus",
+      "finishPosition": "Position de Fin :",
+      "finishPositionDesc": "Meilleure position = multiplicateur plus élevé",
+      "itmBonus": "Bonus ITM :",
+      "itmBonusDesc": "Points supplémentaires pour finir dans l'argent",
+      "examples": "Exemples :",
+      "example1Scenario": "1ère place, 50 joueurs, buy-in 100€ :",
+      "example1Calculation": "50 × 2.0 × 10.0 = <strong>1000 points</strong>",
+      "example2Scenario": "6ème place, 30 joueurs, buy-in 50€ :",
+      "example2Calculation": "30 × 1.0 × 3.0 = <strong>90 points</strong>",
+      "note": "Les points ne sont attribués que pour les tournois où vous finissez dans l'argent (ITM). Les multiplicateurs exacts peuvent varier selon la structure du tournoi et la taille du field."
+    },
+    "pointsInfo": "Information de calcul des points"
+  },
+  "profile": {
+    "editProfile": "Modifier le Profil",
+    "personalInfo": "Informations Personnelles",
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "username": "Nom d'utilisateur",
+    "email": "Email",
+    "phone": "Téléphone",
+    "displayPreferences": "Préférences d'Affichage",
+    "displayName": "Nom d'Affichage",
+    "realName": "Nom Réel",
+    "both": "Les Deux",
+    "preview": "Aperçu",
+    "howYourNameAppears": "Comment votre nom apparaîtra",
+    "save": "Sauvegarder les Modifications",
+    "cancel": "Annuler",
+    "saving": "Sauvegarde...",
+    "profileUpdated": "Profil mis à jour avec succès",
+    "errorUpdating": "Erreur lors de la mise à jour du profil",
+    "memberSince": "Membre depuis",
+    "verified": "Vérifié",
+    "vip": "VIP",
+    "yourStatistics": "Vos Statistiques",
+    "totalWins": "Total Victoires",
+    "totalWinnings": "Total Gains",
+    "tournaments": "Tournois",
+    "itmRate": "Taux ITM",
+    "quickActions": "Actions Rapides",
+    "getStarted": "Commencer",
+    "myRegistrations": "Mes Inscriptions",
+    "upcoming": "à venir",
+    "tournamentHistory": "Historique des Tournois",
+    "viewPastResults": "Voir les résultats passés",
+    "achievements": "Réalisations",
+    "unlocked": "débloquées",
+    "friends": "Amis",
+    "accessAccount": "Accéder à votre compte",
+    "createAccount": "Créer un nouveau compte",
+    "browseTournaments": "Parcourir les Tournois",
+    "viewUpcomingEvents": "Voir les événements à venir",
+    "settings": "Paramètres",
+    "updateInfo": "Mettre à jour vos informations",
+    "notifications": "Notifications",
+    "tournamentAlerts": "Alertes de tournois",
+    "logout": "Déconnexion",
+    "signOut": "Se déconnecter de votre compte",
+    "editAvatar": "Modifier la photo de profil"
+  },
+  "qrScanner": {
+    "scanTournament": "Scanner QR Code",
+    "unknownQR": "QR Code inconnu",
+    "unknownQRMessage": "Ce QR code n'est pas reconnu. Veuillez scanner un QR code PocketPair valide.",
+    "tournamentNotFound": "Tournoi introuvable",
+    "checkInSuccess": "Présence confirmée",
+    "checkInFailed": "Échec de la présence",
+    "checkInFailedMessage": "Impossible de confirmer la présence. Veuillez réessayer ou contacter le responsable du tournoi.",
+    "loginRequired": "Connexion requise",
+    "loginRequiredMessage": "Vous devez être connecté pour confirmer votre présence. Souhaitez-vous vous connecter ?"
+  },
+  "achievements": {
+    "title": "Succès",
+    "unlocked": "Débloqués",
+    "completion": "Progression",
+    "unlockedTitle": "Succès débloqué !",
+    "unlockedOn": "Débloqué le {date}",
+    "emptyCategory": "Pas de succès ici pour le moment",
+    "filters": {
+      "all": "Tous"
+    },
+    "categories": {
+      "registration": "Inscription",
+      "winnings": "Gains",
+      "results": "Résultats",
+      "milestones": "Étapes",
+      "streaks": "Séries"
+    },
+    "tiers": {
+      "bronze": "Bronze",
+      "silver": "Argent",
+      "gold": "Or",
+      "platinum": "Platine"
+    },
+    "items": {
+      "first_registration": {
+        "name": "Premiers Pas",
+        "description": "Inscrivez-vous à votre premier tournoi"
+      },
+      "first_cash": {
+        "name": "Dans les Places Payées",
+        "description": "Marquez vos premiers points dans les places payées"
+      },
+      "first_win": {
+        "name": "Champion",
+        "description": "Gagnez votre premier tournoi"
+      },
+      "tournaments_5": {
+        "name": "Régulier",
+        "description": "Jouez 5 tournois"
+      },
+      "tournaments_20": {
+        "name": "Grinder",
+        "description": "Jouez 20 tournois"
+      },
+      "tournaments_50": {
+        "name": "Vétéran",
+        "description": "Jouez 50 tournois"
+      },
+      "final_table_5": {
+        "name": "Table Finale Habituel",
+        "description": "Accédez à la table finale 5 fois"
+      },
+      "winnings_1000": {
+        "name": "Haute Mise",
+        "description": "Gagnez 1 000 € en total de prix"
+      },
+      "itm_rate_50": {
+        "name": "Constant",
+        "description": "Atteindre un taux ITM de 50%"
+      },
+      "rebuy_3": {
+        "name": "Tapis Vide",
+        "description": "Faites 3 recaves dans un seul tournoi"
+      },
+      "streak_cash_3": {
+        "name": "Série Chaude",
+        "description": "Marquez 3 tournois consécutifs"
+      },
+      "streak_play_5": {
+        "name": "Déterminé",
+        "description": "Jouez 5 tournois consécutifs"
+      }
+    },
+    "locked": "Verrouillé"
+  },
+  "error": {
+    "boundary": {
+      "title": "Une erreur s'est produite",
+      "defaultMessage": "Une erreur inattendue s'est produite. Veuillez réessayer.",
+      "retryFailed": "La tentative a échoué. Veuillez réessayer plus tard.",
+      "retry": "Réessayer",
+      "reset": "Réinitialiser",
+      "showDetails": "Afficher les détails",
+      "hideDetails": "Masquer les détails"
+    }
+  }
+}

@@ -1,0 +1,512 @@
+{
+  "app": {
+    "title": "PocketPair"
+  },
+  "nav": {
+    "home": "Home",
+    "events": "Evenementen",
+    "mySeats": "Mijn Plaatsen",
+    "leaders": "Leiders",
+    "me": "Ik",
+    "login": "Inloggen"
+  },
+  "auth": {
+    "login": "Inloggen",
+    "register": "Registreren",
+    "email": "Email",
+    "password": "Wachtwoord",
+    "username": "Gebruikersnaam",
+    "confirmPassword": "Bevestig Wachtwoord",
+    "rememberMe": "Onthoud mij",
+    "forgotPassword": "Wachtwoord vergeten?",
+    "continueWithGoogle": "Doorgaan met Google",
+    "orContinueWith": "of ga door met",
+    "noAccount": "Heb je geen account?",
+    "alreadyHaveAccount": "Heb je al een account?",
+    "continueAsGuest": "Doorgaan als gast",
+    "welcomeBack": "Welkom terug",
+    "joinCommunity": "Word lid van onze gemeenschap",
+    "createAccount": "Account Aanmaken",
+    "emailRequired": "Email is vereist",
+    "emailInvalid": "Voer een geldig emailadres in",
+    "passwordRequired": "Wachtwoord is vereist",
+    "passwordTooShort": "Wachtwoord moet minstens 6 karakters lang zijn",
+    "usernameRequired": "Gebruikersnaam is vereist",
+    "usernameInvalid": "Gebruikersnaam moet 3-20 karakters lang zijn met alleen letters, cijfers en underscores",
+    "passwordsDoNotMatch": "Wachtwoorden komen niet overeen",
+    "passwordRequirements": "Wachtwoordvereisten:",
+    "passwordLength": "Minstens 8 karakters",
+    "passwordLowercase": "Eén kleine letter",
+    "passwordUppercase": "Eén hoofdletter",
+    "passwordNumber": "Eén cijfer",
+    "passwordRequirementsNotMet": "Wachtwoord voldoet niet aan de vereisten",
+    "agreeToTerms": "Ik ga akkoord met de",
+    "termsAndConditions": "Algemene Voorwaarden",
+    "termsRequired": "Voorwaarden Vereist",
+    "mustAcceptTerms": "Je moet de algemene voorwaarden accepteren om te registreren",
+    "termsContent": "Door een account aan te maken, ga je akkoord met onze Servicevoorwaarden en Privacybeleid. We zijn toegewijd aan het beschermen van je privacy en het waarborgen van een veilige speelomgeving.",
+    "registrationSuccess": "Registratie Gelukt!",
+    "welcomeMessage": "Welkom {username}! Je account is succesvol aangemaakt.",
+    "loginFailed": "Inloggen mislukt. Controleer je inloggegevens.",
+    "registrationFailed": "Registratie mislukt. Probeer opnieuw.",
+    "googleAuth": "Google Authenticatie",
+    "googleAuthInfo": "Dit zal je doorverwijzen naar Google om in te loggen. Doorgaan?",
+    "forgotPasswordInfo": "Voer je emailadres in en we sturen je een link om je wachtwoord te resetten.",
+    "sendResetLink": "Reset Link Verzenden",
+    "loginToRegister": "Inloggen om te Registreren",
+    "showPassword": "Wachtwoord tonen",
+    "hidePassword": "Wachtwoord verbergen",
+    "acceptTerms": "Voorwaarden accepteren"
+  },
+  "common": {
+    "ok": "OK",
+    "cancel": "Annuleren",
+    "close": "Sluiten",
+    "continue": "Doorgaan",
+    "nice": "Prima!",
+    "pullToRefresh": "Trek om te vernieuwen",
+    "note": "Opmerking",
+    "loading": "Laden...",
+    "errorLoading": "Fout bij het laden van gegevens",
+    "tryAgainLater": "Probeer het later opnieuw",
+    "retry": "Opnieuw proberen",
+    "guest": "Gast",
+    "player": "Speler",
+    "yes": "Ja",
+    "no": "Nee",
+    "copied": "Gekopieerd",
+    "notYetAvailable": "Deze functie is nog niet beschikbaar",
+    "language": "Taal",
+    "back": "Terug"
+  },
+  "home": {
+    "welcome": "Welkom",
+    "welcomeBack": "Welkom terug",
+    "explorePocketPair": "Verken PocketPair",
+    "browseClubs": "Blader door alle clubs",
+    "trackYourEdge": "Volg je voordeel, {username}",
+    "unlockFeatures": "Ontgrendel Je Poker Reis",
+    "ctaDescription": "Volg je prestaties, registreer voor toernooien en concurreer met spelers uit heel België",
+    "selectClub": "Selecteer club",
+    "kpis": {
+      "itm": "ITM",
+      "roi": "ROI",
+      "cashes": "Winsten"
+    },
+    "actions": {
+      "upcoming": "Komend",
+      "upcomingSubtitle": "Bekijk geplande toernooien",
+      "myRegistrations": "Mijn registraties",
+      "myRegistrationsSubtitle": "Beheer je plaatsen",
+      "leaderboard": "Ranglijst",
+      "leaderboardSubtitle": "Zie topspelers"
+    },
+    "progress": {
+      "title": "Voortgang over {range}",
+      "subtitle": "Je prestatie tracking",
+      "chartPlaceholder": "Prestatiegrafiek verschijnt hier",
+      "timeLabels": {
+        "7d": "7D",
+        "30d": "30D",
+        "1y": "1J"
+      }
+    },
+    "tournaments": {
+      "title": "Volgende Toernooien",
+      "seeAll": "Alles bekijken",
+      "spotsLeft": "{count} plaatsen over",
+      "full": "Vol",
+      "register": "Registreren"
+    },
+    "results": {
+      "title": "Recente resultaten",
+      "seeAll": "Alles bekijken",
+      "buyIn": "Buy-in",
+      "cash": "Winst"
+    },
+    "streak": "{count} keer op rij in the money",
+    "nextAchievements": "Volgende prestaties"
+  },
+  "events": {
+    "title": "Evenementen",
+    "search": {
+      "placeholder": "Zoek toernooien..."
+    },
+    "filters": {
+      "lowStakes": "Lage Inzet",
+      "midStakes": "Middel Inzet",
+      "highStakes": "Hoge Inzet",
+      "deepstack": "Deepstack",
+      "turbo": "Turbo",
+      "freezeout": "Freezeout"
+    },
+    "categories": {
+      "upcoming": "Komend",
+      "live": "Live",
+      "completed": "Afgerond"
+    },
+    "types": {
+      "deepstack": "Deepstack",
+      "turbo": "Turbo",
+      "freezeout": "Freezeout",
+      "bounty": "Bounty"
+    },
+    "status": {
+      "not_started": "Niet gestart",
+      "registration_open": "Registratie open",
+      "late_registration": "Late registratie",
+      "in_progress": "Bezig",
+      "break": "Pauze",
+      "final_table": "Finale tafel",
+      "finished": "Afgerond"
+    },
+    "buyIn": "Buy-in",
+    "rake": "Rake",
+    "guarantee": "GTD",
+    "maxPlayers": "Max {count} spelers",
+    "spotsLeft": "{count} plaatsen over",
+    "joinWaitlist": "Wachtlijst",
+    "onWaitlist": "Op wachtlijst",
+    "waitlistPosition": "Positie {position} op wachtlijst",
+    "full": "Vol",
+    "register": "Registreren",
+    "unregister": "Uitschrijven",
+    "viewLive": "Bekijk Live",
+    "results": "Resultaten",
+    "registration": "Registratie",
+    "registrationCloses": "Registratie sluit",
+    "blindsStructure": "Blinds Structuur",
+    "level": "Niveau",
+    "smallBlind": "Small Blind",
+    "bigBlind": "Big Blind",
+    "ante": "Ante",
+    "duration": "Duur",
+    "minutes": "{count} min",
+    "dateTime": "Datum & Tijd",
+    "structure": "Structuur",
+    "players": "Spelers",
+    "tournamentClock": "Clock",
+    "timeRemaining": "Tijd Over",
+    "smallBigBlind": "Small / Big Blind",
+    "nextLevel": "Volgend Niveau",
+    "tableAssignment": "Tafel Toewijzing",
+    "viewAllTables": "Bekijk Alle Tafels",
+    "table": "Tafel",
+    "seat": "Stoel",
+    "chipStack": "Chip Stack",
+    "moreTables": "+{count} meer tafels",
+    "playersLeft": "Spelers Over",
+    "stillInPlay": "Nog in Spel",
+    "breakTime": "Pauze Tijd",
+    "onBreak": "In Pauze",
+    "break": "Pauze",
+    "averageStack": "Gemiddelde Stack",
+    "prizePool": "Prize Pool",
+    "finalResults": "Eindresultaten",
+    "completed": "Afgerond",
+    "totalPlayers": "Totaal Spelers",
+    "yourResult": "Jouw Resultaat",
+    "payout": "Uitbetaling",
+    "noPayout": "Geen uitbetaling",
+    "netProfit": "Netto Winst",
+    "completeResults": "Complete Resultaten",
+    "showLess": "Minder Tonen",
+    "showAll": "Alles Tonen",
+    "position": "Positie",
+    "player": "Speler",
+    "loadingDetails": "Toernooi details laden...",
+    "empty": {
+      "title": "Geen toernooien gevonden",
+      "subtitle": "Kom later terug voor nieuwe evenementen"
+    }
+  },
+  "mySeats": {
+    "title": "Mijn Plaatsen",
+    "stats": {
+      "registered": "Geregistreerd",
+      "investment": "Investering",
+      "upcoming": "Komend"
+    },
+    "filters": {
+      "canCancel": "Annuleerbaar",
+      "lateReg": "Late Reg",
+      "highStakes": "Hoge Inzet",
+      "deepstack": "Deepstack",
+      "turbo": "Turbo"
+    },
+    "categories": {
+      "upcoming": "Komend",
+      "live": "Live",
+      "completed": "Afgerond"
+    },
+    "types": {
+      "deepstack": "Deepstack",
+      "turbo": "Turbo",
+      "freezeout": "Freezeout",
+      "bounty": "Bounty"
+    },
+    "status": {
+      "upcoming": "Komend",
+      "live": "Live",
+      "completed": "Afgerond",
+      "FINISHED": "Afgerond",
+      "not_started": "Niet gestart",
+      "registration_open": "Registratie open",
+      "late_registration": "Late registratie",
+      "in_progress": "Bezig",
+      "break": "Pauze",
+      "final_table": "Finale tafel",
+      "finished": "Afgerond"
+    },
+    "buyIn": "Buy-in",
+    "tableNotAssigned": "Tafel niet toegewezen",
+    "position": "Positie",
+    "registeredOn": "Geregistreerd op",
+    "investment": "Investering",
+    "cancel": "Annuleren",
+    "modify": "Wijzigen",
+    "viewLive": "Bekijk Live",
+    "viewResult": "Bekijk Resultaat",
+    "empty": {
+      "title": "Geen registraties gevonden",
+      "subtitle": "Je hebt je nog niet ingeschreven voor toernooien",
+      "browseEvents": "Bekijk Evenementen"
+    },
+    "cancelConfirmTitle": "Registratie Annuleren",
+    "cancelConfirmMessage": "Weet je zeker dat je je registratie voor {name} wilt annuleren?",
+    "shareMessage": "Bekijk mijn registratie voor {name} op PocketPair!",
+    "registrationStatus": {
+      "REGISTERED": "Geregistreerd",
+      "CHECKED_IN": "Ingecheckt",
+      "SEATED": "Gezeten",
+      "BUSTED": "Uitgeschakeld",
+      "WAITLISTED": "Wachtlijst",
+      "CANCELLED": "Geannuleerd",
+      "NO_SHOW": "Afwezig"
+    },
+    "qrCode": {
+      "title": "Check-in QR-code",
+      "instructions": "Toon deze QR-code aan de toernooimanager om in te checken",
+      "error": "QR-code genereren mislukt",
+      "showQR": "Toon QR"
+    }
+  },
+  "checkIn": {
+    "scanQR": {
+      "title": "Scan Check-in QR",
+      "instructions": "Plaats de QR-code binnen het kader om te scannen",
+      "orEnterManually": "Of voer code handmatig in",
+      "enterCodePlaceholder": "Voer check-in code in",
+      "manualEntryLabel": "Voer check-in code in",
+      "submit": "Indienen",
+      "errors": {
+        "noElement": "Scanner element niet gevonden",
+        "cameraAccess": "Kan geen toegang krijgen tot camera. Geef alstublieft toestemming."
+      }
+    },
+    "success": {
+      "title": "Ingecheckt!",
+      "message": "Succesvol ingecheckt met code: {code}"
+    }
+  },
+  "leaderboard": {
+    "title": "Ranglijst",
+    "yourRank": "Je huidige ranking",
+    "points": "Punten",
+    "tournaments": "toernooien",
+    "itm": "ITM",
+    "avgFinish": "gem. finish",
+    "periods": {
+      "week": "Week",
+      "month": "Maand",
+      "year": "Jaar",
+      "allTime": "Altijd"
+    },
+    "categories": {
+      "overall": "Algemeen",
+      "profit": "Winst",
+      "volume": "Volume"
+    },
+    "filters": {
+      "verified": "Geverifieerd",
+      "club": "Zelfde Club",
+      "highVolume": "Hoog Volume",
+      "recent": "Recent"
+    },
+    "loadMore": "Meer Spelers Laden",
+    "empty": {
+      "title": "Geen spelers gevonden",
+      "subtitle": "Probeer je filters aan te passen"
+    },
+    "guestTitle": "Doe Mee aan de Competitie",
+    "guestSubtitle": "Log in om je ranking te zien en te concurreren met andere spelers",
+    "loginToCompete": "Inloggen om te Concurreren",
+    "pointsCalculation": {
+      "title": "Punten Berekening",
+      "howCalculated": "Hoe Ranglijst Punten Worden Berekend",
+      "baseFormula": "Basis Formule:",
+      "formula": "Punten = (Field Grootte × Buy-in Gewicht × Finish Positie Vermenigvuldiger)",
+      "factors": "Factoren:",
+      "fieldSize": "Field Grootte:",
+      "fieldSizeDesc": "Meer spelers = meer punten beschikbaar",
+      "buyinWeight": "Buy-in Gewicht:",
+      "buyinWeightDesc": "Hogere inzet toernooien zijn meer waard",
+      "finishPosition": "Finish Positie:",
+      "finishPositionDesc": "Betere finish = hogere vermenigvuldiger",
+      "itmBonus": "ITM Bonus:",
+      "itmBonusDesc": "Extra punten voor eindigen in het geld",
+      "examples": "Voorbeelden:",
+      "example1Scenario": "1e plaats, 50 spelers, €100 buy-in:",
+      "example1Calculation": "50 × 2.0 × 10.0 = <strong>1000 punten</strong>",
+      "example2Scenario": "6e plaats, 30 spelers, €50 buy-in:",
+      "example2Calculation": "30 × 1.0 × 3.0 = <strong>90 punten</strong>",
+      "note": "Punten worden alleen toegekend voor toernooien waar je in het geld eindigt (ITM). De exacte vermenigvuldigers kunnen variëren op basis van toernooi structuur en field grootte."
+    },
+    "pointsInfo": "Informatie punten berekening"
+  },
+  "profile": {
+    "editProfile": "Profiel Bewerken",
+    "personalInfo": "Persoonlijke Informatie",
+    "firstName": "Voornaam",
+    "lastName": "Achternaam",
+    "username": "Gebruikersnaam",
+    "email": "Email",
+    "phone": "Telefoon",
+    "displayPreferences": "Weergave Voorkeuren",
+    "displayName": "Weergavenaam",
+    "realName": "Echte Naam",
+    "both": "Beide",
+    "preview": "Voorbeeld",
+    "howYourNameAppears": "Hoe je naam verschijnt",
+    "save": "Wijzigingen Opslaan",
+    "cancel": "Annuleren",
+    "saving": "Opslaan...",
+    "profileUpdated": "Profiel succesvol bijgewerkt",
+    "errorUpdating": "Fout bij het bijwerken van profiel",
+    "memberSince": "Lid sinds",
+    "verified": "Geverifieerd",
+    "vip": "VIP",
+    "yourStatistics": "Jouw Statistieken",
+    "totalWins": "Totaal Overwinningen",
+    "totalWinnings": "Totale Winsten",
+    "tournaments": "Toernooien",
+    "itmRate": "ITM Percentage",
+    "quickActions": "Snelle Acties",
+    "getStarted": "Aan de Slag",
+    "myRegistrations": "Mijn Registraties",
+    "upcoming": "komend",
+    "tournamentHistory": "Toernooi Geschiedenis",
+    "viewPastResults": "Bekijk eerdere resultaten",
+    "achievements": "Prestaties",
+    "unlocked": "ontgrendeld",
+    "friends": "Vrienden",
+    "accessAccount": "Toegang tot je account",
+    "createAccount": "Nieuw account aanmaken",
+    "browseTournaments": "Toernooien Bekijken",
+    "viewUpcomingEvents": "Bekijk komende evenementen",
+    "settings": "Instellingen",
+    "updateInfo": "Je informatie bijwerken",
+    "notifications": "Meldingen",
+    "tournamentAlerts": "Toernooi meldingen",
+    "logout": "Uitloggen",
+    "signOut": "Uitloggen uit je account",
+    "editAvatar": "Profielfoto bewerken"
+  },
+  "qrScanner": {
+    "scanTournament": "Scan QR Code",
+    "unknownQR": "Onbekende QR Code",
+    "unknownQRMessage": "Deze QR-code wordt niet herkend. Scan een geldige PocketPair QR-code.",
+    "tournamentNotFound": "Toernooi niet gevonden",
+    "checkInSuccess": "Inchecken geslaagd",
+    "checkInFailed": "Inchecken mislukt",
+    "checkInFailedMessage": "Kon niet inchecken. Probeer het opnieuw of neem contact op met de toernooi beheerder.",
+    "loginRequired": "Inloggen vereist",
+    "loginRequiredMessage": "Je moet ingelogd zijn om in te checken. Wil je nu inloggen?"
+  },
+  "achievements": {
+    "title": "Prestaties",
+    "unlocked": "Ontgrendeld",
+    "completion": "Voortgang",
+    "unlockedTitle": "Prestatie ontgrendeld!",
+    "unlockedOn": "Ontgrendeld op {date}",
+    "emptyCategory": "Nog geen prestaties hier",
+    "filters": {
+      "all": "Alles"
+    },
+    "categories": {
+      "registration": "Inschrijving",
+      "winnings": "Winst",
+      "results": "Resultaten",
+      "milestones": "Mijlpalen",
+      "streaks": "Reeksen"
+    },
+    "tiers": {
+      "bronze": "Brons",
+      "silver": "Zilver",
+      "gold": "Goud",
+      "platinum": "Platina"
+    },
+    "items": {
+      "first_registration": {
+        "name": "Eerste Stappen",
+        "description": "Schrijf je in voor je eerste toernooi"
+      },
+      "first_cash": {
+        "name": "In de Winsten",
+        "description": "Cash voor het eerst in een toernooi"
+      },
+      "first_win": {
+        "name": "Kampioen",
+        "description": "Win je eerste toernooi"
+      },
+      "tournaments_5": {
+        "name": "Regelmatig",
+        "description": "Speel 5 toernooien"
+      },
+      "tournaments_20": {
+        "name": "Grinder",
+        "description": "Speel 20 toernooien"
+      },
+      "tournaments_50": {
+        "name": "Veteraan",
+        "description": "Speel 50 toernooien"
+      },
+      "final_table_5": {
+        "name": "Finale Tafel Gewoonte",
+        "description": "Bereik 5 keer de finale tafel"
+      },
+      "winnings_1000": {
+        "name": "Hoge Inzet",
+        "description": "Win totaal €1.000 aan prijzen"
+      },
+      "itm_rate_50": {
+        "name": "Consistent",
+        "description": "Bereik een ITM-percentage van 50%"
+      },
+      "rebuy_3": {
+        "name": "Alles Erop",
+        "description": "Maak 3 rebuy's in één toernooi"
+      },
+      "streak_cash_3": {
+        "name": "Hete Reeks",
+        "description": "Cash 3 toernooien achter elkaar"
+      },
+      "streak_play_5": {
+        "name": "Toegewijd",
+        "description": "Speel 5 toernooien achter elkaar"
+      }
+    },
+    "locked": "Vergrendeld"
+  },
+  "error": {
+    "boundary": {
+      "title": "Er is iets misgegaan",
+      "defaultMessage": "Er is een onverwachte fout opgetreden. Probeer het opnieuw.",
+      "retryFailed": "Opnieuw proberen is mislukt. Probeer het later opnieuw.",
+      "retry": "Opnieuw proberen",
+      "reset": "Resetten",
+      "showDetails": "Details tonen",
+      "hideDetails": "Details verbergen"
+    }
+  }
+}
