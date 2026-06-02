@@ -1,0 +1,20 @@
+// Domain components (built on the ui/ primitives + motion/).
+export { TournamentCard } from './TournamentCard';
+export type { TournamentCardProps } from './TournamentCard';
+export { LeaderboardTable } from './LeaderboardTable';
+export type { LeaderboardTableProps } from './LeaderboardTable';
+export { StatCard } from './StatCard';
+export type { StatCardProps } from './StatCard';
+export { RegistrationStatusBadge } from './RegistrationStatusBadge';
+export { AchievementCard } from './AchievementCard';
+export { AchievementGrid } from './AchievementGrid';
+export type { AchievementGridProps } from './AchievementGrid';
+export { AchievementCelebration } from './AchievementCelebration';
+export type { AchievementCelebrationProps } from './AchievementCelebration';
+export { ClubSelector } from './ClubSelector';
+export { ClockDisplay } from './ClockDisplay';
+export type { ClockDisplayProps, ClockLevel } from './ClockDisplay';
+export { SeatingCard } from './SeatingCard';
+export type { SeatingCardProps } from './SeatingCard';
+export { ErrorBoundary } from './ErrorBoundary';
+export { Placeholder } from './Placeholder';

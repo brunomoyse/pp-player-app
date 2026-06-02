@@ -269,6 +269,11 @@
       "showQR": "Show QR"
     }
   },
+  "seating": {
+    "you": "You",
+    "chips": "chips",
+    "empty": "Empty seat"
+  },
   "checkIn": {
     "scanQR": {
       "title": "Scan Check-in QR",

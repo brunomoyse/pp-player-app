@@ -290,6 +290,11 @@
       "showQR": "Afficher QR"
     }
   },
+  "seating": {
+    "you": "Vous",
+    "chips": "jetons",
+    "empty": "Siège vide"
+  },
   "checkIn": {
     "scanQR": {
       "title": "Scanner le QR d'enregistrement",

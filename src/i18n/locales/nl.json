@@ -291,6 +291,11 @@
       "showQR": "Toon QR"
     }
   },
+  "seating": {
+    "you": "Jij",
+    "chips": "chips",
+    "empty": "Lege stoel"
+  },
   "checkIn": {
     "scanQR": {
       "title": "Scan Check-in QR",

@@ -1,0 +1,43 @@
+import { forwardRef } from 'react';
+import { TextInput, type TextInputProps, View } from 'react-native';
+
+import { cn } from '@/lib/cn';
+import { colors } from '@/theme/tokens';
+
+import { Text } from './Text';
+
+export interface InputProps extends TextInputProps {
+  label?: string;
+  error?: string | null;
+  className?: string;
+}
+
+export const Input = forwardRef<TextInput, InputProps>(function Input(
+  { label, error, className, ...rest },
+  ref
+) {
+  return (
+    <View className="gap-1.5">
+      {label ? (
+        <Text variant="label" className="text-pp-text-muted">
+          {label}
+        </Text>
+      ) : null}
+      <TextInput
+        ref={ref}
+        placeholderTextColor={colors.textMuted}
+        className={cn(
+          'rounded-xl border bg-pp-surface-2 px-4 py-3 font-sans text-base text-pp-text',
+          error ? 'border-pp-danger' : 'border-pp-border-strong',
+          className
+        )}
+        {...rest}
+      />
+      {error ? (
+        <Text className="text-xs text-pp-danger" accessibilityLiveRegion="polite">
+          {error}
+        </Text>
+      ) : null}
+    </View>
+  );
+});
