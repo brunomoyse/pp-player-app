@@ -26,6 +26,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { AchievementCelebration, ErrorBoundary } from '@/components';
 import { apolloClient } from '@/graphql/client';
+import { loadPersistedLocale } from '@/i18n/useI18n';
 import { useAchievementNotifications } from '@/hooks/useAchievementNotifications';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useGamificationStore } from '@/stores/useGamificationStore';
@@ -71,6 +72,7 @@ export default function RootLayout() {
 
   useEffect(() => {
     initialize();
+    void loadPersistedLocale();
   }, [initialize]);
 
   useEffect(() => {

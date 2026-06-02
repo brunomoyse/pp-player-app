@@ -5,9 +5,10 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, Switch, View } from 'react-native';
 
-import { EditProfileModal, StatCard } from '@/components';
+import { EditProfileModal, LanguageModal, StatCard } from '@/components';
 import { Avatar, Button, Card, Screen, Text } from '@/components/ui';
 import { GET_MY_ACHIEVEMENTS, GET_MY_STATISTICS } from '@/graphql/operations';
+import { LOCALE_LABELS, useI18n } from '@/i18n/useI18n';
 import { useAuthStore, useIsAuthenticated } from '@/stores/useAuthStore';
 import { colors } from '@/theme/tokens';
 import { currencyCents } from '@/utils/currency';
@@ -55,7 +56,9 @@ export default function ProfileScreen() {
   const isAuth = useIsAuthenticated();
   const user = useAuthStore((s) => s.currentUser);
   const logout = useAuthStore((s) => s.logout);
+  const { locale } = useI18n();
   const [editing, setEditing] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
   const [notifications, setNotifications] = useState(true);
 
   const stats = useQuery(GET_MY_STATISTICS, { skip: !isAuth });
@@ -162,11 +165,18 @@ export default function ProfileScreen() {
             />
           }
         />
+        <Setting
+          icon="language-outline"
+          title={t('common.language')}
+          subtitle={LOCALE_LABELS[locale]}
+          onPress={() => setLangOpen(true)}
+        />
       </Card>
 
       <Button title={t('profile.logout')} variant="danger" onPress={() => void logout()} />
 
       <EditProfileModal visible={editing} onClose={() => setEditing(false)} />
+      <LanguageModal visible={langOpen} onClose={() => setLangOpen(false)} />
     </Screen>
   );
 }

@@ -19,4 +19,6 @@ export type { SeatingCardProps } from './SeatingCard';
 export { ErrorBoundary } from './ErrorBoundary';
 export { EditProfileModal } from './EditProfileModal';
 export type { EditProfileModalProps } from './EditProfileModal';
+export { LanguageModal } from './LanguageModal';
+export type { LanguageModalProps } from './LanguageModal';
 export { Placeholder } from './Placeholder';
