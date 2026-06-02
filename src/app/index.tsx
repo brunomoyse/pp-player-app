@@ -1,98 +1,65 @@
-import * as Device from 'expo-device';
-import { Platform, StyleSheet } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { View } from 'react-native';
 
-import { AnimatedIcon } from '@/components/animated-icon';
-import { HintRow } from '@/components/hint-row';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { WebBadge } from '@/components/web-badge';
-import { BottomTabInset, MaxContentWidth, Spacing } from '@/constants/theme';
+import { Badge, Button, Card, Screen, Text } from '@/components/ui';
 
-function getDevMenuHint() {
-  if (Platform.OS === 'web') {
-    return <ThemedText type="small">use browser devtools</ThemedText>;
-  }
-  if (Device.isDevice) {
-    return (
-      <ThemedText type="small">
-        shake device or press <ThemedText type="code">m</ThemedText> in terminal
-      </ThemedText>
-    );
-  }
-  const shortcut = Platform.OS === 'android' ? 'cmd+m (or ctrl+m)' : 'cmd+d';
+export default function ShowcaseScreen() {
   return (
-    <ThemedText type="small">
-      press <ThemedText type="code">{shortcut}</ThemedText>
-    </ThemedText>
+    <Screen contentClassName="gap-5">
+      <Text variant="gold">PocketPair UI</Text>
+      <Text variant="muted">Design-system showcase (Phase 1)</Text>
+
+      {/* Typography */}
+      <Card>
+        <Text variant="label" className="mb-2">
+          Typography
+        </Text>
+        <Text variant="title">Title — Space Grotesk</Text>
+        <Text variant="heading">Heading — Space Grotesk</Text>
+        <Text variant="body">Body — Inter regular, the quick brown fox.</Text>
+        <Text variant="muted">Muted — Inter, secondary information.</Text>
+        <Text variant="dim">Dim — least important caption.</Text>
+        <Text variant="mono">Mono 1.234,56 € — JetBrains tabular</Text>
+      </Card>
+
+      {/* Buttons */}
+      <Card>
+        <Text variant="label" className="mb-3">
+          Buttons
+        </Text>
+        <View className="gap-2">
+          <Button title="Primary" variant="primary" />
+          <Button title="Secondary" variant="secondary" />
+          <Button title="Danger" variant="danger" />
+          <Button title="Success" variant="success" />
+          <Button title="Loading" variant="primary" loading />
+          <Button title="Disabled" variant="primary" disabled />
+        </View>
+      </Card>
+
+      {/* Badges */}
+      <Card>
+        <Text variant="label" className="mb-3">
+          Badges
+        </Text>
+        <View className="flex-row flex-wrap gap-2">
+          <Badge label="Upcoming" tone="upcoming" />
+          <Badge label="Live" tone="live" />
+          <Badge label="Completed" tone="completed" />
+          <Badge label="Deepstack" tone="deepstack" />
+          <Badge label="Turbo" tone="turbo" />
+          <Badge label="Freezeout" tone="freezeout" />
+          <Badge label="Bounty" tone="bounty" />
+          <Badge label="Gold" tone="gold" />
+        </View>
+      </Card>
+
+      {/* Highlighted card */}
+      <Card highlighted>
+        <Text variant="heading" className="text-pp-gold">
+          Highlighted card
+        </Text>
+        <Text variant="muted">Gold border + glow for featured / unlocked items.</Text>
+      </Card>
+    </Screen>
   );
 }
-
-export default function HomeScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <ThemedView style={styles.heroSection}>
-          <AnimatedIcon />
-          <ThemedText type="title" style={styles.title}>
-            Welcome to&nbsp;Expo
-          </ThemedText>
-        </ThemedView>
-
-        <ThemedText type="code" style={styles.code}>
-          get started
-        </ThemedText>
-
-        <ThemedView type="backgroundElement" style={styles.stepContainer}>
-          <HintRow
-            title="Try editing"
-            hint={<ThemedText type="code">src/app/index.tsx</ThemedText>}
-          />
-          <HintRow title="Dev tools" hint={getDevMenuHint()} />
-          <HintRow
-            title="Fresh start"
-            hint={<ThemedText type="code">npm run reset-project</ThemedText>}
-          />
-        </ThemedView>
-
-        {Platform.OS === 'web' && <WebBadge />}
-      </SafeAreaView>
-    </ThemedView>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  safeArea: {
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    alignItems: 'center',
-    gap: Spacing.three,
-    paddingBottom: BottomTabInset + Spacing.three,
-    maxWidth: MaxContentWidth,
-  },
-  heroSection: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    paddingHorizontal: Spacing.four,
-    gap: Spacing.four,
-  },
-  title: {
-    textAlign: 'center',
-  },
-  code: {
-    textTransform: 'uppercase',
-  },
-  stepContainer: {
-    gap: Spacing.three,
-    alignSelf: 'stretch',
-    paddingHorizontal: Spacing.three,
-    paddingVertical: Spacing.four,
-    borderRadius: Spacing.four,
-  },
-});
