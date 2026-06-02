@@ -24,8 +24,11 @@ import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import { AchievementCelebration, ErrorBoundary } from '@/components';
 import { apolloClient } from '@/graphql/client';
+import { useAchievementNotifications } from '@/hooks/useAchievementNotifications';
 import { useAuthStore } from '@/stores/useAuthStore';
+import { useGamificationStore } from '@/stores/useGamificationStore';
 import { colors } from '@/theme/tokens';
 
 SplashScreen.preventAutoHideAsync();
@@ -43,6 +46,14 @@ const PPDarkTheme = {
     notification: colors.gold,
   },
 };
+
+function GamificationLayer() {
+  useAchievementNotifications();
+  const show = useGamificationStore((s) => s.show);
+  const achievement = useGamificationStore((s) => s.celebration);
+  const dismiss = useGamificationStore((s) => s.dismiss);
+  return <AchievementCelebration show={show} achievement={achievement} onDismiss={dismiss} />;
+}
 
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
@@ -74,18 +85,22 @@ export default function RootLayout() {
         <SafeAreaProvider>
           <ThemeProvider value={PPDarkTheme}>
             <StatusBar style="light" />
-            <Stack
-              screenOptions={{
-                headerShown: false,
-                contentStyle: { backgroundColor: colors.bg },
-                animation: 'slide_from_right',
-              }}>
-              <Stack.Screen name="(tabs)" />
-              <Stack.Screen name="login" options={{ presentation: 'modal' }} />
-              <Stack.Screen name="register" options={{ presentation: 'modal' }} />
-              <Stack.Screen name="tournament/[id]" />
-              <Stack.Screen name="achievements" />
-            </Stack>
+            <ErrorBoundary>
+              <Stack
+                screenOptions={{
+                  headerShown: false,
+                  contentStyle: { backgroundColor: colors.bg },
+                  animation: 'slide_from_right',
+                }}>
+                <Stack.Screen name="(tabs)" />
+                <Stack.Screen name="login" options={{ presentation: 'modal' }} />
+                <Stack.Screen name="register" options={{ presentation: 'modal' }} />
+                <Stack.Screen name="tournament/[id]" />
+                <Stack.Screen name="achievements" />
+              </Stack>
+              {/* App-wide gamification: notification listener + celebration overlay. */}
+              <GamificationLayer />
+            </ErrorBoundary>
           </ThemeProvider>
         </SafeAreaProvider>
       </ApolloProvider>

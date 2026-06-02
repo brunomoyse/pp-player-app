@@ -19,7 +19,7 @@ export interface Club {
 }
 
 // Notification types
-export type NotificationType = 'TOURNAMENT_STARTING_SOON' | 'REGISTRATION_CONFIRMED' | 'TOURNAMENT_STATUS_CHANGED'
+export type NotificationType = 'TOURNAMENT_STARTING_SOON' | 'REGISTRATION_CONFIRMED' | 'TOURNAMENT_STATUS_CHANGED' | 'ACHIEVEMENT_UNLOCKED'
 
 export interface UserNotification {
     id: string;

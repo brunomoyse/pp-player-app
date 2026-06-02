@@ -4,8 +4,10 @@ import { Stack, router, useLocalSearchParams } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Alert, Pressable, Share, View } from 'react-native';
 
-import { ClockDisplay, type ClockLevel } from '@/components';
+import { ClockDisplay } from '@/components';
 import { FadeUp } from '@/components/motion';
+import { useLiveClock } from '@/hooks/useLiveClock';
+import { useLiveRegistrations } from '@/hooks/useLiveRegistrations';
 import {
   Badge,
   type BadgeTone,
@@ -22,7 +24,7 @@ import {
 } from '@/graphql/operations';
 import { useAuthStore, useIsAuthenticated } from '@/stores/useAuthStore';
 import { colors } from '@/theme/tokens';
-import type { TournamentStatus, TournamentStructure } from '@/types/tournament';
+import type { TournamentStatus } from '@/types/tournament';
 import { currencyCents } from '@/utils/currency';
 import { formatDateTime } from '@/utils/datetime';
 
@@ -31,17 +33,6 @@ const STATUS_TONE: Record<TournamentStatus, BadgeTone> = {
   IN_PROGRESS: 'live',
   COMPLETED: 'completed',
 };
-
-function toLevel(s?: TournamentStructure | null): ClockLevel | null {
-  if (!s) return null;
-  return {
-    level: s.levelNumber,
-    smallBlind: s.smallBlind,
-    bigBlind: s.bigBlind,
-    ante: s.ante ?? null,
-    isBreak: s.isBreak,
-  };
-}
 
 export default function TournamentDetailScreen() {
   const { t, i18n } = useTranslation();
@@ -57,6 +48,9 @@ export default function TournamentDetailScreen() {
   const [register, { loading: registering }] = useMutation(REGISTER_FOR_TOURNAMENT);
 
   const tn = data?.tournament;
+  // Live clock + registration count over the WebSocket (Phase 6).
+  const clock = useLiveClock(id, tn?.clock);
+  const regCount = useLiveRegistrations(id, tn?.registrations?.length ?? 0);
   const registered = tn?.registrations?.some((r) => r.userId === currentUser?.id) ?? false;
 
   const onRegister = async () => {
@@ -127,31 +121,23 @@ export default function TournamentDetailScreen() {
             <Card className="gap-3">
               <Fact icon="time-outline" label={t('events.dateTime')} value={formatDateTime(tn.startTime, i18n.language)} />
               <Fact icon="cash-outline" label={t('events.buyIn')} value={currencyCents(tn.buyInCents)} />
-              {tn.seatCap ? (
-                <Fact
-                  icon="people-outline"
-                  label={t('events.players')}
-                  value={`${tn.registrations?.length ?? 0} / ${tn.seatCap}`}
-                />
-              ) : (
-                <Fact
-                  icon="people-outline"
-                  label={t('events.players')}
-                  value={`${tn.registrations?.length ?? 0}`}
-                />
-              )}
+              <Fact
+                icon="people-outline"
+                label={t('events.players')}
+                value={tn.seatCap ? `${regCount} / ${tn.seatCap}` : `${regCount}`}
+              />
               {tn.club ? (
                 <Fact icon="business-outline" label={t('home.selectClub')} value={tn.club.name} />
               ) : null}
             </Card>
 
-            {/* Live clock */}
+            {/* Live clock (subscription-driven, Phase 6) */}
             {tn.clock ? (
               <ClockDisplay
-                isLive={tn.clock.status === 'RUNNING'}
-                timeRemaining={tn.clock.timeRemainingSeconds ?? 0}
-                currentLevel={toLevel(tn.clock.currentStructure)}
-                nextLevel={toLevel(tn.clock.nextStructure)}
+                isLive={clock.isLive}
+                timeRemaining={clock.timeRemaining}
+                currentLevel={clock.currentLevel}
+                nextLevel={clock.nextLevel}
               />
             ) : null}
 
