@@ -5,7 +5,7 @@ import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Pressable, View } from 'react-native';
 
-import { RegistrationStatusBadge, StatCard } from '@/components';
+import { QRCodeModal, RegistrationStatusBadge, StatCard } from '@/components';
 import { Stagger } from '@/components/motion';
 import { Button, Card, EmptyState, ErrorState, LoadingState, Screen, Segment, Text } from '@/components/ui';
 import {
@@ -32,6 +32,7 @@ export default function MySeatsScreen() {
   const isAuth = useIsAuthenticated();
   const currentUser = useAuthStore((s) => s.currentUser);
   const [category, setCategory] = useState<Category>('upcoming');
+  const [qrFor, setQrFor] = useState<string | null>(null);
 
   const { data, loading, error, refetch, networkStatus } = useQuery(GET_MY_REGISTRATIONS, {
     skip: !isAuth,
@@ -39,7 +40,7 @@ export default function MySeatsScreen() {
   });
   const [cancel] = useMutation(CANCEL_REGISTRATION);
 
-  const regs = data?.myTournamentRegistrations ?? [];
+  const regs = useMemo(() => data?.myTournamentRegistrations ?? [], [data]);
   const investment = useMemo(
     () => regs.reduce((sum, r) => sum + (r.tournament.buyInCents ?? 0), 0),
     [regs]
@@ -146,9 +147,7 @@ export default function MySeatsScreen() {
                       title={t('mySeats.qrCode.showQR')}
                       variant="secondary"
                       className="flex-1"
-                      onPress={() =>
-                        Alert.alert(t('mySeats.qrCode.title'), t('common.notYetAvailable'))
-                      }
+                      onPress={() => setQrFor(reg.tournamentId)}
                     />
                     <Button
                       title={t('mySeats.cancel')}
@@ -163,6 +162,8 @@ export default function MySeatsScreen() {
           ))}
         </Stagger>
       )}
+
+      <QRCodeModal visible={qrFor !== null} tournamentId={qrFor} onClose={() => setQrFor(null)} />
     </Screen>
   );
 }

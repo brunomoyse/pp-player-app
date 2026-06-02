@@ -21,4 +21,8 @@ export { EditProfileModal } from './EditProfileModal';
 export type { EditProfileModalProps } from './EditProfileModal';
 export { LanguageModal } from './LanguageModal';
 export type { LanguageModalProps } from './LanguageModal';
+export { QRCodeModal } from './QRCodeModal';
+export type { QRCodeModalProps } from './QRCodeModal';
+export { QRCodeScanner } from './QRCodeScanner';
+export type { QRCodeScannerProps } from './QRCodeScanner';
 export { Placeholder } from './Placeholder';

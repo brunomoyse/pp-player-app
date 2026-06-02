@@ -40,7 +40,13 @@
         }
       ],
       "expo-localization",
-      "expo-secure-store"
+      "expo-secure-store",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "PocketPair uses the camera to scan tournament check-in QR codes."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,

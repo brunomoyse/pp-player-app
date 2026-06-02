@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { MotiView } from 'moti';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Modal, Pressable, useWindowDimensions, View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -58,9 +58,12 @@ export function AchievementCelebration({ show, achievement, onDismiss }: Achieve
   const { width, height } = useWindowDimensions();
   const [burst, setBurst] = useState(0);
 
-  useEffect(() => {
+  // New confetti burst each time the overlay opens (adjust-state-on-prop-change).
+  const [wasShown, setWasShown] = useState(show);
+  if (show !== wasShown) {
+    setWasShown(show);
     if (show) setBurst((b) => b + 1);
-  }, [show]);
+  }
 
   const pieces = useMemo(
     () => (reduce ? [] : buildPieces(burst || 1, width, height)),

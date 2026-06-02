@@ -14,6 +14,7 @@ function deviceLocale(): AppLocale {
   return (SUPPORTED_LOCALES as readonly string[]).includes(code) ? (code as AppLocale) : 'en';
 }
 
+// eslint-disable-next-line import/no-named-as-default-member -- `.use` is a real method on i18next's default export
 i18n.use(initReactI18next).init({
   resources: {
     en: { translation: en },

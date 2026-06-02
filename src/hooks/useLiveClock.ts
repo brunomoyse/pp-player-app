@@ -36,27 +36,28 @@ export function useLiveClock(
   const [clock, setClock] = useState<TournamentClock | null>(initial ?? null);
   const [remaining, setRemaining] = useState<number>(initial?.timeRemainingSeconds ?? 0);
 
-  const { data } = useSubscription(TOURNAMENT_CLOCK_UPDATES, {
-    variables: { tournamentId: tournamentId! },
-    skip: !tournamentId,
-  });
-
-  // Re-seed when the underlying query clock changes (e.g. navigation / refetch).
-  useEffect(() => {
+  // Re-seed when the underlying query clock changes (adjust-state-on-prop-change).
+  const [seed, setSeed] = useState(initial ?? null);
+  if (seed !== initial) {
+    setSeed(initial ?? null);
     if (initial) {
       setClock(initial);
       setRemaining(initial.timeRemainingSeconds ?? 0);
     }
-  }, [initial]);
+  }
 
-  // Apply each server push.
-  useEffect(() => {
-    const next = data?.tournamentClockUpdates;
-    if (next) {
-      setClock(next);
-      setRemaining(next.timeRemainingSeconds ?? 0);
-    }
-  }, [data]);
+  // Apply each server push in the subscription callback (not a sync effect).
+  useSubscription(TOURNAMENT_CLOCK_UPDATES, {
+    variables: { tournamentId: tournamentId! },
+    skip: !tournamentId,
+    onData: ({ data }) => {
+      const next = data.data?.tournamentClockUpdates;
+      if (next) {
+        setClock(next);
+        setRemaining(next.timeRemainingSeconds ?? 0);
+      }
+    },
+  });
 
   // Local countdown while running.
   const running = clock?.status === 'RUNNING';

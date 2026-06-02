@@ -33,15 +33,13 @@ export function AnimatedNumber({
   className,
 }: AnimatedNumberProps) {
   const reduce = useReducedMotion();
-  const [display, setDisplay] = useState(reduce ? value : 0);
+  const [display, setDisplay] = useState(0);
   const fromRef = useRef(0);
   const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
-    if (reduce) {
-      setDisplay(value);
-      return;
-    }
+    // Reduced motion: skip the tween — the rendered value is derived below.
+    if (reduce) return;
     const from = fromRef.current;
     const now0 = () => globalThis.performance?.now?.() ?? Date.now();
     const start = now0();
@@ -61,7 +59,8 @@ export function AnimatedNumber({
     };
   }, [value, duration, reduce]);
 
-  const text = format ? format(display) : display.toFixed(decimals);
+  const shown = reduce ? value : display;
+  const text = format ? format(shown) : shown.toFixed(decimals);
   return (
     <Text variant={variant} className={className}>
       {prefix}

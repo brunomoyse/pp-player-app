@@ -36,7 +36,6 @@ const getLocale = (lang: string) => {
             return 'fr-BE'
         case 'nl':
             return 'nl-BE'
-            break
         default:
             return 'en-GB'
     }
