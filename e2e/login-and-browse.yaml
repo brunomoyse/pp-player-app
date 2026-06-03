@@ -1,0 +1,40 @@
+# Native e2e: guest browse of live data + login + authenticated screens.
+# Runs against the real pp-service (no CORS on native).
+appId: com.pocketpair.app
+---
+- launchApp:
+    clearState: true
+    permissions: { all: allow }
+
+# --- Guest home renders real data from the live API ---
+- assertVisible: "Explore PocketPair"
+- assertVisible: "Next Tournaments"
+
+# --- Events tab: real tournament list (no auth needed) ---
+- tapOn: "Events"
+- assertVisible: "Tournaments"
+- assertVisible: "Upcoming"
+
+# --- Leaderboard tab: guest CTA + period segments ---
+- tapOn: "Leaders"
+- assertVisible: "Join the Competition"
+
+# --- Log in through the dedicated route ---
+- openLink: pocketpair://login
+- assertVisible: "Welcome back"
+- tapOn:
+    below: "Email"
+- inputText: "native-e2e@pocketpair.test"
+- tapOn:
+    below: "Password"
+- inputText: "Passw0rd!"
+- hideKeyboard
+- tapOn: "Login"
+
+# --- Authenticated: Home shows KPIs, My Seats tab now exists, profile shows the user ---
+- tapOn: "Home"
+- assertVisible: "ITM Rate"
+- tapOn: "My Seats"
+- assertVisible: "Registered"
+- tapOn: "Me"
+- assertVisible: "native-e2e@pocketpair.test"

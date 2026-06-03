@@ -1,3 +1,4 @@
+import '@/lib/logbox';
 import '@/global.css';
 import '@/i18n';
 

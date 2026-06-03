@@ -1,8 +1,8 @@
 import { SetContextLink } from '@apollo/client/link/context';
 import { ErrorLink } from '@apollo/client/link/error';
 
+import { getAuthActions } from '@/graphql/authActions';
 import { tokens } from '@/lib/tokens';
-import { useAuthStore } from '@/stores/useAuthStore';
 
 // Inject the bearer access token on every request.
 export const authLink = new SetContextLink((prevContext) => {
@@ -26,9 +26,11 @@ export const errorLink = new ErrorLink(({ error }) => {
     (typeof error === 'string' ? error : '') ??
     '';
   if (AUTH_ERROR.test(message)) {
-    const store = useAuthStore.getState();
-    store.refreshAccessToken().then((ok) => {
-      if (!ok) store.clearSession();
-    });
+    const auth = getAuthActions();
+    if (auth) {
+      auth.refresh().then((ok) => {
+        if (!ok) auth.signOut();
+      });
+    }
   }
 });

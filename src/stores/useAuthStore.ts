@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
+import { setAuthActions } from '@/graphql/authActions';
 import { apolloClient } from '@/graphql/client';
 import { GET_ME, LOGIN_USER, REGISTER_USER } from '@/graphql/operations/auth';
 import { tokens } from '@/lib/tokens';
@@ -164,6 +165,13 @@ export const useAuthStore = create<AuthState>()(
     }
   )
 );
+
+// Let the Apollo error link trigger refresh / sign-out without importing the
+// store (breaks the useAuthStore → client → links → useAuthStore require cycle).
+setAuthActions({
+  refresh: () => useAuthStore.getState().refreshAccessToken(),
+  signOut: () => useAuthStore.getState().clearSession(),
+});
 
 export const useIsAuthenticated = () =>
   useAuthStore((s) => !!s.accessToken && !!s.currentUser);

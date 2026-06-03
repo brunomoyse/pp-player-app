@@ -41,3 +41,6 @@ example
 # generated native folders
 /ios
 /android
+
+# Maestro e2e screenshots (written to CWD)
+[A-Z]-*.png

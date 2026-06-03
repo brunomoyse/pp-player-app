@@ -32,6 +32,8 @@ export default function RegisterScreen() {
   const isLoading = useAuthStore((s) => s.isLoading);
   const error = useAuthStore((s) => s.error);
 
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -45,6 +47,8 @@ export default function RegisterScreen() {
   const hasNumber = /[0-9]/.test(password);
   const passwordValid = hasLength && hasLower && hasUpper && hasNumber;
   const valid =
+    firstName.trim().length > 0 &&
+    lastName.trim().length > 0 &&
     USERNAME_RE.test(username) &&
     EMAIL_RE.test(email) &&
     passwordValid &&
@@ -53,7 +57,13 @@ export default function RegisterScreen() {
 
   const onSubmit = async () => {
     if (!valid) return;
-    const user = await register({ username, email: email.trim(), password });
+    const user = await register({
+      firstName: firstName.trim(),
+      lastName: lastName.trim(),
+      username,
+      email: email.trim(),
+      password,
+    });
     if (user) router.replace('/(tabs)');
   };
 
@@ -66,6 +76,26 @@ export default function RegisterScreen() {
           <Text variant="muted">{t('auth.joinCommunity')}</Text>
         </View>
 
+        <View className="flex-row gap-3">
+          <View className="flex-1">
+            <Input
+              label={t('profile.firstName')}
+              value={firstName}
+              onChangeText={setFirstName}
+              autoCapitalize="words"
+              textContentType="givenName"
+            />
+          </View>
+          <View className="flex-1">
+            <Input
+              label={t('profile.lastName')}
+              value={lastName}
+              onChangeText={setLastName}
+              autoCapitalize="words"
+              textContentType="familyName"
+            />
+          </View>
+        </View>
         <Input
           label={t('auth.username')}
           value={username}

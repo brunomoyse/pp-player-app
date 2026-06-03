@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client/react';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -80,6 +80,19 @@ export default function ProfileScreen() {
             onPress={() => router.push('/register')}
           />
         </View>
+
+        {/* Language is available without an account. */}
+        <Pressable
+          onPress={() => setLangOpen(true)}
+          accessibilityRole="button"
+          className="mt-2 flex-row items-center gap-2 rounded-full border border-pp-border px-4 py-2">
+          <Ionicons name="language-outline" size={16} color={colors.gold} />
+          <Text className="font-sans-medium text-pp-text">
+            {t('common.language')} · {LOCALE_LABELS[locale]}
+          </Text>
+        </Pressable>
+
+        <LanguageModal visible={langOpen} onClose={() => setLangOpen(false)} />
       </Screen>
     );
   }
@@ -107,7 +120,7 @@ export default function ProfileScreen() {
       {/* Stats */}
       <View className="flex-row gap-3">
         <StatCard
-          icon="game-controller-outline"
+          icon={<MaterialCommunityIcons name="cards-playing-outline" size={20} color={colors.gold} />}
           value={block?.totalTournaments ?? 0}
           label={t('profile.tournaments')}
         />
