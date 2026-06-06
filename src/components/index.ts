@@ -12,6 +12,8 @@ export type { AchievementGridProps } from './AchievementGrid';
 export { AchievementCelebration } from './AchievementCelebration';
 export type { AchievementCelebrationProps } from './AchievementCelebration';
 export { CrossClubProfileCard } from './CrossClubProfileCard';
+export { PlayerNoteSheet } from './PlayerNoteSheet';
+export type { PlayerNoteSheetProps } from './PlayerNoteSheet';
 export { ClubSelector } from './ClubSelector';
 export { ClockDisplay } from './ClockDisplay';
 export type { ClockDisplayProps, ClockLevel } from './ClockDisplay';

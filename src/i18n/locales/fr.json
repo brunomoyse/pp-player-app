@@ -504,6 +504,31 @@
     },
     "locked": "Verrouillé"
   },
+  "notes": {
+    "title": "Notes sur les joueurs",
+    "privateSubtitle": "Privé — vous seul pouvez les voir",
+    "style": "Style de jeu",
+    "tagsLabel": "Étiquettes rapides",
+    "bodyLabel": "Notes",
+    "bodyPlaceholder": "Lectures, tendances, historique…",
+    "showdownLabel": "Abattages vus",
+    "showdownPlaceholder": "ex. ouvre UTG avec K9s",
+    "add": "Ajouter",
+    "save": "Enregistrer la note",
+    "saving": "Enregistrement…",
+    "empty": "Aucune note pour l'instant. Ajoutez-en une sur un joueur pour commencer.",
+    "unknownPlayer": "Joueur inconnu",
+    "tags": {
+      "tight": "Serré",
+      "loose": "Large",
+      "aggressive": "Agressif",
+      "passive": "Passif",
+      "station": "Suiveur",
+      "maniac": "Maniaque",
+      "rock": "Rocher",
+      "tricky": "Rusé"
+    }
+  },
   "error": {
     "boundary": {
       "title": "Une erreur s'est produite",

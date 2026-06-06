@@ -1,0 +1,34 @@
+mutation UpsertPlayerNote($input: UpsertPlayerNoteInput!) {
+  upsertPlayerNote(input: $input) {
+    id
+    subjectRegisteredPlayerId
+    body
+    style
+    updatedAt
+  }
+}
+
+mutation DeletePlayerNote($noteId: ID!) {
+  deletePlayerNote(noteId: $noteId)
+}
+
+mutation AddPlayerNoteTag($input: AddPlayerNoteTagInput!) {
+  addPlayerNoteTag(input: $input) {
+    id
+    kind
+    tag
+  }
+}
+
+mutation RemovePlayerNoteTag($noteId: ID!, $tagId: ID!) {
+  removePlayerNoteTag(noteId: $noteId, tagId: $tagId)
+}
+
+mutation AddShowdownObservation($input: AddShowdownObservationInput!) {
+  addShowdownObservation(input: $input) {
+    id
+    tournamentId
+    description
+    createdAt
+  }
+}

@@ -1,0 +1,36 @@
+query GetPlayerNote($subjectRegisteredPlayerId: ID!) {
+  playerNote(subjectRegisteredPlayerId: $subjectRegisteredPlayerId) {
+    ...PlayerNoteFields
+  }
+}
+
+query GetMyPlayerNotes {
+  myPlayerNotes {
+    ...PlayerNoteFields
+  }
+}
+
+fragment PlayerNoteFields on PlayerNote {
+  id
+  subjectRegisteredPlayerId
+  body
+  style
+  createdAt
+  updatedAt
+  subject {
+    id
+    clubId
+    displayName
+  }
+  tags {
+    id
+    kind
+    tag
+  }
+  showdownObservations {
+    id
+    tournamentId
+    description
+    createdAt
+  }
+}

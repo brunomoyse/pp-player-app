@@ -8,6 +8,7 @@ import { Pressable, Switch, View } from 'react-native';
 import { CrossClubProfileCard, EditProfileModal, LanguageModal, StatCard } from '@/components';
 import { Avatar, Button, Card, Screen, Text } from '@/components/ui';
 import { GET_MY_ACHIEVEMENTS, GET_MY_STATISTICS } from '@/graphql/operations';
+import { useFeatureFlags } from '@/hooks/useFeatureFlags';
 import { LOCALE_LABELS, useI18n } from '@/i18n/useI18n';
 import { useAuthStore, useIsAuthenticated } from '@/stores/useAuthStore';
 import { colors } from '@/theme/tokens';
@@ -57,6 +58,7 @@ export default function ProfileScreen() {
   const user = useAuthStore((s) => s.currentUser);
   const logout = useAuthStore((s) => s.logout);
   const { locale } = useI18n();
+  const flags = useFeatureFlags();
   const [editing, setEditing] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [notifications, setNotifications] = useState(true);
@@ -155,6 +157,14 @@ export default function ProfileScreen() {
           title={t('profile.myRegistrations')}
           onPress={() => router.push('/my-seats')}
         />
+        {flags.notes ? (
+          <Setting
+            icon="reader-outline"
+            title={t('notes.title')}
+            subtitle={t('notes.privateSubtitle')}
+            onPress={() => router.push('/notes')}
+          />
+        ) : null}
         <Setting
           icon="calendar-outline"
           title={t('profile.browseTournaments')}

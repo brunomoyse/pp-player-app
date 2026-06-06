@@ -503,6 +503,31 @@
     },
     "locked": "Locked"
   },
+  "notes": {
+    "title": "Opponent Notes",
+    "privateSubtitle": "Private — only you can see these",
+    "style": "Playing style",
+    "tagsLabel": "Quick tags",
+    "bodyLabel": "Notes",
+    "bodyPlaceholder": "Reads, tendencies, history…",
+    "showdownLabel": "Showdowns seen",
+    "showdownPlaceholder": "e.g. opened UTG with K9s",
+    "add": "Add",
+    "save": "Save note",
+    "saving": "Saving…",
+    "empty": "No notes yet. Add one on a player to get started.",
+    "unknownPlayer": "Unknown player",
+    "tags": {
+      "tight": "Tight",
+      "loose": "Loose",
+      "aggressive": "Aggressive",
+      "passive": "Passive",
+      "station": "Calling station",
+      "maniac": "Maniac",
+      "rock": "Rock",
+      "tricky": "Tricky"
+    }
+  },
   "error": {
     "boundary": {
       "title": "Something went wrong",

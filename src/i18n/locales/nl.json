@@ -505,6 +505,31 @@
     },
     "locked": "Vergrendeld"
   },
+  "notes": {
+    "title": "Tegenstandernotities",
+    "privateSubtitle": "Privé — alleen jij kunt deze zien",
+    "style": "Speelstijl",
+    "tagsLabel": "Snelle labels",
+    "bodyLabel": "Notities",
+    "bodyPlaceholder": "Reads, tendensen, geschiedenis…",
+    "showdownLabel": "Geziene showdowns",
+    "showdownPlaceholder": "bijv. opent UTG met K9s",
+    "add": "Toevoegen",
+    "save": "Notitie opslaan",
+    "saving": "Opslaan…",
+    "empty": "Nog geen notities. Voeg er een toe bij een speler om te beginnen.",
+    "unknownPlayer": "Onbekende speler",
+    "tags": {
+      "tight": "Tight",
+      "loose": "Loose",
+      "aggressive": "Agressief",
+      "passive": "Passief",
+      "station": "Calling station",
+      "maniac": "Maniak",
+      "rock": "Rots",
+      "tricky": "Lastig"
+    }
+  },
   "error": {
     "boundary": {
       "title": "Er is iets misgegaan",

@@ -4,4 +4,6 @@ export * from './registrations';
 export * from './clubs';
 export * from './achievements';
 export * from './identity';
+export * from './notes';
+export * from './system';
 export * from './subscriptions';
