@@ -537,6 +537,29 @@
       "badge": "Badges"
     }
   },
+  "predictions": {
+    "title": "Pronostics",
+    "subtitle": "Pronostics fantasy gratuits avec des points",
+    "balanceLabel": "Points de pronostic",
+    "points": "points",
+    "claim": "Récupérer {points} points",
+    "earnHint": "Gagnez des points en pointant et en jouant — sans achat, juste pour le plaisir.",
+    "history": "Vos pronostics",
+    "empty": "Aucun pronostic pour l'instant.",
+    "predictWinner": "Pronostiquer le vainqueur",
+    "yourPick": "Votre pronostic",
+    "stake": "Mise",
+    "balance": "{points} pts",
+    "placePrediction": "Valider le pronostic",
+    "needPoints": "Récupérez d'abord des points pour pronostiquer.",
+    "staked": "{points} pts misés",
+    "failed": "Impossible de valider le pronostic",
+    "status": {
+      "open": "En cours",
+      "won": "Gagné",
+      "lost": "Perdu"
+    }
+  },
   "achievements": {
     "title": "Succès",
     "unlocked": "Débloqués",

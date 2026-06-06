@@ -13,6 +13,8 @@ export { AchievementCelebration } from './AchievementCelebration';
 export type { AchievementCelebrationProps } from './AchievementCelebration';
 export { CrossClubProfileCard } from './CrossClubProfileCard';
 export { StreakCard } from './StreakCard';
+export { PredictionCard } from './PredictionCard';
+export type { PredictionPlayer } from './PredictionCard';
 export { PlayerNoteSheet } from './PlayerNoteSheet';
 export type { PlayerNoteSheetProps } from './PlayerNoteSheet';
 export { PreGameField } from './PreGameField';

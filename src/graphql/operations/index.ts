@@ -10,5 +10,6 @@ export * from './attendance';
 export * from './season';
 export * from './social';
 export * from './cosmetics';
+export * from './prediction';
 export * from './system';
 export * from './subscriptions';

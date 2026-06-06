@@ -1,10 +1,12 @@
 import { useMutation, useQuery } from '@apollo/client/react';
 import { Ionicons } from '@expo/vector-icons';
 import { Stack, router, useLocalSearchParams } from 'expo-router';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Pressable, Share, View } from 'react-native';
 
-import { ClockDisplay, PreGameField } from '@/components';
+import { ClockDisplay, PreGameField, PredictionCard, type PredictionPlayer } from '@/components';
+import { useFeatureFlags } from '@/hooks/useFeatureFlags';
 import { FadeUp } from '@/components/motion';
 import { useLiveClock } from '@/hooks/useLiveClock';
 import { useLiveRegistrations } from '@/hooks/useLiveRegistrations';
@@ -48,6 +50,15 @@ export default function TournamentDetailScreen() {
   const [register, { loading: registering }] = useMutation(REGISTER_FOR_TOURNAMENT);
 
   const tn = data?.tournament;
+  const flags = useFeatureFlags();
+  // Registered players with display names — the fantasy-prediction picker pool.
+  const predictionPlayers = useMemo<PredictionPlayer[]>(
+    () =>
+      (tn?.registrations ?? [])
+        .filter((r) => r.user)
+        .map((r) => ({ userId: r.userId, name: r.user?.username || r.user?.firstName || '—' })),
+    [tn],
+  );
   // Live clock + registration count over the WebSocket (Phase 6).
   const clock = useLiveClock(id, tn?.clock);
   const regCount = useLiveRegistrations(id, tn?.registrations?.length ?? 0);
@@ -133,6 +144,11 @@ export default function TournamentDetailScreen() {
 
             {/* Pre-game prep — who's registered + your notes (Pro). Renders only when eligible. */}
             <PreGameField tournamentId={id!} />
+
+            {/* Fantasy: predict the winner with Prediction Points (G2). */}
+            {flags.predictions && tn.status !== 'COMPLETED' ? (
+              <PredictionCard tournamentId={id!} players={predictionPlayers} />
+            ) : null}
 
             {/* Live clock (subscription-driven, Phase 6) */}
             {tn.clock ? (

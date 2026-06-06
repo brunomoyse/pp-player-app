@@ -153,6 +153,11 @@ export const GET_TOURNAMENT: TypedDocumentNode<GetTournamentResult, GetTournamen
         registrationTime
         status
         notes
+        user {
+          id
+          firstName
+          username
+        }
       }
       club {
         id

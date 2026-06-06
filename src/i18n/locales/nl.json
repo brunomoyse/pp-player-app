@@ -538,6 +538,29 @@
       "badge": "Badges"
     }
   },
+  "predictions": {
+    "title": "Voorspellingen",
+    "subtitle": "Gratis fantasy-voorspellingen met punten",
+    "balanceLabel": "Voorspelpunten",
+    "points": "punten",
+    "claim": "Haal {points} punten op",
+    "earnHint": "Verdien punten door in te checken en te spelen — geen aankoop, puur voor de lol.",
+    "history": "Je voorspellingen",
+    "empty": "Nog geen voorspellingen.",
+    "predictWinner": "Voorspel de winnaar",
+    "yourPick": "Jouw voorspelling",
+    "stake": "Inzet",
+    "balance": "{points} pnt",
+    "placePrediction": "Voorspelling plaatsen",
+    "needPoints": "Haal eerst punten op om te voorspellen.",
+    "staked": "{points} pnt ingezet",
+    "failed": "Kon voorspelling niet plaatsen",
+    "status": {
+      "open": "Open",
+      "won": "Gewonnen",
+      "lost": "Verloren"
+    }
+  },
   "achievements": {
     "title": "Prestaties",
     "unlocked": "Ontgrendeld",

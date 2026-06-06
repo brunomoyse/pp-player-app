@@ -1,0 +1,19 @@
+query GetMyPredictionBalance {
+  myPredictionBalance {
+    balance
+    claimable
+  }
+}
+
+query GetMyPredictions {
+  myPredictions {
+    id
+    tournamentId
+    tournamentName
+    predictedWinnerName
+    stakePoints
+    status
+    payoutPoints
+    createdAt
+  }
+}

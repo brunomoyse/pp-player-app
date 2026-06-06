@@ -1,0 +1,23 @@
+mutation ClaimPredictionPoints {
+  claimPredictionPoints {
+    balance
+    claimable
+  }
+}
+
+mutation CreatePrediction($tournamentId: ID!, $predictedWinnerUserId: ID!, $stakePoints: Int!) {
+  createPrediction(
+    tournamentId: $tournamentId
+    predictedWinnerUserId: $predictedWinnerUserId
+    stakePoints: $stakePoints
+  ) {
+    id
+    tournamentId
+    tournamentName
+    predictedWinnerName
+    stakePoints
+    status
+    payoutPoints
+    createdAt
+  }
+}

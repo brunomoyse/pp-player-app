@@ -193,6 +193,14 @@ export default function ProfileScreen() {
             onPress={() => router.push('/cosmetics')}
           />
         ) : null}
+        {flags.predictions ? (
+          <Setting
+            icon="podium-outline"
+            title={t('predictions.title')}
+            subtitle={t('predictions.subtitle')}
+            onPress={() => router.push('/predictions')}
+          />
+        ) : null}
         <Setting
           icon="ticket-outline"
           title={t('profile.myRegistrations')}

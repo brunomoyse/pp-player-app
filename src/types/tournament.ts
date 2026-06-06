@@ -32,6 +32,11 @@ export interface TournamentRegistration {
     notes?: string | null;
     registrationTime: string;
     status: RegistrationStatus;
+    user?: {
+        id: string;
+        firstName?: string | null;
+        username?: string | null;
+    } | null;
 }
 
 export type RegistrationStatus = 'REGISTERED' | 'CHECKED_IN' | 'SEATED' | 'BUSTED' | 'WAITLISTED' | 'CANCELLED' | 'NO_SHOW'
