@@ -1,13 +1,17 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useAudioPlayer } from 'expo-audio';
+import * as Haptics from 'expo-haptics';
+import { LinearGradient } from 'expo-linear-gradient';
 import { MotiView } from 'moti';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Modal, Pressable, useWindowDimensions, View } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import { useReducedMotion } from 'react-native-reanimated';
 
+import { HolographicFoil } from '@/components/HolographicFoil';
 import { Text } from '@/components/ui';
 import { ppEasing, ppSpring } from '@/lib/motion';
+import { LEGENDARY_SOUND, UNLOCK_SOUND } from '@/lib/sounds';
 import { colors } from '@/theme/tokens';
 import type { Achievement } from '@/types/achievements';
 
@@ -58,6 +62,24 @@ export function AchievementCelebration({ show, achievement, onDismiss }: Achieve
   const { width, height } = useWindowDimensions();
   const [burst, setBurst] = useState(0);
 
+  const isLegendary = achievement?.tier === 'LEGENDARY';
+  const sound = isLegendary ? LEGENDARY_SOUND : UNLOCK_SOUND;
+  const player = useAudioPlayer(sound);
+
+  // Fire haptics (and sound, once an asset is bundled) as the card appears.
+  useEffect(() => {
+    if (!show) return;
+    if (isLegendary) {
+      void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    } else {
+      void Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    }
+    if (sound != null) {
+      player.seekTo(0);
+      player.play();
+    }
+  }, [show, isLegendary, sound, player]);
+
   // New confetti burst each time the overlay opens (adjust-state-on-prop-change).
   const [wasShown, setWasShown] = useState(show);
   if (show !== wasShown) {
@@ -77,7 +99,7 @@ export function AchievementCelebration({ show, achievement, onDismiss }: Achieve
       <Pressable
         onPress={onDismiss}
         className="flex-1 items-center justify-center px-6"
-        style={{ backgroundColor: 'rgba(10,10,12,0.72)' }}>
+        style={{ backgroundColor: isLegendary ? 'rgba(6,6,8,0.9)' : 'rgba(10,10,12,0.72)' }}>
         {/* Confetti — emanates from the card centre. */}
         <View pointerEvents="none" className="absolute inset-0 items-center justify-center">
           {pieces.map((p, i) => (
@@ -105,20 +127,46 @@ export function AchievementCelebration({ show, achievement, onDismiss }: Achieve
             transition={reduce ? { type: 'timing', duration: 200 } : ppSpring}
             className="w-full max-w-[320px] items-center rounded-2xl border bg-pp-surface px-6 pb-6 pt-8"
             style={{ borderColor: 'rgba(254,231,138,0.35)' }}>
-            <LinearGradient
-              colors={[colors.gold, colors.goldStrong]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              style={{
-                width: 72,
-                height: 72,
-                borderRadius: 36,
-                alignItems: 'center',
-                justifyContent: 'center',
-                marginBottom: 16,
-              }}>
-              <Ionicons name={iconName(achievement.icon)} size={34} color={colors.bg} />
-            </LinearGradient>
+            {isLegendary ? (
+              <View
+                style={{
+                  width: 104,
+                  height: 104,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: 16,
+                }}>
+                <View style={{ position: 'absolute' }}>
+                  <HolographicFoil size={104} animate={!reduce} />
+                </View>
+                <View
+                  style={{
+                    width: 64,
+                    height: 64,
+                    borderRadius: 32,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: 'rgba(8,8,10,0.55)',
+                  }}>
+                  <Ionicons name={iconName(achievement.icon)} size={34} color={colors.text} />
+                </View>
+              </View>
+            ) : (
+              <LinearGradient
+                colors={[colors.gold, colors.goldStrong]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                style={{
+                  width: 72,
+                  height: 72,
+                  borderRadius: 36,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginBottom: 16,
+                }}>
+                <Ionicons name={iconName(achievement.icon)} size={34} color={colors.bg} />
+              </LinearGradient>
+            )}
 
             <Text className="font-mono text-[11px] uppercase tracking-[0.2em] text-pp-gold-deep">
               {t('achievements.unlockedTitle')}

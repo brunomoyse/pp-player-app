@@ -7,7 +7,7 @@ export type AchievementCategory =
   | 'MILESTONES'
   | 'STREAKS'
 
-export type AchievementTier = 'BRONZE' | 'SILVER' | 'GOLD' | 'PLATINUM'
+export type AchievementTier = 'BRONZE' | 'SILVER' | 'GOLD' | 'PLATINUM' | 'LEGENDARY'
 
 export interface Achievement {
   id: string

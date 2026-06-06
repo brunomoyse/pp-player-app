@@ -46,7 +46,8 @@
         {
           "cameraPermission": "PocketPair uses the camera to scan tournament check-in QR codes."
         }
-      ]
+      ],
+      "expo-audio"
     ],
     "experiments": {
       "typedRoutes": true,

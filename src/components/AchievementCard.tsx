@@ -11,6 +11,7 @@ const TIER_COLOR: Record<AchievementTier, string> = {
   SILVER: '#c0c0c0',
   GOLD: colors.gold,
   PLATINUM: '#cfe0f5',
+  LEGENDARY: '#a17fff',
 };
 
 function iconName(name?: string | null): keyof typeof Ionicons.glyphMap {
@@ -26,7 +27,9 @@ export function AchievementCard({ item }: { item: PlayerAchievement }) {
   const pct = threshold ? Math.min(Math.round((progress / threshold) * 100), 100) : 0;
 
   return (
-    <Card highlighted={!isLocked && (tier === 'GOLD' || tier === 'PLATINUM')} className="flex-row gap-3">
+    <Card
+      highlighted={!isLocked && (tier === 'GOLD' || tier === 'PLATINUM' || tier === 'LEGENDARY')}
+      className="flex-row gap-3">
       {/* Locked state = greyed icon + lock badge (never dim the whole card / text). */}
       <View className="relative h-12 w-12 items-center justify-center rounded-2xl border border-pp-border bg-white/5">
         <Ionicons name={iconName(a.icon)} size={24} color={isLocked ? colors.textDim : colors.gold} />
