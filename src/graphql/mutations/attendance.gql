@@ -1,0 +1,14 @@
+mutation RecordCheckIn($tournamentId: ID!) {
+  recordCheckIn(tournamentId: $tournamentId) {
+    streak {
+      currentStreak
+      longestStreak
+      freezesAvailable
+      lastCheckInAt
+    }
+    alreadyCheckedIn
+    freezeUsed
+    isComeback
+    isNewLongest
+  }
+}

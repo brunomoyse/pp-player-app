@@ -1,0 +1,8 @@
+query GetMyAttendanceStreak {
+  myAttendanceStreak {
+    currentStreak
+    longestStreak
+    freezesAvailable
+    lastCheckInAt
+  }
+}

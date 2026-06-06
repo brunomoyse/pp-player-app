@@ -430,6 +430,21 @@
     "loginRequired": "Inloggen vereist",
     "loginRequiredMessage": "Je moet ingelogd zijn om in te checken. Wil je nu inloggen?"
   },
+  "streak": {
+    "title": "Aanwezigheidsreeks",
+    "days": "Reeks van {count} events",
+    "empty": "Check in om je reeks te starten",
+    "best": "Record: {count}",
+    "freezes": "Freezes",
+    "advancedTitle": "Reeks verlengd!",
+    "advancedMessage": "Je bent bezig aan een reeks van {count} events. Hou het brandend.",
+    "newBestTitle": "Nieuw persoonlijk record!",
+    "newBestMessage": "{count} events op rij — je langste ooit.",
+    "frozenTitle": "Reeks gered",
+    "frozenMessage": "Een freeze hield je reeks op {count}.",
+    "comebackTitle": "Welkom terug",
+    "comebackMessage": "Frisse start — je reeks begint opnieuw op {count}."
+  },
   "achievements": {
     "title": "Prestaties",
     "unlocked": "Ontgrendeld",

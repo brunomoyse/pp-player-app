@@ -429,6 +429,21 @@
     "loginRequired": "Connexion requise",
     "loginRequiredMessage": "Vous devez être connecté pour confirmer votre présence. Souhaitez-vous vous connecter ?"
   },
+  "streak": {
+    "title": "Série de présence",
+    "days": "Série de {count} événements",
+    "empty": "Enregistrez-vous pour démarrer votre série",
+    "best": "Record : {count}",
+    "freezes": "Jokers",
+    "advancedTitle": "Série prolongée !",
+    "advancedMessage": "Vous êtes sur une série de {count} événements. Gardez la flamme.",
+    "newBestTitle": "Nouveau record personnel !",
+    "newBestMessage": "{count} événements d'affilée — votre meilleure série.",
+    "frozenTitle": "Série sauvée",
+    "frozenMessage": "Un joker a maintenu votre série à {count}.",
+    "comebackTitle": "Bon retour",
+    "comebackMessage": "Nouveau départ — votre série recommence à {count}."
+  },
   "achievements": {
     "title": "Succès",
     "unlocked": "Débloqués",

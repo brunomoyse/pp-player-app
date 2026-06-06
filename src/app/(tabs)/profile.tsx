@@ -5,7 +5,13 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, Switch, View } from 'react-native';
 
-import { CrossClubProfileCard, EditProfileModal, LanguageModal, StatCard } from '@/components';
+import {
+  CrossClubProfileCard,
+  EditProfileModal,
+  LanguageModal,
+  StatCard,
+  StreakCard,
+} from '@/components';
 import { Avatar, Button, Card, Screen, Text } from '@/components/ui';
 import { GET_MY_ACHIEVEMENTS, GET_MY_STATISTICS } from '@/graphql/operations';
 import { useFeatureFlags } from '@/hooks/useFeatureFlags';
@@ -137,6 +143,9 @@ export default function ProfileScreen() {
           label={t('profile.itmRate')}
         />
       </View>
+
+      {/* Attendance streak — the consecutive-event flame */}
+      <StreakCard />
 
       {/* Poker passport — cross-club identity */}
       <CrossClubProfileCard />

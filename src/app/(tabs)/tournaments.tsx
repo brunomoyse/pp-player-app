@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client/react';
 import { Ionicons } from '@expo/vector-icons';
+import * as Haptics from 'expo-haptics';
 import { router } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -8,7 +9,13 @@ import { Alert, Pressable, View } from 'react-native';
 import { ClubSelector, QRCodeScanner, TournamentCard } from '@/components';
 import { Stagger } from '@/components/motion';
 import { EmptyState, ErrorState, Input, LoadingState, Screen, Segment, Text } from '@/components/ui';
-import { GET_TOURNAMENTS, SELF_CHECK_IN, type TournamentListItem } from '@/graphql/operations';
+import {
+  GET_MY_ATTENDANCE_STREAK,
+  GET_TOURNAMENTS,
+  RECORD_CHECK_IN,
+  SELF_CHECK_IN,
+  type TournamentListItem,
+} from '@/graphql/operations';
 import { useClubs } from '@/hooks/useClubs';
 import { useIsAuthenticated } from '@/stores/useAuthStore';
 import { useClubStore } from '@/stores/useClubStore';
@@ -33,6 +40,9 @@ export default function TournamentsScreen() {
   const [search, setSearch] = useState('');
   const [scanning, setScanning] = useState(false);
   const [selfCheckIn] = useMutation(SELF_CHECK_IN);
+  const [recordCheckIn] = useMutation(RECORD_CHECK_IN, {
+    refetchQueries: [{ query: GET_MY_ATTENDANCE_STREAK }],
+  });
 
   const onScanned = async (parsed: ParsedQRCode) => {
     setScanning(false);
@@ -45,7 +55,36 @@ export default function TournamentsScreen() {
       }
       try {
         const { data: res } = await selfCheckIn({ variables: { input: { tournamentId: parsed.payload } } });
-        Alert.alert(t('qrScanner.checkInSuccess'), res?.selfCheckIn.message ?? '');
+        void Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+
+        // Advance the attendance streak — the dopamine moment.
+        let title = t('qrScanner.checkInSuccess');
+        let message = res?.selfCheckIn.message ?? '';
+        try {
+          const { data: streakRes } = await recordCheckIn({
+            variables: { tournamentId: parsed.payload },
+          });
+          const r = streakRes?.recordCheckIn;
+          if (r && !r.alreadyCheckedIn) {
+            const count = r.streak.currentStreak;
+            if (r.isComeback) {
+              title = t('streak.comebackTitle');
+              message = t('streak.comebackMessage', { count });
+            } else if (r.isNewLongest) {
+              title = t('streak.newBestTitle');
+              message = t('streak.newBestMessage', { count });
+            } else if (r.freezeUsed) {
+              title = t('streak.frozenTitle');
+              message = t('streak.frozenMessage', { count });
+            } else {
+              title = t('streak.advancedTitle');
+              message = t('streak.advancedMessage', { count });
+            }
+          }
+        } catch {
+          // Streak bookkeeping is best-effort; the check-in already succeeded.
+        }
+        Alert.alert(title, message);
       } catch {
         Alert.alert(t('qrScanner.checkInFailed'), t('qrScanner.checkInFailedMessage'));
       }

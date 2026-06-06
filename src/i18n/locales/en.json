@@ -428,6 +428,21 @@
     "loginRequired": "Login Required",
     "loginRequiredMessage": "You need to be logged in to check in. Would you like to log in now?"
   },
+  "streak": {
+    "title": "Attendance Streak",
+    "days": "{count}-event streak",
+    "empty": "Check in to start your streak",
+    "best": "Best: {count}",
+    "freezes": "Freezes",
+    "advancedTitle": "Streak extended!",
+    "advancedMessage": "You're on a {count}-event streak. Keep it lit.",
+    "newBestTitle": "New personal best!",
+    "newBestMessage": "{count} events in a row — your longest ever.",
+    "frozenTitle": "Streak saved",
+    "frozenMessage": "A freeze kept your streak alive at {count}.",
+    "comebackTitle": "Welcome back",
+    "comebackMessage": "Fresh start — your streak begins again at {count}."
+  },
   "achievements": {
     "title": "Achievements",
     "unlocked": "Unlocked",
