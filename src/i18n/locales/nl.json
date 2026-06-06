@@ -523,6 +523,21 @@
     "share": "Deel mijn jaar",
     "shareHeader": "Mijn pokerjaar {year} 🃏"
   },
+  "cosmetics": {
+    "title": "Cosmetics",
+    "subtitle": "Kaartruggen, frames & thema's",
+    "empty": "Nog geen cosmetics beschikbaar.",
+    "buy": "Kopen",
+    "equip": "Uitrusten",
+    "equipped": "Uitgerust",
+    "confirmBuy": "Dit item kopen voor {price}?",
+    "kinds": {
+      "card_back": "Kaartruggen",
+      "avatar_frame": "Avatarframes",
+      "theme": "Tafelthema's",
+      "badge": "Badges"
+    }
+  },
   "achievements": {
     "title": "Prestaties",
     "unlocked": "Ontgrendeld",

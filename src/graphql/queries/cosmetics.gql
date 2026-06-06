@@ -1,0 +1,18 @@
+fragment CosmeticFields on CosmeticItem {
+  id
+  code
+  kind
+  name
+  description
+  priceCents
+  previewRef
+  clubId
+  owned
+  equipped
+}
+
+query GetCosmeticCatalog($kind: String) {
+  cosmeticCatalog(kind: $kind) {
+    ...CosmeticFields
+  }
+}

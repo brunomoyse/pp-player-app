@@ -522,6 +522,21 @@
     "share": "Partager mon année",
     "shareHeader": "Mon année poker {year} 🃏"
   },
+  "cosmetics": {
+    "title": "Cosmétiques",
+    "subtitle": "Dos de cartes, cadres et thèmes",
+    "empty": "Aucun cosmétique disponible pour l'instant.",
+    "buy": "Acheter",
+    "equip": "Équiper",
+    "equipped": "Équipé",
+    "confirmBuy": "Acheter cet article pour {price} ?",
+    "kinds": {
+      "card_back": "Dos de cartes",
+      "avatar_frame": "Cadres d'avatar",
+      "theme": "Thèmes de table",
+      "badge": "Badges"
+    }
+  },
   "achievements": {
     "title": "Succès",
     "unlocked": "Débloqués",

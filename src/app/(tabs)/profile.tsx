@@ -185,6 +185,14 @@ export default function ProfileScreen() {
           subtitle={t('wrapped.subtitle')}
           onPress={() => router.push('/wrapped')}
         />
+        {flags.cosmetics ? (
+          <Setting
+            icon="color-palette-outline"
+            title={t('cosmetics.title')}
+            subtitle={t('cosmetics.subtitle')}
+            onPress={() => router.push('/cosmetics')}
+          />
+        ) : null}
         <Setting
           icon="ticket-outline"
           title={t('profile.myRegistrations')}
