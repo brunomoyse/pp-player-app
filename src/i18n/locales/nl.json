@@ -530,6 +530,17 @@
       "tricky": "Lastig"
     }
   },
+  "pro": {
+    "analyticsTitle": "Prestatie-analyses",
+    "analyticsSubtitle": "Je resultaten, uitgesplitst",
+    "upsellTitle": "Een Pro-functie",
+    "upsellBody": "Ontgrendel volledige prestatie-analyses, onbeperkte tegenstandernotities en pre-game intel met Pro.",
+    "netProfit": "Nettowinst",
+    "tournaments": "Toernooien",
+    "byClub": "Per club",
+    "byBuyIn": "Per buy-in",
+    "noData": "Nog geen resultaten"
+  },
   "error": {
     "boundary": {
       "title": "Er is iets misgegaan",

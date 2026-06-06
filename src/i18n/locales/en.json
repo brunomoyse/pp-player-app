@@ -528,6 +528,17 @@
       "tricky": "Tricky"
     }
   },
+  "pro": {
+    "analyticsTitle": "Performance Analytics",
+    "analyticsSubtitle": "Your results, broken down",
+    "upsellTitle": "A Pro feature",
+    "upsellBody": "Unlock full performance analytics, unlimited opponent notes, and pre-game intel with Pro.",
+    "netProfit": "Net Profit",
+    "tournaments": "Tournaments",
+    "byClub": "By club",
+    "byBuyIn": "By buy-in",
+    "noData": "No results yet"
+  },
   "error": {
     "boundary": {
       "title": "Something went wrong",

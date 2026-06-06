@@ -529,6 +529,17 @@
       "tricky": "Rusé"
     }
   },
+  "pro": {
+    "analyticsTitle": "Analyses de performance",
+    "analyticsSubtitle": "Vos résultats, détaillés",
+    "upsellTitle": "Une fonctionnalité Pro",
+    "upsellBody": "Débloquez les analyses complètes, les notes illimitées sur les adversaires et les infos d'avant-partie avec Pro.",
+    "netProfit": "Profit net",
+    "tournaments": "Tournois",
+    "byClub": "Par club",
+    "byBuyIn": "Par buy-in",
+    "noData": "Aucun résultat pour l'instant"
+  },
   "error": {
     "boundary": {
       "title": "Une erreur s'est produite",

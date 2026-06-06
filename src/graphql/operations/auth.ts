@@ -68,6 +68,7 @@ export const GET_ME: TypedDocumentNode<MeResult, Record<string, never>> = gql`
       phone
       isActive
       role
+      isPro
       managedClub {
         id
         name

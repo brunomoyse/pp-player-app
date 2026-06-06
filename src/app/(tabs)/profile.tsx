@@ -165,6 +165,14 @@ export default function ProfileScreen() {
             onPress={() => router.push('/notes')}
           />
         ) : null}
+        {flags.proAccount ? (
+          <Setting
+            icon="stats-chart-outline"
+            title={t('pro.analyticsTitle')}
+            subtitle={t('pro.analyticsSubtitle')}
+            onPress={() => router.push('/analytics')}
+          />
+        ) : null}
         <Setting
           icon="calendar-outline"
           title={t('profile.browseTournaments')}
