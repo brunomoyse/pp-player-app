@@ -254,6 +254,14 @@ export default function ProfileScreen() {
           subtitle={LOCALE_LABELS[locale]}
           onPress={() => setLangOpen(true)}
         />
+        {flags.publicStats ? (
+          <Setting
+            icon="shield-checkmark-outline"
+            title={t('privacy.title')}
+            subtitle={t('privacy.subtitle')}
+            onPress={() => router.push('/privacy')}
+          />
+        ) : null}
       </Card>
 
       <Button title={t('profile.logout')} variant="danger" onPress={() => void logout()} />

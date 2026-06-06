@@ -1,0 +1,6 @@
+mutation UpdatePrivacySettings($shareNamedPl: Boolean!, $inScoutingPool: Boolean!) {
+  updatePrivacySettings(shareNamedPl: $shareNamedPl, inScoutingPool: $inScoutingPool) {
+    shareNamedPl
+    inScoutingPool
+  }
+}

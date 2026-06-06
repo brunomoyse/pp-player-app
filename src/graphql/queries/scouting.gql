@@ -1,0 +1,6 @@
+query GetMyPrivacySettings {
+  myPrivacySettings {
+    shareNamedPl
+    inScoutingPool
+  }
+}

@@ -11,5 +11,6 @@ export * from './season';
 export * from './social';
 export * from './cosmetics';
 export * from './prediction';
+export * from './scouting';
 export * from './system';
 export * from './subscriptions';

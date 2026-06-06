@@ -561,6 +561,16 @@
       "lost": "Verloren"
     }
   },
+  "privacy": {
+    "title": "Privacy & delen",
+    "subtitle": "Bepaal wat andere spelers zien",
+    "intro": "Jij bepaalt wat je deelt. Beide opties staan uit tot je ze aanzet, en je kunt ze altijd wijzigen.",
+    "poolTitle": "Verschijnen in tegenstander-zoeken",
+    "poolBody": "Laat andere spelers je op naam vinden en je toernooistaat zien (gespeelde events, ITM-percentage, beste resultaat). Zet uit om privé te blijven.",
+    "pnlTitle": "Mijn winst / verlies tonen",
+    "pnlBody": "Koppel ook je nettowinst aan je profiel wanneer iemand je opzoekt. Dit staat los — alleen gedeeld als je het aanzet.",
+    "footer": "Je privénotities worden nooit gedeeld of getoond, ongeacht deze instellingen."
+  },
   "achievements": {
     "title": "Prestaties",
     "unlocked": "Ontgrendeld",

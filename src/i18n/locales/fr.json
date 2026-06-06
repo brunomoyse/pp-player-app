@@ -560,6 +560,16 @@
       "lost": "Perdu"
     }
   },
+  "privacy": {
+    "title": "Confidentialité et partage",
+    "subtitle": "Contrôlez ce que les autres joueurs voient",
+    "intro": "Vous décidez de ce que vous partagez. Les deux options sont désactivées tant que vous ne les activez pas, et vous pouvez les modifier à tout moment.",
+    "poolTitle": "Apparaître dans la recherche d'adversaires",
+    "poolBody": "Permettez aux autres joueurs de vous trouver par votre nom et de voir votre palmarès (tournois joués, taux ITM, meilleure place). Désactivez pour rester privé.",
+    "pnlTitle": "Afficher mes gains / pertes",
+    "pnlBody": "Associez aussi vos gains nets à votre profil lorsqu'on vous recherche. C'est distinct — partagé uniquement si vous l'activez.",
+    "footer": "Vos notes privées ne sont jamais partagées ni montrées à qui que ce soit, quels que soient ces réglages."
+  },
   "achievements": {
     "title": "Succès",
     "unlocked": "Débloqués",

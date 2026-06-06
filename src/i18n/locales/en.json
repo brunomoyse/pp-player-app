@@ -559,6 +559,16 @@
       "lost": "Lost"
     }
   },
+  "privacy": {
+    "title": "Privacy & sharing",
+    "subtitle": "Control what other players can see",
+    "intro": "You decide what you share. Both options are off until you turn them on, and you can change them anytime.",
+    "poolTitle": "Appear in opponent lookup",
+    "poolBody": "Let other players find you by name and see your tournament record (events played, in-the-money rate, best finish). Turn this off to stay private.",
+    "pnlTitle": "Show my profit / loss",
+    "pnlBody": "Also attach your net winnings to your profile when someone looks you up. This is separate — only shared if you switch it on.",
+    "footer": "Your private notes are never shared or shown to anyone, regardless of these settings."
+  },
   "achievements": {
     "title": "Achievements",
     "unlocked": "Unlocked",
