@@ -517,6 +517,8 @@
     "saving": "Saving…",
     "empty": "No notes yet. Add one on a player to get started.",
     "unknownPlayer": "Unknown player",
+    "whosHere": "Who's here",
+    "notedCount": "{noted}/{total} noted",
     "tags": {
       "tight": "Tight",
       "loose": "Loose",

@@ -1,0 +1,18 @@
+query GetTournamentFieldNotes($tournamentId: ID!) {
+  tournamentFieldNotes(tournamentId: $tournamentId) {
+    registeredPlayer {
+      id
+      displayName
+    }
+    note {
+      id
+      body
+      style
+      tags {
+        id
+        kind
+        tag
+      }
+    }
+  }
+}

@@ -518,6 +518,8 @@
     "saving": "Enregistrement…",
     "empty": "Aucune note pour l'instant. Ajoutez-en une sur un joueur pour commencer.",
     "unknownPlayer": "Joueur inconnu",
+    "whosHere": "Qui est là",
+    "notedCount": "{noted}/{total} notés",
     "tags": {
       "tight": "Serré",
       "loose": "Large",

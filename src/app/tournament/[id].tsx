@@ -4,7 +4,7 @@ import { Stack, router, useLocalSearchParams } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { Alert, Pressable, Share, View } from 'react-native';
 
-import { ClockDisplay } from '@/components';
+import { ClockDisplay, PreGameField } from '@/components';
 import { FadeUp } from '@/components/motion';
 import { useLiveClock } from '@/hooks/useLiveClock';
 import { useLiveRegistrations } from '@/hooks/useLiveRegistrations';
@@ -130,6 +130,9 @@ export default function TournamentDetailScreen() {
                 <Fact icon="business-outline" label={t('home.selectClub')} value={tn.club.name} />
               ) : null}
             </Card>
+
+            {/* Pre-game prep — who's registered + your notes (Pro). Renders only when eligible. */}
+            <PreGameField tournamentId={id!} />
 
             {/* Live clock (subscription-driven, Phase 6) */}
             {tn.clock ? (

@@ -519,6 +519,8 @@
     "saving": "Opslaan…",
     "empty": "Nog geen notities. Voeg er een toe bij een speler om te beginnen.",
     "unknownPlayer": "Onbekende speler",
+    "whosHere": "Wie is er",
+    "notedCount": "{noted}/{total} genoteerd",
     "tags": {
       "tight": "Tight",
       "loose": "Loose",

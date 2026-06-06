@@ -1,6 +1,7 @@
 import { gql, type TypedDocumentNode } from '@apollo/client';
 
 import type {
+  FieldPlayerNote,
   NoteTagKind,
   PlayerNote,
   PlayerNoteTag,
@@ -43,6 +44,38 @@ export interface GetPlayerNoteVars {
 export const GET_PLAYER_NOTE: TypedDocumentNode<GetPlayerNoteResult, GetPlayerNoteVars> = gql`
   query GetPlayerNote($subjectRegisteredPlayerId: ID!) {
     playerNote(subjectRegisteredPlayerId: $subjectRegisteredPlayerId) {${NOTE_FIELDS}}
+  }
+`;
+
+export interface GetTournamentFieldNotesResult {
+  tournamentFieldNotes: FieldPlayerNote[];
+}
+export interface GetTournamentFieldNotesVars {
+  tournamentId: string;
+}
+
+/** Pre-game prep: tonight's field with the viewer's notes attached (Pro only). */
+export const GET_TOURNAMENT_FIELD_NOTES: TypedDocumentNode<
+  GetTournamentFieldNotesResult,
+  GetTournamentFieldNotesVars
+> = gql`
+  query GetTournamentFieldNotes($tournamentId: ID!) {
+    tournamentFieldNotes(tournamentId: $tournamentId) {
+      registeredPlayer {
+        id
+        displayName
+      }
+      note {
+        id
+        body
+        style
+        tags {
+          id
+          kind
+          tag
+        }
+      }
+    }
   }
 `;
 

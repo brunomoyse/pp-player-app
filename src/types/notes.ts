@@ -16,6 +16,17 @@ export interface ShowdownObservation {
   createdAt: string;
 }
 
+/** A player in tonight's field paired with the viewer's note on them (if any). */
+export interface FieldPlayerNote {
+  registeredPlayer: { id: string; displayName: string };
+  note: {
+    id: string;
+    body: string;
+    style?: PlayerStyle | null;
+    tags?: PlayerNoteTag[];
+  } | null;
+}
+
 /** A private note on one opponent. Visible only to its author. */
 export interface PlayerNote {
   id: string;
