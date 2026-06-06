@@ -1,0 +1,23 @@
+mutation SendFriendRequest($userId: ID!) {
+  sendFriendRequest(userId: $userId) {
+    friendshipId
+    userId
+    name
+    status
+    isIncoming
+  }
+}
+
+mutation AcceptFriendRequest($friendshipId: ID!) {
+  acceptFriendRequest(friendshipId: $friendshipId) {
+    friendshipId
+    userId
+    name
+    status
+    isIncoming
+  }
+}
+
+mutation RemoveFriend($friendshipId: ID!) {
+  removeFriend(friendshipId: $friendshipId)
+}

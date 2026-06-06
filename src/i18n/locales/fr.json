@@ -482,6 +482,46 @@
       "description": "Enregistrez-vous dans 3 clubs différents cette semaine"
     }
   },
+  "rivals": {
+    "title": "Rivaux",
+    "subtitle": "Vos confrontations directes",
+    "empty": "Jouez quelques tournois pour créer des rivalités.",
+    "nemesis": "Votre Némésis",
+    "nemesisLine": "Vous a battu {losses} fois en {meetings} rencontres",
+    "headToHead": "Face-à-face",
+    "recordLegend": "V–D",
+    "meetings": "{count} rencontres"
+  },
+  "friends": {
+    "title": "Amis",
+    "subtitle": "Flammes et demandes d'amis",
+    "requests": "Demandes d'amis",
+    "accept": "Accepter",
+    "decline": "Refuser",
+    "yourFriends": "Vos amis",
+    "empty": "Pas encore d'amis — ajoutez quelqu'un avec qui vous jouez.",
+    "peopleYouPlay": "Joueurs que vous croisez",
+    "add": "Ajouter",
+    "remove": "Retirer",
+    "sharedNights": "{count} soirées partagées"
+  },
+  "wrapped": {
+    "title": "Mon année poker",
+    "subtitle": "Votre rétrospective annuelle à partager",
+    "empty": "Jouez quelques tournois cette année pour débloquer votre rétro.",
+    "yourYear": "Votre année {year}",
+    "net": "Résultat net",
+    "tournaments": "Tournois",
+    "winnings": "Gains",
+    "itm": "Places payées",
+    "bestFinish": "Meilleure place",
+    "checkIns": "Présences",
+    "streak": "Plus longue série",
+    "favoriteClub": "Club favori",
+    "nemesis": "Némésis",
+    "share": "Partager mon année",
+    "shareHeader": "Mon année poker {year} 🃏"
+  },
   "achievements": {
     "title": "Succès",
     "unlocked": "Débloqués",

@@ -481,6 +481,46 @@
       "description": "Check in at 3 different clubs this week"
     }
   },
+  "rivals": {
+    "title": "Rivals",
+    "subtitle": "Your head-to-head records",
+    "empty": "Play a few tournaments to build up rivalries.",
+    "nemesis": "Your Nemesis",
+    "nemesisLine": "Beat you {losses} times across {meetings} meetings",
+    "headToHead": "Head-to-head",
+    "recordLegend": "W–L",
+    "meetings": "{count} meetings"
+  },
+  "friends": {
+    "title": "Friends",
+    "subtitle": "Flames & friend requests",
+    "requests": "Friend requests",
+    "accept": "Accept",
+    "decline": "Decline",
+    "yourFriends": "Your friends",
+    "empty": "No friends yet — add someone you play with.",
+    "peopleYouPlay": "People you play",
+    "add": "Add",
+    "remove": "Remove",
+    "sharedNights": "{count} shared nights"
+  },
+  "wrapped": {
+    "title": "Year in Poker",
+    "subtitle": "Your shareable annual recap",
+    "empty": "Play some tournaments this year to unlock your recap.",
+    "yourYear": "Your {year}",
+    "net": "Net result",
+    "tournaments": "Tournaments",
+    "winnings": "Winnings",
+    "itm": "In the money",
+    "bestFinish": "Best finish",
+    "checkIns": "Check-ins",
+    "streak": "Longest streak",
+    "favoriteClub": "Favorite club",
+    "nemesis": "Nemesis",
+    "share": "Share my year",
+    "shareHeader": "My {year} Year in Poker 🃏"
+  },
   "achievements": {
     "title": "Achievements",
     "unlocked": "Unlocked",

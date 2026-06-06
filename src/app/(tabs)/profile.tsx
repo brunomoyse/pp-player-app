@@ -168,6 +168,24 @@ export default function ProfileScreen() {
           onPress={() => router.push('/season')}
         />
         <Setting
+          icon="flash-outline"
+          title={t('rivals.title')}
+          subtitle={t('rivals.subtitle')}
+          onPress={() => router.push('/rivals')}
+        />
+        <Setting
+          icon="people-outline"
+          title={t('friends.title')}
+          subtitle={t('friends.subtitle')}
+          onPress={() => router.push('/friends')}
+        />
+        <Setting
+          icon="sparkles-outline"
+          title={t('wrapped.title')}
+          subtitle={t('wrapped.subtitle')}
+          onPress={() => router.push('/wrapped')}
+        />
+        <Setting
           icon="ticket-outline"
           title={t('profile.myRegistrations')}
           onPress={() => router.push('/my-seats')}

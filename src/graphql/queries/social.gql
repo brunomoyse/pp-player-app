@@ -1,0 +1,50 @@
+query GetMyRivalries($limit: Int) {
+  myRivalries(limit: $limit) {
+    opponentId
+    opponentName
+    meetings
+    wins
+    losses
+  }
+}
+
+fragment FriendFields on Friend {
+  friendshipId
+  userId
+  name
+  status
+  isIncoming
+  flame {
+    sharedNights
+    lastShared
+    alive
+  }
+}
+
+query GetMyFriends {
+  myFriends {
+    ...FriendFields
+  }
+}
+
+query GetIncomingFriendRequests {
+  incomingFriendRequests {
+    ...FriendFields
+  }
+}
+
+query GetMyYearInPoker($year: Int) {
+  myYearInPoker(year: $year) {
+    year
+    tournaments
+    buyinsCents
+    winningsCents
+    netCents
+    itmCount
+    bestFinish
+    checkIns
+    longestStreak
+    favoriteClub
+    nemesisName
+  }
+}

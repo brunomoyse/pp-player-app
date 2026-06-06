@@ -483,6 +483,46 @@
       "description": "Check deze week in bij 3 verschillende clubs"
     }
   },
+  "rivals": {
+    "title": "Rivalen",
+    "subtitle": "Je onderlinge resultaten",
+    "empty": "Speel enkele toernooien om rivaliteiten op te bouwen.",
+    "nemesis": "Je Nemesis",
+    "nemesisLine": "Versloeg je {losses} keer in {meetings} ontmoetingen",
+    "headToHead": "Onderling",
+    "recordLegend": "W–V",
+    "meetings": "{count} ontmoetingen"
+  },
+  "friends": {
+    "title": "Vrienden",
+    "subtitle": "Vlammen & vriendschapsverzoeken",
+    "requests": "Vriendschapsverzoeken",
+    "accept": "Accepteren",
+    "decline": "Weigeren",
+    "yourFriends": "Je vrienden",
+    "empty": "Nog geen vrienden — voeg iemand toe met wie je speelt.",
+    "peopleYouPlay": "Spelers die je tegenkomt",
+    "add": "Toevoegen",
+    "remove": "Verwijderen",
+    "sharedNights": "{count} gedeelde avonden"
+  },
+  "wrapped": {
+    "title": "Jaar in poker",
+    "subtitle": "Je deelbare jaaroverzicht",
+    "empty": "Speel dit jaar enkele toernooien om je overzicht te ontgrendelen.",
+    "yourYear": "Jouw {year}",
+    "net": "Nettoresultaat",
+    "tournaments": "Toernooien",
+    "winnings": "Winst",
+    "itm": "In the money",
+    "bestFinish": "Beste resultaat",
+    "checkIns": "Check-ins",
+    "streak": "Langste reeks",
+    "favoriteClub": "Favoriete club",
+    "nemesis": "Nemesis",
+    "share": "Deel mijn jaar",
+    "shareHeader": "Mijn pokerjaar {year} 🃏"
+  },
   "achievements": {
     "title": "Prestaties",
     "unlocked": "Ontgrendeld",
