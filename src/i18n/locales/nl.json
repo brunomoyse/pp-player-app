@@ -571,6 +571,23 @@
     "pnlBody": "Koppel ook je nettowinst aan je profiel wanneer iemand je opzoekt. Dit staat los — alleen gedeeld als je het aanzet.",
     "footer": "Je privénotities worden nooit gedeeld of getoond, ongeacht deze instellingen."
   },
+  "scouting": {
+    "title": "Tegenstander opzoeken",
+    "subtitle": "Scout spelers die zich aanmeldden",
+    "searchPlaceholder": "Zoek spelers op naam",
+    "quota": "{used}/{limit} gratis opzoekingen deze maand gebruikt",
+    "unlimited": "Onbeperkt opzoeken (Pro)",
+    "results": "Resultaten",
+    "hint": "Typ minstens 2 tekens om te zoeken.",
+    "noResults": "Geen spelers gevonden in de zoekpool.",
+    "tournaments": "Toernooien",
+    "itm": "ITM",
+    "best": "Beste",
+    "pnl": "Winst / verlies",
+    "pnlPrivate": "Privé",
+    "quotaReached": "Limiet gratis opzoekingen bereikt",
+    "quotaReachedBody": "Upgrade naar Pro (en sluit je aan bij de pool) voor onbeperkt opzoeken."
+  },
   "achievements": {
     "title": "Prestaties",
     "unlocked": "Ontgrendeld",

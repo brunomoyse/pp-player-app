@@ -570,6 +570,23 @@
     "pnlBody": "Associez aussi vos gains nets à votre profil lorsqu'on vous recherche. C'est distinct — partagé uniquement si vous l'activez.",
     "footer": "Vos notes privées ne sont jamais partagées ni montrées à qui que ce soit, quels que soient ces réglages."
   },
+  "scouting": {
+    "title": "Recherche d'adversaires",
+    "subtitle": "Analysez les joueurs qui ont accepté",
+    "searchPlaceholder": "Rechercher des joueurs par nom",
+    "quota": "{used}/{limit} recherches gratuites utilisées ce mois-ci",
+    "unlimited": "Recherches illimitées (Pro)",
+    "results": "Résultats",
+    "hint": "Saisissez au moins 2 caractères pour rechercher.",
+    "noResults": "Aucun joueur trouvé dans le pool de recherche.",
+    "tournaments": "Tournois",
+    "itm": "ITM",
+    "best": "Meilleur",
+    "pnl": "Gains / pertes",
+    "pnlPrivate": "Privé",
+    "quotaReached": "Limite de recherches gratuites atteinte",
+    "quotaReachedBody": "Passez à Pro (et rejoignez le pool) pour des recherches illimitées."
+  },
   "achievements": {
     "title": "Succès",
     "unlocked": "Débloqués",

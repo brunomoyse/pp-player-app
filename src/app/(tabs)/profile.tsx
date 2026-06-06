@@ -222,6 +222,14 @@ export default function ProfileScreen() {
             onPress={() => router.push('/analytics')}
           />
         ) : null}
+        {flags.publicStats ? (
+          <Setting
+            icon="search-outline"
+            title={t('scouting.title')}
+            subtitle={t('scouting.subtitle')}
+            onPress={() => router.push('/scouting')}
+          />
+        ) : null}
         <Setting
           icon="calendar-outline"
           title={t('profile.browseTournaments')}

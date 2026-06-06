@@ -569,6 +569,23 @@
     "pnlBody": "Also attach your net winnings to your profile when someone looks you up. This is separate — only shared if you switch it on.",
     "footer": "Your private notes are never shared or shown to anyone, regardless of these settings."
   },
+  "scouting": {
+    "title": "Opponent lookup",
+    "subtitle": "Scout players who opted in",
+    "searchPlaceholder": "Search players by name",
+    "quota": "{used}/{limit} free lookups used this month",
+    "unlimited": "Unlimited lookups (Pro)",
+    "results": "Results",
+    "hint": "Type at least 2 characters to search.",
+    "noResults": "No players found in the lookup pool.",
+    "tournaments": "Tournaments",
+    "itm": "ITM",
+    "best": "Best",
+    "pnl": "Profit / loss",
+    "pnlPrivate": "Private",
+    "quotaReached": "Free lookup limit reached",
+    "quotaReachedBody": "Upgrade to Pro (and join the pool) for unlimited opponent lookups."
+  },
   "achievements": {
     "title": "Achievements",
     "unlocked": "Unlocked",

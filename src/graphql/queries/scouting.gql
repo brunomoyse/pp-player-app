@@ -4,3 +4,30 @@ query GetMyPrivacySettings {
     inScoutingPool
   }
 }
+
+query ScoutingSearch($query: String!) {
+  scoutingSearch(query: $query) {
+    userId
+    handle
+  }
+}
+
+query ScoutingProfile($userId: ID!) {
+  scoutingProfile(userId: $userId) {
+    userId
+    handle
+    tournaments
+    itmPercentage
+    bestFinish
+    sharesPnl
+    netCents
+  }
+}
+
+query GetMyScoutingQuota {
+  myScoutingQuota {
+    used
+    limit
+    unlimited
+  }
+}
