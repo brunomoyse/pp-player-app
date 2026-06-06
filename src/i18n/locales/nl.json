@@ -445,6 +445,44 @@
     "comebackTitle": "Welkom terug",
     "comebackMessage": "Frisse start — je reeks begint opnieuw op {count}."
   },
+  "season": {
+    "title": "Seizoen",
+    "subtitle": "Pass, quests & Hall of Fame",
+    "selectClub": "Kies een club om het seizoen te zien.",
+    "noActiveSeason": "Er loopt momenteel geen seizoen.",
+    "premium": "Premium",
+    "tier": "Niveau {tier}",
+    "xp": "{xp} XP",
+    "xpToNext": "{xp} XP tot het volgende niveau",
+    "weeklyQuests": "Wekelijkse quests",
+    "claimed": "Opgehaald",
+    "claimXp": "Haal {xp} XP op",
+    "hallOfFame": "Hall of Fame",
+    "noChampions": "Nog geen kampioenen gekroond.",
+    "events": "{count} events"
+  },
+  "quests": {
+    "weekly_regular": {
+      "title": "Aanwezig",
+      "description": "Check deze week in bij 1 event"
+    },
+    "double_up": {
+      "title": "Double Up",
+      "description": "Check deze week in bij 2 events"
+    },
+    "triple_threat": {
+      "title": "Triple Threat",
+      "description": "Check deze week in bij 3 events"
+    },
+    "club_hopper": {
+      "title": "Clubhopper",
+      "description": "Check deze week in bij 2 verschillende clubs"
+    },
+    "explorer": {
+      "title": "Ontdekkingsreiziger",
+      "description": "Check deze week in bij 3 verschillende clubs"
+    }
+  },
   "achievements": {
     "title": "Prestaties",
     "unlocked": "Ontgrendeld",

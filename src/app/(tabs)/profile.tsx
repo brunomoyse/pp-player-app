@@ -162,6 +162,12 @@ export default function ProfileScreen() {
           onPress={() => router.push('/achievements')}
         />
         <Setting
+          icon="trophy-outline"
+          title={t('season.title')}
+          subtitle={t('season.subtitle')}
+          onPress={() => router.push('/season')}
+        />
+        <Setting
           icon="ticket-outline"
           title={t('profile.myRegistrations')}
           onPress={() => router.push('/my-seats')}

@@ -1,0 +1,10 @@
+mutation ClaimQuest($code: String!) {
+  claimQuest(code: $code) {
+    code
+    target
+    progress
+    completed
+    claimed
+    xpReward
+  }
+}

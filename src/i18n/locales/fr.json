@@ -444,6 +444,44 @@
     "comebackTitle": "Bon retour",
     "comebackMessage": "Nouveau départ — votre série recommence à {count}."
   },
+  "season": {
+    "title": "Saison",
+    "subtitle": "Pass, quêtes et Panthéon",
+    "selectClub": "Choisissez un club pour voir sa saison.",
+    "noActiveSeason": "Aucune saison en cours pour le moment.",
+    "premium": "Premium",
+    "tier": "Palier {tier}",
+    "xp": "{xp} XP",
+    "xpToNext": "{xp} XP avant le palier suivant",
+    "weeklyQuests": "Quêtes hebdomadaires",
+    "claimed": "Récupéré",
+    "claimXp": "Récupérer {xp} XP",
+    "hallOfFame": "Panthéon",
+    "noChampions": "Aucun champion couronné pour l'instant.",
+    "events": "{count} événements"
+  },
+  "quests": {
+    "weekly_regular": {
+      "title": "Présent",
+      "description": "Enregistrez-vous à 1 événement cette semaine"
+    },
+    "double_up": {
+      "title": "Double mise",
+      "description": "Enregistrez-vous à 2 événements cette semaine"
+    },
+    "triple_threat": {
+      "title": "Triple menace",
+      "description": "Enregistrez-vous à 3 événements cette semaine"
+    },
+    "club_hopper": {
+      "title": "Globe-trotteur",
+      "description": "Enregistrez-vous dans 2 clubs différents cette semaine"
+    },
+    "explorer": {
+      "title": "Explorateur",
+      "description": "Enregistrez-vous dans 3 clubs différents cette semaine"
+    }
+  },
   "achievements": {
     "title": "Succès",
     "unlocked": "Débloqués",

@@ -7,5 +7,6 @@ export * from './identity';
 export * from './notes';
 export * from './analytics';
 export * from './attendance';
+export * from './season';
 export * from './system';
 export * from './subscriptions';
