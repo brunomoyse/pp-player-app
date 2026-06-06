@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, Switch, View } from 'react-native';
 
-import { EditProfileModal, LanguageModal, StatCard } from '@/components';
+import { CrossClubProfileCard, EditProfileModal, LanguageModal, StatCard } from '@/components';
 import { Avatar, Button, Card, Screen, Text } from '@/components/ui';
 import { GET_MY_ACHIEVEMENTS, GET_MY_STATISTICS } from '@/graphql/operations';
 import { LOCALE_LABELS, useI18n } from '@/i18n/useI18n';
@@ -135,6 +135,9 @@ export default function ProfileScreen() {
           label={t('profile.itmRate')}
         />
       </View>
+
+      {/* Poker passport — cross-club identity */}
+      <CrossClubProfileCard />
 
       {/* Quick actions */}
       <Card className="gap-1">

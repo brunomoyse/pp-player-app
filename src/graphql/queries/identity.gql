@@ -1,0 +1,13 @@
+query GetMyCrossClubProfile {
+  myCrossClubProfile {
+    id
+    clubId
+    displayName
+    isClaimed
+    club {
+      id
+      name
+      city
+    }
+  }
+}

@@ -1,0 +1,8 @@
+mutation ClaimRegisteredPlayer($input: ClaimRegisteredPlayerInput!) {
+  claimRegisteredPlayer(input: $input) {
+    id
+    clubId
+    displayName
+    isClaimed
+  }
+}
