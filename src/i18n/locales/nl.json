@@ -504,7 +504,11 @@
     "peopleYouPlay": "Spelers die je tegenkomt",
     "add": "Toevoegen",
     "remove": "Verwijderen",
-    "sharedNights": "{count} gedeelde avonden"
+    "sent": "Verzonden",
+    "pending": "In afwachting",
+    "cancel": "Annuleren",
+    "sharedNights": "{count} gedeelde avonden",
+    "canRegisterMe": "Toestaan mij voor toernooien in te schrijven"
   },
   "wrapped": {
     "title": "Jaar in poker",

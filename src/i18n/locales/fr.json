@@ -503,7 +503,11 @@
     "peopleYouPlay": "Joueurs que vous croisez",
     "add": "Ajouter",
     "remove": "Retirer",
-    "sharedNights": "{count} soirées partagées"
+    "sent": "Envoyées",
+    "pending": "En attente",
+    "cancel": "Annuler",
+    "sharedNights": "{count} soirées partagées",
+    "canRegisterMe": "Autoriser à m'inscrire aux tournois"
   },
   "wrapped": {
     "title": "Mon année poker",

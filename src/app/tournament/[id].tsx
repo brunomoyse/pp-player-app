@@ -55,8 +55,8 @@ export default function TournamentDetailScreen() {
   const predictionPlayers = useMemo<PredictionPlayer[]>(
     () =>
       (tn?.registrations ?? [])
-        .filter((r) => r.user)
-        .map((r) => ({ userId: r.userId, name: r.user?.username || r.user?.firstName || '—' })),
+        .filter((r) => r.user && r.userId)
+        .map((r) => ({ userId: r.userId!, name: r.displayName || r.user?.username || r.user?.firstName || '—' })),
     [tn],
   );
   // Live clock + registration count over the WebSocket (Phase 6).

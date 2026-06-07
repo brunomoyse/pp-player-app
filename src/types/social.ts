@@ -18,6 +18,8 @@ export interface Friend {
   name: string;
   status: string;
   isIncoming: boolean;
+  iCanRegisterThem: boolean;
+  canRegisterMe: boolean;
   flame?: MutualFlame;
 }
 

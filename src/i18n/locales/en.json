@@ -502,7 +502,11 @@
     "peopleYouPlay": "People you play",
     "add": "Add",
     "remove": "Remove",
-    "sharedNights": "{count} shared nights"
+    "sent": "Sent",
+    "pending": "Pending",
+    "cancel": "Cancel",
+    "sharedNights": "{count} shared nights",
+    "canRegisterMe": "Allow them to register me for tournaments"
   },
   "wrapped": {
     "title": "Year in Poker",

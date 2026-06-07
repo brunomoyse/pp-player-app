@@ -105,6 +105,11 @@ export const GET_TOURNAMENT: TypedDocumentNode<GetTournamentResult, GetTournamen
       seatCap
       status
       liveStatus
+      voucherValueCents
+      levelTwoBonusChips
+      rebuyMax
+      addonChips
+      addonPriceCents
       structure {
         id
         tournamentId
@@ -150,6 +155,8 @@ export const GET_TOURNAMENT: TypedDocumentNode<GetTournamentResult, GetTournamen
       registrations {
         id
         userId
+        registeredPlayerId
+        displayName
         registrationTime
         status
         notes
@@ -188,6 +195,8 @@ export const GET_LEADERBOARD: TypedDocumentNode<GetLeaderboardResult, GetLeaderb
           username
           email
         }
+        registeredPlayerId
+        displayName
         rank
         totalTournaments
         totalBuyIns

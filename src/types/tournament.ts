@@ -15,6 +15,11 @@ export interface Tournament {
     status: TournamentStatus;
     title: string;
     updatedAt?: string;
+    voucherValueCents?: number;
+    levelTwoBonusChips?: number | null;
+    rebuyMax?: number | null;
+    addonChips?: number | null;
+    addonPriceCents?: number | null;
 
     clock?: TournamentClock | null;
     club?: Club;
@@ -28,7 +33,9 @@ export type TournamentLiveStatus = 'NOT_STARTED' | 'REGISTRATION_OPEN' | 'LATE_R
 export interface TournamentRegistration {
     id: string;
     tournamentId?: string;
-    userId: string;
+    userId?: string | null;
+    registeredPlayerId: string;
+    displayName: string;
     notes?: string | null;
     registrationTime: string;
     status: RegistrationStatus;
@@ -44,7 +51,9 @@ export type RegistrationStatus = 'REGISTERED' | 'CHECKED_IN' | 'SEATED' | 'BUSTE
 export interface TournamentResult {
     id: string;
     tournamentId: string;
-    userId: string;
+    userId?: string | null;
+    registeredPlayerId: string;
+    displayName: string;
     finalPosition: number;
     prizeCents: number;
     points: number;
@@ -153,7 +162,9 @@ export interface PlayerStatsResponse {
 export type LeaderboardPeriod = 'ALL_TIME' | 'LAST_YEAR' | 'LAST_6_MONTHS' | 'LAST_30_DAYS' | 'LAST_7_DAYS'
 
 export interface LeaderboardEntry {
-    user: User;
+    user?: User | null;
+    registeredPlayerId: string;
+    displayName: string;
     rank: number;
     totalTournaments: number;
     totalBuyIns: number;

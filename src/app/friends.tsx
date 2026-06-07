@@ -11,14 +11,20 @@ import {
   GET_INCOMING_FRIEND_REQUESTS,
   GET_MY_FRIENDS,
   GET_MY_RIVALRIES,
+  GET_OUTGOING_FRIEND_REQUESTS,
   REMOVE_FRIEND,
   SEND_FRIEND_REQUEST,
+  SET_FRIEND_REGISTRATION_PERMISSION,
 } from '@/graphql/operations';
 import { useIsAuthenticated } from '@/stores/useAuthStore';
 import { colors } from '@/theme/tokens';
 import type { Friend } from '@/types/social';
 
-const REFETCH = [{ query: GET_MY_FRIENDS }, { query: GET_INCOMING_FRIEND_REQUESTS }];
+const REFETCH = [
+  { query: GET_MY_FRIENDS },
+  { query: GET_INCOMING_FRIEND_REQUESTS },
+  { query: GET_OUTGOING_FRIEND_REQUESTS },
+];
 
 function FlameLabel({ friend }: { friend: Friend }) {
   const { t } = useTranslation();
@@ -42,6 +48,7 @@ export default function FriendsScreen() {
 
   const friendsQ = useQuery(GET_MY_FRIENDS, { skip: !isAuth, notifyOnNetworkStatusChange: true });
   const incomingQ = useQuery(GET_INCOMING_FRIEND_REQUESTS, { skip: !isAuth });
+  const outgoingQ = useQuery(GET_OUTGOING_FRIEND_REQUESTS, { skip: !isAuth });
   const rivalsQ = useQuery(GET_MY_RIVALRIES, { variables: { limit: 25 }, skip: !isAuth });
 
   const [sendRequest, { loading: sending }] = useMutation(SEND_FRIEND_REQUEST, {
@@ -51,22 +58,30 @@ export default function FriendsScreen() {
     refetchQueries: REFETCH,
   });
   const [removeFriend] = useMutation(REMOVE_FRIEND, { refetchQueries: REFETCH });
+  const [setRegPermission] = useMutation(SET_FRIEND_REGISTRATION_PERMISSION, {
+    refetchQueries: REFETCH,
+  });
 
   const friends = useMemo(() => friendsQ.data?.myFriends ?? [], [friendsQ.data]);
   const incoming = useMemo(
     () => incomingQ.data?.incomingFriendRequests ?? [],
     [incomingQ.data],
   );
+  const outgoing = useMemo(
+    () => outgoingQ.data?.outgoingFriendRequests ?? [],
+    [outgoingQ.data],
+  );
 
-  // People you've played who aren't already friends, pending, or just-invited.
+  // People you've played who aren't already friends, pending (in or out), or just-invited.
   const suggestions = useMemo(() => {
     const known = new Set<string>([
       ...friends.map((f) => f.userId),
       ...incoming.map((f) => f.userId),
+      ...outgoing.map((f) => f.userId),
       ...sentTo,
     ]);
     return (rivalsQ.data?.myRivalries ?? []).filter((r) => !known.has(r.opponentId)).slice(0, 10);
-  }, [friends, incoming, sentTo, rivalsQ.data]);
+  }, [friends, incoming, outgoing, sentTo, rivalsQ.data]);
 
   const onSend = async (userId: string) => {
     setSentTo((prev) => [...prev, userId]);
@@ -126,6 +141,30 @@ export default function FriendsScreen() {
               </Card>
             ) : null}
 
+            {/* Outgoing requests (sent, awaiting acceptance) */}
+            {outgoing.length > 0 ? (
+              <Card className="gap-1">
+                <Text variant="label" className="mb-1 text-pp-gold-deep">
+                  {t('friends.sent')}
+                </Text>
+                {outgoing.map((f) => (
+                  <View key={f.friendshipId} className="flex-row items-center gap-3 py-2">
+                    <Avatar name={f.name} size={36} />
+                    <Text className="flex-1 font-sans-semibold text-pp-text">{f.name}</Text>
+                    <Text variant="dim" className="text-[12px]">
+                      {t('friends.pending')}
+                    </Text>
+                    <Pressable
+                      onPress={() => void removeFriend({ variables: { friendshipId: f.friendshipId } })}
+                      accessibilityLabel={t('friends.cancel')}
+                      hitSlop={8}>
+                      <Ionicons name="close" size={22} color={colors.textMuted} />
+                    </Pressable>
+                  </View>
+                ))}
+              </Card>
+            ) : null}
+
             {/* Friends */}
             <Card className="gap-1">
               <Text variant="label" className="mb-1 text-pp-gold-deep">
@@ -137,17 +176,36 @@ export default function FriendsScreen() {
                 </Text>
               ) : (
                 friends.map((f) => (
-                  <View key={f.friendshipId} className="flex-row items-center gap-3 py-2">
-                    <Avatar name={f.name} size={40} />
-                    <View className="flex-1">
-                      <Text className="font-sans-semibold text-pp-text">{f.name}</Text>
-                      <FlameLabel friend={f} />
+                  <View key={f.friendshipId} className="gap-2 py-2">
+                    <View className="flex-row items-center gap-3">
+                      <Avatar name={f.name} size={40} />
+                      <View className="flex-1">
+                        <Text className="font-sans-semibold text-pp-text">{f.name}</Text>
+                        <FlameLabel friend={f} />
+                      </View>
+                      <Pressable
+                        onPress={() => void removeFriend({ variables: { friendshipId: f.friendshipId } })}
+                        accessibilityLabel={t('friends.remove')}
+                        hitSlop={8}>
+                        <Ionicons name="ellipsis-horizontal" size={20} color={colors.textDim} />
+                      </Pressable>
                     </View>
+                    {/* Registration permission toggle */}
                     <Pressable
-                      onPress={() => void removeFriend({ variables: { friendshipId: f.friendshipId } })}
-                      accessibilityLabel={t('friends.remove')}
-                      hitSlop={8}>
-                      <Ionicons name="ellipsis-horizontal" size={20} color={colors.textDim} />
+                      onPress={() =>
+                        void setRegPermission({
+                          variables: { friendshipId: f.friendshipId, allow: !f.canRegisterMe },
+                        })
+                      }
+                      className="flex-row items-center gap-2 py-1 px-2">
+                      <Ionicons
+                        name={f.canRegisterMe ? 'checkmark-circle' : 'ellipse-outline'}
+                        size={18}
+                        color={f.canRegisterMe ? colors.gold : colors.textDim}
+                      />
+                      <Text className="text-[12px] flex-1 text-pp-text-dim">
+                        {t('friends.canRegisterMe')}
+                      </Text>
                     </Pressable>
                   </View>
                 ))

@@ -46,7 +46,7 @@ export default function LeaderboardScreen() {
   });
 
   const entries = data?.leaderboard.items ?? [];
-  const me = currentUser ? entries.find((e) => e.user.id === currentUser.id) : undefined;
+  const me = currentUser ? entries.find((e) => e.user?.id === currentUser.id) : undefined;
 
   const periodSegments = (['week', 'month', 'year', 'allTime'] as Period[]).map((p) => ({
     value: p,

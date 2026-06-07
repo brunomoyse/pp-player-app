@@ -5,7 +5,7 @@ import { cn } from '@/lib/cn';
 import type { LeaderboardEntry } from '@/types/tournament';
 
 function fullName(e: LeaderboardEntry): string {
-  return e.user.username ?? ([e.user.firstName, e.user.lastName].filter(Boolean).join(' ') || '—');
+  return e.displayName || (e.user?.username ?? ([e.user?.firstName, e.user?.lastName].filter(Boolean).join(' ') || '—'));
 }
 
 function rankColor(rank: number): string {
@@ -31,10 +31,10 @@ export function LeaderboardTable({ entries, currentUserId, metric = 'points' }: 
   return (
     <Card className="gap-1 p-2">
       {entries.map((e) => {
-        const me = currentUserId && e.user.id === currentUserId;
+        const me = currentUserId != null && e.user?.id === currentUserId;
         return (
           <View
-            key={e.user.id}
+            key={e.registeredPlayerId}
             className={cn(
               'flex-row items-center gap-3 rounded-xl px-2 py-2.5',
               me && 'bg-pp-gold/10'

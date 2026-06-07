@@ -21,3 +21,20 @@ mutation AcceptFriendRequest($friendshipId: ID!) {
 mutation RemoveFriend($friendshipId: ID!) {
   removeFriend(friendshipId: $friendshipId)
 }
+
+mutation SetFriendRegistrationPermission($friendshipId: ID!, $allow: Boolean!) {
+  setFriendRegistrationPermission(friendshipId: $friendshipId, allow: $allow)
+}
+
+mutation RegisterFriendForTournament($friendUserId: ID!, $tournamentId: ID!) {
+  registerFriendForTournament(friendUserId: $friendUserId, tournamentId: $tournamentId) {
+    id
+    tournamentId
+    userId
+    registeredPlayerId
+    displayName
+    registrationTime
+    status
+    notes
+  }
+}

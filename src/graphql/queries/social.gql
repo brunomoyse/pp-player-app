@@ -14,6 +14,8 @@ fragment FriendFields on Friend {
   name
   status
   isIncoming
+  iCanRegisterThem
+  canRegisterMe
   flame {
     sharedNights
     lastShared
@@ -29,6 +31,12 @@ query GetMyFriends {
 
 query GetIncomingFriendRequests {
   incomingFriendRequests {
+    ...FriendFields
+  }
+}
+
+query GetOutgoingFriendRequests {
+  outgoingFriendRequests {
     ...FriendFields
   }
 }
