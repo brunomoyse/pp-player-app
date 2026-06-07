@@ -9,7 +9,6 @@
     "userInterfaceStyle": "dark",
     "backgroundColor": "#18181a",
     "ios": {
-      "icon": "./assets/expo.icon",
       "bundleIdentifier": "com.pocketpair.app",
       "supportsTablet": true
     },
