@@ -1,6 +1,6 @@
 # pp-player-app
 
-The **player-facing** app for [PocketPair](https://github.com/brunomoyse), a poker
+The **player-facing** app for [PocketPair](https://pocketpair.be), a poker
 tournament platform for clubs and their players. Built with **Expo / React Native**
 (SDK 56, React Native 0.85, React 19, Hermes, New Architecture), it talks to the
 `pp-service` GraphQL backend over HTTP + WebSocket with JWT bearer auth.
