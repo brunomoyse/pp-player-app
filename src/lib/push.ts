@@ -21,6 +21,20 @@ Notifications.setNotificationHandler({
 
 const ANDROID_CHANNEL_ID = 'default';
 
+// The Expo token currently registered with the backend, held at module scope so
+// the auth store can unregister it on logout *before* the access token is
+// cleared (a hook reacting to auth state would only run once auth is already
+// gone, leaving the mutation unauthenticated).
+let registeredPushToken: string | null = null;
+
+export function setRegisteredPushToken(token: string | null): void {
+  registeredPushToken = token;
+}
+
+export function getRegisteredPushToken(): string | null {
+  return registeredPushToken;
+}
+
 /**
  * The EAS project id is required by getExpoPushTokenAsync. It is injected into
  * the resolved config once `eas init` has run; until then (and in Expo Go /

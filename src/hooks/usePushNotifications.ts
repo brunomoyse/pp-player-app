@@ -3,14 +3,13 @@ import * as Notifications from 'expo-notifications';
 import { router } from 'expo-router';
 import { useEffect, useRef } from 'react';
 
-import {
-  REGISTER_DEVICE_TOKEN,
-  UNREGISTER_DEVICE_TOKEN,
-} from '@/graphql/operations/notifications';
+import { REGISTER_DEVICE_TOKEN } from '@/graphql/operations/notifications';
+import i18n from '@/i18n';
 import {
   currentPushPlatform,
   isAchievementNotification,
   registerForPushNotificationsAsync,
+  setRegisteredPushToken,
 } from '@/lib/push';
 import { useIsAuthenticated } from '@/stores/useAuthStore';
 
@@ -19,9 +18,11 @@ import { useIsAuthenticated } from '@/stores/useAuthStore';
  * Expo push token and routes taps on achievement-unlock pushes.
  *
  * - On sign-in: request permission, mint the Expo push token, and register it
- *   with the backend so the server can target this device.
- * - On sign-out: best-effort unregister so a shared device stops receiving the
- *   previous user's pushes.
+ *   with the backend so the server can target this device. The token is also
+ *   stashed at module scope so the auth store can unregister it on logout while
+ *   the session is still valid (see useAuthStore.logout).
+ * - On sign-out: the local token ref is cleared so the next user re-registers;
+ *   the backend unregister itself is owned by logout().
  * - On tap (foreground, background, or cold start): deep-link to the
  *   achievements screen when the push is an achievement unlock.
  *
@@ -33,9 +34,15 @@ export function usePushNotifications() {
   const apollo = useApolloClient();
   const registeredToken = useRef<string | null>(null);
 
-  // Register / unregister this device's push token as auth state flips.
+  // Register this device's push token whenever a session is active.
   useEffect(() => {
     let cancelled = false;
+
+    if (!isAuth) {
+      registeredToken.current = null;
+      setRegisteredPushToken(null);
+      return;
+    }
 
     async function register() {
       const token = await registerForPushNotificationsAsync();
@@ -43,27 +50,18 @@ export function usePushNotifications() {
       try {
         await apollo.mutate({
           mutation: REGISTER_DEVICE_TOKEN,
-          variables: { input: { token, platform: currentPushPlatform() } },
+          variables: {
+            input: { token, platform: currentPushPlatform(), locale: i18n.language },
+          },
         });
         registeredToken.current = token;
+        setRegisteredPushToken(token);
       } catch (e) {
         if (__DEV__) console.warn('[push] registerDeviceToken failed', e);
       }
     }
 
-    async function unregister() {
-      const token = registeredToken.current;
-      registeredToken.current = null;
-      if (!token) return;
-      try {
-        await apollo.mutate({ mutation: UNREGISTER_DEVICE_TOKEN, variables: { token } });
-      } catch (e) {
-        if (__DEV__) console.warn('[push] unregisterDeviceToken failed', e);
-      }
-    }
-
-    if (isAuth) void register();
-    else void unregister();
+    void register();
 
     return () => {
       cancelled = true;

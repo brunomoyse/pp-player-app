@@ -5,6 +5,8 @@ import type { PushPlatform } from '@/lib/push';
 export interface RegisterDeviceTokenInput {
   token: string;
   platform: PushPlatform;
+  /** Device locale (e.g. `en`, `fr`, `nl`) used to localize push copy. */
+  locale?: string;
 }
 
 export interface RegisterDeviceTokenResult {

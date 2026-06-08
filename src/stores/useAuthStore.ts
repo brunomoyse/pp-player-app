@@ -5,6 +5,8 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 import { setAuthActions } from '@/graphql/authActions';
 import { apolloClient } from '@/graphql/client';
 import { GET_ME, LOGIN_USER, REGISTER_USER } from '@/graphql/operations/auth';
+import { UNREGISTER_DEVICE_TOKEN } from '@/graphql/operations/notifications';
+import { getRegisteredPushToken, setRegisteredPushToken } from '@/lib/push';
 import { tokens } from '@/lib/tokens';
 import type { User, UserLoginInput, UserRegistrationInput } from '@/types/user';
 
@@ -127,6 +129,20 @@ export const useAuthStore = create<AuthState>()(
 
       logout: async () => {
         if (refreshTimer) clearTimeout(refreshTimer);
+        // Drop this device's push token while the session is still valid — the
+        // mutation needs auth, so it must run before clearSession().
+        const pushToken = getRegisteredPushToken();
+        if (pushToken) {
+          setRegisteredPushToken(null);
+          try {
+            await apolloClient.mutate({
+              mutation: UNREGISTER_DEVICE_TOKEN,
+              variables: { token: pushToken },
+            });
+          } catch {
+            // best-effort; the token is reassigned on next login regardless
+          }
+        }
         try {
           await fetch(`${AUTH_BASE}/auth/logout`, { method: 'POST', credentials: 'include' });
         } catch {
