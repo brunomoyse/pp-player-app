@@ -1,7 +1,7 @@
 import { router, Stack } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, View } from 'react-native';
+import { Image, Pressable, View } from 'react-native';
 
 import { Button, Input, Screen, Text } from '@/components/ui';
 import { useAuthStore } from '@/stores/useAuthStore';
@@ -30,9 +30,17 @@ export default function LoginScreen() {
     <>
       <Stack.Screen options={{ title: t('auth.login'), headerShown: true }} />
       <Screen contentClassName="gap-5 pt-8">
-        <View className="gap-1">
-          <Text variant="title">{t('auth.welcomeBack')}</Text>
-          <Text variant="muted">{t('home.unlockFeatures')}</Text>
+        <View className="items-center gap-3 pb-2">
+          <Image
+            source={require('../../assets/images/icon-no-bg.png')}
+            style={{ width: 96, height: 96 }}
+            resizeMode="contain"
+            accessibilityLabel="PocketPair"
+          />
+          <View className="items-center gap-1">
+            <Text variant="title">{t('auth.welcomeBack')}</Text>
+            <Text variant="muted">{t('home.unlockFeatures')}</Text>
+          </View>
         </View>
 
         <Input
