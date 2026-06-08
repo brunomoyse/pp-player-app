@@ -205,13 +205,18 @@ export default function ProfileScreen() {
         />
       </Card>
 
-      {/* Tools (feature-flagged) — only render the card when something is enabled. */}
-      {flags.cosmetics || flags.predictions || flags.notes || flags.proAccount || flags.publicStats ? (
-        <Card className="gap-1">
-          <Text variant="label" className="mb-1 text-pp-gold-deep">
-            {t('profile.tools')}
-          </Text>
-          {flags.cosmetics ? (
+      {/* Tools — drink wallet is always available; the rest are feature-flagged. */}
+      <Card className="gap-1">
+        <Text variant="label" className="mb-1 text-pp-gold-deep">
+          {t('profile.tools')}
+        </Text>
+        <Setting
+          icon="wine-outline"
+          title={t('drinkWallet.title')}
+          subtitle={t('drinkWallet.subtitle')}
+          onPress={() => router.push('/drink-wallet')}
+        />
+        {flags.cosmetics ? (
             <Setting
               icon="color-palette-outline"
               title={t('cosmetics.title')}
@@ -251,8 +256,7 @@ export default function ProfileScreen() {
               onPress={() => router.push('/scouting')}
             />
           ) : null}
-        </Card>
-      ) : null}
+      </Card>
 
       {/* Tournaments */}
       <Card className="gap-1">

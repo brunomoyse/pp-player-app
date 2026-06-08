@@ -544,6 +544,34 @@
       "badge": "Badges"
     }
   },
+  "drinkWallet": {
+    "title": "Drankportemonnee",
+    "subtitle": "Je barcredits bij de club",
+    "balanceLabel": "Credits",
+    "creditsUnit": "{count} credits",
+    "linkCard": "Kaart koppelen",
+    "enterCode": "Code invoeren",
+    "manualPrompt": "Voer de code in die op je kaart staat",
+    "linking": "Kaart koppelen…",
+    "linked": "Kaart aan je account gekoppeld",
+    "history": "Recente activiteit",
+    "noActivity": "Nog geen activiteit",
+    "empty": "Nog geen kaart gekoppeld. Koppel je gedrukte kaart om je saldo te zien.",
+    "expiresOn": "Verloopt op {date}",
+    "reason": {
+      "tournamentTopup": "Toernooicredit",
+      "barRedemption": "Drankje ingewisseld",
+      "expiry": "Verlopen",
+      "adjustment": "Aanpassing",
+      "transfer": "Overdracht"
+    },
+    "error": {
+      "invalidCode": "Dat lijkt geen geldige kaartcode.",
+      "ownedByOther": "Deze kaart is al aan een ander account gekoppeld.",
+      "alreadyHaveWallet": "Je hebt al een portemonnee bij deze club.",
+      "generic": "Kaart koppelen mislukt. Probeer het opnieuw."
+    }
+  },
   "predictions": {
     "title": "Voorspellingen",
     "subtitle": "Gratis fantasy-voorspellingen met punten",

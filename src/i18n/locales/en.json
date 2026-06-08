@@ -542,6 +542,34 @@
       "badge": "Badges"
     }
   },
+  "drinkWallet": {
+    "title": "Drink Wallet",
+    "subtitle": "Your bar credits at the club",
+    "balanceLabel": "Credits",
+    "creditsUnit": "{count} credits",
+    "linkCard": "Link a card",
+    "enterCode": "Enter code",
+    "manualPrompt": "Enter the code printed on your card",
+    "linking": "Linking card…",
+    "linked": "Card linked to your account",
+    "history": "Recent activity",
+    "noActivity": "No activity yet",
+    "empty": "No card linked yet. Link your printed card to see your balance.",
+    "expiresOn": "Expires {date}",
+    "reason": {
+      "tournamentTopup": "Tournament credit",
+      "barRedemption": "Drink redeemed",
+      "expiry": "Expired",
+      "adjustment": "Adjustment",
+      "transfer": "Transfer"
+    },
+    "error": {
+      "invalidCode": "That doesn't look like a valid card code.",
+      "ownedByOther": "This card is already linked to another account.",
+      "alreadyHaveWallet": "You already have a wallet at this club.",
+      "generic": "Could not link the card. Please try again."
+    }
+  },
   "predictions": {
     "title": "Predictions",
     "subtitle": "Free fantasy picks with points",

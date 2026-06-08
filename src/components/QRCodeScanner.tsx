@@ -13,10 +13,13 @@ export interface QRCodeScannerProps {
   onClose: () => void;
   /** Fires once with the parsed code; the parent decides how to act on it. */
   onScanned: (parsed: ParsedQRCode) => void;
+  /** Header title; defaults to the tournament check-in wording. */
+  title?: string;
 }
 
-export function QRCodeScanner({ visible, onClose, onScanned }: QRCodeScannerProps) {
+export function QRCodeScanner({ visible, onClose, onScanned, title }: QRCodeScannerProps) {
   const { t } = useTranslation();
+  const heading = title ?? t('qrScanner.scanTournament');
   const [permission, requestPermission] = useCameraPermissions();
   // `active` is the one-shot guard: it gates onBarcodeScanned and resets when
   // the scanner (re)opens via the adjust-state-on-prop-change pattern.
@@ -37,7 +40,7 @@ export function QRCodeScanner({ visible, onClose, onScanned }: QRCodeScannerProp
     <Modal visible={visible} animationType="slide" onRequestClose={onClose} statusBarTranslucent>
       <View className="flex-1 bg-pp-bg">
         <View className="flex-row items-center justify-between px-5 pb-3 pt-14">
-          <Text variant="heading">{t('qrScanner.scanTournament')}</Text>
+          <Text variant="heading">{heading}</Text>
           <Pressable onPress={onClose} accessibilityRole="button" hitSlop={8}>
             <Ionicons name="close" size={26} color={colors.text} />
           </Pressable>
@@ -49,7 +52,7 @@ export function QRCodeScanner({ visible, onClose, onScanned }: QRCodeScannerProp
           <View className="flex-1 items-center justify-center gap-4 px-8">
             <Ionicons name="camera-outline" size={56} color={colors.textDim} />
             <Text variant="muted" className="text-center">
-              {t('qrScanner.scanTournament')}
+              {heading}
             </Text>
             <Button title={t('common.continue')} onPress={() => void requestPermission()} />
           </View>

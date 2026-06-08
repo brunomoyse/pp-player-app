@@ -102,6 +102,7 @@ export default function RootLayout() {
                 <Stack.Screen name="register" options={{ presentation: 'modal' }} />
                 <Stack.Screen name="tournament/[id]" />
                 <Stack.Screen name="achievements" />
+                <Stack.Screen name="drink-wallet" />
               </Stack>
               {/* App-wide gamification: notification listener + celebration overlay. */}
               <GamificationLayer />

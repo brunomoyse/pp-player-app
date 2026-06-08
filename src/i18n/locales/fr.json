@@ -543,6 +543,34 @@
       "badge": "Badges"
     }
   },
+  "drinkWallet": {
+    "title": "Portefeuille Boissons",
+    "subtitle": "Vos crédits bar au club",
+    "balanceLabel": "Crédits",
+    "creditsUnit": "{count} crédits",
+    "linkCard": "Associer une carte",
+    "enterCode": "Saisir le code",
+    "manualPrompt": "Saisissez le code imprimé sur votre carte",
+    "linking": "Association de la carte…",
+    "linked": "Carte associée à votre compte",
+    "history": "Activité récente",
+    "noActivity": "Aucune activité pour le moment",
+    "empty": "Aucune carte associée. Associez votre carte imprimée pour voir votre solde.",
+    "expiresOn": "Expire le {date}",
+    "reason": {
+      "tournamentTopup": "Crédit tournoi",
+      "barRedemption": "Boisson utilisée",
+      "expiry": "Expiré",
+      "adjustment": "Ajustement",
+      "transfer": "Transfert"
+    },
+    "error": {
+      "invalidCode": "Ce code de carte ne semble pas valide.",
+      "ownedByOther": "Cette carte est déjà associée à un autre compte.",
+      "alreadyHaveWallet": "Vous avez déjà un portefeuille dans ce club.",
+      "generic": "Impossible d'associer la carte. Veuillez réessayer."
+    }
+  },
   "predictions": {
     "title": "Pronostics",
     "subtitle": "Pronostics fantasy gratuits avec des points",
