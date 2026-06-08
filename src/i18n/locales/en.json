@@ -615,7 +615,7 @@
     },
     "items": {
       "first_registration": {
-        "name": "First Steps",
+        "name": "Welcome to the Felt",
         "description": "Register for your first tournament"
       },
       "first_cash": {
@@ -623,23 +623,23 @@
         "description": "Cash in a tournament for the first time"
       },
       "first_win": {
-        "name": "Champion",
+        "name": "Winner Winner",
         "description": "Win your first tournament"
       },
       "tournaments_5": {
-        "name": "Regular",
+        "name": "The Usual",
         "description": "Play 5 tournaments"
       },
       "tournaments_20": {
-        "name": "Grinder",
+        "name": "The Daily Grind",
         "description": "Play 20 tournaments"
       },
       "tournaments_50": {
-        "name": "Veteran",
+        "name": "Old Hand",
         "description": "Play 50 tournaments"
       },
       "final_table_5": {
-        "name": "Final Table Fixture",
+        "name": "Reserved Seat",
         "description": "Reach the final table 5 times"
       },
       "winnings_1000": {
@@ -647,19 +647,19 @@
         "description": "Win €1,000 in total prizes"
       },
       "itm_rate_50": {
-        "name": "Consistent",
+        "name": "Like Clockwork",
         "description": "Reach a 50% in-the-money rate"
       },
       "rebuy_3": {
-        "name": "All In",
+        "name": "Just One More",
         "description": "Make 3 rebuys in a single tournament"
       },
       "streak_cash_3": {
-        "name": "Hot Streak",
+        "name": "Heater",
         "description": "Cash in 3 tournaments in a row"
       },
       "streak_play_5": {
-        "name": "Dedicated",
+        "name": "No Days Off",
         "description": "Play 5 tournaments in a row"
       }
     },

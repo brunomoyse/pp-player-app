@@ -616,51 +616,51 @@
     },
     "items": {
       "first_registration": {
-        "name": "Premiers Pas",
+        "name": "Baptême du Tapis",
         "description": "Inscrivez-vous à votre premier tournoi"
       },
       "first_cash": {
-        "name": "Dans les Places Payées",
+        "name": "Premier Pactole",
         "description": "Marquez vos premiers points dans les places payées"
       },
       "first_win": {
-        "name": "Champion",
+        "name": "Premier Sacre",
         "description": "Gagnez votre premier tournoi"
       },
       "tournaments_5": {
-        "name": "Régulier",
+        "name": "Habitué",
         "description": "Jouez 5 tournois"
       },
       "tournaments_20": {
-        "name": "Grinder",
+        "name": "Forçat du Tapis",
         "description": "Jouez 20 tournois"
       },
       "tournaments_50": {
-        "name": "Vétéran",
+        "name": "Vieux de la Vieille",
         "description": "Jouez 50 tournois"
       },
       "final_table_5": {
-        "name": "Table Finale Habituel",
+        "name": "Abonné à la Finale",
         "description": "Accédez à la table finale 5 fois"
       },
       "winnings_1000": {
-        "name": "Haute Mise",
+        "name": "Gros Bonnet",
         "description": "Gagnez 1 000 € en total de prix"
       },
       "itm_rate_50": {
-        "name": "Constant",
+        "name": "Métronome",
         "description": "Atteindre un taux ITM de 50%"
       },
       "rebuy_3": {
-        "name": "Tapis Vide",
+        "name": "Jamais Deux Sans Trois",
         "description": "Faites 3 recaves dans un seul tournoi"
       },
       "streak_cash_3": {
-        "name": "Série Chaude",
+        "name": "La Main Chaude",
         "description": "Marquez 3 tournois consécutifs"
       },
       "streak_play_5": {
-        "name": "Déterminé",
+        "name": "Sans Relâche",
         "description": "Jouez 5 tournois consécutifs"
       }
     },

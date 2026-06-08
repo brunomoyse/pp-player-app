@@ -617,51 +617,51 @@
     },
     "items": {
       "first_registration": {
-        "name": "Eerste Stappen",
+        "name": "Vuurdoop",
         "description": "Schrijf je in voor je eerste toernooi"
       },
       "first_cash": {
-        "name": "In de Winsten",
+        "name": "Kassa!",
         "description": "Cash voor het eerst in een toernooi"
       },
       "first_win": {
-        "name": "Kampioen",
+        "name": "Goud Waard",
         "description": "Win je eerste toernooi"
       },
       "tournaments_5": {
-        "name": "Regelmatig",
+        "name": "Vaste Klant",
         "description": "Speel 5 toernooien"
       },
       "tournaments_20": {
-        "name": "Grinder",
+        "name": "Doorbijter",
         "description": "Speel 20 toernooien"
       },
       "tournaments_50": {
-        "name": "Veteraan",
+        "name": "Oude Rot",
         "description": "Speel 50 toernooien"
       },
       "final_table_5": {
-        "name": "Finale Tafel Gewoonte",
+        "name": "Vaste Waarde",
         "description": "Bereik 5 keer de finale tafel"
       },
       "winnings_1000": {
-        "name": "Hoge Inzet",
+        "name": "Goudhaantje",
         "description": "Win totaal €1.000 aan prijzen"
       },
       "itm_rate_50": {
-        "name": "Consistent",
+        "name": "Zwitsers Uurwerk",
         "description": "Bereik een ITM-percentage van 50%"
       },
       "rebuy_3": {
-        "name": "Alles Erop",
+        "name": "Driemaal is Scheepsrecht",
         "description": "Maak 3 rebuy's in één toernooi"
       },
       "streak_cash_3": {
-        "name": "Hete Reeks",
+        "name": "Op Dreef",
         "description": "Cash 3 toernooien achter elkaar"
       },
       "streak_play_5": {
-        "name": "Toegewijd",
+        "name": "Door Weer en Wind",
         "description": "Speel 5 toernooien achter elkaar"
       }
     },
