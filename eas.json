@@ -21,6 +21,11 @@
       "channel": "preview",
       "ios": {
         "simulator": false
+      },
+      "env": {
+        "EXPO_PUBLIC_GRAPHQL_ENDPOINT": "https://pocketpair.be/api/graphql",
+        "EXPO_PUBLIC_GRAPHQL_WS_ENDPOINT": "wss://pocketpair.be/api/graphql",
+        "EXPO_PUBLIC_AUTH_BASE_URL": "https://pocketpair.be/api"
       }
     },
     "production": {
