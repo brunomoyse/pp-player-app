@@ -47,7 +47,13 @@
         }
       ],
       "expo-audio",
-      "expo-sharing"
+      "expo-sharing",
+      [
+        "expo-notifications",
+        {
+          "color": "#fee78a"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,
