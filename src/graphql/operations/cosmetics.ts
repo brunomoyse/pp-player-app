@@ -37,6 +37,23 @@ export const GET_COSMETIC_CATALOG: TypedDocumentNode<
   ${COSMETIC_FIELDS}
 `;
 
+export interface GetMyCosmeticsResult {
+  myCosmetics: CosmeticItem[];
+}
+
+/** The current user's owned cosmetics, each flagged equipped or not. */
+export const GET_MY_COSMETICS: TypedDocumentNode<
+  GetMyCosmeticsResult,
+  Record<string, never>
+> = gql`
+  query GetMyCosmetics {
+    myCosmetics {
+      ...CosmeticFields
+    }
+  }
+  ${COSMETIC_FIELDS}
+`;
+
 export interface PurchaseCosmeticResult {
   purchaseCosmetic: CosmeticItem;
 }

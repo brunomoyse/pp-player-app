@@ -2,6 +2,7 @@ import { Image } from 'expo-image';
 import { View } from 'react-native';
 
 import { cn } from '@/lib/cn';
+import { frameFor } from '@/theme/cosmetics';
 
 import { Text } from './Text';
 
@@ -11,6 +12,8 @@ export interface AvatarProps {
   size?: number;
   /** gold ring around the avatar. */
   ring?: boolean;
+  /** equipped avatar_frame cosmetic previewRef — its ring overrides `ring`. */
+  frame?: string | null;
   className?: string;
 }
 
@@ -20,15 +23,22 @@ function initials(name?: string | null): string {
   return (parts[0]?.[0] ?? '').concat(parts[1]?.[0] ?? '').toUpperCase() || '?';
 }
 
-export function Avatar({ name, uri, size = 48, ring, className }: AvatarProps) {
+export function Avatar({ name, uri, size = 48, ring, frame, className }: AvatarProps) {
+  const framePreview = frameFor(frame);
   return (
     <View
       className={cn(
         'items-center justify-center overflow-hidden rounded-full bg-pp-surface-2',
-        ring && 'border-2 border-pp-gold',
+        ring && !framePreview && 'border-2 border-pp-gold',
         className
       )}
-      style={{ width: size, height: size }}>
+      style={{
+        width: size,
+        height: size,
+        ...(framePreview
+          ? { borderWidth: framePreview.ringWidth, borderColor: framePreview.ringColor }
+          : {}),
+      }}>
       {uri ? (
         <Image source={{ uri }} style={{ width: size, height: size }} contentFit="cover" />
       ) : (

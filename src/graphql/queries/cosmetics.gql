@@ -16,3 +16,9 @@ query GetCosmeticCatalog($kind: String) {
     ...CosmeticFields
   }
 }
+
+query GetMyCosmetics {
+  myCosmetics {
+    ...CosmeticFields
+  }
+}
