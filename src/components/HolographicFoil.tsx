@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import {
   Easing,
   useDerivedValue,
+  useReducedMotion,
   useSharedValue,
   withRepeat,
   withTiming,
@@ -20,12 +21,13 @@ const HOLO_COLORS = ['#ff5f6d', '#ffc371', '#47e891', '#3ad0ff', '#a17fff', '#ff
 export function HolographicFoil({ size = 96, animate = true }: { size?: number; animate?: boolean }) {
   const r = size / 2;
   const phase = useSharedValue(0);
+  const reduce = useReducedMotion();
 
   useEffect(() => {
-    if (animate) {
+    if (animate && !reduce) {
       phase.value = withRepeat(withTiming(1, { duration: 2600, easing: Easing.linear }), -1, false);
     }
-  }, [animate, phase]);
+  }, [animate, reduce, phase]);
 
   const start = useDerivedValue(() => {
     const a = phase.value * Math.PI * 2;

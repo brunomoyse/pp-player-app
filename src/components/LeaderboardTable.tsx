@@ -5,7 +5,7 @@ import { cn } from '@/lib/cn';
 import type { LeaderboardEntry } from '@/types/tournament';
 
 function fullName(e: LeaderboardEntry): string {
-  return e.displayName || (e.user?.username ?? ([e.user?.firstName, e.user?.lastName].filter(Boolean).join(' ') || '—'));
+  return e.displayName || (e.user?.username ?? ([e.user?.firstName, e.user?.lastName].filter(Boolean).join(' ') || '-'));
 }
 
 function rankColor(rank: number): string {
@@ -37,7 +37,7 @@ export function LeaderboardTable({ entries, currentUserId, metric = 'points' }: 
             key={e.registeredPlayerId}
             className={cn(
               'flex-row items-center gap-3 rounded-xl px-2 py-2.5',
-              me && 'bg-pp-gold/10'
+              me && 'bg-pp-gold/20 border border-pp-gold/30'
             )}>
             <Text className={cn('w-7 text-center font-mono-medium', rankColor(e.rank))}>
               {e.rank}

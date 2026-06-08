@@ -3,6 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { MotiView } from 'moti';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
+import { useReducedMotion } from 'react-native-reanimated';
 
 import { Card, Text } from '@/components/ui';
 import { GET_MY_ATTENDANCE_STREAK } from '@/graphql/operations';
@@ -18,6 +19,8 @@ export function StreakCard() {
   const streak = data?.myAttendanceStreak;
   const current = streak?.currentStreak ?? 0;
   const lit = current > 0;
+  const reduce = useReducedMotion();
+  const pulse = lit && !reduce;
 
   if (!streak && loading) {
     return (
@@ -37,9 +40,9 @@ export function StreakCard() {
 
       <View className="flex-row items-center gap-3">
         <MotiView
-          from={{ scale: 0.9, opacity: 0.6 }}
-          animate={{ scale: lit ? [1, 1.08, 1] : 1, opacity: 1 }}
-          transition={{ type: 'timing', duration: 1400, loop: lit }}
+          from={{ scale: reduce ? 1 : 0.9, opacity: reduce ? 1 : 0.6 }}
+          animate={{ scale: pulse ? [1, 1.08, 1] : 1, opacity: 1 }}
+          transition={{ type: 'timing', duration: 1400, loop: pulse }}
           className="h-14 w-14 items-center justify-center rounded-2xl bg-white/5">
           <Ionicons name="flame" size={28} color={lit ? colors.gold : colors.textDim} />
         </MotiView>

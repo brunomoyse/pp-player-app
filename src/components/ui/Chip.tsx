@@ -18,6 +18,7 @@ export function Chip({ label, active, onPress, className }: ChipProps) {
       accessibilityRole="button"
       accessibilityState={{ selected: !!active }}
       onPress={onPress}
+      style={({ pressed }) => ({ transform: [{ scale: pressed ? 0.97 : 1 }] })}
       className={cn(
         'rounded-full border px-3 py-1.5',
         active ? 'border-pp-gold bg-pp-gold' : 'border-pp-border bg-white/5',

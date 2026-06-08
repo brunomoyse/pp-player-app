@@ -56,7 +56,7 @@ export default function TournamentDetailScreen() {
     () =>
       (tn?.registrations ?? [])
         .filter((r) => r.user && r.userId)
-        .map((r) => ({ userId: r.userId!, name: r.displayName || r.user?.username || r.user?.firstName || '—' })),
+        .map((r) => ({ userId: r.userId!, name: r.displayName || r.user?.username || r.user?.firstName || '-' })),
     [tn],
   );
   // Live clock + registration count over the WebSocket (Phase 6).
@@ -80,7 +80,7 @@ export default function TournamentDetailScreen() {
 
   const onShare = () => {
     if (!tn) return;
-    void Share.share({ message: `${tn.title} — PocketPair` }).catch(() =>
+    void Share.share({ message: `${tn.title} - PocketPair` }).catch(() =>
       Alert.alert(t('common.notYetAvailable'))
     );
   };
@@ -173,7 +173,7 @@ export default function TournamentDetailScreen() {
                         {s.isBreak ? t('events.break') : `${t('events.level')} ${s.levelNumber}`}
                       </Text>
                       <Text variant="mono" className="flex-1 text-center text-pp-text">
-                        {s.isBreak ? '—' : `${s.smallBlind}/${s.bigBlind}${s.ante ? ` (${s.ante})` : ''}`}
+                        {s.isBreak ? '-' : `${s.smallBlind}/${s.bigBlind}${s.ante ? ` (${s.ante})` : ''}`}
                       </Text>
                       <Text variant="dim" className="w-16 text-right text-[12px]">
                         {t('events.minutes', { count: s.durationMinutes })}

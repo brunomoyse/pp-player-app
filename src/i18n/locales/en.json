@@ -25,6 +25,7 @@
     "alreadyHaveAccount": "Already have an account?",
     "continueAsGuest": "Continue as guest",
     "welcomeBack": "Welcome back",
+    "guestHeadline": "PocketPair",
     "joinCommunity": "Join our community",
     "createAccount": "Create Account",
     "emailRequired": "Email is required",
@@ -374,6 +375,7 @@
     "tournaments": "Tournaments",
     "itmRate": "ITM Rate",
     "quickActions": "Quick Actions",
+    "tools": "Tools",
     "getStarted": "Get Started",
     "myRegistrations": "My Registrations",
     "upcoming": "upcoming",
@@ -437,11 +439,11 @@
     "advancedTitle": "Streak extended!",
     "advancedMessage": "You're on a {count}-event streak. Keep it lit.",
     "newBestTitle": "New personal best!",
-    "newBestMessage": "{count} events in a row — your longest ever.",
+    "newBestMessage": "{count} events in a row. Your longest ever.",
     "frozenTitle": "Streak saved",
     "frozenMessage": "A freeze kept your streak alive at {count}.",
     "comebackTitle": "Welcome back",
-    "comebackMessage": "Fresh start — your streak begins again at {count}."
+    "comebackMessage": "Fresh start. Your streak begins again at {count}."
   },
   "season": {
     "title": "Season",
@@ -488,7 +490,7 @@
     "nemesis": "Your Nemesis",
     "nemesisLine": "Beat you {losses} times across {meetings} meetings",
     "headToHead": "Head-to-head",
-    "recordLegend": "W–L",
+    "recordLegend": "W-L",
     "meetings": "{count} meetings"
   },
   "friends": {
@@ -498,7 +500,7 @@
     "accept": "Accept",
     "decline": "Decline",
     "yourFriends": "Your friends",
-    "empty": "No friends yet — add someone you play with.",
+    "empty": "No friends yet. Add someone you play with.",
     "peopleYouPlay": "People you play",
     "add": "Add",
     "remove": "Remove",
@@ -546,7 +548,7 @@
     "balanceLabel": "Prediction points",
     "points": "points",
     "claim": "Claim {points} points",
-    "earnHint": "Earn points by checking in and playing — no purchase, just for fun.",
+    "earnHint": "Earn points by checking in and playing. No purchase, just for fun.",
     "history": "Your predictions",
     "empty": "No predictions yet.",
     "predictWinner": "Predict the winner",
@@ -570,7 +572,7 @@
     "poolTitle": "Appear in opponent lookup",
     "poolBody": "Let other players find you by name and see your tournament record (events played, in-the-money rate, best finish). Turn this off to stay private.",
     "pnlTitle": "Show my profit / loss",
-    "pnlBody": "Also attach your net winnings to your profile when someone looks you up. This is separate — only shared if you switch it on.",
+    "pnlBody": "Also attach your net winnings to your profile when someone looks you up. This is separate, only shared if you switch it on.",
     "footer": "Your private notes are never shared or shown to anyone, regardless of these settings."
   },
   "scouting": {
@@ -661,13 +663,28 @@
       "streak_play_5": {
         "name": "No Days Off",
         "description": "Play 5 tournaments in a row"
+      },
+      "clubs_2": {
+        "name": "Away Game",
+        "description": "Play at 2 different clubs"
+      },
+      "clubs_3": {
+        "name": "On the Circuit",
+        "description": "Play at 3 different clubs"
+      },
+      "clubs_5": {
+        "name": "Frequent Flyer",
+        "description": "Play at 5 different clubs"
       }
     },
-    "locked": "Locked"
+    "locked": "Locked",
+    "shareVideo": "Share",
+    "preparingShare": "Preparing…",
+    "shareError": "Couldn't create the video. Try again."
   },
   "notes": {
     "title": "Opponent Notes",
-    "privateSubtitle": "Private — only you can see these",
+    "privateSubtitle": "Private. Only you can see these",
     "style": "Playing style",
     "tagsLabel": "Quick tags",
     "bodyLabel": "Notes",

@@ -12,7 +12,7 @@ import { colors } from '@/theme/tokens';
 import type { Rivalry } from '@/types/social';
 
 function record(r: Rivalry) {
-  return `${r.wins}–${r.losses}`;
+  return `${r.wins}-${r.losses}`;
 }
 
 export default function RivalsScreen() {

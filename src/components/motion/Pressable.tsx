@@ -1,5 +1,6 @@
 import { MotiPressable } from 'moti/interactions';
 import { useMemo, type ReactNode } from 'react';
+import { useReducedMotion } from 'react-native-reanimated';
 
 import { ppSpring } from '@/lib/motion';
 
@@ -14,6 +15,7 @@ export interface PressableProps {
 
 /** Spring press-scale feedback (port of motion-v Pressable). */
 export function Pressable({ children, onPress, scale = 0.97, disabled, className }: PressableProps) {
+  const reduce = useReducedMotion();
   return (
     <MotiPressable
       onPress={disabled ? undefined : onPress}
@@ -24,9 +26,9 @@ export function Pressable({ children, onPress, scale = 0.97, disabled, className
         () =>
           ({ pressed }: { pressed: boolean }) => {
             'worklet';
-            return { scale: pressed ? scale : 1 };
+            return { scale: pressed && !reduce ? scale : 1 };
           },
-        [scale]
+        [scale, reduce]
       )}
       transition={ppSpring}>
       {children}

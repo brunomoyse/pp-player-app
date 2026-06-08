@@ -3,7 +3,7 @@ import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, Switch, View } from 'react-native';
+import { Image, Pressable, Switch, View } from 'react-native';
 
 import {
   CrossClubProfileCard,
@@ -22,7 +22,7 @@ import { colors } from '@/theme/tokens';
 import { currencyCents } from '@/utils/currency';
 
 function fullName(first?: string | null, last?: string | null, username?: string | null) {
-  return username ?? ([first, last].filter(Boolean).join(' ') || '—');
+  return username ?? ([first, last].filter(Boolean).join(' ') || '-');
 }
 
 function Setting({
@@ -76,31 +76,41 @@ export default function ProfileScreen() {
 
   if (!isAuth) {
     return (
-      <Screen scroll={false} contentClassName="items-center justify-center gap-4">
-        <Avatar size={72} />
-        <Text variant="title">{t('auth.login')}</Text>
-        <Text variant="muted" className="text-center">
-          {t('home.ctaDescription')}
-        </Text>
-        <View className="w-full gap-2">
+      <Screen scroll={false} contentClassName="justify-between">
+        {/* Brand block sits in the upper space; CTAs anchor to the bottom. */}
+        <View className="flex-1 items-center justify-center gap-4">
+          <Image
+            source={require('../../../assets/images/icon-no-bg.png')}
+            style={{ width: 80, height: 80 }}
+            resizeMode="contain"
+            accessibilityLabel="PocketPair"
+          />
+          <View className="items-center gap-1.5">
+            <Text variant="title">{t('auth.guestHeadline')}</Text>
+            <Text variant="muted" className="px-4 text-center">
+              {t('home.ctaDescription')}
+            </Text>
+          </View>
+        </View>
+
+        <View className="gap-2 pb-2">
           <Button title={t('auth.login')} onPress={() => router.push('/login')} />
           <Button
             title={t('auth.createAccount')}
             variant="secondary"
             onPress={() => router.push('/register')}
           />
+          {/* Language is available without an account. */}
+          <Pressable
+            onPress={() => setLangOpen(true)}
+            accessibilityRole="button"
+            className="mt-1 flex-row items-center justify-center gap-2 self-center rounded-full border border-pp-border px-4 py-2">
+            <Ionicons name="language-outline" size={16} color={colors.gold} />
+            <Text className="font-sans-medium text-pp-text">
+              {t('common.language')} · {LOCALE_LABELS[locale]}
+            </Text>
+          </Pressable>
         </View>
-
-        {/* Language is available without an account. */}
-        <Pressable
-          onPress={() => setLangOpen(true)}
-          accessibilityRole="button"
-          className="mt-2 flex-row items-center gap-2 rounded-full border border-pp-border px-4 py-2">
-          <Ionicons name="language-outline" size={16} color={colors.gold} />
-          <Text className="font-sans-medium text-pp-text">
-            {t('common.language')} · {LOCALE_LABELS[locale]}
-          </Text>
-        </Pressable>
 
         <LanguageModal visible={langOpen} onClose={() => setLangOpen(false)} />
       </Screen>
@@ -158,7 +168,7 @@ export default function ProfileScreen() {
       {/* Poker passport — cross-club identity */}
       <CrossClubProfileCard />
 
-      {/* Quick actions */}
+      {/* Progress & play */}
       <Card className="gap-1">
         <Text variant="label" className="mb-1 text-pp-gold-deep">
           {t('profile.quickActions')}
@@ -193,51 +203,67 @@ export default function ProfileScreen() {
           subtitle={t('wrapped.subtitle')}
           onPress={() => router.push('/wrapped')}
         />
-        {flags.cosmetics ? (
-          <Setting
-            icon="color-palette-outline"
-            title={t('cosmetics.title')}
-            subtitle={t('cosmetics.subtitle')}
-            onPress={() => router.push('/cosmetics')}
-          />
-        ) : null}
-        {flags.predictions ? (
-          <Setting
-            icon="podium-outline"
-            title={t('predictions.title')}
-            subtitle={t('predictions.subtitle')}
-            onPress={() => router.push('/predictions')}
-          />
-        ) : null}
+      </Card>
+
+      {/* Tools (feature-flagged) — only render the card when something is enabled. */}
+      {flags.cosmetics || flags.predictions || flags.notes || flags.proAccount || flags.publicStats ? (
+        <Card className="gap-1">
+          <Text variant="label" className="mb-1 text-pp-gold-deep">
+            {t('profile.tools')}
+          </Text>
+          {flags.cosmetics ? (
+            <Setting
+              icon="color-palette-outline"
+              title={t('cosmetics.title')}
+              subtitle={t('cosmetics.subtitle')}
+              onPress={() => router.push('/cosmetics')}
+            />
+          ) : null}
+          {flags.predictions ? (
+            <Setting
+              icon="podium-outline"
+              title={t('predictions.title')}
+              subtitle={t('predictions.subtitle')}
+              onPress={() => router.push('/predictions')}
+            />
+          ) : null}
+          {flags.notes ? (
+            <Setting
+              icon="reader-outline"
+              title={t('notes.title')}
+              subtitle={t('notes.privateSubtitle')}
+              onPress={() => router.push('/notes')}
+            />
+          ) : null}
+          {flags.proAccount ? (
+            <Setting
+              icon="stats-chart-outline"
+              title={t('pro.analyticsTitle')}
+              subtitle={t('pro.analyticsSubtitle')}
+              onPress={() => router.push('/analytics')}
+            />
+          ) : null}
+          {flags.publicStats ? (
+            <Setting
+              icon="search-outline"
+              title={t('scouting.title')}
+              subtitle={t('scouting.subtitle')}
+              onPress={() => router.push('/scouting')}
+            />
+          ) : null}
+        </Card>
+      ) : null}
+
+      {/* Tournaments */}
+      <Card className="gap-1">
+        <Text variant="label" className="mb-1 text-pp-gold-deep">
+          {t('profile.tournaments')}
+        </Text>
         <Setting
           icon="ticket-outline"
           title={t('profile.myRegistrations')}
           onPress={() => router.push('/my-seats')}
         />
-        {flags.notes ? (
-          <Setting
-            icon="reader-outline"
-            title={t('notes.title')}
-            subtitle={t('notes.privateSubtitle')}
-            onPress={() => router.push('/notes')}
-          />
-        ) : null}
-        {flags.proAccount ? (
-          <Setting
-            icon="stats-chart-outline"
-            title={t('pro.analyticsTitle')}
-            subtitle={t('pro.analyticsSubtitle')}
-            onPress={() => router.push('/analytics')}
-          />
-        ) : null}
-        {flags.publicStats ? (
-          <Setting
-            icon="search-outline"
-            title={t('scouting.title')}
-            subtitle={t('scouting.subtitle')}
-            onPress={() => router.push('/scouting')}
-          />
-        ) : null}
         <Setting
           icon="calendar-outline"
           title={t('profile.browseTournaments')}

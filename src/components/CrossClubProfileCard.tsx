@@ -34,7 +34,7 @@ export function CrossClubProfileCard() {
               <Ionicons name="business-outline" size={18} color={colors.gold} />
             </View>
             <View className="flex-1">
-              <Text className="font-sans-semibold text-pp-text">{m.club?.name ?? '—'}</Text>
+              <Text className="font-sans-semibold text-pp-text">{m.club?.name ?? '-'}</Text>
               <Text variant="dim" className="text-[12px]">
                 {m.displayName}
                 {m.club?.city ? ` · ${m.club.city}` : ''}

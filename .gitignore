@@ -48,3 +48,5 @@ example
 
 # Maestro e2e screenshots (written to CWD)
 [A-Z]-*.png
+
+.env

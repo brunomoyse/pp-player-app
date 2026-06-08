@@ -111,7 +111,7 @@ export default function ScoutingScreen() {
                   />
                   <Stat
                     label={t('scouting.best')}
-                    value={profile.bestFinish ? `#${profile.bestFinish}` : '—'}
+                    value={profile.bestFinish ? `#${profile.bestFinish}` : '-'}
                   />
                 </View>
                 <View className="flex-row items-center justify-between border-t border-pp-border pt-2">

@@ -25,6 +25,7 @@
     "alreadyHaveAccount": "Heb je al een account?",
     "continueAsGuest": "Doorgaan als gast",
     "welcomeBack": "Welkom terug",
+    "guestHeadline": "PocketPair",
     "joinCommunity": "Word lid van onze gemeenschap",
     "createAccount": "Account Aanmaken",
     "emailRequired": "Email is vereist",
@@ -397,6 +398,7 @@
     "tournaments": "Toernooien",
     "itmRate": "ITM Percentage",
     "quickActions": "Snelle Acties",
+    "tools": "Hulpmiddelen",
     "getStarted": "Aan de Slag",
     "myRegistrations": "Mijn Registraties",
     "upcoming": "komend",
@@ -439,11 +441,11 @@
     "advancedTitle": "Reeks verlengd!",
     "advancedMessage": "Je bent bezig aan een reeks van {count} events. Hou het brandend.",
     "newBestTitle": "Nieuw persoonlijk record!",
-    "newBestMessage": "{count} events op rij — je langste ooit.",
+    "newBestMessage": "{count} events op rij. Je langste ooit.",
     "frozenTitle": "Reeks gered",
     "frozenMessage": "Een freeze hield je reeks op {count}.",
     "comebackTitle": "Welkom terug",
-    "comebackMessage": "Frisse start — je reeks begint opnieuw op {count}."
+    "comebackMessage": "Frisse start. Je reeks begint opnieuw op {count}."
   },
   "season": {
     "title": "Seizoen",
@@ -490,7 +492,7 @@
     "nemesis": "Je Nemesis",
     "nemesisLine": "Versloeg je {losses} keer in {meetings} ontmoetingen",
     "headToHead": "Onderling",
-    "recordLegend": "W–V",
+    "recordLegend": "W-V",
     "meetings": "{count} ontmoetingen"
   },
   "friends": {
@@ -500,7 +502,7 @@
     "accept": "Accepteren",
     "decline": "Weigeren",
     "yourFriends": "Je vrienden",
-    "empty": "Nog geen vrienden — voeg iemand toe met wie je speelt.",
+    "empty": "Nog geen vrienden. Voeg iemand toe met wie je speelt.",
     "peopleYouPlay": "Spelers die je tegenkomt",
     "add": "Toevoegen",
     "remove": "Verwijderen",
@@ -548,7 +550,7 @@
     "balanceLabel": "Voorspelpunten",
     "points": "punten",
     "claim": "Haal {points} punten op",
-    "earnHint": "Verdien punten door in te checken en te spelen — geen aankoop, puur voor de lol.",
+    "earnHint": "Verdien punten door in te checken en te spelen. Geen aankoop, puur voor de lol.",
     "history": "Je voorspellingen",
     "empty": "Nog geen voorspellingen.",
     "predictWinner": "Voorspel de winnaar",
@@ -572,7 +574,7 @@
     "poolTitle": "Verschijnen in tegenstander-zoeken",
     "poolBody": "Laat andere spelers je op naam vinden en je toernooistaat zien (gespeelde events, ITM-percentage, beste resultaat). Zet uit om privé te blijven.",
     "pnlTitle": "Mijn winst / verlies tonen",
-    "pnlBody": "Koppel ook je nettowinst aan je profiel wanneer iemand je opzoekt. Dit staat los — alleen gedeeld als je het aanzet.",
+    "pnlBody": "Koppel ook je nettowinst aan je profiel wanneer iemand je opzoekt. Dit staat los, alleen gedeeld als je het aanzet.",
     "footer": "Je privénotities worden nooit gedeeld of getoond, ongeacht deze instellingen."
   },
   "scouting": {
@@ -663,13 +665,28 @@
       "streak_play_5": {
         "name": "Door Weer en Wind",
         "description": "Speel 5 toernooien achter elkaar"
+      },
+      "clubs_2": {
+        "name": "Uitwedstrijd",
+        "description": "Speel bij 2 verschillende clubs"
+      },
+      "clubs_3": {
+        "name": "Rondtrekker",
+        "description": "Speel bij 3 verschillende clubs"
+      },
+      "clubs_5": {
+        "name": "Veelvlieger",
+        "description": "Speel bij 5 verschillende clubs"
       }
     },
-    "locked": "Vergrendeld"
+    "locked": "Vergrendeld",
+    "shareVideo": "Delen",
+    "preparingShare": "Voorbereiden…",
+    "shareError": "Kon de video niet maken. Probeer opnieuw."
   },
   "notes": {
     "title": "Tegenstandernotities",
-    "privateSubtitle": "Privé — alleen jij kunt deze zien",
+    "privateSubtitle": "Privé. Alleen jij kunt deze zien",
     "style": "Speelstijl",
     "tagsLabel": "Snelle labels",
     "bodyLabel": "Notities",

@@ -8,9 +8,9 @@ const TONE: Record<RegistrationStatus, BadgeTone> = {
   CHECKED_IN: 'upcoming',
   SEATED: 'upcoming',
   BUSTED: 'completed',
-  WAITLISTED: 'turbo',
+  WAITLISTED: 'neutral',
   CANCELLED: 'completed',
-  NO_SHOW: 'live',
+  NO_SHOW: 'bounty',
 };
 
 export function RegistrationStatusBadge({ status }: { status: RegistrationStatus }) {

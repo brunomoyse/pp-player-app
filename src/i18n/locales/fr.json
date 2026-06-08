@@ -25,6 +25,7 @@
     "alreadyHaveAccount": "Vous avez déjà un compte ?",
     "continueAsGuest": "Continuer en invité",
     "welcomeBack": "Bon retour",
+    "guestHeadline": "PocketPair",
     "joinCommunity": "Rejoignez notre communauté",
     "createAccount": "Créer un compte",
     "emailRequired": "Email requis",
@@ -396,6 +397,7 @@
     "tournaments": "Tournois",
     "itmRate": "Taux ITM",
     "quickActions": "Actions Rapides",
+    "tools": "Outils",
     "getStarted": "Commencer",
     "myRegistrations": "Mes Inscriptions",
     "upcoming": "à venir",
@@ -438,11 +440,11 @@
     "advancedTitle": "Série prolongée !",
     "advancedMessage": "Vous êtes sur une série de {count} événements. Gardez la flamme.",
     "newBestTitle": "Nouveau record personnel !",
-    "newBestMessage": "{count} événements d'affilée — votre meilleure série.",
+    "newBestMessage": "{count} événements d'affilée. Votre meilleure série.",
     "frozenTitle": "Série sauvée",
     "frozenMessage": "Un joker a maintenu votre série à {count}.",
     "comebackTitle": "Bon retour",
-    "comebackMessage": "Nouveau départ — votre série recommence à {count}."
+    "comebackMessage": "Nouveau départ. Votre série recommence à {count}."
   },
   "season": {
     "title": "Saison",
@@ -489,7 +491,7 @@
     "nemesis": "Votre Némésis",
     "nemesisLine": "Vous a battu {losses} fois en {meetings} rencontres",
     "headToHead": "Face-à-face",
-    "recordLegend": "V–D",
+    "recordLegend": "V-D",
     "meetings": "{count} rencontres"
   },
   "friends": {
@@ -499,7 +501,7 @@
     "accept": "Accepter",
     "decline": "Refuser",
     "yourFriends": "Vos amis",
-    "empty": "Pas encore d'amis — ajoutez quelqu'un avec qui vous jouez.",
+    "empty": "Pas encore d'amis. Ajoutez quelqu'un avec qui vous jouez.",
     "peopleYouPlay": "Joueurs que vous croisez",
     "add": "Ajouter",
     "remove": "Retirer",
@@ -547,7 +549,7 @@
     "balanceLabel": "Points de pronostic",
     "points": "points",
     "claim": "Récupérer {points} points",
-    "earnHint": "Gagnez des points en pointant et en jouant — sans achat, juste pour le plaisir.",
+    "earnHint": "Gagnez des points en pointant et en jouant. Sans achat, juste pour le plaisir.",
     "history": "Vos pronostics",
     "empty": "Aucun pronostic pour l'instant.",
     "predictWinner": "Pronostiquer le vainqueur",
@@ -571,7 +573,7 @@
     "poolTitle": "Apparaître dans la recherche d'adversaires",
     "poolBody": "Permettez aux autres joueurs de vous trouver par votre nom et de voir votre palmarès (tournois joués, taux ITM, meilleure place). Désactivez pour rester privé.",
     "pnlTitle": "Afficher mes gains / pertes",
-    "pnlBody": "Associez aussi vos gains nets à votre profil lorsqu'on vous recherche. C'est distinct — partagé uniquement si vous l'activez.",
+    "pnlBody": "Associez aussi vos gains nets à votre profil lorsqu'on vous recherche. C'est distinct, partagé uniquement si vous l'activez.",
     "footer": "Vos notes privées ne sont jamais partagées ni montrées à qui que ce soit, quels que soient ces réglages."
   },
   "scouting": {
@@ -662,13 +664,28 @@
       "streak_play_5": {
         "name": "Sans Relâche",
         "description": "Jouez 5 tournois consécutifs"
+      },
+      "clubs_2": {
+        "name": "En Déplacement",
+        "description": "Jouez dans 2 clubs différents"
+      },
+      "clubs_3": {
+        "name": "Sur le Circuit",
+        "description": "Jouez dans 3 clubs différents"
+      },
+      "clubs_5": {
+        "name": "Grand Voyageur",
+        "description": "Jouez dans 5 clubs différents"
       }
     },
-    "locked": "Verrouillé"
+    "locked": "Verrouillé",
+    "shareVideo": "Partager",
+    "preparingShare": "Préparation…",
+    "shareError": "Impossible de créer la vidéo. Réessayez."
   },
   "notes": {
     "title": "Notes sur les joueurs",
-    "privateSubtitle": "Privé — vous seul pouvez les voir",
+    "privateSubtitle": "Privé. Vous seul pouvez les voir",
     "style": "Style de jeu",
     "tagsLabel": "Étiquettes rapides",
     "bodyLabel": "Notes",
