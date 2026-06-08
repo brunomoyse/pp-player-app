@@ -37,12 +37,16 @@ export function useLiveClock(
   const [remaining, setRemaining] = useState<number>(initial?.timeRemainingSeconds ?? 0);
 
   // Re-seed when the underlying query clock changes (adjust-state-on-prop-change).
-  const [seed, setSeed] = useState(initial ?? null);
-  if (seed !== initial) {
-    setSeed(initial ?? null);
-    if (initial) {
-      setClock(initial);
-      setRemaining(initial.timeRemainingSeconds ?? 0);
+  // Normalize undefined→null and compare against the SAME normalized value we
+  // store, otherwise `seed (null) !== initial (undefined)` stays true forever
+  // and re-seeds every render → "too many re-renders".
+  const normalized = initial ?? null;
+  const [seed, setSeed] = useState(normalized);
+  if (seed !== normalized) {
+    setSeed(normalized);
+    if (normalized) {
+      setClock(normalized);
+      setRemaining(normalized.timeRemainingSeconds ?? 0);
     }
   }
 
