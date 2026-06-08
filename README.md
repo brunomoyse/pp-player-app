@@ -1,4 +1,4 @@
-# pp-mobile-rn
+# pp-player-app
 
 The player-facing PocketPair app, rebuilt as a native **Expo / React Native** app
 (SDK 56, RN 0.85, React 19, Hermes, New Architecture). It is a feature- and
