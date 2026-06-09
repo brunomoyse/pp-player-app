@@ -219,6 +219,13 @@
     "empty": {
       "title": "Aucun tournoi trouvé",
       "subtitle": "Revenez plus tard pour de nouveaux événements"
+    },
+    "toast": {
+      "registered": "Siège confirmé — vous êtes inscrit !",
+      "waitlisted": "Tournoi complet — vous avez été ajouté à la liste d'attente",
+      "registerFailed": "L'inscription a échoué. Veuillez réessayer.",
+      "cancelled": "Inscription annulée",
+      "cancelFailed": "Impossible d'annuler votre inscription. Veuillez réessayer."
     }
   },
   "mySeats": {

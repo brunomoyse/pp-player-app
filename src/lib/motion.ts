@@ -14,6 +14,6 @@ export const ppSpring = {
   mass: SPRING.mass,
 };
 
-export function timing(duration = TIMING.normal, delay = 0) {
+export function timing(duration: number = TIMING.normal, delay = 0) {
   return { type: 'timing' as const, duration, delay, easing: ppEasing };
 }

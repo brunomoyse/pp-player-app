@@ -201,7 +201,14 @@
     "showAll": "Show All",
     "position": "Position",
     "player": "Player",
-    "loadingDetails": "Loading tournament details..."
+    "loadingDetails": "Loading tournament details...",
+    "toast": {
+      "registered": "Seat confirmed — you are registered!",
+      "waitlisted": "Tournament is full — you have been added to the waitlist",
+      "registerFailed": "Registration failed. Please try again.",
+      "cancelled": "Registration cancelled",
+      "cancelFailed": "Could not cancel your registration. Please try again."
+    }
   },
   "mySeats": {
     "title": "My Seats",

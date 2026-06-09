@@ -25,7 +25,7 @@ import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { AchievementCelebration, ErrorBoundary } from '@/components';
+import { AchievementCelebration, ErrorBoundary, ToastOverlay } from '@/components';
 import { apolloClient } from '@/graphql/client';
 import { loadPersistedLocale } from '@/i18n/useI18n';
 import { useAchievementNotifications } from '@/hooks/useAchievementNotifications';
@@ -106,6 +106,8 @@ export default function RootLayout() {
               </Stack>
               {/* App-wide gamification: notification listener + celebration overlay. */}
               <GamificationLayer />
+              {/* Global feedback toasts (mutation success/error, live events). */}
+              <ToastOverlay />
             </ErrorBoundary>
           </ThemeProvider>
         </SafeAreaProvider>

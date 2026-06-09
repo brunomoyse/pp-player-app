@@ -33,3 +33,4 @@ export type { QRCodeModalProps } from './QRCodeModal';
 export { QRCodeScanner } from './QRCodeScanner';
 export type { QRCodeScannerProps } from './QRCodeScanner';
 export { Placeholder } from './Placeholder';
+export { ToastOverlay } from './ToastOverlay';

@@ -219,6 +219,13 @@
     "empty": {
       "title": "Geen toernooien gevonden",
       "subtitle": "Kom later terug voor nieuwe evenementen"
+    },
+    "toast": {
+      "registered": "Stoel bevestigd — je bent ingeschreven!",
+      "waitlisted": "Toernooi is vol — je staat nu op de wachtlijst",
+      "registerFailed": "Inschrijving mislukt. Probeer het opnieuw.",
+      "cancelled": "Inschrijving geannuleerd",
+      "cancelFailed": "Kon je inschrijving niet annuleren. Probeer het opnieuw."
     }
   },
   "mySeats": {

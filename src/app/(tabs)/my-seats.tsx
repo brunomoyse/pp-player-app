@@ -13,6 +13,7 @@ import {
   GET_MY_REGISTRATIONS,
   type MyRegistration,
 } from '@/graphql/operations';
+import { toast } from '@/lib/toast';
 import { useAuthStore, useIsAuthenticated } from '@/stores/useAuthStore';
 import { colors } from '@/theme/tokens';
 import type { TournamentStatus } from '@/types/tournament';
@@ -65,8 +66,9 @@ export default function MySeatsScreen() {
                 variables: { input: { tournamentId: reg.tournamentId, userId: currentUser?.id } },
               });
               await refetch();
+              toast.success(t('events.toast.cancelled'));
             } catch {
-              // surfaced by the error link
+              toast.error(t('events.toast.cancelFailed'));
             }
           },
         },

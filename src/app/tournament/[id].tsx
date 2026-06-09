@@ -21,9 +21,11 @@ import {
   Text,
 } from '@/components/ui';
 import {
+  CANCEL_REGISTRATION,
   GET_TOURNAMENT,
   REGISTER_FOR_TOURNAMENT,
 } from '@/graphql/operations';
+import { toast } from '@/lib/toast';
 import { useAuthStore, useIsAuthenticated } from '@/stores/useAuthStore';
 import { colors } from '@/theme/tokens';
 import type { TournamentStatus } from '@/types/tournament';
@@ -48,6 +50,7 @@ export default function TournamentDetailScreen() {
     notifyOnNetworkStatusChange: true,
   });
   const [register, { loading: registering }] = useMutation(REGISTER_FOR_TOURNAMENT);
+  const [cancel, { loading: cancelling }] = useMutation(CANCEL_REGISTRATION);
 
   const tn = data?.tournament;
   const flags = useFeatureFlags();
@@ -71,11 +74,44 @@ export default function TournamentDetailScreen() {
       return;
     }
     try {
-      await register({ variables: { input: { tournamentId: tn.id, userId: currentUser?.id } } });
+      const result = await register({
+        variables: { input: { tournamentId: tn.id, userId: currentUser?.id } },
+      });
       await refetch();
+      if (result.data?.registerForTournament?.status === 'WAITLISTED') {
+        toast.info(t('events.toast.waitlisted'));
+      } else {
+        toast.success(t('events.toast.registered'));
+      }
     } catch {
-      // surfaced by error link
+      toast.error(t('events.toast.registerFailed'));
     }
+  };
+
+  const onUnregister = () => {
+    if (!tn) return;
+    Alert.alert(
+      t('mySeats.cancelConfirmTitle'),
+      t('mySeats.cancelConfirmMessage', { name: tn.title }),
+      [
+        { text: t('common.no'), style: 'cancel' },
+        {
+          text: t('common.yes'),
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await cancel({
+                variables: { input: { tournamentId: tn.id, userId: currentUser?.id } },
+              });
+              await refetch();
+              toast.success(t('events.toast.cancelled'));
+            } catch {
+              toast.error(t('events.toast.cancelFailed'));
+            }
+          },
+        },
+      ]
+    );
   };
 
   const onShare = () => {
@@ -184,14 +220,18 @@ export default function TournamentDetailScreen() {
               </View>
             ) : null}
 
-            {/* Register CTA */}
+            {/* Register / unregister CTA */}
             {tn.status === 'UPCOMING' ? (
-              <Button
-                title={registered ? t('events.onWaitlist') : t('events.register')}
-                onPress={onRegister}
-                loading={registering}
-                disabled={registered}
-              />
+              registered ? (
+                <Button
+                  title={t('events.unregister')}
+                  variant="danger"
+                  onPress={onUnregister}
+                  loading={cancelling}
+                />
+              ) : (
+                <Button title={t('events.register')} onPress={onRegister} loading={registering} />
+              )
             ) : null}
           </>
         )}
