@@ -13,19 +13,20 @@ const WS_URL = process.env.EXPO_PUBLIC_GRAPHQL_WS_ENDPOINT ?? 'ws://localhost:80
 const httpLink = new HttpLink({ uri: HTTP_URL });
 
 // graphql-ws transport — token is sent in connectionParams and re-read on each
-// (re)connect so a refreshed token is used after reconnects.
-const wsLink = new GraphQLWsLink(
-  createClient({
-    url: WS_URL,
-    lazy: true,
-    retryAttempts: 10,
-    keepAlive: 15_000,
-    connectionParams: () => {
-      const token = tokens.getAccess();
-      return token ? { headers: { Authorization: `Bearer ${token}` } } : {};
-    },
-  })
-);
+// (re)connect so a refreshed token is used after reconnects. Exported so the
+// connection monitor can observe socket health and force reconnects.
+export const wsClient = createClient({
+  url: WS_URL,
+  lazy: true,
+  retryAttempts: 10,
+  keepAlive: 15_000,
+  connectionParams: () => {
+    const token = tokens.getAccess();
+    return token ? { headers: { Authorization: `Bearer ${token}` } } : {};
+  },
+});
+
+const wsLink = new GraphQLWsLink(wsClient);
 
 const isSubscription = ({ query }: { query: Parameters<typeof getMainDefinition>[0] }) => {
   const def = getMainDefinition(query);

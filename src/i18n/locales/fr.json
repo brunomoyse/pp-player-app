@@ -78,7 +78,8 @@
     "copied": "Copié",
     "notYetAvailable": "Cette fonctionnalité n'est pas encore disponible",
     "language": "Langue",
-    "back": "Retour"
+    "back": "Retour",
+    "reconnecting": "Reconnexion…"
   },
   "home": {
     "welcome": "Bienvenue",

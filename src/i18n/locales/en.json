@@ -424,7 +424,8 @@
     "copied": "Copied",
     "notYetAvailable": "This feature is not yet available",
     "language": "Language",
-    "back": "Back"
+    "back": "Back",
+    "reconnecting": "Reconnecting…"
   },
   "qrScanner": {
     "scanTournament": "Scan QR Code",

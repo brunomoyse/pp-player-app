@@ -78,7 +78,8 @@
     "copied": "Gekopieerd",
     "notYetAvailable": "Deze functie is nog niet beschikbaar",
     "language": "Taal",
-    "back": "Terug"
+    "back": "Terug",
+    "reconnecting": "Opnieuw verbinden…"
   },
   "home": {
     "welcome": "Welkom",

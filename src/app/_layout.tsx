@@ -25,10 +25,11 @@ import { useEffect } from 'react';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { AchievementCelebration, ErrorBoundary, ToastOverlay } from '@/components';
+import { AchievementCelebration, ConnectionBanner, ErrorBoundary, ToastOverlay } from '@/components';
 import { apolloClient } from '@/graphql/client';
 import { loadPersistedLocale } from '@/i18n/useI18n';
 import { useAchievementNotifications } from '@/hooks/useAchievementNotifications';
+import { useConnectionMonitor } from '@/hooks/useConnectionMonitor';
 import { usePushNotifications } from '@/hooks/usePushNotifications';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useGamificationStore } from '@/stores/useGamificationStore';
@@ -53,6 +54,7 @@ const PPDarkTheme = {
 function GamificationLayer() {
   useAchievementNotifications();
   usePushNotifications();
+  useConnectionMonitor();
   const show = useGamificationStore((s) => s.show);
   const achievement = useGamificationStore((s) => s.celebration);
   const dismiss = useGamificationStore((s) => s.dismiss);
@@ -108,6 +110,8 @@ export default function RootLayout() {
               <GamificationLayer />
               {/* Global feedback toasts (mutation success/error, live events). */}
               <ToastOverlay />
+              {/* "Reconnecting…" pill while the subscription socket is down. */}
+              <ConnectionBanner />
             </ErrorBoundary>
           </ThemeProvider>
         </SafeAreaProvider>

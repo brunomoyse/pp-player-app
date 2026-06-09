@@ -34,3 +34,4 @@ export { QRCodeScanner } from './QRCodeScanner';
 export type { QRCodeScannerProps } from './QRCodeScanner';
 export { Placeholder } from './Placeholder';
 export { ToastOverlay } from './ToastOverlay';
+export { ConnectionBanner } from './ConnectionBanner';
