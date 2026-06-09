@@ -1,7 +1,8 @@
 import { useMutation, useQuery } from '@apollo/client/react';
 import { Ionicons } from '@expo/vector-icons';
+import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 import { Stack, router, useLocalSearchParams } from 'expo-router';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Pressable, Share, View } from 'react-native';
 
@@ -31,6 +32,8 @@ import { colors } from '@/theme/tokens';
 import type { TournamentStatus } from '@/types/tournament';
 import { currencyCents } from '@/utils/currency';
 import { formatDateTime } from '@/utils/datetime';
+
+const KEEP_AWAKE_TAG = 'tournament-live-clock';
 
 const STATUS_TONE: Record<TournamentStatus, BadgeTone> = {
   UPCOMING: 'upcoming',
@@ -64,6 +67,16 @@ export default function TournamentDetailScreen() {
   );
   // Live clock + registration count over the WebSocket (Phase 6).
   const clock = useLiveClock(id, tn?.clock);
+
+  // Keep the screen on while the clock is running — players leave this screen
+  // face-up at the table and the device must not lock mid-level.
+  useEffect(() => {
+    if (!clock.isLive) return;
+    void activateKeepAwakeAsync(KEEP_AWAKE_TAG);
+    return () => {
+      void deactivateKeepAwake(KEEP_AWAKE_TAG);
+    };
+  }, [clock.isLive]);
   const regCount = useLiveRegistrations(id, tn?.registrations?.length ?? 0);
   const registered = tn?.registrations?.some((r) => r.userId === currentUser?.id) ?? false;
 
