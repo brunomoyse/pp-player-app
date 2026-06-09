@@ -770,5 +770,10 @@
       "showDetails": "Afficher les détails",
       "hideDetails": "Masquer les détails"
     }
+  },
+  "notifications": {
+    "seatAssigned": "Siège attribué — consultez votre table dans Mes Sièges",
+    "playerMoved": "Vous avez été déplacé vers un nouveau siège",
+    "eliminated": "Vous avez été éliminé du tournoi"
   }
 }

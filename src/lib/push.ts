@@ -114,3 +114,16 @@ export function isAchievementNotification(
   const type = data?.type ?? data?.notificationType;
   return type === 'ACHIEVEMENT_UNLOCKED';
 }
+
+const SEATING_PUSH_TYPES = new Set(['SEAT_ASSIGNED', 'PLAYER_MOVED', 'PLAYER_ELIMINATED']);
+
+/** Tournament to deep-link to when a seating push is tapped, or null. */
+export function seatingNotificationTournamentId(
+  content: Notifications.NotificationContent | undefined
+): string | null {
+  const data = content?.data as Record<string, unknown> | undefined;
+  const type = data?.type ?? data?.notificationType;
+  if (typeof type !== 'string' || !SEATING_PUSH_TYPES.has(type)) return null;
+  const id = data?.tournament_id ?? data?.tournamentId;
+  return typeof id === 'string' ? id : null;
+}

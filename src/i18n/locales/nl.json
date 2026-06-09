@@ -771,5 +771,10 @@
       "showDetails": "Details tonen",
       "hideDetails": "Details verbergen"
     }
+  },
+  "notifications": {
+    "seatAssigned": "Stoel toegewezen — bekijk je tafel in Mijn Stoelen",
+    "playerMoved": "Je bent verplaatst naar een nieuwe stoel",
+    "eliminated": "Je bent uitgeschakeld uit het toernooi"
   }
 }

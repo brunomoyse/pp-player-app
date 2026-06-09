@@ -9,6 +9,7 @@ import {
   currentPushPlatform,
   isAchievementNotification,
   registerForPushNotificationsAsync,
+  seatingNotificationTournamentId,
   setRegisteredPushToken,
 } from '@/lib/push';
 import { useIsAuthenticated } from '@/stores/useAuthStore';
@@ -68,12 +69,19 @@ export function usePushNotifications() {
     };
   }, [isAuth, apollo]);
 
-  // Route taps on achievement pushes to the achievements screen. Covers the
-  // warm path (app running) and the cold path (tapped while terminated).
+  // Route push taps: achievements → achievements screen, seating events →
+  // the tournament. Covers the warm path (app running) and the cold path
+  // (tapped while terminated).
   useEffect(() => {
     function handle(response: Notifications.NotificationResponse | null) {
       if (!response) return;
-      if (isAchievementNotification(response.notification.request.content)) {
+      const content = response.notification.request.content;
+      const tournamentId = seatingNotificationTournamentId(content);
+      if (tournamentId) {
+        router.push(`/tournament/${tournamentId}`);
+        return;
+      }
+      if (isAchievementNotification(content)) {
         router.push('/achievements');
       }
     }

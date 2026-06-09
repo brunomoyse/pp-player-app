@@ -769,5 +769,10 @@
       "showDetails": "Show Details",
       "hideDetails": "Hide Details"
     }
+  },
+  "notifications": {
+    "seatAssigned": "Seat assigned — check your table in My Seats",
+    "playerMoved": "You've been moved to a new seat",
+    "eliminated": "You've been eliminated from the tournament"
   }
 }

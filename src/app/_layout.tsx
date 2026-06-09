@@ -31,6 +31,7 @@ import { loadPersistedLocale } from '@/i18n/useI18n';
 import { useAchievementNotifications } from '@/hooks/useAchievementNotifications';
 import { useConnectionMonitor } from '@/hooks/useConnectionMonitor';
 import { usePushNotifications } from '@/hooks/usePushNotifications';
+import { useSeatingNotifications } from '@/hooks/useSeatingNotifications';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useGamificationStore } from '@/stores/useGamificationStore';
 import { colors } from '@/theme/tokens';
@@ -53,6 +54,7 @@ const PPDarkTheme = {
 
 function GamificationLayer() {
   useAchievementNotifications();
+  useSeatingNotifications();
   usePushNotifications();
   useConnectionMonitor();
   const show = useGamificationStore((s) => s.show);
