@@ -6,7 +6,13 @@ import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Pressable, Share, View } from 'react-native';
 
-import { ClockDisplay, PreGameField, PredictionCard, type PredictionPlayer } from '@/components';
+import {
+  ClockDisplay,
+  PreGameField,
+  PredictionCard,
+  type PredictionPlayer,
+  RegistrationStatusBadge,
+} from '@/components';
 import { useFeatureFlags } from '@/hooks/useFeatureFlags';
 import { FadeUp } from '@/components/motion';
 import { useLiveClock } from '@/hooks/useLiveClock';
@@ -78,7 +84,11 @@ export default function TournamentDetailScreen() {
     };
   }, [clock.isLive]);
   const regCount = useLiveRegistrations(id, tn?.registrations?.length ?? 0);
-  const registered = tn?.registrations?.some((r) => r.userId === currentUser?.id) ?? false;
+  // The viewer's active registration, if any (cancelled/no-show don't count —
+  // they should be able to register again).
+  const myRegistration = tn?.registrations?.find(
+    (r) => r.userId === currentUser?.id && r.status !== 'CANCELLED' && r.status !== 'NO_SHOW'
+  );
 
   const onRegister = async () => {
     if (!tn) return;
@@ -91,8 +101,13 @@ export default function TournamentDetailScreen() {
         variables: { input: { tournamentId: tn.id, userId: currentUser?.id } },
       });
       await refetch();
-      if (result.data?.registerForTournament?.status === 'WAITLISTED') {
-        toast.info(t('events.toast.waitlisted'));
+      const reg = result.data?.registerForTournament;
+      if (reg?.status === 'WAITLISTED') {
+        toast.info(
+          reg.waitlistPosition
+            ? t('events.toast.waitlistedPosition', { position: reg.waitlistPosition })
+            : t('events.toast.waitlisted')
+        );
       } else {
         toast.success(t('events.toast.registered'));
       }
@@ -235,13 +250,22 @@ export default function TournamentDetailScreen() {
 
             {/* Register / unregister CTA */}
             {tn.status === 'UPCOMING' ? (
-              registered ? (
-                <Button
-                  title={t('events.unregister')}
-                  variant="danger"
-                  onPress={onUnregister}
-                  loading={cancelling}
-                />
+              myRegistration ? (
+                <View className="gap-3">
+                  <View className="flex-row items-center justify-between">
+                    <Text variant="muted">{t('events.yourStatus')}</Text>
+                    <RegistrationStatusBadge
+                      status={myRegistration.status}
+                      waitlistPosition={myRegistration.waitlistPosition}
+                    />
+                  </View>
+                  <Button
+                    title={t('events.unregister')}
+                    variant="danger"
+                    onPress={onUnregister}
+                    loading={cancelling}
+                  />
+                </View>
               ) : (
                 <Button title={t('events.register')} onPress={onRegister} loading={registering} />
               )

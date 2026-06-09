@@ -39,6 +39,8 @@ export interface TournamentRegistration {
     notes?: string | null;
     registrationTime: string;
     status: RegistrationStatus;
+    /** 1-based position when status is WAITLISTED, null otherwise. */
+    waitlistPosition?: number | null;
     user?: {
         id: string;
         firstName?: string | null;

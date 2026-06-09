@@ -126,7 +126,7 @@ export default function MySeatsScreen() {
                   <Text variant="heading" className="flex-1" numberOfLines={2}>
                     {reg.tournament.title}
                   </Text>
-                  <RegistrationStatusBadge status={reg.status} />
+                  <RegistrationStatusBadge status={reg.status} waitlistPosition={reg.waitlistPosition} />
                 </View>
 
                 <View className="flex-row flex-wrap gap-x-5 gap-y-2">

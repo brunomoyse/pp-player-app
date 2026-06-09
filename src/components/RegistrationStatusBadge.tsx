@@ -13,8 +13,18 @@ const TONE: Record<RegistrationStatus, BadgeTone> = {
   NO_SHOW: 'bounty',
 };
 
-export function RegistrationStatusBadge({ status }: { status: RegistrationStatus }) {
+export function RegistrationStatusBadge({
+  status,
+  waitlistPosition,
+}: {
+  status: RegistrationStatus;
+  /** Shown inside the badge ("Waitlist #3") when status is WAITLISTED. */
+  waitlistPosition?: number | null;
+}) {
   const { t } = useTranslation();
-  const label = t(`mySeats.status.${status}`, status.replace('_', ' '));
+  const label =
+    status === 'WAITLISTED' && waitlistPosition
+      ? t('mySeats.registrationStatus.WAITLISTED_POSITION', { position: waitlistPosition })
+      : t(`mySeats.registrationStatus.${status}`, status.replace('_', ' '));
   return <Badge label={label} tone={TONE[status]} />;
 }

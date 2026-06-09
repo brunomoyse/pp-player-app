@@ -226,8 +226,10 @@
       "waitlisted": "Toernooi is vol — je staat nu op de wachtlijst",
       "registerFailed": "Inschrijving mislukt. Probeer het opnieuw.",
       "cancelled": "Inschrijving geannuleerd",
-      "cancelFailed": "Kon je inschrijving niet annuleren. Probeer het opnieuw."
-    }
+      "cancelFailed": "Kon je inschrijving niet annuleren. Probeer het opnieuw.",
+      "waitlistedPosition": "Je staat op plek {position} van de wachtlijst"
+    },
+    "yourStatus": "Jouw inschrijving"
   },
   "mySeats": {
     "title": "Mijn Plaatsen",
@@ -285,13 +287,14 @@
     "cancelConfirmMessage": "Weet je zeker dat je je registratie voor {name} wilt annuleren?",
     "shareMessage": "Bekijk mijn registratie voor {name} op PocketPair!",
     "registrationStatus": {
-      "REGISTERED": "Geregistreerd",
+      "REGISTERED": "Ingeschreven",
       "CHECKED_IN": "Ingecheckt",
-      "SEATED": "Gezeten",
+      "SEATED": "Aan tafel",
       "BUSTED": "Uitgeschakeld",
       "WAITLISTED": "Wachtlijst",
       "CANCELLED": "Geannuleerd",
-      "NO_SHOW": "Afwezig"
+      "NO_SHOW": "No-show",
+      "WAITLISTED_POSITION": "Wachtlijst #{position}"
     },
     "qrCode": {
       "title": "Check-in QR-code",

@@ -226,8 +226,10 @@
       "waitlisted": "Tournoi complet — vous avez été ajouté à la liste d'attente",
       "registerFailed": "L'inscription a échoué. Veuillez réessayer.",
       "cancelled": "Inscription annulée",
-      "cancelFailed": "Impossible d'annuler votre inscription. Veuillez réessayer."
-    }
+      "cancelFailed": "Impossible d'annuler votre inscription. Veuillez réessayer.",
+      "waitlistedPosition": "Vous êtes n°{position} sur la liste d'attente"
+    },
+    "yourStatus": "Votre inscription"
   },
   "mySeats": {
     "title": "Mes Places",
@@ -285,12 +287,13 @@
     "shareMessage": "Découvrez mon inscription à {name} sur PocketPair !",
     "registrationStatus": {
       "REGISTERED": "Inscrit",
-      "CHECKED_IN": "Enregistré",
-      "SEATED": "Assis",
+      "CHECKED_IN": "Présent",
+      "SEATED": "À table",
       "BUSTED": "Éliminé",
-      "WAITLISTED": "En attente",
+      "WAITLISTED": "Liste d'attente",
       "CANCELLED": "Annulé",
-      "NO_SHOW": "Absent"
+      "NO_SHOW": "Absent",
+      "WAITLISTED_POSITION": "Liste d'attente n°{position}"
     },
     "qrCode": {
       "title": "Code QR d'enregistrement",

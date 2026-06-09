@@ -159,6 +159,7 @@ export const GET_TOURNAMENT: TypedDocumentNode<GetTournamentResult, GetTournamen
         displayName
         registrationTime
         status
+        waitlistPosition
         notes
         user {
           id
@@ -305,6 +306,7 @@ export const REGISTER_FOR_TOURNAMENT: TypedDocumentNode<
       userId
       registrationTime
       status
+      waitlistPosition
       notes
     }
   }

@@ -207,8 +207,10 @@
       "waitlisted": "Tournament is full — you have been added to the waitlist",
       "registerFailed": "Registration failed. Please try again.",
       "cancelled": "Registration cancelled",
-      "cancelFailed": "Could not cancel your registration. Please try again."
-    }
+      "cancelFailed": "Could not cancel your registration. Please try again.",
+      "waitlistedPosition": "You're #{position} on the waitlist"
+    },
+    "yourStatus": "Your registration"
   },
   "mySeats": {
     "title": "My Seats",
@@ -263,12 +265,13 @@
     "shareMessage": "Check out my registration for {name} on PocketPair!",
     "registrationStatus": {
       "REGISTERED": "Registered",
-      "CHECKED_IN": "Checked In",
+      "CHECKED_IN": "Checked in",
       "SEATED": "Seated",
       "BUSTED": "Busted",
-      "WAITLISTED": "Waitlisted",
+      "WAITLISTED": "Waitlist",
       "CANCELLED": "Cancelled",
-      "NO_SHOW": "No Show"
+      "NO_SHOW": "No-show",
+      "WAITLISTED_POSITION": "Waitlist #{position}"
     },
     "qrCode": {
       "title": "Check-in QR Code",
