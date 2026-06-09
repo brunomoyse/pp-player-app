@@ -44,3 +44,76 @@ export const UNREGISTER_DEVICE_TOKEN: TypedDocumentNode<
     unregisterDeviceToken(token: $token)
   }
 `;
+
+export interface NotificationPreferences {
+  tournamentReminders: boolean;
+  registrationUpdates: boolean;
+  seatingUpdates: boolean;
+  achievements: boolean;
+}
+
+const PREF_FIELDS = gql`
+  fragment NotificationPreferenceFields on NotificationPreferences {
+    tournamentReminders
+    registrationUpdates
+    seatingUpdates
+    achievements
+  }
+`;
+
+export interface GetMyNotificationPreferencesResult {
+  myNotificationPreferences: NotificationPreferences;
+}
+
+// Per-category notification preferences (server defaults to all-on until the
+// user changes something).
+export const GET_MY_NOTIFICATION_PREFERENCES: TypedDocumentNode<
+  GetMyNotificationPreferencesResult,
+  Record<string, never>
+> = gql`
+  query GetMyNotificationPreferences {
+    myNotificationPreferences {
+      ...NotificationPreferenceFields
+    }
+  }
+  ${PREF_FIELDS}
+`;
+
+export interface UpdateNotificationPreferencesInput {
+  tournamentReminders?: boolean;
+  registrationUpdates?: boolean;
+  seatingUpdates?: boolean;
+  achievements?: boolean;
+}
+export interface UpdateNotificationPreferencesResult {
+  updateNotificationPreferences: NotificationPreferences;
+}
+export interface UpdateNotificationPreferencesVars {
+  input: UpdateNotificationPreferencesInput;
+}
+
+// Partial update — omitted fields keep their current value.
+export const UPDATE_NOTIFICATION_PREFERENCES: TypedDocumentNode<
+  UpdateNotificationPreferencesResult,
+  UpdateNotificationPreferencesVars
+> = gql`
+  mutation UpdateNotificationPreferences($input: UpdateNotificationPreferencesInput!) {
+    updateNotificationPreferences(input: $input) {
+      ...NotificationPreferenceFields
+    }
+  }
+  ${PREF_FIELDS}
+`;
+
+export interface DeleteMyAccountResult {
+  deleteMyAccount: boolean;
+}
+
+// Self-service account deletion: the server anonymizes personal data,
+// deactivates the account and revokes all sessions/device tokens.
+export const DELETE_MY_ACCOUNT: TypedDocumentNode<DeleteMyAccountResult, Record<string, never>> =
+  gql`
+    mutation DeleteMyAccount {
+      deleteMyAccount
+    }
+  `;
