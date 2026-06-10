@@ -1,6 +1,6 @@
 query GetTournamentFieldNotes($tournamentId: ID!) {
   tournamentFieldNotes(tournamentId: $tournamentId) {
-    registeredPlayer {
+    clubPlayer {
       id
       displayName
     }

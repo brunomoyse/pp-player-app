@@ -46,9 +46,9 @@ export function PreGameField({ tournamentId }: { tournamentId: string }) {
       <Card className="gap-1 p-2">
         {field.map((f) => (
           <Pressable
-            key={f.registeredPlayer.id}
+            key={f.clubPlayer.id}
             onPress={() =>
-              setOpenSubject({ id: f.registeredPlayer.id, name: f.registeredPlayer.displayName })
+              setOpenSubject({ id: f.clubPlayer.id, name: f.clubPlayer.displayName })
             }
             className="flex-row items-center gap-3 rounded-xl px-2 py-2">
             <View className="h-8 w-8 items-center justify-center rounded-full bg-white/5">
@@ -60,7 +60,7 @@ export function PreGameField({ tournamentId }: { tournamentId: string }) {
             </View>
             <View className="flex-1">
               <Text className="font-sans-semibold text-pp-text">
-                {f.registeredPlayer.displayName}
+                {f.clubPlayer.displayName}
               </Text>
               {f.note?.tags && f.note.tags.length > 0 ? (
                 <Text variant="dim" className="text-[12px]">

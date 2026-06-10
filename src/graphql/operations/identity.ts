@@ -1,9 +1,9 @@
 import { gql, type TypedDocumentNode } from '@apollo/client';
 
-import type { RegisteredPlayer } from '@/types/identity';
+import type { ClubPlayer } from '@/types/identity';
 
 export interface GetMyCrossClubProfileResult {
-  myCrossClubProfile: RegisteredPlayer[];
+  myCrossClubProfile: ClubPlayer[];
 }
 
 /** The current user's roster entries across every club — the cross-club profile. */
@@ -26,21 +26,21 @@ export const GET_MY_CROSS_CLUB_PROFILE: TypedDocumentNode<
   }
 `;
 
-export interface ClaimRegisteredPlayerResult {
-  claimRegisteredPlayer: RegisteredPlayer;
+export interface ClaimClubPlayerResult {
+  claimClubPlayer: ClubPlayer;
 }
 
-export interface ClaimRegisteredPlayerVars {
-  input: { registeredPlayerId: string };
+export interface ClaimClubPlayerVars {
+  input: { clubPlayerId: string };
 }
 
 /** Claim an unclaimed roster entry, linking it to the current app user. */
 export const CLAIM_REGISTERED_PLAYER: TypedDocumentNode<
-  ClaimRegisteredPlayerResult,
-  ClaimRegisteredPlayerVars
+  ClaimClubPlayerResult,
+  ClaimClubPlayerVars
 > = gql`
-  mutation ClaimRegisteredPlayer($input: ClaimRegisteredPlayerInput!) {
-    claimRegisteredPlayer(input: $input) {
+  mutation ClaimClubPlayer($input: ClaimClubPlayerInput!) {
+    claimClubPlayer(input: $input) {
       id
       clubId
       displayName

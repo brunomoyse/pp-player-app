@@ -66,7 +66,7 @@ export default function NotesScreen() {
               key={note.id}
               onPress={() =>
                 setOpenSubject({
-                  id: note.subjectRegisteredPlayerId,
+                  id: note.subjectClubPlayerId,
                   name: note.subject?.displayName,
                 })
               }>

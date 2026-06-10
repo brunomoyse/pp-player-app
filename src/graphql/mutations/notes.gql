@@ -1,7 +1,7 @@
 mutation UpsertPlayerNote($input: UpsertPlayerNoteInput!) {
   upsertPlayerNote(input: $input) {
     id
-    subjectRegisteredPlayerId
+    subjectClubPlayerId
     body
     style
     updatedAt

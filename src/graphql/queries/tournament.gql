@@ -86,7 +86,7 @@ query GetTournament($id: UUID!) {
     registrations {
       id
       userId
-      registeredPlayerId
+      clubPlayerId
       displayName
       registrationTime
       status
@@ -195,7 +195,7 @@ query GetLeaderboard($period: LeaderboardPeriod, $pagination: PaginationInput, $
         username
         email
       }
-      registeredPlayerId
+      clubPlayerId
       displayName
       rank
       totalTournaments

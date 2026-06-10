@@ -1,5 +1,5 @@
-mutation ClaimRegisteredPlayer($input: ClaimRegisteredPlayerInput!) {
-  claimRegisteredPlayer(input: $input) {
+mutation ClaimClubPlayer($input: ClaimClubPlayerInput!) {
+  claimClubPlayer(input: $input) {
     id
     clubId
     displayName

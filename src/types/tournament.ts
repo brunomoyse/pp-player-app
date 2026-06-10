@@ -34,7 +34,7 @@ export interface TournamentRegistration {
     id: string;
     tournamentId?: string;
     userId?: string | null;
-    registeredPlayerId: string;
+    clubPlayerId: string;
     displayName: string;
     notes?: string | null;
     registrationTime: string;
@@ -54,7 +54,7 @@ export interface TournamentResult {
     id: string;
     tournamentId: string;
     userId?: string | null;
-    registeredPlayerId: string;
+    clubPlayerId: string;
     displayName: string;
     finalPosition: number;
     prizeCents: number;
@@ -165,7 +165,7 @@ export type LeaderboardPeriod = 'ALL_TIME' | 'LAST_YEAR' | 'LAST_6_MONTHS' | 'LA
 
 export interface LeaderboardEntry {
     user?: User | null;
-    registeredPlayerId: string;
+    clubPlayerId: string;
     displayName: string;
     rank: number;
     totalTournaments: number;

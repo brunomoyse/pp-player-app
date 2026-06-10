@@ -31,7 +31,7 @@ mutation RegisterFriendForTournament($friendUserId: ID!, $tournamentId: ID!) {
     id
     tournamentId
     userId
-    registeredPlayerId
+    clubPlayerId
     displayName
     registrationTime
     status

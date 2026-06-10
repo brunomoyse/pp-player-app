@@ -11,7 +11,7 @@ import type {
 
 const NOTE_FIELDS = `
   id
-  subjectRegisteredPlayerId
+  subjectClubPlayerId
   body
   style
   createdAt
@@ -38,12 +38,12 @@ export interface GetPlayerNoteResult {
   playerNote: PlayerNote | null;
 }
 export interface GetPlayerNoteVars {
-  subjectRegisteredPlayerId: string;
+  subjectClubPlayerId: string;
 }
 
 export const GET_PLAYER_NOTE: TypedDocumentNode<GetPlayerNoteResult, GetPlayerNoteVars> = gql`
-  query GetPlayerNote($subjectRegisteredPlayerId: ID!) {
-    playerNote(subjectRegisteredPlayerId: $subjectRegisteredPlayerId) {${NOTE_FIELDS}}
+  query GetPlayerNote($subjectClubPlayerId: ID!) {
+    playerNote(subjectClubPlayerId: $subjectClubPlayerId) {${NOTE_FIELDS}}
   }
 `;
 
@@ -61,7 +61,7 @@ export const GET_TOURNAMENT_FIELD_NOTES: TypedDocumentNode<
 > = gql`
   query GetTournamentFieldNotes($tournamentId: ID!) {
     tournamentFieldNotes(tournamentId: $tournamentId) {
-      registeredPlayer {
+      clubPlayer {
         id
         displayName
       }
@@ -97,7 +97,7 @@ export interface UpsertPlayerNoteResult {
 }
 export interface UpsertPlayerNoteVars {
   input: {
-    subjectRegisteredPlayerId: string;
+    subjectClubPlayerId: string;
     body?: string | null;
     style?: PlayerStyle | null;
   };

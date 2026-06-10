@@ -216,7 +216,7 @@ export const REGISTER_FRIEND_FOR_TOURNAMENT: TypedDocumentNode<
       id
       tournamentId
       userId
-      registeredPlayerId
+      clubPlayerId
       displayName
       registrationTime
       status

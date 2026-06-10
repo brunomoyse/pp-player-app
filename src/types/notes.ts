@@ -1,4 +1,4 @@
-import type { RegisteredPlayer } from './identity';
+import type { ClubPlayer } from './identity';
 
 export type PlayerStyle = 'TAG' | 'LAG' | 'TIGHT_PASSIVE' | 'LOOSE_PASSIVE';
 export type NoteTagKind = 'TAG' | 'TELL';
@@ -18,7 +18,7 @@ export interface ShowdownObservation {
 
 /** A player in tonight's field paired with the viewer's note on them (if any). */
 export interface FieldPlayerNote {
-  registeredPlayer: { id: string; displayName: string };
+  clubPlayer: { id: string; displayName: string };
   note: {
     id: string;
     body: string;
@@ -30,12 +30,12 @@ export interface FieldPlayerNote {
 /** A private note on one opponent. Visible only to its author. */
 export interface PlayerNote {
   id: string;
-  subjectRegisteredPlayerId: string;
+  subjectClubPlayerId: string;
   body: string;
   style?: PlayerStyle | null;
   createdAt: string;
   updatedAt: string;
-  subject?: RegisteredPlayer | null;
+  subject?: ClubPlayer | null;
   tags?: PlayerNoteTag[];
   showdownObservations?: ShowdownObservation[];
 }

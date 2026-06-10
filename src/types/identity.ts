@@ -5,7 +5,7 @@ import type { Club } from './user';
  * are an app user yet. One app user maps to many registered players (one per
  * club) — that fan-out is the cross-club profile.
  */
-export interface RegisteredPlayer {
+export interface ClubPlayer {
   id: string;
   clubId: string;
   displayName: string;

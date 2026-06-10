@@ -1,5 +1,5 @@
-query GetPlayerNote($subjectRegisteredPlayerId: ID!) {
-  playerNote(subjectRegisteredPlayerId: $subjectRegisteredPlayerId) {
+query GetPlayerNote($subjectClubPlayerId: ID!) {
+  playerNote(subjectClubPlayerId: $subjectClubPlayerId) {
     ...PlayerNoteFields
   }
 }
@@ -12,7 +12,7 @@ query GetMyPlayerNotes {
 
 fragment PlayerNoteFields on PlayerNote {
   id
-  subjectRegisteredPlayerId
+  subjectClubPlayerId
   body
   style
   createdAt

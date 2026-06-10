@@ -155,7 +155,7 @@ export const GET_TOURNAMENT: TypedDocumentNode<GetTournamentResult, GetTournamen
       registrations {
         id
         userId
-        registeredPlayerId
+        clubPlayerId
         displayName
         registrationTime
         status
@@ -196,7 +196,7 @@ export const GET_LEADERBOARD: TypedDocumentNode<GetLeaderboardResult, GetLeaderb
           username
           email
         }
-        registeredPlayerId
+        clubPlayerId
         displayName
         rank
         totalTournaments

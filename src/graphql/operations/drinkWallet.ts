@@ -15,7 +15,7 @@ export const GET_DRINK_WALLET: TypedDocumentNode<GetDrinkWalletResult, GetDrinkW
     drinkWallet(walletId: $walletId) {
       id
       clubId
-      registeredPlayerId
+      clubPlayerId
       balance
       createdAt
       recentEntries {

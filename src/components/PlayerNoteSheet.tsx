@@ -18,7 +18,7 @@ import type { PlayerNote, PlayerStyle } from '@/types/notes';
 export interface PlayerNoteSheetProps {
   visible: boolean;
   onClose: () => void;
-  /** The registered_player this note is about. */
+  /** The club_player this note is about. */
   subjectId: string;
   subjectName?: string;
 }
@@ -45,7 +45,7 @@ const TAG_PRESETS = [
 export function PlayerNoteSheet({ visible, onClose, subjectId, subjectName }: PlayerNoteSheetProps) {
   const { t } = useTranslation();
   const { data, loading, refetch } = useQuery(GET_PLAYER_NOTE, {
-    variables: { subjectRegisteredPlayerId: subjectId },
+    variables: { subjectClubPlayerId: subjectId },
     skip: !visible,
   });
   const note = data?.playerNote ?? null;
@@ -116,7 +116,7 @@ function NoteForm({ note, subjectId, onClose, refetch }: NoteFormProps) {
     if (note?.id) return note.id;
     try {
       const res = await upsert({
-        variables: { input: { subjectRegisteredPlayerId: subjectId, body, style } },
+        variables: { input: { subjectClubPlayerId: subjectId, body, style } },
       });
       refetch();
       return res.data?.upsertPlayerNote.id ?? null;
@@ -130,7 +130,7 @@ function NoteForm({ note, subjectId, onClose, refetch }: NoteFormProps) {
     setError(null);
     try {
       await upsert({
-        variables: { input: { subjectRegisteredPlayerId: subjectId, body, style } },
+        variables: { input: { subjectClubPlayerId: subjectId, body, style } },
       });
       refetch();
       onClose();

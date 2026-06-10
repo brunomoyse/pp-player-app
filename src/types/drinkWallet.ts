@@ -24,7 +24,7 @@ export interface DrinkLedgerEntry {
 export interface DrinkWallet {
   id: string;
   clubId: string;
-  registeredPlayerId: string | null;
+  clubPlayerId: string | null;
   balance: number;
   createdAt: string;
   recentEntries: DrinkLedgerEntry[];

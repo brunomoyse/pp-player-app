@@ -34,7 +34,7 @@ export function LeaderboardTable({ entries, currentUserId, metric = 'points' }: 
         const me = currentUserId != null && e.user?.id === currentUserId;
         return (
           <View
-            key={e.registeredPlayerId}
+            key={e.clubPlayerId}
             className={cn(
               'flex-row items-center gap-3 rounded-xl px-2 py-2.5',
               me && 'bg-pp-gold/20 border border-pp-gold/30'
