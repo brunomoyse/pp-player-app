@@ -39,6 +39,8 @@ query GetTournament($id: UUID!) {
     rebuyMax
     addonChips
     addonPriceCents
+    bountyType
+    bountyAmountCents
     structure {
       id
       tournamentId
@@ -90,6 +92,7 @@ query GetTournament($id: UUID!) {
       displayName
       registrationTime
       status
+      currentBountyCents
       notes
       user {
         id
@@ -182,6 +185,35 @@ query GetTournamentEntryStats($tournamentId: ID!) {
     rebuyCount
     reEntryCount
     addonCount
+    totalChips
+    playersRemaining
+  }
+}
+
+query GetTournamentResults($tournamentId: ID!) {
+  tournamentResults(tournamentId: $tournamentId) {
+    id
+    tournamentId
+    userId
+    clubPlayerId
+    displayName
+    finalPosition
+    prizeCents
+    points
+    createdAt
+  }
+}
+
+query GetTournamentBounties($tournamentId: ID!) {
+  tournamentBounties(tournamentId: $tournamentId) {
+    id
+    tournamentId
+    hunterClubPlayerId
+    victimClubPlayerId
+    hunterName
+    victimName
+    amountCents
+    createdAt
   }
 }
 

@@ -28,6 +28,11 @@ export interface Tournament {
     /** True when this is the series' final day (Day 2). */
     isFinalDay?: boolean;
 
+    /** Bounty / progressive-knockout format (NONE for a standard tournament). */
+    bountyType?: BountyType;
+    /** Bounty slice taken from each buy-in / rebuy / re-entry, in cents. */
+    bountyAmountCents?: number;
+
     clock?: TournamentClock | null;
     club?: Club;
     registrations: TournamentRegistration[];
@@ -36,6 +41,9 @@ export interface Tournament {
 
 export type TournamentStatus = 'UPCOMING' | 'IN_PROGRESS' | 'COMPLETED'
 export type TournamentLiveStatus = 'NOT_STARTED' | 'REGISTRATION_OPEN' | 'LATE_REGISTRATION' | 'IN_PROGRESS' | 'BREAK' | 'FINAL_TABLE' | 'FINISHED'
+
+/** none | fixed | progressive (PKO). */
+export type BountyType = 'NONE' | 'FIXED' | 'PROGRESSIVE'
 
 export interface TournamentRegistration {
     id: string;
@@ -50,6 +58,8 @@ export interface TournamentRegistration {
     waitlistPosition?: number | null;
     /** Carried-over chip stack for a multi-day final-day seat (null otherwise). */
     startingStack?: number | null;
+    /** Live progressive-knockout bounty head for this player, in cents (0 for non-PKO). */
+    currentBountyCents?: number;
     user?: {
         id: string;
         firstName?: string | null;
@@ -114,6 +124,23 @@ export interface TournamentEntryStats {
     rebuyCount: number;
     reEntryCount: number;
     addonCount: number;
+    /** Total chips in play across all entries (i64 — may arrive as a string, coerce with Number). */
+    totalChips?: number;
+    /** Active players still in the tournament. */
+    playersRemaining?: number;
+}
+
+/** A single recorded knockout in a bounty / PKO tournament. */
+export interface TournamentBounty {
+    id: string;
+    tournamentId: string;
+    hunterClubPlayerId: string;
+    victimClubPlayerId: string;
+    hunterName: string;
+    victimName: string;
+    /** Cash the hunter collected for this knockout, in cents. */
+    amountCents: number;
+    createdAt: string;
 }
 
 // Player Deal types (ICM, even split, custom)

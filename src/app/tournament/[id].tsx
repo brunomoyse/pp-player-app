@@ -30,6 +30,7 @@ import {
 import {
   CANCEL_REGISTRATION,
   GET_TOURNAMENT,
+  GET_TOURNAMENT_ENTRY_STATS,
   REGISTER_FOR_TOURNAMENT,
 } from '@/graphql/operations';
 import { toast } from '@/lib/toast';
@@ -63,6 +64,20 @@ export default function TournamentDetailScreen() {
 
   const tn = data?.tournament;
   const flags = useFeatureFlags();
+
+  // Live entry stats (chips in play, players left) — only meaningful while running.
+  const { data: statsData } = useQuery(GET_TOURNAMENT_ENTRY_STATS, {
+    variables: { tournamentId: id! },
+    skip: !id || tn?.status !== 'IN_PROGRESS',
+    pollInterval: 30_000,
+  });
+  const stats = statsData?.tournamentEntryStats;
+  // PKO / bounty format and the carried-over progressive-knockout head.
+  const isBounty = !!tn?.bountyType && tn.bountyType !== 'NONE';
+  const avgStack =
+    stats && stats.playersRemaining && stats.playersRemaining > 0
+      ? Math.round(Number(stats.totalChips ?? 0) / stats.playersRemaining)
+      : null;
   // Registered players with display names — the fantasy-prediction picker pool.
   const predictionPlayers = useMemo<PredictionPlayer[]>(
     () =>
@@ -183,10 +198,13 @@ export default function TournamentDetailScreen() {
                   <Text variant="title" className="flex-1">
                     {tn.title}
                   </Text>
-                  <Badge
-                    label={t(`events.status.${tn.status.toLowerCase()}`, tn.status)}
-                    tone={STATUS_TONE[tn.status]}
-                  />
+                  <View className="items-end gap-1">
+                    <Badge
+                      label={t(`events.status.${tn.status.toLowerCase()}`, tn.status)}
+                      tone={STATUS_TONE[tn.status]}
+                    />
+                    {isBounty ? <Badge label={t('events.pko')} tone="bounty" /> : null}
+                  </View>
                 </View>
                 {tn.description ? <Text variant="muted">{tn.description}</Text> : null}
               </View>
@@ -201,6 +219,27 @@ export default function TournamentDetailScreen() {
                 label={t('events.players')}
                 value={tn.seatCap ? `${regCount} / ${tn.seatCap}` : `${regCount}`}
               />
+              {isBounty ? (
+                <Fact
+                  icon="skull-outline"
+                  label={t('events.bounty.perKnockout')}
+                  value={currencyCents(tn.bountyAmountCents ?? 0)}
+                />
+              ) : null}
+              {tn.status === 'IN_PROGRESS' && stats?.playersRemaining != null ? (
+                <Fact
+                  icon="person-outline"
+                  label={t('events.playersLeft')}
+                  value={`${stats.playersRemaining}`}
+                />
+              ) : null}
+              {tn.status === 'IN_PROGRESS' && avgStack != null ? (
+                <Fact
+                  icon="layers-outline"
+                  label={t('events.averageStack')}
+                  value={avgStack.toLocaleString(i18n.language)}
+                />
+              ) : null}
               {tn.club ? (
                 <Fact icon="business-outline" label={t('home.selectClub')} value={tn.club.name} />
               ) : null}
@@ -223,6 +262,36 @@ export default function TournamentDetailScreen() {
                   </View>
                 </Card>
               </FadeUp>
+            ) : null}
+
+            {/* Progressive knockout — your live bounty head, climbs with each elimination. */}
+            {tn.bountyType === 'PROGRESSIVE' &&
+            myRegistration?.currentBountyCents != null &&
+            myRegistration.currentBountyCents > 0 ? (
+              <FadeUp>
+                <Card className="flex-row items-center gap-3 border border-pp-gold/40 bg-pp-gold/10">
+                  <Ionicons name="skull-outline" size={24} color={colors.gold} />
+                  <View className="flex-1">
+                    <Text variant="heading" className="text-pp-gold">
+                      {t('events.bounty.yourBountyTitle')}
+                    </Text>
+                    <Text variant="muted">
+                      {t('events.bounty.yourBountyBody', {
+                        amount: currencyCents(myRegistration.currentBountyCents),
+                      })}
+                    </Text>
+                  </View>
+                </Card>
+              </FadeUp>
+            ) : null}
+
+            {/* Final results — finishing order, prizes and (PKO) knockout feed. */}
+            {tn.status === 'COMPLETED' ? (
+              <Button
+                title={t('events.viewFinalResults')}
+                variant="secondary"
+                onPress={() => router.push(`/tournament/${id}/results`)}
+              />
             ) : null}
 
             {/* Pre-game prep — who's registered + your notes (Pro). Renders only when eligible. */}

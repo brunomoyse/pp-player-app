@@ -105,6 +105,7 @@ export default function RootLayout() {
                 <Stack.Screen name="login" options={{ presentation: 'modal' }} />
                 <Stack.Screen name="register" options={{ presentation: 'modal' }} />
                 <Stack.Screen name="tournament/[id]" />
+                <Stack.Screen name="tournament/[id]/results" />
                 <Stack.Screen name="achievements" />
                 <Stack.Screen name="drink-wallet" />
               </Stack>

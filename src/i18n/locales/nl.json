@@ -231,7 +231,20 @@
     },
     "yourStatus": "Jouw inschrijving",
     "qualifiedForDay2Title": "Gekwalificeerd voor Day 2",
-    "qualifiedForDay2Body": "Je neemt {chipCount} chips mee naar de finaledag."
+    "qualifiedForDay2Body": "Je neemt {chipCount} chips mee naar de finaledag.",
+    "pko": "PKO",
+    "viewFinalResults": "Bekijk eindresultaten",
+    "resultsEmpty": "Nog geen resultaten geregistreerd.",
+    "resultsPoints": "{count} pts",
+    "bounty": {
+      "perKnockout": "Premie per knock-out",
+      "yourBountyTitle": "Jouw premie",
+      "yourBountyBody": "Je bent {amount} waard voor wie je uitschakelt."
+    },
+    "knockouts": {
+      "title": "Knock-outs",
+      "eliminated": "Schakelde {victim} uit"
+    }
   },
   "mySeats": {
     "title": "Mijn Plaatsen",

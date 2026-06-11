@@ -231,7 +231,20 @@
     },
     "yourStatus": "Votre inscription",
     "qualifiedForDay2Title": "Qualifié pour le Day 2",
-    "qualifiedForDay2Body": "Vous emportez {chipCount} jetons dans le day final."
+    "qualifiedForDay2Body": "Vous emportez {chipCount} jetons dans le day final.",
+    "pko": "PKO",
+    "viewFinalResults": "Voir les résultats finaux",
+    "resultsEmpty": "Aucun résultat enregistré pour l'instant.",
+    "resultsPoints": "{count} pts",
+    "bounty": {
+      "perKnockout": "Prime par élimination",
+      "yourBountyTitle": "Votre prime",
+      "yourBountyBody": "Vous valez {amount} pour celui qui vous élimine."
+    },
+    "knockouts": {
+      "title": "Éliminations",
+      "eliminated": "A éliminé {victim}"
+    }
   },
   "mySeats": {
     "title": "Mes Places",

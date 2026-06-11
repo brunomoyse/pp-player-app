@@ -212,7 +212,20 @@
     },
     "yourStatus": "Your registration",
     "qualifiedForDay2Title": "Qualified for Day 2",
-    "qualifiedForDay2Body": "You're carrying {chipCount} chips into the final day."
+    "qualifiedForDay2Body": "You're carrying {chipCount} chips into the final day.",
+    "pko": "PKO",
+    "viewFinalResults": "View Final Results",
+    "resultsEmpty": "No results recorded yet.",
+    "resultsPoints": "{count} pts",
+    "bounty": {
+      "perKnockout": "Bounty per knockout",
+      "yourBountyTitle": "Your Bounty",
+      "yourBountyBody": "You're worth {amount} to whoever knocks you out."
+    },
+    "knockouts": {
+      "title": "Knockouts",
+      "eliminated": "Eliminated {victim}"
+    }
   },
   "mySeats": {
     "title": "My Seats",

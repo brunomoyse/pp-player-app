@@ -6,7 +6,10 @@ import type {
   PlayerStatsResponse,
   RegisterForTournamentInput,
   Tournament,
+  TournamentBounty,
+  TournamentEntryStats,
   TournamentRegistration,
+  TournamentResult,
   TournamentStatus,
   UserTournamentResult,
 } from '@/types/tournament';
@@ -113,6 +116,8 @@ export const GET_TOURNAMENT: TypedDocumentNode<GetTournamentResult, GetTournamen
       seriesId
       flightLabel
       isFinalDay
+      bountyType
+      bountyAmountCents
       structure {
         id
         tournamentId
@@ -164,6 +169,7 @@ export const GET_TOURNAMENT: TypedDocumentNode<GetTournamentResult, GetTournamen
         status
         waitlistPosition
         startingStack
+        currentBountyCents
         notes
         user {
           id
@@ -176,6 +182,84 @@ export const GET_TOURNAMENT: TypedDocumentNode<GetTournamentResult, GetTournamen
         name
         city
       }
+    }
+  }
+`;
+
+export interface GetTournamentEntryStatsResult {
+  tournamentEntryStats: TournamentEntryStats;
+}
+export interface GetTournamentEntryStatsVars {
+  tournamentId: string;
+}
+
+export const GET_TOURNAMENT_ENTRY_STATS: TypedDocumentNode<
+  GetTournamentEntryStatsResult,
+  GetTournamentEntryStatsVars
+> = gql`
+  query GetTournamentEntryStats($tournamentId: ID!) {
+    tournamentEntryStats(tournamentId: $tournamentId) {
+      tournamentId
+      totalEntries
+      totalAmountCents
+      uniquePlayers
+      initialCount
+      rebuyCount
+      reEntryCount
+      addonCount
+      totalChips
+      playersRemaining
+    }
+  }
+`;
+
+export interface GetTournamentResultsResult {
+  tournamentResults: TournamentResult[];
+}
+export interface GetTournamentResultsVars {
+  tournamentId: string;
+}
+
+export const GET_TOURNAMENT_RESULTS: TypedDocumentNode<
+  GetTournamentResultsResult,
+  GetTournamentResultsVars
+> = gql`
+  query GetTournamentResults($tournamentId: ID!) {
+    tournamentResults(tournamentId: $tournamentId) {
+      id
+      tournamentId
+      userId
+      clubPlayerId
+      displayName
+      finalPosition
+      prizeCents
+      points
+      createdAt
+    }
+  }
+`;
+
+export interface GetTournamentBountiesResult {
+  tournamentBounties: TournamentBounty[];
+}
+export interface GetTournamentBountiesVars {
+  tournamentId: string;
+}
+
+export const GET_TOURNAMENT_BOUNTIES: TypedDocumentNode<
+  GetTournamentBountiesResult,
+  GetTournamentBountiesVars
+> = gql`
+  query GetTournamentBounties($tournamentId: ID!) {
+    tournamentBounties(tournamentId: $tournamentId) {
+      id
+      tournamentId
+      hunterClubPlayerId
+      victimClubPlayerId
+      hunterName
+      victimName
+      amountCents
+      createdAt
     }
   }
 `;
