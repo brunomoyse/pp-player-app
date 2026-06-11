@@ -110,6 +110,9 @@ export const GET_TOURNAMENT: TypedDocumentNode<GetTournamentResult, GetTournamen
       rebuyMax
       addonChips
       addonPriceCents
+      seriesId
+      flightLabel
+      isFinalDay
       structure {
         id
         tournamentId
@@ -160,6 +163,7 @@ export const GET_TOURNAMENT: TypedDocumentNode<GetTournamentResult, GetTournamen
         registrationTime
         status
         waitlistPosition
+        startingStack
         notes
         user {
           id

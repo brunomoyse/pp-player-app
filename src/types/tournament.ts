@@ -21,6 +21,13 @@ export interface Tournament {
     addonChips?: number | null;
     addonPriceCents?: number | null;
 
+    /** Multi-day series this tournament belongs to (null for single-day events). */
+    seriesId?: string | null;
+    /** Flight label within the series, e.g. "Day 1A" or "Day 2". */
+    flightLabel?: string | null;
+    /** True when this is the series' final day (Day 2). */
+    isFinalDay?: boolean;
+
     clock?: TournamentClock | null;
     club?: Club;
     registrations: TournamentRegistration[];
@@ -41,6 +48,8 @@ export interface TournamentRegistration {
     status: RegistrationStatus;
     /** 1-based position when status is WAITLISTED, null otherwise. */
     waitlistPosition?: number | null;
+    /** Carried-over chip stack for a multi-day final-day seat (null otherwise). */
+    startingStack?: number | null;
     user?: {
         id: string;
         firstName?: string | null;

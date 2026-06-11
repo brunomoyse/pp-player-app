@@ -229,7 +229,9 @@
       "cancelFailed": "Kon je inschrijving niet annuleren. Probeer het opnieuw.",
       "waitlistedPosition": "Je staat op plek {position} van de wachtlijst"
     },
-    "yourStatus": "Jouw inschrijving"
+    "yourStatus": "Jouw inschrijving",
+    "qualifiedForDay2Title": "Gekwalificeerd voor Day 2",
+    "qualifiedForDay2Body": "Je neemt {chipCount} chips mee naar de finaledag."
   },
   "mySeats": {
     "title": "Mijn Plaatsen",
@@ -794,6 +796,7 @@
   "notifications": {
     "seatAssigned": "Stoel toegewezen — bekijk je tafel in Mijn Stoelen",
     "playerMoved": "Je bent verplaatst naar een nieuwe stoel",
-    "eliminated": "Je bent uitgeschakeld uit het toernooi"
+    "eliminated": "Je bent uitgeschakeld uit het toernooi",
+    "qualifiedForDay2": "Je bent gekwalificeerd voor Day 2!"
   }
 }

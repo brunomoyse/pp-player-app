@@ -229,7 +229,9 @@
       "cancelFailed": "Impossible d'annuler votre inscription. Veuillez réessayer.",
       "waitlistedPosition": "Vous êtes n°{position} sur la liste d'attente"
     },
-    "yourStatus": "Votre inscription"
+    "yourStatus": "Votre inscription",
+    "qualifiedForDay2Title": "Qualifié pour le Day 2",
+    "qualifiedForDay2Body": "Vous emportez {chipCount} jetons dans le day final."
   },
   "mySeats": {
     "title": "Mes Places",
@@ -793,6 +795,7 @@
   "notifications": {
     "seatAssigned": "Siège attribué — consultez votre table dans Mes Sièges",
     "playerMoved": "Vous avez été déplacé vers un nouveau siège",
-    "eliminated": "Vous avez été éliminé du tournoi"
+    "eliminated": "Vous avez été éliminé du tournoi",
+    "qualifiedForDay2": "Vous êtes qualifié pour le Day 2 !"
   }
 }

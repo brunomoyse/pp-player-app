@@ -29,6 +29,7 @@ export type NotificationType =
     | 'SEAT_ASSIGNED'
     | 'PLAYER_MOVED'
     | 'PLAYER_ELIMINATED'
+    | 'QUALIFIED_FOR_DAY_2'
 
 export interface UserNotification {
     id: string;

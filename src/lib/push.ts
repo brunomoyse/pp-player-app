@@ -115,7 +115,14 @@ export function isAchievementNotification(
   return type === 'ACHIEVEMENT_UNLOCKED';
 }
 
-const SEATING_PUSH_TYPES = new Set(['SEAT_ASSIGNED', 'PLAYER_MOVED', 'PLAYER_ELIMINATED']);
+// Push types whose tap deep-links to a tournament screen (they all carry a
+// tournament_id): live seating events plus multi-day Day-2 qualification.
+const SEATING_PUSH_TYPES = new Set([
+  'SEAT_ASSIGNED',
+  'PLAYER_MOVED',
+  'PLAYER_ELIMINATED',
+  'QUALIFIED_FOR_DAY_2',
+]);
 
 /** Tournament to deep-link to when a seating push is tapped, or null. */
 export function seatingNotificationTournamentId(

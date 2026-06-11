@@ -37,6 +37,10 @@ export function useSeatingNotifications() {
         lastId.current = note.id;
         toast.error(t('notifications.eliminated'));
         break;
+      case 'QUALIFIED_FOR_DAY_2':
+        lastId.current = note.id;
+        toast.success(t('notifications.qualifiedForDay2'));
+        break;
       default:
         break;
     }

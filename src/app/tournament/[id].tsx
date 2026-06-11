@@ -206,6 +206,25 @@ export default function TournamentDetailScreen() {
               ) : null}
             </Card>
 
+            {/* Day 2 qualification — survived a flight, carrying a stack into the final day. */}
+            {tn.isFinalDay && myRegistration?.startingStack != null ? (
+              <FadeUp>
+                <Card className="flex-row items-center gap-3 border border-pp-gold/40 bg-pp-gold/10">
+                  <Ionicons name="trophy" size={24} color={colors.gold} />
+                  <View className="flex-1">
+                    <Text variant="heading" className="text-pp-gold">
+                      {t('events.qualifiedForDay2Title')}
+                    </Text>
+                    <Text variant="muted">
+                      {t('events.qualifiedForDay2Body', {
+                        chipCount: myRegistration.startingStack.toLocaleString(i18n.language),
+                      })}
+                    </Text>
+                  </View>
+                </Card>
+              </FadeUp>
+            ) : null}
+
             {/* Pre-game prep — who's registered + your notes (Pro). Renders only when eligible. */}
             <PreGameField tournamentId={id!} />
 

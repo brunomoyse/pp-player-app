@@ -210,7 +210,9 @@
       "cancelFailed": "Could not cancel your registration. Please try again.",
       "waitlistedPosition": "You're #{position} on the waitlist"
     },
-    "yourStatus": "Your registration"
+    "yourStatus": "Your registration",
+    "qualifiedForDay2Title": "Qualified for Day 2",
+    "qualifiedForDay2Body": "You're carrying {chipCount} chips into the final day."
   },
   "mySeats": {
     "title": "My Seats",
@@ -792,6 +794,7 @@
   "notifications": {
     "seatAssigned": "Seat assigned — check your table in My Seats",
     "playerMoved": "You've been moved to a new seat",
-    "eliminated": "You've been eliminated from the tournament"
+    "eliminated": "You've been eliminated from the tournament",
+    "qualifiedForDay2": "You've qualified for Day 2!"
   }
 }
