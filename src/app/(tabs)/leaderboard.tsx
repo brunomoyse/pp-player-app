@@ -6,7 +6,7 @@ import { View } from 'react-native';
 
 import { LeaderboardTable } from '@/components';
 import { Button, Card, EmptyState, ErrorState, LoadingState, Screen, Segment, Text } from '@/components/ui';
-import { GET_LEADERBOARD } from '@/graphql/operations';
+import { GET_LEADERBOARD, GET_LEADERBOARD_CONFIGS } from '@/graphql/operations';
 import { useClubs } from '@/hooks/useClubs';
 import { useClubStore } from '@/stores/useClubStore';
 import { useAuthStore, useIsAuthenticated } from '@/stores/useAuthStore';
@@ -14,6 +14,9 @@ import type { LeaderboardPeriod } from '@/types/tournament';
 
 type Period = 'week' | 'month' | 'year' | 'allTime';
 type Metric = 'overall' | 'profit' | 'volume';
+
+/** Sentinel for the default (period-based) leaderboard, where no league is selected. */
+const DEFAULT_LEAGUE = '__default__';
 
 const PERIOD_ENUM: Record<Period, LeaderboardPeriod> = {
   week: 'LAST_7_DAYS',
@@ -35,11 +38,21 @@ export default function LeaderboardScreen() {
   const selectedClub = useClubStore((s) => s.selectedClub);
   const [period, setPeriod] = useState<Period>('week');
   const [metric, setMetric] = useState<Metric>('overall');
+  const [league, setLeague] = useState<string>(DEFAULT_LEAGUE);
+
+  // Configurable leaderboards (leagues) for the selected club. Empty -> selector hidden.
+  const { data: configsData } = useQuery(GET_LEADERBOARD_CONFIGS, {
+    variables: { clubId: selectedClub?.id ?? '' },
+    skip: !selectedClub?.id,
+  });
+  const leagues = configsData?.leaderboardConfigs ?? [];
+  const activeConfigId = league === DEFAULT_LEAGUE ? null : league;
 
   const { data, loading, error, refetch, networkStatus } = useQuery(GET_LEADERBOARD, {
     variables: {
       period: PERIOD_ENUM[period],
       clubId: selectedClub?.id ?? null,
+      configId: activeConfigId,
       pagination: { limit: 50, offset: 0 },
     },
     notifyOnNetworkStatusChange: true,
@@ -56,6 +69,10 @@ export default function LeaderboardScreen() {
     value: m,
     label: t(`leaderboard.categories.${m}`),
   }));
+  const leagueSegments = [
+    { value: DEFAULT_LEAGUE, label: t('leaderboard.defaultView') },
+    ...leagues.map((lg) => ({ value: lg.id, label: lg.name })),
+  ];
 
   return (
     <Screen
@@ -95,7 +112,12 @@ export default function LeaderboardScreen() {
         </Card>
       ) : null}
 
-      <Segment options={periodSegments} value={period} onChange={setPeriod} />
+      {leagues.length > 0 ? (
+        <Segment options={leagueSegments} value={league} onChange={setLeague} />
+      ) : null}
+      {activeConfigId === null ? (
+        <Segment options={periodSegments} value={period} onChange={setPeriod} />
+      ) : null}
       <Segment options={metricSegments} value={metric} onChange={setMetric} />
 
       {loading && !data ? (

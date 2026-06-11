@@ -183,11 +183,17 @@ export interface GetLeaderboardVars {
   period?: LeaderboardPeriod | null;
   pagination?: PaginationInput | null;
   clubId?: string | null;
+  configId?: string | null;
 }
 
 export const GET_LEADERBOARD: TypedDocumentNode<GetLeaderboardResult, GetLeaderboardVars> = gql`
-  query GetLeaderboard($period: LeaderboardPeriod, $pagination: PaginationInput, $clubId: UUID) {
-    leaderboard(period: $period, pagination: $pagination, clubId: $clubId) {
+  query GetLeaderboard(
+    $period: LeaderboardPeriod
+    $pagination: PaginationInput
+    $clubId: UUID
+    $configId: UUID
+  ) {
+    leaderboard(period: $period, pagination: $pagination, clubId: $clubId, configId: $configId) {
       items {
         user {
           id
@@ -215,6 +221,31 @@ export const GET_LEADERBOARD: TypedDocumentNode<GetLeaderboardResult, GetLeaderb
       pageSize
       offset
       hasNextPage
+    }
+  }
+`;
+
+export interface LeaderboardConfigSummary {
+  id: string;
+  name: string;
+  isDefault: boolean;
+}
+export interface GetLeaderboardConfigsResult {
+  leaderboardConfigs: LeaderboardConfigSummary[];
+}
+export interface GetLeaderboardConfigsVars {
+  clubId: string;
+}
+
+export const GET_LEADERBOARD_CONFIGS: TypedDocumentNode<
+  GetLeaderboardConfigsResult,
+  GetLeaderboardConfigsVars
+> = gql`
+  query GetLeaderboardConfigs($clubId: ID!) {
+    leaderboardConfigs(clubId: $clubId) {
+      id
+      name
+      isDefault
     }
   }
 `;

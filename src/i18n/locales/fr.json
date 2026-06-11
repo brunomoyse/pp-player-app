@@ -378,7 +378,8 @@
       "example2Calculation": "30 × 1.0 × 3.0 = <strong>90 points</strong>",
       "note": "Les points ne sont attribués que pour les tournois où vous finissez dans l'argent (ITM). Les multiplicateurs exacts peuvent varier selon la structure du tournoi et la taille du field."
     },
-    "pointsInfo": "Information de calcul des points"
+    "pointsInfo": "Information de calcul des points",
+    "defaultView": "Par défaut"
   },
   "profile": {
     "editProfile": "Modifier le Profil",

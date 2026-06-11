@@ -355,7 +355,8 @@
       "example2Calculation": "30 × 1.0 × 3.0 = <strong>90 points</strong>",
       "note": "Points are awarded only for tournaments where you finish in the money (ITM). The exact multipliers may vary based on tournament structure and field size."
     },
-    "pointsInfo": "Points calculation information"
+    "pointsInfo": "Points calculation information",
+    "defaultView": "Default"
   },
   "profile": {
     "editProfile": "Edit Profile",

@@ -379,7 +379,8 @@
       "example2Calculation": "30 × 1.0 × 3.0 = <strong>90 punten</strong>",
       "note": "Punten worden alleen toegekend voor toernooien waar je in het geld eindigt (ITM). De exacte vermenigvuldigers kunnen variëren op basis van toernooi structuur en field grootte."
     },
-    "pointsInfo": "Informatie punten berekening"
+    "pointsInfo": "Informatie punten berekening",
+    "defaultView": "Standaard"
   },
   "profile": {
     "editProfile": "Profiel Bewerken",
