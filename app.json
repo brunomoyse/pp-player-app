@@ -10,7 +10,8 @@
     "backgroundColor": "#18181a",
     "ios": {
       "bundleIdentifier": "com.pocketpair.app",
-      "supportsTablet": true
+      "supportsTablet": true,
+      "icon": "./assets/PocketPair.icon"
     },
     "android": {
       "package": "com.pocketpair.app",
