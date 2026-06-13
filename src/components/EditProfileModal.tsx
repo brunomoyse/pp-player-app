@@ -1,11 +1,9 @@
-import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Modal, Pressable, ScrollView, View } from 'react-native';
 
-import { Button, Input, Text } from '@/components/ui';
+import { Button, IconButton, Input, Text } from '@/components/ui';
 import { useAuthStore } from '@/stores/useAuthStore';
-import { colors } from '@/theme/tokens';
 
 export interface EditProfileModalProps {
   visible: boolean;
@@ -36,14 +34,13 @@ export function EditProfileModal({ visible, onClose }: EditProfileModalProps) {
         onPress={onClose}
         className="flex-1 justify-end"
         style={{ backgroundColor: 'rgba(10,10,12,0.6)' }}>
-        <Pressable
-          onPress={() => {}}
+        <View
+          onStartShouldSetResponder={() => true}
+          accessibilityViewIsModal
           className="max-h-[85%] rounded-t-2xl border-t border-pp-border bg-pp-surface pb-8 pt-4">
           <View className="mb-3 flex-row items-center justify-between px-5">
             <Text variant="heading">{t('profile.editProfile')}</Text>
-            <Pressable onPress={onClose} accessibilityRole="button" hitSlop={8}>
-              <Ionicons name="close" size={22} color={colors.textMuted} />
-            </Pressable>
+            <IconButton name="close" size={22} accessibilityLabel={t('common.close')} onPress={onClose} />
           </View>
 
           <ScrollView contentContainerClassName="gap-4 px-5 pt-1">
@@ -58,7 +55,7 @@ export function EditProfileModal({ visible, onClose }: EditProfileModalProps) {
             />
             <Button title={t('profile.save')} onPress={save} className="mt-2" />
           </ScrollView>
-        </Pressable>
+        </View>
       </Pressable>
     </Modal>
   );

@@ -1,11 +1,11 @@
 import { useMutation, useQuery } from '@apollo/client/react';
 import { Ionicons } from '@expo/vector-icons';
-import { Redirect, Stack, router } from 'expo-router';
+import { Redirect, Stack } from 'expo-router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Modal, Pressable, View } from 'react-native';
 
-import { QRCodeScanner } from '@/components';
+import { BackButton, QRCodeScanner } from '@/components';
 import { Button, Card, EmptyState, Input, LoadingState, Screen, Text } from '@/components/ui';
 import { CLAIM_CARD, GET_DRINK_WALLET } from '@/graphql/operations';
 import { useI18n } from '@/i18n/useI18n';
@@ -37,7 +37,7 @@ function LedgerRow({ entry }: { entry: DrinkLedgerEntry }) {
         <Text className="font-sans-semibold text-pp-text">
           {t(`drinkWallet.reason.${REASON_KEY[entry.reason]}`)}
         </Text>
-        <Text variant="dim" className="text-[12px]">
+        <Text variant="dim">
           {formatDate(entry.createdAt, locale)}
           {entry.expiresAt
             ? ` · ${t('drinkWallet.expiresOn', { date: formatDate(entry.expiresAt, locale) })}`
@@ -91,7 +91,7 @@ function DrinkWalletCard({
           {t('drinkWallet.history')}
         </Text>
         {!wallet || wallet.recentEntries.length === 0 ? (
-          <Text variant="dim" className="text-[12px]">
+          <Text variant="dim">
             {t('drinkWallet.noActivity')}
           </Text>
         ) : (
@@ -187,9 +187,7 @@ export default function DrinkWalletScreen() {
       <Stack.Screen options={{ headerShown: false }} />
       <Screen refreshing={refreshing} onRefresh={onRefresh} contentClassName="gap-4">
         <View className="flex-row items-center gap-3">
-          <Pressable onPress={() => router.back()} accessibilityLabel={t('common.back')} hitSlop={8}>
-            <Ionicons name="chevron-back" size={26} color={colors.textMuted} />
-          </Pressable>
+          <BackButton />
           <Text variant="title">{t('drinkWallet.title')}</Text>
         </View>
 
@@ -242,9 +240,15 @@ export default function DrinkWalletScreen() {
         animationType="fade"
         transparent
         onRequestClose={() => setManualOpen(false)}>
-        <View className="flex-1 items-center justify-center bg-black/60 px-6">
-          <Card className="w-full gap-4">
-            <Text variant="heading">{t('drinkWallet.enterCode')}</Text>
+        <Pressable
+          onPress={() => setManualOpen(false)}
+          className="flex-1 items-center justify-center bg-black/60 px-6">
+          <View
+            onStartShouldSetResponder={() => true}
+            accessibilityViewIsModal
+            className="w-full">
+            <Card className="w-full gap-4">
+              <Text variant="heading">{t('drinkWallet.enterCode')}</Text>
             <Input
               label={t('drinkWallet.manualPrompt')}
               value={manualValue}
@@ -271,8 +275,9 @@ export default function DrinkWalletScreen() {
                 />
               </View>
             </View>
-          </Card>
-        </View>
+            </Card>
+          </View>
+        </Pressable>
       </Modal>
     </>
   );

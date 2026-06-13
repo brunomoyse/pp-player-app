@@ -4,15 +4,9 @@ import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 import { Stack, router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Pressable, Share, View } from 'react-native';
+import { Alert, Share, View } from 'react-native';
 
-import {
-  ClockDisplay,
-  PreGameField,
-  PredictionCard,
-  type PredictionPlayer,
-  RegistrationStatusBadge,
-} from '@/components';
+import { BackButton, ClockDisplay, PreGameField, PredictionCard, RegistrationStatusBadge, type PredictionPlayer } from '@/components';
 import { useFeatureFlags } from '@/hooks/useFeatureFlags';
 import { FadeUp } from '@/components/motion';
 import { useLiveClock } from '@/hooks/useLiveClock';
@@ -23,6 +17,7 @@ import {
   Button,
   Card,
   ErrorState,
+  IconButton,
   LoadingState,
   Screen,
   Text,
@@ -172,13 +167,14 @@ export default function TournamentDetailScreen() {
         onRefresh={() => void refetch()}
         contentClassName="gap-4">
         <View className="flex-row items-center justify-between">
-          <Pressable onPress={() => router.back()} accessibilityLabel={t('common.back')} hitSlop={8}>
-            <Ionicons name="chevron-back" size={26} color={colors.textMuted} />
-          </Pressable>
+          <BackButton />
           {tn ? (
-            <Pressable onPress={onShare} accessibilityLabel="Share" hitSlop={8}>
-              <Ionicons name="share-outline" size={22} color={colors.textMuted} />
-            </Pressable>
+            <IconButton
+              name="share-outline"
+              size={22}
+              accessibilityLabel={t('common.share')}
+              onPress={onShare}
+            />
           ) : null}
         </View>
 

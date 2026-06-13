@@ -1,15 +1,14 @@
 import { useQuery } from '@apollo/client/react';
-import { Ionicons } from '@expo/vector-icons';
-import { Stack, router, useLocalSearchParams } from 'expo-router';
+import { Stack, useLocalSearchParams } from 'expo-router';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, View } from 'react-native';
+import { View } from 'react-native';
 
 import { Avatar, Card, EmptyState, LoadingState, Screen, Text } from '@/components/ui';
+import { BackButton } from '@/components';
 import { GET_TOURNAMENT_BOUNTIES, GET_TOURNAMENT_RESULTS } from '@/graphql/operations';
 import { cn } from '@/lib/cn';
 import { useAuthStore } from '@/stores/useAuthStore';
-import { colors } from '@/theme/tokens';
 import { currencyCents } from '@/utils/currency';
 
 /** Medal colours for the podium, dim for the rest of the field. */
@@ -50,9 +49,7 @@ export default function TournamentResultsScreen() {
         onRefresh={() => void refetch()}
         contentClassName="gap-4">
         <View className="flex-row items-center gap-3">
-          <Pressable onPress={() => router.back()} accessibilityLabel={t('common.back')} hitSlop={8}>
-            <Ionicons name="chevron-back" size={26} color={colors.textMuted} />
-          </Pressable>
+          <BackButton />
           <Text variant="title">{t('events.finalResults')}</Text>
         </View>
 
@@ -85,7 +82,7 @@ export default function TournamentResultsScreen() {
                         {r.displayName}
                       </Text>
                       {r.points > 0 ? (
-                        <Text variant="dim" className="text-[11px]">
+                        <Text variant="micro">
                           {t('events.resultsPoints', { count: r.points })}
                         </Text>
                       ) : null}
@@ -112,7 +109,7 @@ export default function TournamentResultsScreen() {
                         <Text className="font-sans-semibold text-pp-text" numberOfLines={1}>
                           {k.hunterName}
                         </Text>
-                        <Text variant="dim" className="text-[12px]" numberOfLines={1}>
+                        <Text variant="dim" numberOfLines={1}>
                           {t('events.knockouts.eliminated', { victim: k.victimName })}
                         </Text>
                       </View>

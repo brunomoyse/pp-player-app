@@ -25,7 +25,7 @@ export function StreakCard() {
   if (!streak && loading) {
     return (
       <Card>
-        <Text variant="dim" className="text-[12px]">
+        <Text variant="dim">
           {t('common.loading')}
         </Text>
       </Card>
@@ -51,7 +51,7 @@ export function StreakCard() {
           <Text variant="title">
             {t('streak.days', { count: current })}
           </Text>
-          <Text variant="dim" className="text-[12px]">
+          <Text variant="dim">
             {current === 0
               ? t('streak.empty')
               : t('streak.best', { count: streak?.longestStreak ?? 0 })}

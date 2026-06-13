@@ -1,10 +1,11 @@
 import { useMutation, useQuery } from '@apollo/client/react';
 import { Ionicons } from '@expo/vector-icons';
-import { Redirect, Stack, router } from 'expo-router';
+import { Redirect, Stack } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { Pressable, View } from 'react-native';
+import { View } from 'react-native';
 
 import { Badge, Button, Card, EmptyState, LoadingState, Screen, Text } from '@/components/ui';
+import { BackButton } from '@/components';
 import {
   CLAIM_QUEST,
   GET_CLUB_HALL_OF_FAME,
@@ -12,6 +13,7 @@ import {
   GET_MY_SEASON_PASS,
   GET_WEEKLY_QUESTS,
 } from '@/graphql/operations';
+import { success } from '@/lib/haptics';
 import { useIsAuthenticated } from '@/stores/useAuthStore';
 import { useClubStore } from '@/stores/useClubStore';
 import { colors } from '@/theme/tokens';
@@ -44,7 +46,7 @@ function QuestRow({
       <View className="flex-row items-center justify-between gap-2">
         <View className="flex-1">
           <Text className="font-sans-semibold text-pp-text">{t(`quests.${quest.code}.title`)}</Text>
-          <Text variant="dim" className="text-[12px]">
+          <Text variant="dim">
             {t(`quests.${quest.code}.description`)}
           </Text>
         </View>
@@ -55,10 +57,11 @@ function QuestRow({
             title={t('season.claimXp', { xp: quest.xpReward })}
             variant="primary"
             loading={claiming}
+            accessibilityHint={t('season.a11y.claimHint')}
             onPress={() => onClaim(quest.code)}
           />
         ) : (
-          <Text variant="dim" className="text-[12px]">
+          <Text variant="dim">
             {quest.progress}/{quest.target}
           </Text>
         )}
@@ -105,6 +108,7 @@ export default function SeasonScreen() {
   const onClaim = async (code: string) => {
     try {
       await claimQuest({ variables: { code } });
+      success();
     } catch {
       // Surface nothing loud; the row simply stays unclaimed on failure.
     }
@@ -122,9 +126,7 @@ export default function SeasonScreen() {
         onRefresh={() => void seasonQ.refetch()}
         contentClassName="gap-4">
         <View className="flex-row items-center gap-3">
-          <Pressable onPress={() => router.back()} accessibilityLabel={t('common.back')} hitSlop={8}>
-            <Ionicons name="chevron-back" size={26} color={colors.textMuted} />
-          </Pressable>
+          <BackButton />
           <Text variant="title">{t('season.title')}</Text>
         </View>
 
@@ -147,13 +149,13 @@ export default function SeasonScreen() {
 
               <View className="flex-row items-end justify-between">
                 <Text variant="title">{t('season.tier', { tier: pass?.tier ?? 0 })}</Text>
-                <Text variant="dim" className="text-[12px]">
+                <Text variant="dim">
                   {t('season.xp', { xp: pass?.xp ?? 0 })}
                 </Text>
               </View>
 
               <ProgressBar ratio={pass && pass.xpPerTier ? pass.xpIntoTier / pass.xpPerTier : 0} />
-              <Text variant="dim" className="text-[11px]">
+              <Text variant="micro">
                 {t('season.xpToNext', {
                   xp: pass ? Math.max(0, pass.xpPerTier - pass.xpIntoTier) : 0,
                 })}
@@ -166,7 +168,7 @@ export default function SeasonScreen() {
                 {t('season.weeklyQuests')}
               </Text>
               {quests.length === 0 ? (
-                <Text variant="dim" className="text-[12px]">
+                <Text variant="dim">
                   {t('common.loading')}
                 </Text>
               ) : (
@@ -185,7 +187,7 @@ export default function SeasonScreen() {
               {t('season.hallOfFame')}
             </Text>
             {hallOfFame.length === 0 ? (
-              <Text variant="dim" className="text-[12px]">
+              <Text variant="dim">
                 {t('season.noChampions')}
               </Text>
             ) : (
@@ -196,7 +198,7 @@ export default function SeasonScreen() {
                   </View>
                   <View className="flex-1">
                     <Text className="font-sans-semibold text-pp-text">{e.championName}</Text>
-                    <Text variant="dim" className="text-[12px]">
+                    <Text variant="dim">
                       {e.seasonName} · {t('season.events', { count: e.events })}
                     </Text>
                   </View>

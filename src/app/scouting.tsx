@@ -1,11 +1,12 @@
 import { useLazyQuery, useQuery } from '@apollo/client/react';
 import { Ionicons } from '@expo/vector-icons';
-import { Redirect, Stack, router } from 'expo-router';
+import { Redirect, Stack } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 
 import { Avatar, Badge, Card, EmptyState, Input, Screen, Text } from '@/components/ui';
+import { BackButton } from '@/components';
 import {
   GET_MY_SCOUTING_QUOTA,
   SCOUTING_PROFILE,
@@ -20,7 +21,7 @@ function Stat({ label, value }: { label: string; value: string }) {
   return (
     <View className="flex-1 items-center gap-1">
       <Text variant="title">{value}</Text>
-      <Text variant="dim" className="text-[11px]">
+      <Text variant="micro">
         {label}
       </Text>
     </View>
@@ -58,9 +59,7 @@ export default function ScoutingScreen() {
       <Stack.Screen options={{ headerShown: false }} />
       <Screen contentClassName="gap-4">
         <View className="flex-row items-center gap-3">
-          <Pressable onPress={() => router.back()} accessibilityLabel={t('common.back')} hitSlop={8}>
-            <Ionicons name="chevron-back" size={26} color={colors.textMuted} />
-          </Pressable>
+          <BackButton />
           <Text variant="title">{t('scouting.title')}</Text>
         </View>
 
@@ -70,7 +69,7 @@ export default function ScoutingScreen() {
           <>
             {/* Quota */}
             {quota ? (
-              <Text variant="dim" className="text-[12px]">
+              <Text variant="dim">
                 {quota.unlimited
                   ? t('scouting.unlimited')
                   : t('scouting.quota', { used: quota.used, limit: quota.limit })}
@@ -91,7 +90,7 @@ export default function ScoutingScreen() {
                 <Text className="font-sans-semibold text-pp-danger">
                   {t('scouting.quotaReached')}
                 </Text>
-                <Text variant="dim" className="text-[12px]">
+                <Text variant="dim">
                   {t('scouting.quotaReachedBody')}
                 </Text>
               </Card>
@@ -138,11 +137,11 @@ export default function ScoutingScreen() {
                 {t('scouting.results')}
               </Text>
               {query.trim().length < 2 ? (
-                <Text variant="dim" className="text-[12px]">
+                <Text variant="dim">
                   {t('scouting.hint')}
                 </Text>
               ) : matches.length === 0 ? (
-                <Text variant="dim" className="text-[12px]">
+                <Text variant="dim">
                   {t('scouting.noResults')}
                 </Text>
               ) : (
@@ -151,6 +150,7 @@ export default function ScoutingScreen() {
                     key={m.userId}
                     onPress={() => void onSelect(m.userId)}
                     accessibilityRole="button"
+                    accessibilityHint={t('scouting.a11y.openHint')}
                     className="flex-row items-center gap-3 rounded-xl px-1 py-2">
                     <Avatar name={m.handle} size={36} />
                     <Text className="flex-1 font-sans-semibold text-pp-text">{m.handle}</Text>

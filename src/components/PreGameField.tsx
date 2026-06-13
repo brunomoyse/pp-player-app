@@ -39,7 +39,7 @@ export function PreGameField({ tournamentId }: { tournamentId: string }) {
     <View className="gap-2">
       <View className="flex-row items-center justify-between">
         <Text variant="heading">{t('notes.whosHere')}</Text>
-        <Text variant="dim" className="text-[12px]">
+        <Text variant="dim">
           {t('notes.notedCount', { noted, total: field.length })}
         </Text>
       </View>
@@ -63,7 +63,7 @@ export function PreGameField({ tournamentId }: { tournamentId: string }) {
                 {f.clubPlayer.displayName}
               </Text>
               {f.note?.tags && f.note.tags.length > 0 ? (
-                <Text variant="dim" className="text-[12px]">
+                <Text variant="dim">
                   {f.note.tags.map((tg) => t(`notes.tags.${tg.tag}`, tg.tag)).join(' · ')}
                 </Text>
               ) : f.note?.body ? (

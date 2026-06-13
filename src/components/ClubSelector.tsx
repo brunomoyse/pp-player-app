@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Modal, Pressable, ScrollView, View } from 'react-native';
 
-import { Text } from '@/components/ui';
+import { IconButton, Text } from '@/components/ui';
 import { cn } from '@/lib/cn';
 import { useClubStore } from '@/stores/useClubStore';
 import { colors } from '@/theme/tokens';
@@ -39,14 +39,18 @@ export function ClubSelector() {
           onPress={() => setOpen(false)}
           className="flex-1 justify-end"
           style={{ backgroundColor: 'rgba(10,10,12,0.6)' }}>
-          <Pressable
-            onPress={() => {}}
+          <View
+            onStartShouldSetResponder={() => true}
+            accessibilityViewIsModal
             className="max-h-[70%] rounded-t-2xl border-t border-pp-border bg-pp-surface pb-8 pt-4">
             <View className="mb-3 flex-row items-center justify-between px-5">
               <Text variant="heading">{t('clubs.selectClub', 'Select club')}</Text>
-              <Pressable onPress={() => setOpen(false)} accessibilityRole="button" hitSlop={8}>
-                <Ionicons name="close" size={22} color={colors.textMuted} />
-              </Pressable>
+              <IconButton
+                name="close"
+                size={22}
+                accessibilityLabel={t('common.close')}
+                onPress={() => setOpen(false)}
+              />
             </View>
 
             <ScrollView contentContainerClassName="gap-3 px-5 pt-1">
@@ -84,7 +88,7 @@ export function ClubSelector() {
                 );
               })}
             </ScrollView>
-          </Pressable>
+          </View>
         </Pressable>
       </Modal>
     </>

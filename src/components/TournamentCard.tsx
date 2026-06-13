@@ -27,7 +27,7 @@ export function TournamentCard({ tournament, onPress }: TournamentCardProps) {
   const registered = tournament.registrations?.length ?? 0;
 
   return (
-    <Pressable onPress={onPress} accessibilityRole="button">
+    <Pressable onPress={onPress} accessibilityRole="button" accessibilityHint={t('events.a11y.openHint')}>
       <Card className="gap-3">
         <View className="flex-row items-start justify-between gap-3">
           <Text variant="heading" className="flex-1" numberOfLines={2}>
@@ -59,7 +59,7 @@ function Row({ icon, text }: { icon: keyof typeof Ionicons.glyphMap; text: strin
   return (
     <View className="flex-row items-center gap-1.5">
       <Ionicons name={icon} size={14} color={colors.textMuted} />
-      <Text variant="muted" className="text-[13px]">
+      <Text variant="caption">
         {text}
       </Text>
     </View>

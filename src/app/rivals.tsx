@@ -1,14 +1,13 @@
 import { useQuery } from '@apollo/client/react';
-import { Ionicons } from '@expo/vector-icons';
-import { Redirect, Stack, router } from 'expo-router';
+import { Redirect, Stack } from 'expo-router';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, View } from 'react-native';
+import { View } from 'react-native';
 
 import { Avatar, Card, EmptyState, LoadingState, Screen, Text } from '@/components/ui';
+import { BackButton } from '@/components';
 import { GET_MY_RIVALRIES } from '@/graphql/operations';
 import { useIsAuthenticated } from '@/stores/useAuthStore';
-import { colors } from '@/theme/tokens';
 import type { Rivalry } from '@/types/social';
 
 function record(r: Rivalry) {
@@ -48,9 +47,7 @@ export default function RivalsScreen() {
         onRefresh={() => void refetch()}
         contentClassName="gap-4">
         <View className="flex-row items-center gap-3">
-          <Pressable onPress={() => router.back()} accessibilityLabel={t('common.back')} hitSlop={8}>
-            <Ionicons name="chevron-back" size={26} color={colors.textMuted} />
-          </Pressable>
+          <BackButton />
           <Text variant="title">{t('rivals.title')}</Text>
         </View>
 
@@ -85,7 +82,7 @@ export default function RivalsScreen() {
                 <Text variant="label" className="text-pp-gold-deep">
                   {t('rivals.headToHead')}
                 </Text>
-                <Text variant="dim" className="text-[11px]">
+                <Text variant="micro">
                   {t('rivals.recordLegend')}
                 </Text>
               </View>
@@ -94,7 +91,7 @@ export default function RivalsScreen() {
                   <Avatar name={r.opponentName} size={36} />
                   <View className="flex-1">
                     <Text className="font-sans-semibold text-pp-text">{r.opponentName}</Text>
-                    <Text variant="dim" className="text-[12px]">
+                    <Text variant="dim">
                       {t('rivals.meetings', { count: r.meetings })}
                     </Text>
                   </View>

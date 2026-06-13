@@ -1,10 +1,9 @@
 import { useMutation, useQuery } from '@apollo/client/react';
-import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Modal, Pressable, ScrollView, View } from 'react-native';
 
-import { Button, Chip, Input, LoadingState, Segment, Text } from '@/components/ui';
+import { Button, Chip, IconButton, Input, LoadingState, Segment, Text } from '@/components/ui';
 import {
   ADD_PLAYER_NOTE_TAG,
   ADD_SHOWDOWN_OBSERVATION,
@@ -12,7 +11,6 @@ import {
   REMOVE_PLAYER_NOTE_TAG,
   UPSERT_PLAYER_NOTE,
 } from '@/graphql/operations';
-import { colors } from '@/theme/tokens';
 import type { PlayerNote, PlayerStyle } from '@/types/notes';
 
 export interface PlayerNoteSheetProps {
@@ -56,19 +54,16 @@ export function PlayerNoteSheet({ visible, onClose, subjectId, subjectName }: Pl
         onPress={onClose}
         className="flex-1 justify-end"
         style={{ backgroundColor: 'rgba(10,10,12,0.6)' }}>
-        <Pressable
-          onPress={() => {}}
+        <View
+          onStartShouldSetResponder={() => true}
+          accessibilityViewIsModal
           className="max-h-[88%] rounded-t-2xl border-t border-pp-border bg-pp-surface pb-8 pt-4">
           <View className="mb-3 flex-row items-center justify-between px-5">
             <View className="flex-1">
               <Text variant="heading">{subjectName ?? t('notes.title')}</Text>
-              <Text variant="dim" className="text-[12px]">
-                {t('notes.privateSubtitle')}
-              </Text>
+              <Text variant="micro">{t('notes.privateSubtitle')}</Text>
             </View>
-            <Pressable onPress={onClose} accessibilityRole="button" hitSlop={8}>
-              <Ionicons name="close" size={22} color={colors.textMuted} />
-            </Pressable>
+            <IconButton name="close" size={22} accessibilityLabel={t('common.close')} onPress={onClose} />
           </View>
 
           {loading && !data ? (
@@ -86,7 +81,7 @@ export function PlayerNoteSheet({ visible, onClose, subjectId, subjectName }: Pl
               refetch={() => void refetch()}
             />
           )}
-        </Pressable>
+        </View>
       </Pressable>
     </Modal>
   );

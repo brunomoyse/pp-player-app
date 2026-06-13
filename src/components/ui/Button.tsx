@@ -21,6 +21,14 @@ const FG: Record<ButtonVariant, string> = {
   success: 'text-pp-bg',
 };
 
+// Android ripple tint — dark over light fills (primary/success), light over dark fills.
+const RIPPLE: Record<ButtonVariant, string> = {
+  primary: 'rgba(0,0,0,0.12)',
+  secondary: 'rgba(255,255,255,0.10)',
+  danger: 'rgba(255,255,255,0.18)',
+  success: 'rgba(0,0,0,0.12)',
+};
+
 export interface ButtonProps extends Omit<PressableProps, 'children' | 'style'> {
   title: string;
   variant?: ButtonVariant;
@@ -44,6 +52,7 @@ export function Button({
     <Pressable
       accessibilityRole="button"
       accessibilityState={{ disabled: !!isDisabled, busy: !!loading }}
+      android_ripple={isDisabled ? undefined : { color: RIPPLE[variant] }}
       disabled={isDisabled}
       className={cn(
         'min-h-[44px] flex-row items-center justify-center rounded-full px-5',

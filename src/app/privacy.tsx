@@ -1,11 +1,11 @@
 import { useMutation, useQuery } from '@apollo/client/react';
-import { Ionicons } from '@expo/vector-icons';
-import { Redirect, Stack, router } from 'expo-router';
+import { Redirect, Stack } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Pressable, Switch, View } from 'react-native';
+import { Switch, View } from 'react-native';
 
 import { Card, EmptyState, LoadingState, Screen, Text } from '@/components/ui';
+import { BackButton } from '@/components';
 import { GET_MY_PRIVACY_SETTINGS, UPDATE_PRIVACY_SETTINGS } from '@/graphql/operations';
 import { useFeatureFlags } from '@/hooks/useFeatureFlags';
 import { useIsAuthenticated } from '@/stores/useAuthStore';
@@ -98,9 +98,7 @@ export default function PrivacyScreen() {
       <Stack.Screen options={{ headerShown: false }} />
       <Screen contentClassName="gap-4">
         <View className="flex-row items-center gap-3">
-          <Pressable onPress={() => router.back()} accessibilityLabel={t('common.back')} hitSlop={8}>
-            <Ionicons name="chevron-back" size={26} color={colors.textMuted} />
-          </Pressable>
+          <BackButton />
           <Text variant="title">{t('privacy.title')}</Text>
         </View>
 

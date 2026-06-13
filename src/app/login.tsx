@@ -64,7 +64,7 @@ export default function LoginScreen() {
             placeholder="••••••••"
           />
           <Pressable onPress={() => setShow((s) => !s)} hitSlop={8} className="self-end">
-            <Text variant="dim" className="text-[12px]">
+            <Text variant="dim">
               {show ? t('auth.hidePassword') : t('auth.showPassword')}
             </Text>
           </Pressable>

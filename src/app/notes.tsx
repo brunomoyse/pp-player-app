@@ -1,16 +1,14 @@
 import { useQuery } from '@apollo/client/react';
-import { Ionicons } from '@expo/vector-icons';
-import { Redirect, Stack, router } from 'expo-router';
+import { Redirect, Stack } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 
-import { PlayerNoteSheet } from '@/components';
+import { BackButton, PlayerNoteSheet } from '@/components';
 import { Badge, Card, EmptyState, ErrorState, LoadingState, Screen, Text } from '@/components/ui';
 import { GET_MY_PLAYER_NOTES } from '@/graphql/operations';
 import { useFeatureFlags } from '@/hooks/useFeatureFlags';
 import { useIsAuthenticated } from '@/stores/useAuthStore';
-import { colors } from '@/theme/tokens';
 
 const STYLE_LABEL: Record<string, string> = {
   TAG: 'TAG',
@@ -42,9 +40,7 @@ export default function NotesScreen() {
         onRefresh={() => void refetch()}
         contentClassName="gap-4">
         <View className="flex-row items-center gap-3">
-          <Pressable onPress={() => router.back()} accessibilityLabel={t('common.back')} hitSlop={8}>
-            <Ionicons name="chevron-back" size={26} color={colors.textMuted} />
-          </Pressable>
+          <BackButton />
           <Text variant="title">{t('notes.title')}</Text>
         </View>
 
@@ -83,7 +79,7 @@ export default function NotesScreen() {
                   </Text>
                 ) : null}
                 {note.tags && note.tags.length > 0 ? (
-                  <Text variant="dim" className="text-[12px]">
+                  <Text variant="dim">
                     {note.tags.map((tg) => t(`notes.tags.${tg.tag}`, tg.tag)).join(' · ')}
                   </Text>
                 ) : null}

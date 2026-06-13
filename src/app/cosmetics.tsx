@@ -1,11 +1,12 @@
 import { useMutation, useQuery } from '@apollo/client/react';
 import { Ionicons } from '@expo/vector-icons';
-import { Redirect, Stack, router } from 'expo-router';
+import { Redirect, Stack } from 'expo-router';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Pressable, View } from 'react-native';
+import { Alert, View } from 'react-native';
 
 import { Badge, Button, Card, EmptyState, LoadingState, Screen, Text } from '@/components/ui';
+import { BackButton } from '@/components';
 import { EQUIP_COSMETIC, GET_COSMETIC_CATALOG, PURCHASE_COSMETIC } from '@/graphql/operations';
 import { useFeatureFlags } from '@/hooks/useFeatureFlags';
 import { useIsAuthenticated } from '@/stores/useAuthStore';
@@ -67,9 +68,7 @@ export default function CosmeticsScreen() {
         onRefresh={() => void refetch()}
         contentClassName="gap-4">
         <View className="flex-row items-center gap-3">
-          <Pressable onPress={() => router.back()} accessibilityLabel={t('common.back')} hitSlop={8}>
-            <Ionicons name="chevron-back" size={26} color={colors.textMuted} />
-          </Pressable>
+          <BackButton />
           <Text variant="title">{t('cosmetics.title')}</Text>
         </View>
 
@@ -93,7 +92,7 @@ export default function CosmeticsScreen() {
                   <View className="flex-1">
                     <Text className="font-sans-semibold text-pp-text">{item.name}</Text>
                     {item.description ? (
-                      <Text variant="dim" className="text-[12px]">
+                      <Text variant="dim">
                         {item.description}
                       </Text>
                     ) : null}

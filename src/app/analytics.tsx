@@ -1,10 +1,10 @@
 import { useQuery } from '@apollo/client/react';
 import { Ionicons } from '@expo/vector-icons';
-import { Redirect, Stack, router } from 'expo-router';
+import { Redirect, Stack } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { Pressable, View } from 'react-native';
+import { View } from 'react-native';
 
-import { StatCard } from '@/components';
+import { BackButton, StatCard } from '@/components';
 import { Card, EmptyState, ErrorState, LoadingState, Screen, Text } from '@/components/ui';
 import { GET_MY_PRO_ANALYTICS } from '@/graphql/operations';
 import { useFeatureFlags } from '@/hooks/useFeatureFlags';
@@ -40,9 +40,7 @@ export default function AnalyticsScreen() {
         onRefresh={() => void refetch()}
         contentClassName="gap-4">
         <View className="flex-row items-center gap-3">
-          <Pressable onPress={() => router.back()} accessibilityLabel={t('common.back')} hitSlop={8}>
-            <Ionicons name="chevron-back" size={26} color={colors.textMuted} />
-          </Pressable>
+          <BackButton />
           <Text variant="title">{t('pro.analyticsTitle')}</Text>
         </View>
 
@@ -87,7 +85,7 @@ export default function AnalyticsScreen() {
                 {t('pro.byClub')}
               </Text>
               {(a?.byClub ?? []).length === 0 ? (
-                <Text variant="dim" className="text-[12px]">
+                <Text variant="dim">
                   {t('pro.noData')}
                 </Text>
               ) : (
@@ -95,7 +93,7 @@ export default function AnalyticsScreen() {
                   <View key={c.clubId} className="flex-row items-center justify-between py-1.5">
                     <View className="flex-1">
                       <Text className="font-sans-semibold text-pp-text">{c.clubName}</Text>
-                      <Text variant="dim" className="text-[12px]">
+                      <Text variant="dim">
                         {c.tournaments} {t('pro.tournaments').toLowerCase()}
                       </Text>
                     </View>
@@ -114,7 +112,7 @@ export default function AnalyticsScreen() {
                 {t('pro.byBuyIn')}
               </Text>
               {(a?.byBuyIn ?? []).length === 0 ? (
-                <Text variant="dim" className="text-[12px]">
+                <Text variant="dim">
                   {t('pro.noData')}
                 </Text>
               ) : (
@@ -124,7 +122,7 @@ export default function AnalyticsScreen() {
                       <Text className="font-sans-semibold text-pp-text">
                         {currencyCents(b.buyInCents)}
                       </Text>
-                      <Text variant="dim" className="text-[12px]">
+                      <Text variant="dim">
                         {b.tournaments} {t('pro.tournaments').toLowerCase()}
                       </Text>
                     </View>

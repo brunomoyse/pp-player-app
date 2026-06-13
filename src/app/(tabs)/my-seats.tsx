@@ -120,8 +120,14 @@ export default function MySeatsScreen() {
       ) : (
         <Stagger className="gap-3">
           {filtered.map((reg) => (
-            <Pressable key={reg.id} onPress={() => router.push(`/tournament/${reg.tournamentId}`)}>
-              <Card className="gap-3">
+            // Card is the outer shell; only the body navigates. Action buttons live in a
+            // sibling region OUTSIDE the Pressable so VoiceOver doesn't nest button-in-button.
+            <Card key={reg.id} className="gap-3">
+              <Pressable
+                onPress={() => router.push(`/tournament/${reg.tournamentId}`)}
+                accessibilityRole="button"
+                accessibilityHint={t('mySeats.a11y.openHint')}
+                className="gap-3">
                 <View className="flex-row items-start justify-between gap-3">
                   <Text variant="heading" className="flex-1" numberOfLines={2}>
                     {reg.tournament.title}
@@ -142,25 +148,27 @@ export default function MySeatsScreen() {
                     />
                   ) : null}
                 </View>
+              </Pressable>
 
-                {reg.tournament.status === 'UPCOMING' ? (
-                  <View className="flex-row gap-2">
-                    <Button
-                      title={t('mySeats.qrCode.showQR')}
-                      variant="secondary"
-                      className="flex-1"
-                      onPress={() => setQrFor(reg.tournamentId)}
-                    />
-                    <Button
-                      title={t('mySeats.cancel')}
-                      variant="danger"
-                      className="flex-1"
-                      onPress={() => confirmCancel(reg)}
-                    />
-                  </View>
-                ) : null}
-              </Card>
-            </Pressable>
+              {reg.tournament.status === 'UPCOMING' ? (
+                <View className="flex-row gap-2">
+                  <Button
+                    title={t('mySeats.qrCode.showQR')}
+                    variant="secondary"
+                    className="flex-1"
+                    accessibilityHint={t('mySeats.a11y.qrHint')}
+                    onPress={() => setQrFor(reg.tournamentId)}
+                  />
+                  <Button
+                    title={t('mySeats.cancel')}
+                    variant="danger"
+                    className="flex-1"
+                    accessibilityHint={t('mySeats.a11y.cancelHint')}
+                    onPress={() => confirmCancel(reg)}
+                  />
+                </View>
+              ) : null}
+            </Card>
           ))}
         </Stagger>
       )}
@@ -174,7 +182,7 @@ function Row({ icon, text }: { icon: keyof typeof Ionicons.glyphMap; text: strin
   return (
     <View className="flex-row items-center gap-1.5">
       <Ionicons name={icon} size={14} color={colors.textMuted} />
-      <Text variant="muted" className="text-[13px]">
+      <Text variant="caption">
         {text}
       </Text>
     </View>

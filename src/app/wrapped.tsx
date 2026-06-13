@@ -1,10 +1,11 @@
 import { useQuery } from '@apollo/client/react';
 import { Ionicons } from '@expo/vector-icons';
-import { Redirect, Stack, router } from 'expo-router';
+import { Redirect, Stack } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { Pressable, Share, View } from 'react-native';
+import { Share, View } from 'react-native';
 
 import { Button, Card, EmptyState, LoadingState, Screen, Text } from '@/components/ui';
+import { BackButton } from '@/components';
 import { GET_MY_YEAR_IN_POKER } from '@/graphql/operations';
 import { useIsAuthenticated } from '@/stores/useAuthStore';
 import { colors } from '@/theme/tokens';
@@ -58,9 +59,7 @@ export default function WrappedScreen() {
       <Stack.Screen options={{ headerShown: false }} />
       <Screen contentClassName="gap-4">
         <View className="flex-row items-center gap-3">
-          <Pressable onPress={() => router.back()} accessibilityLabel={t('common.back')} hitSlop={8}>
-            <Ionicons name="chevron-back" size={26} color={colors.textMuted} />
-          </Pressable>
+          <BackButton />
           <Text variant="title">{t('wrapped.title')}</Text>
         </View>
 

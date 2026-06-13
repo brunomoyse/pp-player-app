@@ -1,10 +1,8 @@
-import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 import { Modal, Pressable, View } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
-import { Text } from '@/components/ui';
-import { colors } from '@/theme/tokens';
+import { IconButton, Text } from '@/components/ui';
 
 export interface QRCodeModalProps {
   visible: boolean;
@@ -24,14 +22,13 @@ export function QRCodeModal({ visible, tournamentId, onClose }: QRCodeModalProps
         onPress={onClose}
         className="flex-1 items-center justify-center px-8"
         style={{ backgroundColor: 'rgba(10,10,12,0.72)' }}>
-        <Pressable
-          onPress={() => {}}
+        <View
+          onStartShouldSetResponder={() => true}
+          accessibilityViewIsModal
           className="w-full max-w-[340px] items-center gap-4 rounded-2xl border border-pp-border bg-pp-surface p-6">
           <View className="w-full flex-row items-center justify-between">
             <Text variant="heading">{t('mySeats.qrCode.title')}</Text>
-            <Pressable onPress={onClose} accessibilityRole="button" hitSlop={8}>
-              <Ionicons name="close" size={22} color={colors.textMuted} />
-            </Pressable>
+            <IconButton name="close" size={22} accessibilityLabel={t('common.close')} onPress={onClose} />
           </View>
 
           {value ? (
@@ -45,7 +42,7 @@ export function QRCodeModal({ visible, tournamentId, onClose }: QRCodeModalProps
           <Text variant="muted" className="text-center text-[13px]">
             {t('mySeats.qrCode.instructions')}
           </Text>
-        </Pressable>
+        </View>
       </Pressable>
     </Modal>
   );

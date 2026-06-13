@@ -1,4 +1,6 @@
 // Domain components (built on the ui/ primitives + motion/).
+export { BackButton } from './BackButton';
+export type { BackButtonProps } from './BackButton';
 export { TournamentCard } from './TournamentCard';
 export type { TournamentCardProps } from './TournamentCard';
 export { LeaderboardTable } from './LeaderboardTable';
@@ -35,3 +37,4 @@ export type { QRCodeScannerProps } from './QRCodeScanner';
 export { Placeholder } from './Placeholder';
 export { ToastOverlay } from './ToastOverlay';
 export { ConnectionBanner } from './ConnectionBanner';
+export { NotificationPrimer } from './NotificationPrimer';

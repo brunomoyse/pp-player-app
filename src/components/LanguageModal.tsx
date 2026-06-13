@@ -2,7 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from 'react-i18next';
 import { Modal, Pressable, View } from 'react-native';
 
-import { Text } from '@/components/ui';
+import { IconButton, Text } from '@/components/ui';
 import { cn } from '@/lib/cn';
 import { LOCALE_LABELS, useI18n } from '@/i18n/useI18n';
 import { colors } from '@/theme/tokens';
@@ -22,14 +22,13 @@ export function LanguageModal({ visible, onClose }: LanguageModalProps) {
         onPress={onClose}
         className="flex-1 justify-end"
         style={{ backgroundColor: 'rgba(10,10,12,0.6)' }}>
-        <Pressable
-          onPress={() => {}}
+        <View
+          onStartShouldSetResponder={() => true}
+          accessibilityViewIsModal
           className="rounded-t-2xl border-t border-pp-border bg-pp-surface pb-8 pt-4">
           <View className="mb-3 flex-row items-center justify-between px-5">
             <Text variant="heading">{t('common.language')}</Text>
-            <Pressable onPress={onClose} accessibilityRole="button" hitSlop={8}>
-              <Ionicons name="close" size={22} color={colors.textMuted} />
-            </Pressable>
+            <IconButton name="close" size={22} accessibilityLabel={t('common.close')} onPress={onClose} />
           </View>
 
           <View className="gap-2 px-5 pt-1">
@@ -56,7 +55,7 @@ export function LanguageModal({ visible, onClose }: LanguageModalProps) {
               );
             })}
           </View>
-        </Pressable>
+        </View>
       </Pressable>
     </Modal>
   );

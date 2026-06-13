@@ -76,7 +76,7 @@ function Setting({
       <View className="flex-1">
         <Text className="font-sans-semibold text-pp-text">{title}</Text>
         {subtitle ? (
-          <Text variant="dim" className="text-[12px]">
+          <Text variant="dim">
             {subtitle}
           </Text>
         ) : null}

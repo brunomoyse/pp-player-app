@@ -95,7 +95,7 @@ export default function LeaderboardScreen() {
             <Text variant="mono" className="text-pp-gold">
               {Math.round(me.points)}
             </Text>
-            <Text variant="dim" className="text-[11px]">
+            <Text variant="micro">
               {t('leaderboard.points')}
             </Text>
           </View>

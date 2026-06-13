@@ -1,10 +1,10 @@
 import { useMutation, useQuery } from '@apollo/client/react';
-import { Ionicons } from '@expo/vector-icons';
-import { Redirect, Stack, router } from 'expo-router';
+import { Redirect, Stack } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { Pressable, View } from 'react-native';
+import { View } from 'react-native';
 
 import { Badge, Button, Card, EmptyState, LoadingState, Screen, Text } from '@/components/ui';
+import { BackButton } from '@/components';
 import {
   CLAIM_PREDICTION_POINTS,
   GET_MY_PREDICTION_BALANCE,
@@ -12,7 +12,6 @@ import {
 } from '@/graphql/operations';
 import { useFeatureFlags } from '@/hooks/useFeatureFlags';
 import { useIsAuthenticated } from '@/stores/useAuthStore';
-import { colors } from '@/theme/tokens';
 import type { PredictionStatus } from '@/types/prediction';
 
 const STATUS_TONE: Record<PredictionStatus, 'gold' | 'neutral' | 'live'> = {
@@ -49,9 +48,7 @@ export default function PredictionsScreen() {
         onRefresh={() => void balanceQ.refetch()}
         contentClassName="gap-4">
         <View className="flex-row items-center gap-3">
-          <Pressable onPress={() => router.back()} accessibilityLabel={t('common.back')} hitSlop={8}>
-            <Ionicons name="chevron-back" size={26} color={colors.textMuted} />
-          </Pressable>
+          <BackButton />
           <Text variant="title">{t('predictions.title')}</Text>
         </View>
 
@@ -86,7 +83,7 @@ export default function PredictionsScreen() {
                 {t('predictions.history')}
               </Text>
               {predictions.length === 0 ? (
-                <Text variant="dim" className="text-[12px]">
+                <Text variant="dim">
                   {t('predictions.empty')}
                 </Text>
               ) : (
@@ -96,7 +93,7 @@ export default function PredictionsScreen() {
                       <Text className="font-sans-semibold text-pp-text">
                         {p.predictedWinnerName}
                       </Text>
-                      <Text variant="dim" className="text-[12px]">
+                      <Text variant="dim">
                         {p.tournamentName} · {t('predictions.staked', { points: p.stakePoints })}
                       </Text>
                     </View>

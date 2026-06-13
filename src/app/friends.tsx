@@ -1,11 +1,13 @@
 import { useMutation, useQuery } from '@apollo/client/react';
 import { Ionicons } from '@expo/vector-icons';
-import { Redirect, Stack, router } from 'expo-router';
+import { Redirect, Stack } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 
-import { Avatar, Button, Card, LoadingState, Screen, Text } from '@/components/ui';
+import { Avatar, Button, Card, IconButton, LoadingState, Screen, Text } from '@/components/ui';
+import { BackButton } from '@/components';
+import { success } from '@/lib/haptics';
 import {
   ACCEPT_FRIEND_REQUEST,
   GET_INCOMING_FRIEND_REQUESTS,
@@ -34,7 +36,7 @@ function FlameLabel({ friend }: { friend: Friend }) {
   return (
     <View className="flex-row items-center gap-1">
       <Ionicons name="flame" size={14} color={alive ? colors.gold : colors.textDim} />
-      <Text variant="dim" className="text-[12px]">
+      <Text variant="dim">
         {t('friends.sharedNights', { count: nights })}
       </Text>
     </View>
@@ -104,9 +106,7 @@ export default function FriendsScreen() {
         onRefresh={() => void friendsQ.refetch()}
         contentClassName="gap-4">
         <View className="flex-row items-center gap-3">
-          <Pressable onPress={() => router.back()} accessibilityLabel={t('common.back')} hitSlop={8}>
-            <Ionicons name="chevron-back" size={26} color={colors.textMuted} />
-          </Pressable>
+          <BackButton />
           <Text variant="title">{t('friends.title')}</Text>
         </View>
 
@@ -128,14 +128,19 @@ export default function FriendsScreen() {
                       title={t('friends.accept')}
                       variant="primary"
                       loading={accepting}
-                      onPress={() => void acceptRequest({ variables: { friendshipId: f.friendshipId } })}
+                      accessibilityHint={t('friends.a11y.acceptHint')}
+                      onPress={() => {
+                        success();
+                        void acceptRequest({ variables: { friendshipId: f.friendshipId } });
+                      }}
                     />
-                    <Pressable
-                      onPress={() => void removeFriend({ variables: { friendshipId: f.friendshipId } })}
+                    <IconButton
+                      name="close"
+                      size={22}
                       accessibilityLabel={t('friends.decline')}
-                      hitSlop={8}>
-                      <Ionicons name="close" size={22} color={colors.textMuted} />
-                    </Pressable>
+                      accessibilityHint={t('friends.a11y.declineHint')}
+                      onPress={() => void removeFriend({ variables: { friendshipId: f.friendshipId } })}
+                    />
                   </View>
                 ))}
               </Card>
@@ -151,15 +156,15 @@ export default function FriendsScreen() {
                   <View key={f.friendshipId} className="flex-row items-center gap-3 py-2">
                     <Avatar name={f.name} size={36} />
                     <Text className="flex-1 font-sans-semibold text-pp-text">{f.name}</Text>
-                    <Text variant="dim" className="text-[12px]">
+                    <Text variant="dim">
                       {t('friends.pending')}
                     </Text>
-                    <Pressable
-                      onPress={() => void removeFriend({ variables: { friendshipId: f.friendshipId } })}
+                    <IconButton
+                      name="close"
+                      size={22}
                       accessibilityLabel={t('friends.cancel')}
-                      hitSlop={8}>
-                      <Ionicons name="close" size={22} color={colors.textMuted} />
-                    </Pressable>
+                      onPress={() => void removeFriend({ variables: { friendshipId: f.friendshipId } })}
+                    />
                   </View>
                 ))}
               </Card>
@@ -171,7 +176,7 @@ export default function FriendsScreen() {
                 {t('friends.yourFriends')}
               </Text>
               {friends.length === 0 ? (
-                <Text variant="dim" className="text-[12px]">
+                <Text variant="dim">
                   {t('friends.empty')}
                 </Text>
               ) : (
@@ -183,12 +188,14 @@ export default function FriendsScreen() {
                         <Text className="font-sans-semibold text-pp-text">{f.name}</Text>
                         <FlameLabel friend={f} />
                       </View>
-                      <Pressable
-                        onPress={() => void removeFriend({ variables: { friendshipId: f.friendshipId } })}
+                      <IconButton
+                        name="ellipsis-horizontal"
+                        size={20}
+                        color={colors.textDim}
                         accessibilityLabel={t('friends.remove')}
-                        hitSlop={8}>
-                        <Ionicons name="ellipsis-horizontal" size={20} color={colors.textDim} />
-                      </Pressable>
+                        accessibilityHint={t('friends.a11y.removeHint')}
+                        onPress={() => void removeFriend({ variables: { friendshipId: f.friendshipId } })}
+                      />
                     </View>
                     {/* Registration permission toggle */}
                     <Pressable
@@ -197,13 +204,17 @@ export default function FriendsScreen() {
                           variables: { friendshipId: f.friendshipId, allow: !f.canRegisterMe },
                         })
                       }
-                      className="flex-row items-center gap-2 py-1 px-2">
+                      accessibilityRole="checkbox"
+                      accessibilityState={{ checked: f.canRegisterMe }}
+                      accessibilityLabel={t('friends.canRegisterMe')}
+                      hitSlop={8}
+                      className="flex-row items-center gap-2 py-2 px-2">
                       <Ionicons
                         name={f.canRegisterMe ? 'checkmark-circle' : 'ellipse-outline'}
                         size={18}
                         color={f.canRegisterMe ? colors.gold : colors.textDim}
                       />
-                      <Text className="text-[12px] flex-1 text-pp-text-dim">
+                      <Text variant="micro" className="flex-1">
                         {t('friends.canRegisterMe')}
                       </Text>
                     </Pressable>

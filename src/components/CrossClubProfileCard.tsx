@@ -24,7 +24,7 @@ export function CrossClubProfileCard() {
       </Text>
 
       {memberships.length === 0 ? (
-        <Text variant="dim" className="text-[12px]">
+        <Text variant="dim">
           {loading ? t('common.loading') : t('profile.noClubsYet')}
         </Text>
       ) : (
@@ -35,7 +35,7 @@ export function CrossClubProfileCard() {
             </View>
             <View className="flex-1">
               <Text className="font-sans-semibold text-pp-text">{m.club?.name ?? '-'}</Text>
-              <Text variant="dim" className="text-[12px]">
+              <Text variant="dim">
                 {m.displayName}
                 {m.club?.city ? ` · ${m.club.city}` : ''}
               </Text>

@@ -197,7 +197,7 @@ export default function HomeScreen() {
                   <Text className="font-sans-semibold text-pp-text" numberOfLines={1}>
                     {tournament.title}
                   </Text>
-                  <Text variant="dim" className="text-[11px]">
+                  <Text variant="micro">
                     {formatDate(tournament.startTime, i18n.language)}
                   </Text>
                 </View>

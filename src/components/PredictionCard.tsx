@@ -4,12 +4,13 @@ import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Pressable, View } from 'react-native';
 
-import { Badge, Button, Card, Text } from '@/components/ui';
+import { Badge, Button, Card, IconButton, Text } from '@/components/ui';
 import {
   CREATE_PREDICTION,
   GET_MY_PREDICTION_BALANCE,
   GET_MY_PREDICTIONS,
 } from '@/graphql/operations';
+import { tap } from '@/lib/haptics';
 import { colors } from '@/theme/tokens';
 
 const STAKE_STEP = 25;
@@ -64,7 +65,7 @@ export function PredictionCard({
             label={t(`predictions.status.${existing.status}`)}
           />
         </View>
-        <Text variant="dim" className="text-[12px]">
+        <Text variant="dim">
           {t('predictions.staked', { points: existing.stakePoints })}
         </Text>
       </Card>
@@ -91,7 +92,7 @@ export function PredictionCard({
         <Text variant="label" className="text-pp-gold-deep">
           {t('predictions.predictWinner')}
         </Text>
-        <Text variant="dim" className="text-[12px]">
+        <Text variant="dim">
           {t('predictions.balance', { points: balance })}
         </Text>
       </View>
@@ -119,19 +120,25 @@ export function PredictionCard({
       <View className="flex-row items-center justify-between">
         <Text className="text-pp-text">{t('predictions.stake')}</Text>
         <View className="flex-row items-center gap-3">
-          <Pressable
-            onPress={() => setStake((s) => Math.max(STAKE_STEP, s - STAKE_STEP))}
-            accessibilityLabel="decrease"
-            hitSlop={8}>
-            <Ionicons name="remove-circle-outline" size={26} color={colors.textMuted} />
-          </Pressable>
+          <IconButton
+            name="remove-circle-outline"
+            size={26}
+            accessibilityLabel={t('predictions.decreaseStake')}
+            onPress={() => {
+              tap();
+              setStake((s) => Math.max(STAKE_STEP, s - STAKE_STEP));
+            }}
+          />
           <Text className="min-w-[48px] text-center font-sans-semibold text-pp-text">{stake}</Text>
-          <Pressable
-            onPress={() => setStake((s) => Math.min(balance || STAKE_STEP, s + STAKE_STEP))}
-            accessibilityLabel="increase"
-            hitSlop={8}>
-            <Ionicons name="add-circle-outline" size={26} color={colors.textMuted} />
-          </Pressable>
+          <IconButton
+            name="add-circle-outline"
+            size={26}
+            accessibilityLabel={t('predictions.increaseStake')}
+            onPress={() => {
+              tap();
+              setStake((s) => Math.min(balance || STAKE_STEP, s + STAKE_STEP));
+            }}
+          />
         </View>
       </View>
 
