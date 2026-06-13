@@ -39,14 +39,25 @@
         }
       ],
       "expo-localization",
-      "expo-secure-store",
+      [
+        "expo-secure-store",
+        {
+          "faceIDPermission": "PocketPair uses Face ID to unlock your saved sign-in so you don't have to re-enter your password."
+        }
+      ],
       [
         "expo-camera",
         {
           "cameraPermission": "PocketPair uses the camera to scan tournament check-in QR codes."
         }
       ],
-      "expo-audio",
+      [
+        "expo-audio",
+        {
+          "microphonePermission": false,
+          "recordAudioAndroid": false
+        }
+      ],
       "expo-sharing",
       [
         "expo-notifications",
