@@ -5,6 +5,7 @@ import type { ApolloLink } from '@apollo/client/link';
 import { Observable } from 'rxjs';
 
 import { getAuthActions } from '@/graphql/authActions';
+import { captureException } from '@/lib/monitoring';
 import { tokens } from '@/lib/tokens';
 
 // Inject the bearer access token on every request.
@@ -38,12 +39,15 @@ function isAuthError(error: unknown): boolean {
 // The proactive 14-min timer handles the common case; this is the safety net.
 export const errorLink = new ErrorLink(({ error, operation, forward }) => {
   if (!isAuthError(error)) {
-    if (__DEV__ && error) {
-      console.warn(
-        `[gql] ${operation.operationName ?? 'operation'} failed: ${
-          (error as { message?: string })?.message ?? String(error)
-        }`
-      );
+    if (error) {
+      captureException(error, { operation: operation.operationName ?? 'operation' });
+      if (__DEV__) {
+        console.warn(
+          `[gql] ${operation.operationName ?? 'operation'} failed: ${
+            (error as { message?: string })?.message ?? String(error)
+          }`
+        );
+      }
     }
     return;
   }

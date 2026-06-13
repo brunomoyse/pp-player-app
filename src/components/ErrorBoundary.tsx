@@ -1,7 +1,8 @@
-import { Component, type ReactNode } from 'react';
+import { Component, type ErrorInfo, type ReactNode } from 'react';
 import { View } from 'react-native';
 
 import { Button, Text } from '@/components/ui';
+import { captureException } from '@/lib/monitoring';
 
 interface Props {
   children: ReactNode;
@@ -18,6 +19,10 @@ export class ErrorBoundary extends Component<Props, State> {
 
   static getDerivedStateFromError(error: Error): State {
     return { error };
+  }
+
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    captureException(error, { componentStack: info.componentStack });
   }
 
   reset = () => this.setState({ error: null });

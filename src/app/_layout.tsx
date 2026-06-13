@@ -32,6 +32,7 @@ import { useAchievementNotifications } from '@/hooks/useAchievementNotifications
 import { useConnectionMonitor } from '@/hooks/useConnectionMonitor';
 import { usePushNotifications } from '@/hooks/usePushNotifications';
 import { useSeatingNotifications } from '@/hooks/useSeatingNotifications';
+import { initMonitoring } from '@/lib/monitoring';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useGamificationStore } from '@/stores/useGamificationStore';
 import { colors } from '@/theme/tokens';
@@ -78,6 +79,7 @@ export default function RootLayout() {
   const initialize = useAuthStore((s) => s.initialize);
 
   useEffect(() => {
+    initMonitoring();
     initialize();
     void loadPersistedLocale();
   }, [initialize]);
