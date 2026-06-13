@@ -8,7 +8,7 @@ import { Alert, Pressable, View } from 'react-native';
 
 import { ClubSelector, QRCodeScanner, TournamentCard } from '@/components';
 import { Stagger } from '@/components/motion';
-import { EmptyState, ErrorState, Input, LoadingState, Screen, Segment, Text } from '@/components/ui';
+import { EmptyState, ErrorState, Input, Screen, Segment, SkeletonList, Text } from '@/components/ui';
 import {
   GET_MY_ATTENDANCE_STREAK,
   GET_TOURNAMENTS,
@@ -129,7 +129,7 @@ export default function TournamentsScreen() {
       <Segment options={segments} value={category} onChange={setCategory} />
 
       {loading && !data ? (
-        <LoadingState label={t('common.loading')} />
+        <SkeletonList />
       ) : error ? (
         <ErrorState
           message={t('common.errorLoading')}

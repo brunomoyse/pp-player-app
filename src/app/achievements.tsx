@@ -1,15 +1,13 @@
 import { useQuery } from '@apollo/client/react';
-import { Ionicons } from '@expo/vector-icons';
-import { Redirect, Stack, router } from 'expo-router';
+import { Redirect, Stack } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { Pressable, View } from 'react-native';
+import { View } from 'react-native';
 
-import { AchievementGrid } from '@/components';
+import { AchievementGrid, BackButton } from '@/components';
 import { AnimatedNumber } from '@/components/motion';
-import { Card, ErrorState, LoadingState, Screen, Text } from '@/components/ui';
+import { Card, ErrorState, Screen, SkeletonList, Text } from '@/components/ui';
 import { GET_MY_ACHIEVEMENTS } from '@/graphql/operations';
 import { useIsAuthenticated } from '@/stores/useAuthStore';
-import { colors } from '@/theme/tokens';
 
 export default function AchievementsScreen() {
   const { t } = useTranslation();
@@ -33,14 +31,12 @@ export default function AchievementsScreen() {
         onRefresh={() => void refetch()}
         contentClassName="gap-4">
         <View className="flex-row items-center gap-3">
-          <Pressable onPress={() => router.back()} accessibilityLabel={t('common.back')} hitSlop={8}>
-            <Ionicons name="chevron-back" size={26} color={colors.textMuted} />
-          </Pressable>
+          <BackButton />
           <Text variant="title">{t('achievements.title')}</Text>
         </View>
 
         {loading && !data ? (
-          <LoadingState label={t('common.loading')} />
+          <SkeletonList count={6} />
         ) : error ? (
           <ErrorState
             message={t('common.errorLoading')}

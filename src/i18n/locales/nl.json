@@ -137,6 +137,9 @@
     "nextAchievements": "Volgende prestaties"
   },
   "events": {
+    "a11y": {
+      "openHint": "Opent de toernooidetails"
+    },
     "title": "Evenementen",
     "search": {
       "placeholder": "Zoek toernooien..."
@@ -254,6 +257,11 @@
     }
   },
   "mySeats": {
+    "a11y": {
+      "openHint": "Opent de toernooidetails",
+      "qrHint": "Toont je incheck-QR-code",
+      "cancelHint": "Annuleert je inschrijving"
+    },
     "title": "Mijn Plaatsen",
     "stats": {
       "registered": "Geregistreerd",
@@ -500,6 +508,9 @@
     "comebackMessage": "Frisse start. Je reeks begint opnieuw op {count}."
   },
   "season": {
+    "a11y": {
+      "claimHint": "Claimt je quest-beloning"
+    },
     "title": "Seizoen",
     "subtitle": "Pass, quests & Hall of Fame",
     "selectClub": "Kies een club om het seizoen te zien.",
@@ -548,6 +559,11 @@
     "meetings": "{count} ontmoetingen"
   },
   "friends": {
+    "a11y": {
+      "acceptHint": "Accepteert dit vriendschapsverzoek",
+      "declineHint": "Wijst dit vriendschapsverzoek af",
+      "removeHint": "Verwijdert deze vriend"
+    },
     "title": "Vrienden",
     "subtitle": "Vlammen & vriendschapsverzoeken",
     "requests": "Vriendschapsverzoeken",
@@ -625,6 +641,8 @@
     }
   },
   "predictions": {
+    "decreaseStake": "Inzet verlagen",
+    "increaseStake": "Inzet verhogen",
     "title": "Voorspellingen",
     "subtitle": "Gratis fantasy-voorspellingen met punten",
     "balanceLabel": "Voorspelpunten",
@@ -658,6 +676,9 @@
     "footer": "Je privénotities worden nooit gedeeld of getoond, ongeacht deze instellingen."
   },
   "scouting": {
+    "a11y": {
+      "openHint": "Opent het profiel van deze speler"
+    },
     "title": "Tegenstander opzoeken",
     "subtitle": "Scout spelers die zich aanmeldden",
     "searchPlaceholder": "Zoek spelers op naam",
@@ -817,6 +838,13 @@
     "seatAssigned": "Stoel toegewezen — bekijk je tafel in Mijn Stoelen",
     "playerMoved": "Je bent verplaatst naar een nieuwe stoel",
     "eliminated": "Je bent uitgeschakeld uit het toernooi",
-    "qualifiedForDay2": "Je bent gekwalificeerd voor Day 2!"
+    "qualifiedForDay2": "Je bent gekwalificeerd voor Day 2!",
+    "primerTitle": "Mis je plek nooit",
+    "primerBody": "Zet meldingen aan zodat je als eerste weet wat er in je toernooien gebeurt.",
+    "primerSeating": "Wanneer je een plek krijgt of naar een nieuwe tafel verhuist",
+    "primerResults": "Wanneer resultaten en uitbetalingen verschijnen",
+    "primerAchievements": "Wanneer je een nieuwe prestatie ontgrendelt",
+    "primerEnable": "Meldingen inschakelen",
+    "primerNotNow": "Niet nu"
   }
 }

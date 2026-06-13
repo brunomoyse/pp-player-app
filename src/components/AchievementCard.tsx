@@ -1,6 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
+import { MotiView } from 'moti';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
+import { useReducedMotion } from 'react-native-reanimated';
 
 import { Card, Text } from '@/components/ui';
 import { colors } from '@/theme/tokens';
@@ -20,18 +22,29 @@ function iconName(name?: string | null): keyof typeof Ionicons.glyphMap {
 
 export function AchievementCard({ item }: { item: PlayerAchievement }) {
   const { t } = useTranslation();
+  const reduce = useReducedMotion();
   const { achievement: a, isLocked, progress, unlockedAt } = item;
   const tier = a.tier ?? 'BRONZE';
   const threshold = a.thresholdValue ?? 0;
   const showProgress = isLocked && threshold > 1;
   const pct = threshold ? Math.min(Math.round((progress / threshold) * 100), 100) : 0;
+  // High-tier unlocks get a gentle tier-coloured "breathing" glow behind the icon.
+  const isHighTier = !isLocked && (tier === 'GOLD' || tier === 'PLATINUM' || tier === 'LEGENDARY');
 
   return (
-    <Card
-      highlighted={!isLocked && (tier === 'GOLD' || tier === 'PLATINUM' || tier === 'LEGENDARY')}
-      className="flex-row gap-3">
+    <Card highlighted={isHighTier} className="flex-row gap-3">
       {/* Locked state = greyed icon + lock badge (never dim the whole card / text). */}
-      <View className="relative h-12 w-12 items-center justify-center rounded-2xl border border-pp-border bg-white/5">
+      <View className="relative h-12 w-12 items-center justify-center overflow-hidden rounded-2xl border border-pp-border bg-white/5">
+        {isHighTier && !reduce ? (
+          <MotiView
+            pointerEvents="none"
+            className="absolute inset-0 rounded-2xl"
+            style={{ backgroundColor: TIER_COLOR[tier] }}
+            from={{ opacity: 0.12 }}
+            animate={{ opacity: 0.4 }}
+            transition={{ type: 'timing', duration: 1400, loop: true, repeatReverse: true }}
+          />
+        ) : null}
         <Ionicons name={iconName(a.icon)} size={24} color={isLocked ? colors.textDim : colors.gold} />
         {isLocked ? (
           <View className="absolute -bottom-1 -right-1 rounded-full bg-pp-bg p-0.5">

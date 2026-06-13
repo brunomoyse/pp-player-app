@@ -115,6 +115,9 @@
     "nextAchievements": "Next achievements"
   },
   "events": {
+    "a11y": {
+      "openHint": "Opens event details"
+    },
     "title": "Tournaments",
     "register": "Register",
     "unregister": "Unregister",
@@ -235,6 +238,11 @@
     }
   },
   "mySeats": {
+    "a11y": {
+      "openHint": "Opens event details",
+      "qrHint": "Shows your check-in QR code",
+      "cancelHint": "Cancels your registration"
+    },
     "title": "My Seats",
     "stats": {
       "registered": "Registered",
@@ -498,6 +506,9 @@
     "comebackMessage": "Fresh start. Your streak begins again at {count}."
   },
   "season": {
+    "a11y": {
+      "claimHint": "Claims your quest reward"
+    },
     "title": "Season",
     "subtitle": "Pass, quests & Hall of Fame",
     "selectClub": "Select a club to see its season.",
@@ -546,6 +557,11 @@
     "meetings": "{count} meetings"
   },
   "friends": {
+    "a11y": {
+      "acceptHint": "Accepts this friend request",
+      "declineHint": "Declines this friend request",
+      "removeHint": "Removes this friend"
+    },
     "title": "Friends",
     "subtitle": "Flames & friend requests",
     "requests": "Friend requests",
@@ -623,6 +639,8 @@
     }
   },
   "predictions": {
+    "decreaseStake": "Decrease stake",
+    "increaseStake": "Increase stake",
     "title": "Predictions",
     "subtitle": "Free fantasy picks with points",
     "balanceLabel": "Prediction points",
@@ -656,6 +674,9 @@
     "footer": "Your private notes are never shared or shown to anyone, regardless of these settings."
   },
   "scouting": {
+    "a11y": {
+      "openHint": "Opens this player’s profile"
+    },
     "title": "Opponent lookup",
     "subtitle": "Scout players who opted in",
     "searchPlaceholder": "Search players by name",
@@ -815,6 +836,13 @@
     "seatAssigned": "Seat assigned — check your table in My Seats",
     "playerMoved": "You've been moved to a new seat",
     "eliminated": "You've been eliminated from the tournament",
-    "qualifiedForDay2": "You've qualified for Day 2!"
+    "qualifiedForDay2": "You've qualified for Day 2!",
+    "primerTitle": "Never miss your seat",
+    "primerBody": "Turn on notifications so you're the first to know what's happening in your tournaments.",
+    "primerSeating": "When you're seated or moved to a new table",
+    "primerResults": "When results and payouts are posted",
+    "primerAchievements": "When you unlock a new achievement",
+    "primerEnable": "Enable notifications",
+    "primerNotNow": "Not now"
   }
 }

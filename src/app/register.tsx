@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 
-import { Button, Input, Screen, Text } from '@/components/ui';
+import { Button, IconButton, Input, Screen, Text } from '@/components/ui';
 import { openLegal } from '@/lib/legal';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { colors } from '@/theme/tokens';
@@ -72,7 +72,20 @@ export default function RegisterScreen() {
 
   return (
     <>
-      <Stack.Screen options={{ title: t('auth.register') }} />
+      <Stack.Screen
+        options={{
+          title: t('auth.register'),
+          headerLeft: () => (
+            <IconButton
+              name="close"
+              size={26}
+              color={colors.text}
+              accessibilityLabel={t('common.close')}
+              onPress={() => router.back()}
+            />
+          ),
+        }}
+      />
       <Screen contentClassName="gap-5 pt-6">
         <View className="gap-1">
           <Text variant="title">{t('auth.createAccount')}</Text>
@@ -143,7 +156,7 @@ export default function RegisterScreen() {
         />
 
         <Pressable onPress={() => setShow((s) => !s)} hitSlop={8} className="self-start">
-          <Text variant="dim" className="text-[12px]">
+          <Text variant="dim">
             {show ? t('auth.hidePassword') : t('auth.showPassword')}
           </Text>
         </Pressable>
@@ -187,7 +200,7 @@ export default function RegisterScreen() {
           </Pressable>
         </View>
 
-        <Text variant="dim" className="text-[12px]">
+        <Text variant="dim">
           {t('legal.responsibleGaming')}
         </Text>
 

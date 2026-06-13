@@ -106,6 +106,20 @@ export async function registerForPushNotificationsAsync(): Promise<string | null
   }
 }
 
+export type PushPermissionStatus = 'granted' | 'denied' | 'undetermined';
+
+/**
+ * Read the current push permission status WITHOUT prompting. Lets callers show
+ * their own rationale before triggering the OS dialog (Responsibility: explain
+ * why before asking). Returns 'denied' where push can't exist (web, simulator)
+ * so the rationale never shows on those targets.
+ */
+export async function getPushPermissionStatus(): Promise<PushPermissionStatus> {
+  if (Platform.OS === 'web' || !Device.isDevice) return 'denied';
+  const { status } = await Notifications.getPermissionsAsync();
+  return status as PushPermissionStatus;
+}
+
 /** True when a notification payload represents an unlocked achievement. */
 export function isAchievementNotification(
   content: Notifications.NotificationContent | undefined

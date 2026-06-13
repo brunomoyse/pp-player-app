@@ -117,7 +117,13 @@ export function AchievementCelebration({ show, achievement, onDismiss }: Achieve
   if (!achievement) return null;
 
   return (
-    <Modal visible={show} transparent animationType="fade" onRequestClose={onDismiss} statusBarTranslucent>
+    <Modal
+      visible={show}
+      transparent
+      animationType="fade"
+      onRequestClose={onDismiss}
+      statusBarTranslucent
+      accessibilityViewIsModal>
       <Pressable
         onPress={onDismiss}
         className="flex-1 items-center justify-center px-6"
@@ -224,7 +230,7 @@ export function AchievementCelebration({ show, achievement, onDismiss }: Achieve
               ) : null}
 
               <Pressable onPress={onDismiss} accessibilityRole="button" className="w-full items-center py-2">
-                <Text variant="muted" className="text-[13px]">
+                <Text variant="caption">
                   {t('common.nice')}
                 </Text>
               </Pressable>

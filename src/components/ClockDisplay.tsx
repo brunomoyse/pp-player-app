@@ -1,6 +1,8 @@
 import { MotiView } from 'moti';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
+import { useReducedMotion } from 'react-native-reanimated';
 
 import { Text } from '@/components/ui';
 import { cn } from '@/lib/cn';
@@ -23,14 +25,37 @@ export interface ClockDisplayProps {
 
 export function ClockDisplay({ currentLevel, nextLevel, timeRemaining, isLive }: ClockDisplayProps) {
   const { t } = useTranslation();
+  const reduce = useReducedMotion();
   const onBreak = !!currentLevel?.isBreak;
+
+  // Flash the clock briefly each time the blind level advances, so the change
+  // is noticeable on a glanced-at screen. Keyed counter restarts the animation.
+  const prevLevel = useRef<number | null>(null);
+  const [flash, setFlash] = useState(0);
+  useEffect(() => {
+    const lvl = currentLevel?.level ?? null;
+    if (!reduce && lvl != null && prevLevel.current != null && lvl !== prevLevel.current) {
+      setFlash((f) => f + 1);
+    }
+    prevLevel.current = lvl;
+  }, [currentLevel?.level, reduce]);
 
   return (
     <View
       className={cn(
-        'rounded-2xl border bg-white/[0.02] p-5',
+        'overflow-hidden rounded-2xl border bg-white/[0.02] p-5',
         isLive ? 'border-pp-danger' : 'border-pp-border'
       )}>
+      {flash > 0 ? (
+        <MotiView
+          key={flash}
+          pointerEvents="none"
+          className="absolute inset-0 bg-pp-gold"
+          from={{ opacity: 0.22 }}
+          animate={{ opacity: 0 }}
+          transition={{ type: 'timing', duration: 700 }}
+        />
+      ) : null}
       {/* Header */}
       <View className="mb-4 flex-row items-center justify-between">
         <View className="flex-row items-center gap-2">

@@ -1,7 +1,10 @@
+import { MotiView } from 'moti';
 import { View } from 'react-native';
+import { useReducedMotion } from 'react-native-reanimated';
 
 import { Avatar, Card, Text } from '@/components/ui';
 import { cn } from '@/lib/cn';
+import { ppEasing } from '@/lib/motion';
 import type { LeaderboardEntry } from '@/types/tournament';
 
 function fullName(e: LeaderboardEntry): string {
@@ -28,13 +31,22 @@ export function LeaderboardTable({ entries, currentUserId, metric = 'points' }: 
     return `${Math.round(e.points)}`;
   };
 
+  const reduce = useReducedMotion();
   return (
     <Card className="gap-1 p-2">
-      {entries.map((e) => {
+      {entries.map((e, i) => {
         const me = currentUserId != null && e.user?.id === currentUserId;
         return (
-          <View
+          <MotiView
             key={e.clubPlayerId}
+            from={{ opacity: 0, translateY: reduce ? 0 : 8 }}
+            animate={{ opacity: 1, translateY: 0 }}
+            transition={{
+              type: 'timing',
+              duration: reduce ? 0 : 320,
+              delay: reduce ? 0 : Math.min(i, 12) * 35,
+              easing: ppEasing,
+            }}
             className={cn(
               'flex-row items-center gap-3 rounded-xl px-2 py-2.5',
               me && 'bg-pp-gold/20 border border-pp-gold/30'
@@ -47,12 +59,12 @@ export function LeaderboardTable({ entries, currentUserId, metric = 'points' }: 
               <Text className="font-sans-semibold text-pp-text" numberOfLines={1}>
                 {fullName(e)}
               </Text>
-              <Text variant="dim" className="text-[11px]">
+              <Text variant="micro">
                 {e.totalTournaments} · {Math.round(e.itmPercentage)}% ITM
               </Text>
             </View>
             <Text className="font-mono-medium text-pp-gold">{value(e)}</Text>
-          </View>
+          </MotiView>
         );
       })}
     </Card>

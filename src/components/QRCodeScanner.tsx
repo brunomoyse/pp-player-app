@@ -37,11 +37,20 @@ export function QRCodeScanner({ visible, onClose, onScanned, title }: QRCodeScan
   };
 
   return (
-    <Modal visible={visible} animationType="slide" onRequestClose={onClose} statusBarTranslucent>
+    <Modal
+      visible={visible}
+      animationType="slide"
+      onRequestClose={onClose}
+      statusBarTranslucent
+      accessibilityViewIsModal>
       <View className="flex-1 bg-pp-bg">
         <View className="flex-row items-center justify-between px-5 pb-3 pt-14">
           <Text variant="heading">{heading}</Text>
-          <Pressable onPress={onClose} accessibilityRole="button" hitSlop={8}>
+          <Pressable
+            onPress={onClose}
+            accessibilityRole="button"
+            accessibilityLabel={t('common.close')}
+            hitSlop={8}>
             <Ionicons name="close" size={26} color={colors.text} />
           </Pressable>
         </View>

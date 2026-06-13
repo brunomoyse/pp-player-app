@@ -137,6 +137,9 @@
     "nextAchievements": "Prochains succès"
   },
   "events": {
+    "a11y": {
+      "openHint": "Ouvre les détails de l’événement"
+    },
     "title": "Évènements",
     "search": {
       "placeholder": "Rechercher tournois..."
@@ -254,6 +257,11 @@
     }
   },
   "mySeats": {
+    "a11y": {
+      "openHint": "Ouvre les détails de l’événement",
+      "qrHint": "Affiche votre QR code d’enregistrement",
+      "cancelHint": "Annule votre inscription"
+    },
     "title": "Mes Places",
     "stats": {
       "registered": "Inscrit",
@@ -499,6 +507,9 @@
     "comebackMessage": "Nouveau départ. Votre série recommence à {count}."
   },
   "season": {
+    "a11y": {
+      "claimHint": "Récupère la récompense de quête"
+    },
     "title": "Saison",
     "subtitle": "Pass, quêtes et Panthéon",
     "selectClub": "Choisissez un club pour voir sa saison.",
@@ -547,6 +558,11 @@
     "meetings": "{count} rencontres"
   },
   "friends": {
+    "a11y": {
+      "acceptHint": "Accepte cette demande d’ami",
+      "declineHint": "Refuse cette demande d’ami",
+      "removeHint": "Supprime cet ami"
+    },
     "title": "Amis",
     "subtitle": "Flammes et demandes d'amis",
     "requests": "Demandes d'amis",
@@ -624,6 +640,8 @@
     }
   },
   "predictions": {
+    "decreaseStake": "Diminuer la mise",
+    "increaseStake": "Augmenter la mise",
     "title": "Pronostics",
     "subtitle": "Pronostics fantasy gratuits avec des points",
     "balanceLabel": "Points de pronostic",
@@ -657,6 +675,9 @@
     "footer": "Vos notes privées ne sont jamais partagées ni montrées à qui que ce soit, quels que soient ces réglages."
   },
   "scouting": {
+    "a11y": {
+      "openHint": "Ouvre le profil de ce joueur"
+    },
     "title": "Recherche d'adversaires",
     "subtitle": "Analysez les joueurs qui ont accepté",
     "searchPlaceholder": "Rechercher des joueurs par nom",
@@ -816,6 +837,13 @@
     "seatAssigned": "Siège attribué — consultez votre table dans Mes Sièges",
     "playerMoved": "Vous avez été déplacé vers un nouveau siège",
     "eliminated": "Vous avez été éliminé du tournoi",
-    "qualifiedForDay2": "Vous êtes qualifié pour le Day 2 !"
+    "qualifiedForDay2": "Vous êtes qualifié pour le Day 2 !",
+    "primerTitle": "Ne ratez jamais votre place",
+    "primerBody": "Activez les notifications pour être le premier informé de ce qui se passe dans vos tournois.",
+    "primerSeating": "Quand vous êtes placé ou déplacé à une nouvelle table",
+    "primerResults": "Quand les résultats et les gains sont publiés",
+    "primerAchievements": "Quand vous débloquez un nouveau succès",
+    "primerEnable": "Activer les notifications",
+    "primerNotNow": "Plus tard"
   }
 }

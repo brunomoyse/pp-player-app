@@ -7,12 +7,14 @@ import { REGISTER_DEVICE_TOKEN } from '@/graphql/operations/notifications';
 import i18n from '@/i18n';
 import {
   currentPushPlatform,
+  getPushPermissionStatus,
   isAchievementNotification,
   registerForPushNotificationsAsync,
   seatingNotificationTournamentId,
   setRegisteredPushToken,
 } from '@/lib/push';
 import { useIsAuthenticated } from '@/stores/useAuthStore';
+import { useNotificationPrimerStore } from '@/stores/useNotificationPrimerStore';
 
 /**
  * App-wide singleton (mount once in the root layout): manages the device's
@@ -45,7 +47,9 @@ export function usePushNotifications() {
       return;
     }
 
-    async function register() {
+    // Mint the Expo token (prompting the OS only if permission isn't yet
+    // granted) and register it with the backend.
+    async function mintAndRegister() {
       const token = await registerForPushNotificationsAsync();
       if (cancelled || !token || registeredToken.current === token) return;
       try {
@@ -60,6 +64,22 @@ export function usePushNotifications() {
       } catch (e) {
         if (__DEV__) console.warn('[push] registerDeviceToken failed', e);
       }
+    }
+
+    async function register() {
+      const status = await getPushPermissionStatus();
+      if (cancelled) return;
+      if (status === 'granted') {
+        // Already allowed — register silently, no dialog.
+        await mintAndRegister();
+      } else if (status === 'undetermined') {
+        // Never asked yet: show our rationale first; only prompt the OS once the
+        // person taps "Enable" (Responsibility: explain why before asking).
+        useNotificationPrimerStore.getState().open(() => {
+          void mintAndRegister();
+        });
+      }
+      // 'denied' → respect the choice; don't nag.
     }
 
     void register();
