@@ -14,6 +14,10 @@ const AUTH_BASE = process.env.EXPO_PUBLIC_AUTH_BASE_URL ?? 'http://localhost:808
 // Access tokens last ~15 min; refresh a minute early.
 const REFRESH_AFTER_MS = 14 * 60 * 1000;
 let refreshTimer: ReturnType<typeof setTimeout> | null = null;
+// Single-flight guard: concurrent 401s (or a timer firing mid-request) must
+// share one in-flight refresh, otherwise parallel rotations invalidate each
+// other and cascade into a forced sign-out.
+let refreshInFlight: Promise<boolean> | null = null;
 
 export interface AuthState {
   currentUser: User | null;
@@ -52,10 +56,15 @@ export const useAuthStore = create<AuthState>()(
       login: async (input) => {
         set({ isLoading: true, error: null });
         try {
-          const { data } = await apolloClient.mutate({ mutation: LOGIN_USER, variables: { input } });
+          // nativeClient: true → backend returns the refresh token in the body
+          // (no cookie jar on native); we persist it in the keychain below.
+          const { data } = await apolloClient.mutate({
+            mutation: LOGIN_USER,
+            variables: { input: { ...input, nativeClient: true } },
+          });
           const payload = data?.loginUser;
           if (payload?.token && payload.user) {
-            await get().setSession(payload.user, payload.token);
+            await get().setSession(payload.user, payload.token, payload.refreshToken);
             scheduleRefresh();
             return payload.user;
           }
@@ -104,27 +113,36 @@ export const useAuthStore = create<AuthState>()(
         }
       },
 
-      // Refresh token is returned in the JSON body for native clients (pp-service
-      // change tracked in the plan); we send the stored refresh token back.
+      // Native refresh: present the keychain-stored refresh token via the
+      // X-Refresh-Token header (no cookie jar on native). The backend rotates
+      // the token and returns the new one in the JSON body, which we persist.
       refreshAccessToken: async () => {
-        try {
-          const refresh = await tokens.getRefresh();
-          const res = await fetch(`${AUTH_BASE}/auth/refresh`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(refresh ? { refreshToken: refresh } : {}),
-            credentials: 'include',
-          });
-          if (!res.ok) return false;
-          const json = (await res.json()) as { token?: string; refreshToken?: string };
-          if (!json.token) return false;
-          await tokens.setTokens(json.token, json.refreshToken);
-          set({ accessToken: json.token });
-          scheduleRefresh();
-          return true;
-        } catch {
-          return false;
-        }
+        if (refreshInFlight) return refreshInFlight;
+        refreshInFlight = (async () => {
+          try {
+            const refresh = await tokens.getRefresh();
+            if (!refresh) return false;
+            const res = await fetch(`${AUTH_BASE}/auth/refresh`, {
+              method: 'POST',
+              headers: { 'X-Refresh-Token': refresh },
+            });
+            if (!res.ok) return false;
+            // Body is serde-serialized (snake_case): { token, refresh_token }.
+            const json = (await res.json()) as { token?: string; refresh_token?: string };
+            if (!json.token) return false;
+            // Persist the rotated refresh token; fall back to the current one if
+            // the backend omitted it (shouldn't happen for native callers).
+            await tokens.setTokens(json.token, json.refresh_token ?? refresh);
+            set({ accessToken: json.token });
+            scheduleRefresh();
+            return true;
+          } catch {
+            return false;
+          } finally {
+            refreshInFlight = null;
+          }
+        })();
+        return refreshInFlight;
       },
 
       logout: async () => {
@@ -144,7 +162,13 @@ export const useAuthStore = create<AuthState>()(
           }
         }
         try {
-          await fetch(`${AUTH_BASE}/auth/logout`, { method: 'POST', credentials: 'include' });
+          // Present the refresh token so the backend revokes the whole family
+          // (native has no cookie for the server to read).
+          const refresh = await tokens.getRefresh();
+          await fetch(`${AUTH_BASE}/auth/logout`, {
+            method: 'POST',
+            headers: refresh ? { 'X-Refresh-Token': refresh } : undefined,
+          });
         } catch {
           // best-effort
         }
@@ -161,11 +185,19 @@ export const useAuthStore = create<AuthState>()(
 
       initialize: async () => {
         const token = await tokens.loadAccess();
-        if (token) {
-          set({ accessToken: token });
+        if (!token) return;
+        set({ accessToken: token });
+        // Renew the access token at launch if a refresh token exists, so one
+        // that expired while the app was closed is fresh before any query
+        // fires. On failure (offline / revoked) we keep the stored token — the
+        // Apollo error link refreshes or signs out on the first hard 401.
+        const refresh = await tokens.getRefresh();
+        if (refresh) {
+          await get().refreshAccessToken();
+        } else {
           scheduleRefresh();
-          void get().fetchMe();
         }
+        void get().fetchMe();
       },
 
       clearSession: async () => {

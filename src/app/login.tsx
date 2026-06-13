@@ -28,7 +28,7 @@ export default function LoginScreen() {
 
   return (
     <>
-      <Stack.Screen options={{ title: t('auth.login'), headerShown: true }} />
+      <Stack.Screen options={{ title: t('auth.login') }} />
       <Screen contentClassName="gap-5 pt-8">
         <View className="items-center gap-3 pb-2">
           <Image

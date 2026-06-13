@@ -69,7 +69,7 @@ export default function RegisterScreen() {
 
   return (
     <>
-      <Stack.Screen options={{ title: t('auth.register'), headerShown: true }} />
+      <Stack.Screen options={{ title: t('auth.register') }} />
       <Screen contentClassName="gap-5 pt-6">
         <View className="gap-1">
           <Text variant="title">{t('auth.createAccount')}</Text>

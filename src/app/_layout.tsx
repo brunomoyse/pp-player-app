@@ -102,8 +102,8 @@ export default function RootLayout() {
                   animation: 'slide_from_right',
                 }}>
                 <Stack.Screen name="(tabs)" />
-                <Stack.Screen name="login" options={{ presentation: 'modal' }} />
-                <Stack.Screen name="register" options={{ presentation: 'modal' }} />
+                <Stack.Screen name="login" options={{ presentation: 'modal', headerShown: true }} />
+                <Stack.Screen name="register" options={{ presentation: 'modal', headerShown: true }} />
                 <Stack.Screen name="tournament/[id]" />
                 <Stack.Screen name="tournament/[id]/results" />
                 <Stack.Screen name="achievements" />

@@ -58,6 +58,9 @@ export interface UserRegistrationInput {
 export interface UserLoginInput {
     email: string;
     password: string;
+    /** Native clients set this so the backend returns the refresh token in the
+     *  response body (stored in the keychain) instead of an HttpOnly cookie. */
+    nativeClient?: boolean;
 }
 
 export interface OAuthUrlResponse {

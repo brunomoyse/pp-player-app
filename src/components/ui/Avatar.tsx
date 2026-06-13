@@ -25,6 +25,7 @@ function initials(name?: string | null): string {
 
 export function Avatar({ name, uri, size = 48, ring, frame, className }: AvatarProps) {
   const framePreview = frameFor(frame);
+  const fontSize = size * 0.4;
   return (
     <View
       className={cn(
@@ -42,7 +43,9 @@ export function Avatar({ name, uri, size = 48, ring, frame, className }: AvatarP
       {uri ? (
         <Image source={{ uri }} style={{ width: size, height: size }} contentFit="cover" />
       ) : (
-        <Text className="font-display-bold text-pp-gold" style={{ fontSize: size * 0.4 }}>
+        <Text
+          className="font-display-bold text-pp-gold"
+          style={{ fontSize, lineHeight: fontSize * 1.15 }}>
           {initials(name)}
         </Text>
       )}

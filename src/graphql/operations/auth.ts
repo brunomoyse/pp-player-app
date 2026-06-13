@@ -3,7 +3,7 @@ import { gql, type TypedDocumentNode } from '@apollo/client';
 import type { User, UserLoginInput, UserRegistrationInput } from '@/types/user';
 
 export interface LoginResult {
-  loginUser: { token: string; user: User };
+  loginUser: { token: string; refreshToken: string | null; user: User };
 }
 export interface LoginVars {
   input: UserLoginInput;
@@ -13,6 +13,7 @@ export const LOGIN_USER: TypedDocumentNode<LoginResult, LoginVars> = gql`
   mutation LoginUser($input: UserLoginInput!) {
     loginUser(input: $input) {
       token
+      refreshToken
       user {
         id
         email
