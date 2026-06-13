@@ -16,6 +16,18 @@
         "EXPO_PUBLIC_AUTH_BASE_URL": "http://localhost:8080"
       }
     },
+    "staging": {
+      "distribution": "internal",
+      "channel": "staging",
+      "ios": {
+        "simulator": false
+      },
+      "env": {
+        "EXPO_PUBLIC_GRAPHQL_ENDPOINT": "https://staging.pocketpair.be/api/graphql",
+        "EXPO_PUBLIC_GRAPHQL_WS_ENDPOINT": "wss://staging.pocketpair.be/api/graphql",
+        "EXPO_PUBLIC_AUTH_BASE_URL": "https://staging.pocketpair.be/api"
+      }
+    },
     "preview": {
       "distribution": "internal",
       "channel": "preview",

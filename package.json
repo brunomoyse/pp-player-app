@@ -68,7 +68,8 @@
     "ios": "expo run:ios",
     "ios:iphone11": "bash ./scripts/ios-iphone11.sh",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "typecheck": "tsc --noEmit"
   },
   "private": true
 }
