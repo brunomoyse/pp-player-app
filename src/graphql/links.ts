@@ -26,7 +26,7 @@ export const authLink = new SetContextLink((prevContext) => {
 const AUTH_MESSAGE =
   /authentication required|unauthenticated|unauthorized|must be logged|not authenticated|jwt|token expired|invalid or expired|forbidden/i;
 
-function isAuthError(error: unknown): boolean {
+export function isAuthError(error: unknown): boolean {
   if (!CombinedGraphQLErrors.is(error)) return false;
   return error.errors.some(
     (e) => e.extensions?.code === 'UNAUTHENTICATED' || AUTH_MESSAGE.test(e.message ?? '')
