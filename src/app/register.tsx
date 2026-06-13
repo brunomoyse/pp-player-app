@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 
 import { Button, Input, Screen, Text } from '@/components/ui';
+import { openLegal } from '@/lib/legal';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { colors } from '@/theme/tokens';
 
@@ -39,6 +40,7 @@ export default function RegisterScreen() {
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
   const [terms, setTerms] = useState(false);
+  const [ageConfirm, setAgeConfirm] = useState(false);
   const [show, setShow] = useState(false);
 
   const hasLength = password.length >= 8;
@@ -53,7 +55,8 @@ export default function RegisterScreen() {
     EMAIL_RE.test(email) &&
     passwordValid &&
     password === confirm &&
-    terms;
+    terms &&
+    ageConfirm;
 
   const onSubmit = async () => {
     if (!valid) return;
@@ -159,6 +162,34 @@ export default function RegisterScreen() {
             {t('auth.agreeToTerms')} {t('auth.termsAndConditions')}
           </Text>
         </Pressable>
+
+        <Pressable
+          onPress={() => setAgeConfirm((v) => !v)}
+          accessibilityRole="checkbox"
+          accessibilityState={{ checked: ageConfirm }}
+          className="flex-row items-center gap-2">
+          <Ionicons
+            name={ageConfirm ? 'checkbox' : 'square-outline'}
+            size={20}
+            color={ageConfirm ? colors.gold : colors.textMuted}
+          />
+          <Text variant="muted" className="flex-1">
+            {t('auth.confirmAge')}
+          </Text>
+        </Pressable>
+
+        <View className="flex-row items-center gap-4">
+          <Pressable onPress={() => openLegal('terms')} hitSlop={8}>
+            <Text className="text-[12px] text-pp-gold underline">{t('legal.termsOfService')}</Text>
+          </Pressable>
+          <Pressable onPress={() => openLegal('privacy')} hitSlop={8}>
+            <Text className="text-[12px] text-pp-gold underline">{t('legal.privacyPolicy')}</Text>
+          </Pressable>
+        </View>
+
+        <Text variant="dim" className="text-[12px]">
+          {t('legal.responsibleGaming')}
+        </Text>
 
         {error ? (
           <Text className="text-[13px] text-pp-danger" accessibilityLiveRegion="polite">

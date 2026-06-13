@@ -57,7 +57,14 @@
     "loginToRegister": "Inloggen om te Registreren",
     "showPassword": "Wachtwoord tonen",
     "hidePassword": "Wachtwoord verbergen",
-    "acceptTerms": "Voorwaarden accepteren"
+    "acceptTerms": "Voorwaarden accepteren",
+    "confirmAge": "Ik bevestig dat ik 18 jaar of ouder ben"
+  },
+  "legal": {
+    "sectionTitle": "Juridisch",
+    "termsOfService": "Gebruiksvoorwaarden",
+    "privacyPolicy": "Privacybeleid",
+    "responsibleGaming": "Speel verantwoord. Alleen 18+ — poker is entertainment."
   },
   "common": {
     "ok": "OK",

@@ -57,7 +57,14 @@
     "loginToRegister": "Login to Register",
     "showPassword": "Show password",
     "hidePassword": "Hide password",
-    "acceptTerms": "Accept terms and conditions"
+    "acceptTerms": "Accept terms and conditions",
+    "confirmAge": "I confirm I am 18 years or older"
+  },
+  "legal": {
+    "sectionTitle": "Legal",
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "responsibleGaming": "Play responsibly. 18+ only — poker is entertainment."
   },
   "home": {
     "welcome": "Welcome",

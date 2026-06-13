@@ -24,6 +24,7 @@ import {
 import { useEquippedCosmetics } from '@/hooks/useEquippedCosmetics';
 import { useFeatureFlags } from '@/hooks/useFeatureFlags';
 import { LOCALE_LABELS, useI18n } from '@/i18n/useI18n';
+import { openLegal } from '@/lib/legal';
 import { toast } from '@/lib/toast';
 import { useAuthStore, useIsAuthenticated } from '@/stores/useAuthStore';
 import { colors } from '@/theme/tokens';
@@ -399,6 +400,26 @@ export default function ProfileScreen() {
             onPress={() => router.push('/privacy')}
           />
         ) : null}
+      </Card>
+
+      {/* Legal — links out to the marketing-site policy pages (18+ context). */}
+      <Card className="gap-1">
+        <Text variant="label" className="mb-1 text-pp-gold-deep">
+          {t('legal.sectionTitle')}
+        </Text>
+        <Setting
+          icon="document-text-outline"
+          title={t('legal.termsOfService')}
+          onPress={() => openLegal('terms')}
+        />
+        <Setting
+          icon="lock-closed-outline"
+          title={t('legal.privacyPolicy')}
+          onPress={() => openLegal('privacy')}
+        />
+        <Text variant="dim" className="px-1 pt-1 text-[12px]">
+          {t('legal.responsibleGaming')}
+        </Text>
       </Card>
 
       <Button title={t('profile.logout')} variant="danger" onPress={() => void logout()} />

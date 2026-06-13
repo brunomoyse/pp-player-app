@@ -57,7 +57,14 @@
     "loginToRegister": "Connectez-vous pour vous inscrire",
     "showPassword": "Afficher le mot de passe",
     "hidePassword": "Masquer le mot de passe",
-    "acceptTerms": "Accepter les conditions générales"
+    "acceptTerms": "Accepter les conditions générales",
+    "confirmAge": "Je confirme avoir 18 ans ou plus"
+  },
+  "legal": {
+    "sectionTitle": "Mentions légales",
+    "termsOfService": "Conditions générales",
+    "privacyPolicy": "Politique de confidentialité",
+    "responsibleGaming": "Jouez de manière responsable. Réservé aux 18 ans et plus — le poker est un divertissement."
   },
   "common": {
     "ok": "OK",
