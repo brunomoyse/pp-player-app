@@ -50,6 +50,7 @@ export interface NotificationPreferences {
   registrationUpdates: boolean;
   seatingUpdates: boolean;
   achievements: boolean;
+  announcements: boolean;
 }
 
 const PREF_FIELDS = gql`
@@ -58,6 +59,7 @@ const PREF_FIELDS = gql`
     registrationUpdates
     seatingUpdates
     achievements
+    announcements
   }
 `;
 
@@ -84,6 +86,7 @@ export interface UpdateNotificationPreferencesInput {
   registrationUpdates?: boolean;
   seatingUpdates?: boolean;
   achievements?: boolean;
+  announcements?: boolean;
 }
 export interface UpdateNotificationPreferencesResult {
   updateNotificationPreferences: NotificationPreferences;

@@ -30,6 +30,7 @@ export type NotificationType =
     | 'PLAYER_MOVED'
     | 'PLAYER_ELIMINATED'
     | 'QUALIFIED_FOR_DAY_2'
+    | 'CLUB_ANNOUNCEMENT'
 
 export interface UserNotification {
     id: string;

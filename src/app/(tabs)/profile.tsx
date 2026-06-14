@@ -35,6 +35,7 @@ const DEFAULT_PREFS: NotificationPreferences = {
   registrationUpdates: true,
   seatingUpdates: true,
   achievements: true,
+  announcements: true,
 };
 
 function fullName(first?: string | null, last?: string | null, username?: string | null) {
@@ -254,6 +255,12 @@ export default function ProfileScreen() {
           onPress={() => router.push('/achievements')}
         />
         <Setting
+          icon="megaphone-outline"
+          title={t('announcements.title')}
+          subtitle={t('announcements.subtitle')}
+          onPress={() => router.push('/announcements')}
+        />
+        <Setting
           icon="trophy-outline"
           title={t('season.title')}
           subtitle={t('season.subtitle')}
@@ -378,6 +385,12 @@ export default function ProfileScreen() {
           title={t('profile.prefAchievements')}
           subtitle={t('profile.prefAchievementsHint')}
           right={<PrefSwitch value={prefs.achievements} onChange={setPref('achievements')} />}
+        />
+        <Setting
+          icon="megaphone-outline"
+          title={t('profile.prefAnnouncements')}
+          subtitle={t('profile.prefAnnouncementsHint')}
+          right={<PrefSwitch value={prefs.announcements} onChange={setPref('announcements')} />}
         />
       </Card>
 

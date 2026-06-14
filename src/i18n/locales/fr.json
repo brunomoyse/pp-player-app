@@ -478,7 +478,9 @@
     "deleteAccountMessage2": "Vous serez déconnecté et le compte ne pourra pas être récupéré.",
     "deleteAccountFinal": "Supprimer définitivement",
     "accountDeleted": "Votre compte a été supprimé",
-    "deleteAccountFailed": "Impossible de supprimer votre compte. Veuillez réessayer."
+    "deleteAccountFailed": "Impossible de supprimer votre compte. Veuillez réessayer.",
+    "prefAnnouncements": "Annonces",
+    "prefAnnouncementsHint": "Actualités des clubs, événements et mises à jour"
   },
   "qrScanner": {
     "scanTournament": "Scanner QR Code",
@@ -777,6 +779,10 @@
       "clubs_5": {
         "name": "Grand Voyageur",
         "description": "Jouez dans 5 clubs différents"
+      },
+      "final_table_deal": {
+        "name": "La Poire en Deux",
+        "description": "Concluez un deal à la table finale"
       }
     },
     "locked": "Verrouillé",
@@ -845,5 +851,13 @@
     "primerAchievements": "Quand vous débloquez un nouveau succès",
     "primerEnable": "Activer les notifications",
     "primerNotNow": "Plus tard"
+  },
+  "announcements": {
+    "title": "Annonces",
+    "subtitle": "Actualités et informations de vos clubs",
+    "empty": "Aucune annonce pour l'instant. Les actualités et infos de vos clubs apparaîtront ici.",
+    "scopeTournament": "Tournoi",
+    "scopeClub": "Club",
+    "scopePlatform": "PocketPair"
   }
 }

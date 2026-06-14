@@ -455,7 +455,9 @@
     "deleteAccountMessage2": "You will be signed out and the account cannot be recovered.",
     "deleteAccountFinal": "Delete permanently",
     "accountDeleted": "Your account has been deleted",
-    "deleteAccountFailed": "Could not delete your account. Please try again."
+    "deleteAccountFailed": "Could not delete your account. Please try again.",
+    "prefAnnouncements": "Announcements",
+    "prefAnnouncementsHint": "Club news, events and platform updates"
   },
   "common": {
     "ok": "OK",
@@ -776,6 +778,10 @@
       "clubs_5": {
         "name": "Frequent Flyer",
         "description": "Play at 5 different clubs"
+      },
+      "final_table_deal": {
+        "name": "Chop Chop",
+        "description": "Agree to a deal at the final table"
       }
     },
     "locked": "Locked",
@@ -844,5 +850,13 @@
     "primerAchievements": "When you unlock a new achievement",
     "primerEnable": "Enable notifications",
     "primerNotNow": "Not now"
+  },
+  "announcements": {
+    "title": "Announcements",
+    "subtitle": "News and updates from your clubs",
+    "empty": "No announcements yet. Club news and updates will show up here.",
+    "scopeTournament": "Tournament",
+    "scopeClub": "Club",
+    "scopePlatform": "PocketPair"
   }
 }

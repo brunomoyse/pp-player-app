@@ -6,9 +6,11 @@ import { useEffect, useRef } from 'react';
 import { REGISTER_DEVICE_TOKEN } from '@/graphql/operations/notifications';
 import i18n from '@/i18n';
 import {
+  announcementNotificationTournamentId,
   currentPushPlatform,
   getPushPermissionStatus,
   isAchievementNotification,
+  isAnnouncementNotification,
   registerForPushNotificationsAsync,
   seatingNotificationTournamentId,
   setRegisteredPushToken,
@@ -99,6 +101,15 @@ export function usePushNotifications() {
       const tournamentId = seatingNotificationTournamentId(content);
       if (tournamentId) {
         router.push(`/tournament/${tournamentId}`);
+        return;
+      }
+      if (isAnnouncementNotification(content)) {
+        const announcementTournamentId = announcementNotificationTournamentId(content);
+        if (announcementTournamentId) {
+          router.push(`/tournament/${announcementTournamentId}`);
+        } else {
+          router.push('/announcements');
+        }
         return;
       }
       if (isAchievementNotification(content)) {

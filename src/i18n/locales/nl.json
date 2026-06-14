@@ -479,7 +479,9 @@
     "deleteAccountMessage2": "Je wordt uitgelogd en het account kan niet worden hersteld.",
     "deleteAccountFinal": "Definitief verwijderen",
     "accountDeleted": "Je account is verwijderd",
-    "deleteAccountFailed": "Kon je account niet verwijderen. Probeer het opnieuw."
+    "deleteAccountFailed": "Kon je account niet verwijderen. Probeer het opnieuw.",
+    "prefAnnouncements": "Aankondigingen",
+    "prefAnnouncementsHint": "Clubnieuws, evenementen en platformupdates"
   },
   "qrScanner": {
     "scanTournament": "Scan QR Code",
@@ -778,6 +780,10 @@
       "clubs_5": {
         "name": "Veelvlieger",
         "description": "Speel bij 5 verschillende clubs"
+      },
+      "final_table_deal": {
+        "name": "De Koek Verdelen",
+        "description": "Sluit een deal aan de finaletafel"
       }
     },
     "locked": "Vergrendeld",
@@ -846,5 +852,13 @@
     "primerAchievements": "Wanneer je een nieuwe prestatie ontgrendelt",
     "primerEnable": "Meldingen inschakelen",
     "primerNotNow": "Niet nu"
+  },
+  "announcements": {
+    "title": "Aankondigingen",
+    "subtitle": "Nieuws en updates van je clubs",
+    "empty": "Nog geen aankondigingen. Clubnieuws en updates verschijnen hier.",
+    "scopeTournament": "Toernooi",
+    "scopeClub": "Club",
+    "scopePlatform": "PocketPair"
   }
 }

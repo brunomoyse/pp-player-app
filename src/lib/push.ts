@@ -148,3 +148,26 @@ export function seatingNotificationTournamentId(
   const id = data?.tournament_id ?? data?.tournamentId;
   return typeof id === 'string' ? id : null;
 }
+
+/** True when a notification payload is a club/tournament/platform announcement. */
+export function isAnnouncementNotification(
+  content: Notifications.NotificationContent | undefined
+): boolean {
+  const data = content?.data as Record<string, unknown> | undefined;
+  const type = data?.type ?? data?.notificationType;
+  return type === 'CLUB_ANNOUNCEMENT';
+}
+
+/**
+ * Tournament an announcement deep-links to when tapped, or null. Tournament-
+ * scoped announcements carry a tournament_id; club/platform ones don't (the tap
+ * then routes to the announcements feed instead).
+ */
+export function announcementNotificationTournamentId(
+  content: Notifications.NotificationContent | undefined
+): string | null {
+  if (!isAnnouncementNotification(content)) return null;
+  const data = content?.data as Record<string, unknown> | undefined;
+  const id = data?.tournament_id ?? data?.tournamentId;
+  return typeof id === 'string' ? id : null;
+}
