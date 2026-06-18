@@ -32,3 +32,23 @@ jobs:
 
       - name: Test
         run: npm test
+
+  build:
+    name: Build (Expo bundle)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Metro bundle of the production JS — fails if a dependency update can't be
+      # resolved/transpiled or is incompatible with the app, which lint/typecheck
+      # won't catch. This is the gate that validates Dependabot PRs actually build.
+      - name: Bundle with Metro
+        run: npx expo export --platform ios
