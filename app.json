@@ -65,7 +65,8 @@
         {
           "color": "#fee78a"
         }
-      ]
+      ],
+      "expo-image"
     ],
     "experiments": {
       "typedRoutes": true,

@@ -2,6 +2,12 @@
 # Two ecosystems: npm (package.json) and the GitHub Actions workflows.
 # CocoaPods (ios/Podfile) isn't supported by Dependabot and is driven by the JS
 # deps anyway, so it's intentionally not listed.
+#
+# Guiding rule: the Expo SDK owns the native runtime. `expo`, every `expo-*` /
+# `@expo/*` package, React, React Native and the RN native libraries are all
+# pinned to the installed SDK and must only move via `expo install` / the SDK
+# upgrade flow — never bumped piecemeal by Dependabot, or the JS will desync from
+# the native build. So those are grouped (Expo) or ignored (RN runtime) below.
 version: 2
 updates:
   - package-ecosystem: "npm"
@@ -10,8 +16,16 @@ updates:
       interval: "weekly"
       day: "monday"
     open-pull-requests-limit: 10
-    # Batch low-risk updates into two PRs (runtime vs tooling) to cut noise.
     groups:
+      # Expo SDK packages move as a single unit (the SDK upgrade flow bumps them
+      # together). Bundle every in-range bump into ONE "expo" PR so an SDK patch
+      # is one review, not twenty. Majors are ignored below (whole-SDK upgrade).
+      expo:
+        patterns:
+          - "expo"
+          - "expo-*"
+          - "@expo/*"
+      # Everything else low-risk, split runtime vs tooling to cut noise.
       production-dependencies:
         dependency-type: "production"
         update-types:
@@ -23,20 +37,44 @@ updates:
           - "minor"
           - "patch"
     ignore:
-      # The Expo SDK family is pinned to the SDK version (~56.x) and must be
-      # upgraded together via `expo install` / the Expo SDK upgrade flow — not
-      # bumped piecemeal. Ignore majors here; minor/patch still come through.
+      # --- Expo SDK family: majors only via the whole-SDK upgrade flow ---
       - dependency-name: "expo"
         update-types: ["version-update:semver-major"]
       - dependency-name: "expo-*"
         update-types: ["version-update:semver-major"]
       - dependency-name: "@expo/*"
         update-types: ["version-update:semver-major"]
-      - dependency-name: "react-native"
-        update-types: ["version-update:semver-major"]
+
+      # --- React Native runtime: version is dictated by the installed Expo SDK.
+      # Ignore entirely (incl. patch) — `expo install --fix` is the source of
+      # truth for these, not Dependabot. A 0.x "minor" RN bump is breaking and a
+      # grouped PR previously tried to push react-native 0.85 -> 0.86 off-SDK. ---
       - dependency-name: "react"
-        update-types: ["version-update:semver-major"]
       - dependency-name: "react-dom"
+      - dependency-name: "react-native"
+      - dependency-name: "react-native-reanimated"
+      - dependency-name: "react-native-worklets"
+      - dependency-name: "react-native-screens"
+      - dependency-name: "react-native-safe-area-context"
+      - dependency-name: "react-native-svg"
+      - dependency-name: "react-native-gesture-handler"
+      - dependency-name: "@react-native-async-storage/async-storage"
+      - dependency-name: "@shopify/react-native-skia"
+
+      # --- Incompatible majors: pinned until upstream support lands ---
+      # NativeWind 4 is built on Tailwind CSS 3's plugin API (removed in v4).
+      - dependency-name: "tailwindcss"
+        update-types: ["version-update:semver-major"]
+      # graphql-ws peer caps at ^16; graphql 17 would break the subscription path.
+      - dependency-name: "graphql"
+        update-types: ["version-update:semver-major"]
+      # eslint-config-expo's plugin set (eslint-plugin-react) breaks on eslint 10.
+      - dependency-name: "eslint"
+        update-types: ["version-update:semver-major"]
+      # jest-expo 56's preset targets jest 29 internals; jest 30 fails to run.
+      - dependency-name: "jest"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/jest"
         update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
