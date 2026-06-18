@@ -1,0 +1,51 @@
+# Dependabot config for pp-player-app (Expo SDK 56 / React Native).
+# Two ecosystems: npm (package.json) and the GitHub Actions workflows.
+# CocoaPods (ios/Podfile) isn't supported by Dependabot and is driven by the JS
+# deps anyway, so it's intentionally not listed.
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 10
+    # Batch low-risk updates into two PRs (runtime vs tooling) to cut noise.
+    groups:
+      production-dependencies:
+        dependency-type: "production"
+        update-types:
+          - "minor"
+          - "patch"
+      development-dependencies:
+        dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
+    ignore:
+      # The Expo SDK family is pinned to the SDK version (~56.x) and must be
+      # upgraded together via `expo install` / the Expo SDK upgrade flow — not
+      # bumped piecemeal. Ignore majors here; minor/patch still come through.
+      - dependency-name: "expo"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "expo-*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@expo/*"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-native"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    groups:
+      github-actions:
+        patterns:
+          - "*"
