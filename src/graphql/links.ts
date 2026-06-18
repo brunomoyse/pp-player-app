@@ -14,7 +14,7 @@ export const authLink = new SetContextLink((prevContext) => {
   return {
     ...prevContext,
     headers: {
-      ...(prevContext.headers ?? {}),
+      ...prevContext.headers,
       ...(token ? { authorization: `Bearer ${token}` } : {}),
     },
   };

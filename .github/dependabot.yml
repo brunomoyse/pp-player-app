@@ -68,9 +68,6 @@ updates:
       # graphql-ws peer caps at ^16; graphql 17 would break the subscription path.
       - dependency-name: "graphql"
         update-types: ["version-update:semver-major"]
-      # eslint-config-expo's plugin set (eslint-plugin-react) breaks on eslint 10.
-      - dependency-name: "eslint"
-        update-types: ["version-update:semver-major"]
       # jest-expo 56's preset targets jest 29 internals; jest 30 fails to run.
       - dependency-name: "jest"
         update-types: ["version-update:semver-major"]
