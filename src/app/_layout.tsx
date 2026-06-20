@@ -17,6 +17,7 @@ import {
   SpaceGrotesk_700Bold,
 } from '@expo-google-fonts/space-grotesk';
 import { ApolloProvider } from '@apollo/client/react';
+import * as Sentry from '@sentry/react-native';
 import { useFonts } from 'expo-font';
 import { Stack, ThemeProvider, DarkTheme } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -38,12 +39,31 @@ import { useAchievementNotifications } from '@/hooks/useAchievementNotifications
 import { useConnectionMonitor } from '@/hooks/useConnectionMonitor';
 import { usePushNotifications } from '@/hooks/usePushNotifications';
 import { useSeatingNotifications } from '@/hooks/useSeatingNotifications';
-import { initMonitoring } from '@/lib/monitoring';
+import { initMonitoring, setMonitoringBackend } from '@/lib/monitoring';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { useGamificationStore } from '@/stores/useGamificationStore';
 import { colors } from '@/theme/tokens';
 
 SplashScreen.preventAutoHideAsync();
+
+// Crash/error reporting (opt-in via EXPO_PUBLIC_SENTRY_DSN, baked at build time
+// per EAS profile). Init at module scope so early errors are captured, then
+// route the app's existing reporting seam (ErrorBoundary + Apollo errorLink)
+// through Sentry. No-op in dev / Expo Go where the DSN is unset.
+const sentryDsn = process.env.EXPO_PUBLIC_SENTRY_DSN;
+if (sentryDsn) {
+  Sentry.init({
+    dsn: sentryDsn,
+    // Keep player PII (emails, names) out of events, mirroring the backend.
+    sendDefaultPii: false,
+    // Errors only for the pilot — no performance tracing.
+    tracesSampleRate: 0,
+  });
+  setMonitoringBackend({
+    captureException: (error) => Sentry.captureException(error),
+    captureMessage: (message) => Sentry.captureMessage(message),
+  });
+}
 
 const PPDarkTheme = {
   ...DarkTheme,
@@ -70,7 +90,7 @@ function GamificationLayer() {
   return <AchievementCelebration show={show} achievement={achievement} onDismiss={dismiss} />;
 }
 
-export default function RootLayout() {
+function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
     Inter_400Regular,
     Inter_500Medium,
@@ -132,3 +152,7 @@ export default function RootLayout() {
     </GestureHandlerRootView>
   );
 }
+
+// Sentry.wrap enables touch/navigation breadcrumbs and error boundary capture.
+// Inert when Sentry.init was not called (no DSN).
+export default Sentry.wrap(RootLayout);
