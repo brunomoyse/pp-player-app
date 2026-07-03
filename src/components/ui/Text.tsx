@@ -43,14 +43,24 @@ export function Text({
   className,
   allowFontScaling = true,
   maxFontSizeMultiplier = 1.8,
+  accessibilityLabel,
+  children,
   ...rest
 }: AppTextProps) {
+  // Surface the text to the a11y tree so e2e (Maestro) and screen readers can
+  // match by content instead of tapping by coordinates. Only auto-label plain
+  // string/number children; callers can still override accessibilityLabel.
+  const autoLabel =
+    accessibilityLabel ??
+    (typeof children === 'string' || typeof children === 'number' ? String(children) : undefined);
   return (
     <RNText
       allowFontScaling={allowFontScaling}
       maxFontSizeMultiplier={maxFontSizeMultiplier}
+      accessibilityLabel={autoLabel}
       className={cn(VARIANTS[variant], className)}
-      {...rest}
-    />
+      {...rest}>
+      {children}
+    </RNText>
   );
 }

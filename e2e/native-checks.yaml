@@ -1,13 +1,13 @@
 # Native e2e: guest language switcher (no account required).
 #
-# CAVEATS (dev build):
-#  - launchApp cold-starts the app; on a plain debug build (no expo-dev-client)
-#    the JS bundle is refetched from Metro, so we wait generously before asserting.
-#  - The custom `Text` component does not surface its string to the iOS
-#    accessibility tree, so option labels (Français/English/Nederlands) and the
-#    pill text can't be matched by `assertVisible`. We drive those by point and
-#    capture screenshots. Tab labels and `Button` titles ("Create Account") ARE
-#    exposed, so we anchor on those.
+# Re-pointed onto stable hooks (was point-taps): the shared `Text` primitive now
+# surfaces its string to the accessibility tree, and the language pill + option
+# rows carry explicit testIDs (`open-language`, `language-option-<locale>`) plus
+# accessibilityLabels. Tabs use their `tabBarButtonTestID`s (`tab-*`).
+#
+# Dev-build note: launchApp cold-starts the app; on a plain debug build (no
+# expo-dev-client) the JS bundle is refetched from Metro, so we wait generously
+# for the first tab before asserting.
 appId: com.pocketpair.app
 ---
 - launchApp:
@@ -15,18 +15,17 @@ appId: com.pocketpair.app
 
 # Wait for the JS bundle, then open the Login/Profile tab.
 - extendedWaitUntil:
-    visible: { text: "Home, tab, 1 of 5" }
+    visible: { id: "tab-home" }
     timeout: 30000
-- tapOn: { text: "Login, tab, 5 of 5" }
+- tapOn: { id: "tab-profile" }
 - assertVisible: "Create Account"            # unique to the guest profile
 - takeScreenshot: A-guest-english
 
-# Tap the "Language · English" pill (~65% down) → language modal opens.
-- tapOn:
-    point: "50%,65%"
+# Open the language bottom sheet via its testID.
+- tapOn: { id: "open-language" }
+- assertVisible: { id: "language-option-fr" }
 - takeScreenshot: B-language-modal-open
 
-# Select Français (3rd row of the bottom sheet, ~88% down).
-- tapOn:
-    point: "50%,88%"
+# Select Français by its stable option id.
+- tapOn: { id: "language-option-fr" }
 - takeScreenshot: C-guest-french

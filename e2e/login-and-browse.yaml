@@ -11,12 +11,12 @@ appId: com.pocketpair.app
 - assertVisible: "Next Tournaments"
 
 # --- Events tab: real tournament list (no auth needed) ---
-- tapOn: "Events"
+- tapOn: { id: "tab-events" }
 - assertVisible: "Tournaments"
 - assertVisible: "Upcoming"
 
 # --- Leaderboard tab: guest CTA + period segments ---
-- tapOn: "Leaders"
+- tapOn: { id: "tab-leaderboard" }
 - assertVisible: "Join the Competition"
 
 # --- Log in through the dedicated route ---
@@ -32,9 +32,9 @@ appId: com.pocketpair.app
 - tapOn: "Login"
 
 # --- Authenticated: Home shows KPIs, My Seats tab now exists, profile shows the user ---
-- tapOn: "Home"
+- tapOn: { id: "tab-home" }
 - assertVisible: "ITM Rate"
-- tapOn: "My Seats"
+- tapOn: { id: "tab-my-seats" }
 - assertVisible: "Registered"
-- tapOn: "Me"
+- tapOn: { id: "tab-profile" }
 - assertVisible: "native-e2e@pocketpair.test"

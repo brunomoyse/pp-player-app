@@ -13,7 +13,7 @@ export interface InputProps extends TextInputProps {
 }
 
 export const Input = forwardRef<TextInput, InputProps>(function Input(
-  { label, error, className, onFocus, onBlur, ...rest },
+  { label, error, className, onFocus, onBlur, accessibilityLabel, ...rest },
   ref
 ) {
   const [focused, setFocused] = useState(false);
@@ -26,6 +26,7 @@ export const Input = forwardRef<TextInput, InputProps>(function Input(
       ) : null}
       <TextInput
         ref={ref}
+        accessibilityLabel={accessibilityLabel ?? label}
         placeholderTextColor={colors.textMuted}
         onFocus={(e) => {
           setFocused(true);

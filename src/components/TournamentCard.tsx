@@ -27,7 +27,12 @@ export function TournamentCard({ tournament, onPress }: TournamentCardProps) {
   const registered = tournament.registrations?.length ?? 0;
 
   return (
-    <Pressable onPress={onPress} accessibilityRole="button" accessibilityHint={t('events.a11y.openHint')}>
+    <Pressable
+      onPress={onPress}
+      accessibilityRole="button"
+      accessibilityLabel={tournament.title}
+      accessibilityHint={t('events.a11y.openHint')}
+      testID="tournament-card">
       <Card className="gap-3">
         <View className="flex-row items-start justify-between gap-3">
           <Text variant="heading" className="flex-1" numberOfLines={2}>

@@ -35,30 +35,32 @@ export default function TabsLayout() {
       }}>
       <Tabs.Screen
         name="index"
-        options={{ title: t('nav.home'), tabBarIcon: tabIcon('home') }}
+        options={{ title: t('nav.home'), tabBarIcon: tabIcon('home'), tabBarButtonTestID: 'tab-home' }}
       />
       <Tabs.Screen
         name="tournaments"
-        options={{ title: t('nav.events'), tabBarIcon: tabIcon('calendar') }}
+        options={{ title: t('nav.events'), tabBarIcon: tabIcon('calendar'), tabBarButtonTestID: 'tab-events' }}
       />
       <Tabs.Screen
         name="my-seats"
         options={{
           title: t('nav.mySeats'),
           tabBarIcon: tabIcon('ticket'),
+          tabBarButtonTestID: 'tab-my-seats',
           // Hide the auth-only tab for guests (mirrors the web app).
           href: isAuth ? undefined : null,
         }}
       />
       <Tabs.Screen
         name="leaderboard"
-        options={{ title: t('nav.leaders'), tabBarIcon: tabIcon('trophy') }}
+        options={{ title: t('nav.leaders'), tabBarIcon: tabIcon('trophy'), tabBarButtonTestID: 'tab-leaderboard' }}
       />
       <Tabs.Screen
         name="profile"
         options={{
           title: isAuth ? t('nav.me') : t('nav.login'),
           tabBarIcon: tabIcon(isAuth ? 'person' : 'log-in'),
+          tabBarButtonTestID: 'tab-profile',
         }}
       />
     </Tabs>

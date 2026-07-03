@@ -50,6 +50,7 @@ export function QRCodeScanner({ visible, onClose, onScanned, title }: QRCodeScan
             onPress={onClose}
             accessibilityRole="button"
             accessibilityLabel={t('common.close')}
+            testID="qr-scanner-close"
             hitSlop={8}>
             <Ionicons name="close" size={26} color={colors.text} />
           </Pressable>

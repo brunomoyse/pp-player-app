@@ -179,6 +179,8 @@ export default function ProfileScreen() {
           <Pressable
             onPress={() => setLangOpen(true)}
             accessibilityRole="button"
+            accessibilityLabel={t('common.language')}
+            testID="open-language"
             className="mt-1 flex-row items-center justify-center gap-2 self-center rounded-full border border-pp-border px-4 py-2">
             <Ionicons name="language-outline" size={16} color={colors.gold} />
             <Text className="font-sans-medium text-pp-text">

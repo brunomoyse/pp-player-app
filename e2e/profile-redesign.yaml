@@ -36,7 +36,7 @@ env:
 
 # --- Authenticated profile: settings split into three grouped cards ---
 # (previously one ~13-row card). Tools card is feature-flag gated and may be absent.
-- tapOn: "Me"
+- tapOn: { id: "tab-profile" }
 - assertVisible: "Quick Actions"
 - assertVisible: "Tournaments"
 - assertVisible: "My Registrations"

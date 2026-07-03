@@ -26,5 +26,5 @@ export function RegistrationStatusBadge({
     status === 'WAITLISTED' && waitlistPosition
       ? t('mySeats.registrationStatus.WAITLISTED_POSITION', { position: waitlistPosition })
       : t(`mySeats.registrationStatus.${status}`, status.replace('_', ' '));
-  return <Badge label={label} tone={TONE[status]} />;
+  return <Badge label={label} tone={TONE[status]} testID={`registration-status-${status}`} />;
 }

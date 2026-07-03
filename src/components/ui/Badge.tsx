@@ -32,12 +32,13 @@ export interface BadgeProps {
   label: string;
   tone?: BadgeTone;
   className?: string;
+  testID?: string;
 }
 
-export function Badge({ label, tone = 'neutral', className }: BadgeProps) {
+export function Badge({ label, tone = 'neutral', className, testID }: BadgeProps) {
   const t = TONES[tone];
   return (
-    <View className={cn('self-start rounded-full px-2.5 py-1', t.bg, className)}>
+    <View testID={testID} className={cn('self-start rounded-full px-2.5 py-1', t.bg, className)}>
       <Text className={cn('font-sans-semibold text-[11px]', t.text)}>{label}</Text>
     </View>
   );

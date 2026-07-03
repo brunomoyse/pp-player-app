@@ -51,6 +51,7 @@ export function Button({
   return (
     <Pressable
       accessibilityRole="button"
+      accessibilityLabel={title}
       accessibilityState={{ disabled: !!isDisabled, busy: !!loading }}
       android_ripple={isDisabled ? undefined : { color: RIPPLE[variant] }}
       disabled={isDisabled}

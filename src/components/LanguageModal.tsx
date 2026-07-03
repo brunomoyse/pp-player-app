@@ -42,7 +42,9 @@ export function LanguageModal({ visible, onClose }: LanguageModalProps) {
                     onClose();
                   }}
                   accessibilityRole="button"
+                  accessibilityLabel={LOCALE_LABELS[l]}
                   accessibilityState={{ selected: active }}
+                  testID={`language-option-${l}`}
                   className={cn(
                     'flex-row items-center justify-between rounded-2xl border p-4',
                     active ? 'border-pp-gold bg-pp-gold/10' : 'border-pp-border bg-white/[0.02]'
