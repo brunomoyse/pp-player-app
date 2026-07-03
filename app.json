@@ -74,7 +74,8 @@
           "organization": "nuagemagiquedev",
           "project": "pp-player-app"
         }
-      ]
+      ],
+      "expo-asset"
     ],
     "experiments": {
       "typedRoutes": true,
