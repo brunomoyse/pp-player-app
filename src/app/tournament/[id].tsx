@@ -348,10 +348,16 @@ export default function TournamentDetailScreen() {
                     variant="danger"
                     onPress={onUnregister}
                     loading={cancelling}
+                    testID="unregister-cta"
                   />
                 </View>
               ) : (
-                <Button title={t('events.register')} onPress={onRegister} loading={registering} />
+                <Button
+                  title={t('events.register')}
+                  onPress={onRegister}
+                  loading={registering}
+                  testID="register-cta"
+                />
               )
             ) : null}
           </>

@@ -443,6 +443,8 @@ export default function ProfileScreen() {
       <Pressable
         onPress={confirmDeleteAccount}
         accessibilityRole="button"
+        accessibilityLabel={t('profile.deleteAccount')}
+        testID="delete-account"
         hitSlop={8}
         className="items-center pb-2">
         <Text className="text-[13px] font-sans-medium text-pp-danger/80">

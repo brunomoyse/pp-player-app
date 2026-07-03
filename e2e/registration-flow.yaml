@@ -1,0 +1,44 @@
+# Native e2e: log in, open a tournament, register, and see it under My Seats.
+# Runs against the real pp-service. Grounded in stable hooks: tab-* tabBar ids,
+# tournament-card (Events list), register-cta (tournament detail).
+#
+# UNVERIFIED PENDING SIMULATOR: authored from the real screens + testIDs but not
+# yet run on a device (needs an iOS simulator + dev build). Register mutates
+# state; ./e2e-harness.sh seed resets it.
+appId: com.pocketpair.app
+env:
+  EMAIL: native-e2e@pocketpair.test
+  PASSWORD: Passw0rd!
+---
+- launchApp:
+    clearState: true
+    permissions: { all: allow }
+
+# --- Log in through the dedicated route ---
+- openLink: pocketpair://login
+- assertVisible: "Welcome back"
+- tapOn:
+    below: "Email"
+- inputText: ${EMAIL}
+- tapOn:
+    below: "Password"
+- inputText: ${PASSWORD}
+- hideKeyboard
+- tapOn: "Login"
+
+# --- Events tab → open the first tournament ---
+- tapOn: { id: "tab-events" }
+- assertVisible: "Tournaments"
+- tapOn: { id: "tournament-card", index: 0 }
+
+# --- Register (CTA only shows for UPCOMING tournaments) ---
+- assertVisible: { id: "register-cta" }
+- tapOn: { id: "register-cta" }
+# After registering, the CTA flips to unregister and a status badge appears.
+- extendedWaitUntil:
+    visible: { id: "unregister-cta" }
+    timeout: 15000
+
+# --- My Seats reflects the registration ---
+- tapOn: { id: "tab-my-seats" }
+- assertVisible: "Registered"
