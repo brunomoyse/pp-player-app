@@ -48,7 +48,7 @@ export default function LeaderboardScreen() {
   const leagues = configsData?.leaderboardConfigs ?? [];
   const activeConfigId = league === DEFAULT_LEAGUE ? null : league;
 
-  const { data, loading, error, refetch, networkStatus } = useQuery(GET_LEADERBOARD, {
+  const { data, previousData, loading, error, refetch, networkStatus } = useQuery(GET_LEADERBOARD, {
     variables: {
       period: PERIOD_ENUM[period],
       clubId: selectedClub?.id ?? null,
@@ -58,7 +58,10 @@ export default function LeaderboardScreen() {
     notifyOnNetworkStatusChange: true,
   });
 
-  const entries = data?.leaderboard.items ?? [];
+  // Keep the previous list on screen while new variables (period/league/club)
+  // load — segment changes swap values instead of flashing back to a spinner.
+  const view = data ?? previousData;
+  const entries = view?.leaderboard.items ?? [];
   const me = currentUser ? entries.find((e) => e.user?.id === currentUser.id) : undefined;
 
   const periodSegments = (['week', 'month', 'year', 'allTime'] as Period[]).map((p) => ({
@@ -120,7 +123,7 @@ export default function LeaderboardScreen() {
       ) : null}
       <Segment options={metricSegments} value={metric} onChange={setMetric} />
 
-      {loading && !data ? (
+      {loading && !view ? (
         <LoadingState label={t('common.loading')} />
       ) : error ? (
         <ErrorState
@@ -131,11 +134,13 @@ export default function LeaderboardScreen() {
       ) : entries.length === 0 ? (
         <EmptyState icon="podium-outline" message={t('leaderboard.empty.title')} />
       ) : (
-        <LeaderboardTable
-          entries={entries}
-          currentUserId={currentUser?.id}
-          metric={METRIC_MAP[metric]}
-        />
+        <View style={{ opacity: loading ? 0.5 : 1 }}>
+          <LeaderboardTable
+            entries={entries}
+            currentUserId={currentUser?.id}
+            metric={METRIC_MAP[metric]}
+          />
+        </View>
       )}
     </Screen>
   );
