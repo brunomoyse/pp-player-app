@@ -23,6 +23,7 @@ export function useConnectionMonitor() {
         const code = (event as { code?: number } | undefined)?.code;
         if (code !== undefined && !INTENTIONAL_CLOSE_CODES.has(code)) setWsDown(true);
       }),
+      wsClient.on('error', () => setWsDown(true)),
     ];
     return () => disposers.forEach((dispose) => dispose());
   }, [setWsDown]);

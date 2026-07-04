@@ -18,7 +18,15 @@ const httpLink = new HttpLink({ uri: HTTP_URL });
 export const wsClient = createClient({
   url: WS_URL,
   lazy: true,
-  retryAttempts: 10,
+  // Never stop retrying: the app backgrounds/resumes constantly and a finite
+  // retry budget, once exhausted, kills every subscription for good — the
+  // "reconnecting" banner then spins forever. Backoff is capped at 10s.
+  retryAttempts: Infinity,
+  shouldRetry: () => true,
+  retryWait: async (retries) => {
+    const delay = Math.min(1_000 * 2 ** Math.min(retries, 4), 10_000);
+    await new Promise((resolve) => setTimeout(resolve, delay + Math.random() * 300));
+  },
   keepAlive: 15_000,
   connectionParams: () => {
     const token = tokens.getAccess();
