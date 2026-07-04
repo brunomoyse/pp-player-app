@@ -2,12 +2,11 @@ import { useMutation, useQuery } from '@apollo/client/react';
 import { Ionicons } from '@expo/vector-icons';
 import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 import { Stack, router, useLocalSearchParams } from 'expo-router';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Share, View } from 'react-native';
 
-import { BackButton, ClockDisplay, PreGameField, PredictionCard, RegistrationStatusBadge, type PredictionPlayer } from '@/components';
-import { useFeatureFlags } from '@/hooks/useFeatureFlags';
+import { BackButton, ClockDisplay, PreGameField, RegistrationStatusBadge } from '@/components';
 import { FadeUp } from '@/components/motion';
 import { useLiveClock } from '@/hooks/useLiveClock';
 import { useLiveRegistrations } from '@/hooks/useLiveRegistrations';
@@ -58,7 +57,6 @@ export default function TournamentDetailScreen() {
   const [cancel, { loading: cancelling }] = useMutation(CANCEL_REGISTRATION);
 
   const tn = data?.tournament;
-  const flags = useFeatureFlags();
 
   // Live entry stats (chips in play, players left) — only meaningful while running.
   const { data: statsData } = useQuery(GET_TOURNAMENT_ENTRY_STATS, {
@@ -73,14 +71,6 @@ export default function TournamentDetailScreen() {
     stats && stats.playersRemaining && stats.playersRemaining > 0
       ? Math.round(Number(stats.totalChips ?? 0) / stats.playersRemaining)
       : null;
-  // Registered players with display names — the fantasy-prediction picker pool.
-  const predictionPlayers = useMemo<PredictionPlayer[]>(
-    () =>
-      (tn?.registrations ?? [])
-        .filter((r) => r.user && r.userId)
-        .map((r) => ({ userId: r.userId!, name: r.displayName || r.user?.username || r.user?.firstName || '-' })),
-    [tn],
-  );
   // Live clock + registration count over the WebSocket (Phase 6).
   const clock = useLiveClock(id, tn?.clock);
 
@@ -292,11 +282,6 @@ export default function TournamentDetailScreen() {
 
             {/* Pre-game prep — who's registered + your notes (Pro). Renders only when eligible. */}
             <PreGameField tournamentId={id!} />
-
-            {/* Fantasy: predict the winner with Prediction Points (G2). */}
-            {flags.predictions && tn.status !== 'COMPLETED' ? (
-              <PredictionCard tournamentId={id!} players={predictionPlayers} />
-            ) : null}
 
             {/* Live clock (subscription-driven, Phase 6) */}
             {tn.clock ? (

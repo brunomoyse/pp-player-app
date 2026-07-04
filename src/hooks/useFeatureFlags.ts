@@ -5,7 +5,6 @@ import { GET_FEATURE_FLAGS, type FeatureFlags } from '@/graphql/operations';
 const DEFAULTS: FeatureFlags = {
   notes: false,
   proAccount: false,
-  predictions: false,
   cosmetics: false,
   publicStats: false,
 };

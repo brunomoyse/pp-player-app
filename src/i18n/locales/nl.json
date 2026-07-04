@@ -642,31 +642,6 @@
       "generic": "Kaart koppelen mislukt. Probeer het opnieuw."
     }
   },
-  "predictions": {
-    "decreaseStake": "Inzet verlagen",
-    "increaseStake": "Inzet verhogen",
-    "title": "Voorspellingen",
-    "subtitle": "Gratis fantasy-voorspellingen met punten",
-    "balanceLabel": "Voorspelpunten",
-    "points": "punten",
-    "claim": "Haal {points} punten op",
-    "earnHint": "Verdien punten door in te checken en te spelen. Geen aankoop, puur voor de lol.",
-    "history": "Je voorspellingen",
-    "empty": "Nog geen voorspellingen.",
-    "predictWinner": "Voorspel de winnaar",
-    "yourPick": "Jouw voorspelling",
-    "stake": "Inzet",
-    "balance": "{points} pnt",
-    "placePrediction": "Voorspelling plaatsen",
-    "needPoints": "Haal eerst punten op om te voorspellen.",
-    "staked": "{points} pnt ingezet",
-    "failed": "Kon voorspelling niet plaatsen",
-    "status": {
-      "open": "Open",
-      "won": "Gewonnen",
-      "lost": "Verloren"
-    }
-  },
   "privacy": {
     "title": "Privacy & delen",
     "subtitle": "Bepaal wat andere spelers zien",

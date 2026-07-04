@@ -640,31 +640,6 @@
       "generic": "Could not link the card. Please try again."
     }
   },
-  "predictions": {
-    "decreaseStake": "Decrease stake",
-    "increaseStake": "Increase stake",
-    "title": "Predictions",
-    "subtitle": "Free fantasy picks with points",
-    "balanceLabel": "Prediction points",
-    "points": "points",
-    "claim": "Claim {points} points",
-    "earnHint": "Earn points by checking in and playing. No purchase, just for fun.",
-    "history": "Your predictions",
-    "empty": "No predictions yet.",
-    "predictWinner": "Predict the winner",
-    "yourPick": "Your prediction",
-    "stake": "Stake",
-    "balance": "{points} pts",
-    "placePrediction": "Place prediction",
-    "needPoints": "Claim points first to make a prediction.",
-    "staked": "Staked {points} pts",
-    "failed": "Could not place prediction",
-    "status": {
-      "open": "Open",
-      "won": "Won",
-      "lost": "Lost"
-    }
-  },
   "privacy": {
     "title": "Privacy & sharing",
     "subtitle": "Control what other players can see",

@@ -2,7 +2,6 @@ query GetFeatureFlags {
   featureFlags {
     notes
     proAccount
-    predictions
     cosmetics
     publicStats
   }

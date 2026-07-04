@@ -3,7 +3,6 @@ import { gql, type TypedDocumentNode } from '@apollo/client';
 export interface FeatureFlags {
   notes: boolean;
   proAccount: boolean;
-  predictions: boolean;
   cosmetics: boolean;
   publicStats: boolean;
 }
@@ -21,7 +20,6 @@ export const GET_FEATURE_FLAGS: TypedDocumentNode<
     featureFlags {
       notes
       proAccount
-      predictions
       cosmetics
       publicStats
     }
