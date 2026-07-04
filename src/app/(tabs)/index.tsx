@@ -21,7 +21,8 @@ import type { PlayerStatistics } from '@/types/tournament';
 import { currencyCents } from '@/utils/currency';
 import { formatDate } from '@/utils/datetime';
 
-type Range = '7d' | '30d' | '1y';
+// No 7-day window: most players play weekly, so it would mostly show zeros.
+type Range = '30d' | '1y' | 'all';
 
 export default function HomeScreen() {
   const { t, i18n } = useTranslation();
@@ -29,7 +30,7 @@ export default function HomeScreen() {
   const isAuth = useIsAuthenticated();
   const user = useAuthStore((s) => s.currentUser);
   const selectedClub = useClubStore((s) => s.selectedClub);
-  const [range, setRange] = useState<Range>('7d');
+  const [range, setRange] = useState<Range>('30d');
 
   const upcoming = useQuery(GET_TOURNAMENTS, {
     variables: {
@@ -53,12 +54,12 @@ export default function HomeScreen() {
   const statBlock: PlayerStatistics | undefined = (() => {
     const s = stats.data?.myTournamentStatistics;
     if (!s) return undefined;
-    return range === '7d' ? s.last7Days : range === '30d' ? s.last30Days : s.lastYear;
+    return range === '30d' ? s.last30Days : range === '1y' ? s.lastYear : s.allTime;
   })();
 
   const nextTournaments = upcoming.data?.tournaments.items ?? [];
   const results = recent.data?.myRecentTournamentResults ?? [];
-  const rangeChips: Range[] = ['7d', '30d', '1y'];
+  const rangeChips: Range[] = ['30d', '1y', 'all'];
 
   return (
     <Screen
@@ -80,7 +81,7 @@ export default function HomeScreen() {
           <View className="gap-3">
             <View className="flex-row items-center justify-between">
               <Text variant="heading">
-                {t('home.progress.title', { range: range.toUpperCase() })}
+                {t('home.progress.title', { range: t(`home.progress.timeLabels.${range}`) })}
               </Text>
               <View className="flex-row gap-1.5">
                 {rangeChips.map((r) => (

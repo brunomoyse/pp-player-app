@@ -345,14 +345,6 @@ export interface GetMyStatsResult {
 export const GET_MY_STATISTICS: TypedDocumentNode<GetMyStatsResult, Record<string, never>> = gql`
   query GetMyTournamentStatistics {
     myTournamentStatistics {
-      last7Days {
-        totalItm
-        totalTournaments
-        totalWinnings
-        totalBuyIns
-        itmPercentage
-        roiPercentage
-      }
       last30Days {
         totalItm
         totalTournaments
@@ -362,6 +354,14 @@ export const GET_MY_STATISTICS: TypedDocumentNode<GetMyStatsResult, Record<strin
         roiPercentage
       }
       lastYear {
+        totalItm
+        totalTournaments
+        totalWinnings
+        totalBuyIns
+        itmPercentage
+        roiPercentage
+      }
+      allTime {
         totalItm
         totalTournaments
         totalWinnings

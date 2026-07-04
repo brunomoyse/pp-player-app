@@ -93,9 +93,9 @@
       "subtitle": "Track your performance",
       "chartPlaceholder": "Performance Chart",
       "timeLabels": {
-        "7d": "7D",
         "30d": "30D",
-        "1y": "1Y"
+        "1y": "1Y",
+        "all": "ALL"
       }
     },
     "tournaments": {
@@ -341,14 +341,13 @@
     "yourRank": "Your current rank",
     "points": "Points",
     "periods": {
-      "week": "Week",
       "month": "Month",
       "year": "Year",
       "allTime": "All Time"
     },
     "categories": {
       "overall": "Overall",
-      "profit": "Profit",
+      "winnings": "Winnings",
       "volume": "Volume"
     },
     "filters": {

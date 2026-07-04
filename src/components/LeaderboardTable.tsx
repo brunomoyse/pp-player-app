@@ -21,12 +21,13 @@ function rankColor(rank: number): string {
 export interface LeaderboardTableProps {
   entries: LeaderboardEntry[];
   currentUserId?: string | null;
-  metric?: 'points' | 'profit' | 'volume';
+  // Winnings (not net profit): showing losses on a public board discourages play.
+  metric?: 'points' | 'winnings' | 'volume';
 }
 
 export function LeaderboardTable({ entries, currentUserId, metric = 'points' }: LeaderboardTableProps) {
   const value = (e: LeaderboardEntry) => {
-    if (metric === 'profit') return `${e.netProfit >= 0 ? '+' : ''}${Math.round(e.netProfit / 100)}€`;
+    if (metric === 'winnings') return `${Math.round(e.totalWinnings / 100)}€`;
     if (metric === 'volume') return `${Math.round(e.totalBuyIns / 100)}€`;
     return `${Math.round(e.points)}`;
   };

@@ -112,13 +112,13 @@
       "leaderboardSubtitle": "Zie topspelers"
     },
     "progress": {
-      "title": "Voortgang over {range}",
+      "title": "Voortgang ({range})",
       "subtitle": "Je prestatie tracking",
       "chartPlaceholder": "Prestatiegrafiek verschijnt hier",
       "timeLabels": {
-        "7d": "7D",
         "30d": "30D",
-        "1y": "1J"
+        "1y": "1J",
+        "all": "ALLES"
       }
     },
     "tournaments": {
@@ -365,14 +365,13 @@
     "itm": "ITM",
     "avgFinish": "gem. finish",
     "periods": {
-      "week": "Week",
       "month": "Maand",
       "year": "Jaar",
       "allTime": "Altijd"
     },
     "categories": {
       "overall": "Algemeen",
-      "profit": "Winst",
+      "winnings": "Winsten",
       "volume": "Volume"
     },
     "filters": {

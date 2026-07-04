@@ -112,13 +112,13 @@
       "leaderboardSubtitle": "Voir les meilleurs joueurs"
     },
     "progress": {
-      "title": "Progrès sur {range}",
+      "title": "Progrès ({range})",
       "subtitle": "Suivi de vos performances",
       "chartPlaceholder": "Le graphique des performances apparaîtra ici",
       "timeLabels": {
-        "7d": "7J",
         "30d": "30J",
-        "1y": "1A"
+        "1y": "1A",
+        "all": "TOUT"
       }
     },
     "tournaments": {
@@ -364,14 +364,13 @@
     "itm": "ITM",
     "avgFinish": "fin moy.",
     "periods": {
-      "week": "Semaine",
       "month": "Mois",
       "year": "Année",
       "allTime": "Tout Temps"
     },
     "categories": {
       "overall": "Général",
-      "profit": "Profit",
+      "winnings": "Gains",
       "volume": "Volume"
     },
     "filters": {

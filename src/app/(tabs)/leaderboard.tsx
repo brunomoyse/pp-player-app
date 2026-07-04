@@ -12,21 +12,22 @@ import { useClubStore } from '@/stores/useClubStore';
 import { useAuthStore, useIsAuthenticated } from '@/stores/useAuthStore';
 import type { LeaderboardPeriod } from '@/types/tournament';
 
-type Period = 'week' | 'month' | 'year' | 'allTime';
-type Metric = 'overall' | 'profit' | 'volume';
+// No weekly board (players mostly play once a week) and winnings instead of
+// net profit (a public loss column discourages play).
+type Period = 'month' | 'year' | 'allTime';
+type Metric = 'overall' | 'winnings' | 'volume';
 
 /** Sentinel for the default (period-based) leaderboard, where no league is selected. */
 const DEFAULT_LEAGUE = '__default__';
 
 const PERIOD_ENUM: Record<Period, LeaderboardPeriod> = {
-  week: 'LAST_7_DAYS',
   month: 'LAST_30_DAYS',
   year: 'LAST_YEAR',
   allTime: 'ALL_TIME',
 };
-const METRIC_MAP: Record<Metric, 'points' | 'profit' | 'volume'> = {
+const METRIC_MAP: Record<Metric, 'points' | 'winnings' | 'volume'> = {
   overall: 'points',
-  profit: 'profit',
+  winnings: 'winnings',
   volume: 'volume',
 };
 
@@ -36,7 +37,7 @@ export default function LeaderboardScreen() {
   const isAuth = useIsAuthenticated();
   const currentUser = useAuthStore((s) => s.currentUser);
   const selectedClub = useClubStore((s) => s.selectedClub);
-  const [period, setPeriod] = useState<Period>('week');
+  const [period, setPeriod] = useState<Period>('month');
   const [metric, setMetric] = useState<Metric>('overall');
   const [league, setLeague] = useState<string>(DEFAULT_LEAGUE);
 
@@ -64,11 +65,11 @@ export default function LeaderboardScreen() {
   const entries = view?.leaderboard.items ?? [];
   const me = currentUser ? entries.find((e) => e.user?.id === currentUser.id) : undefined;
 
-  const periodSegments = (['week', 'month', 'year', 'allTime'] as Period[]).map((p) => ({
+  const periodSegments = (['month', 'year', 'allTime'] as Period[]).map((p) => ({
     value: p,
     label: t(`leaderboard.periods.${p}`),
   }));
-  const metricSegments = (['overall', 'profit', 'volume'] as Metric[]).map((m) => ({
+  const metricSegments = (['overall', 'winnings', 'volume'] as Metric[]).map((m) => ({
     value: m,
     label: t(`leaderboard.categories.${m}`),
   }));

@@ -191,9 +191,9 @@ export interface PlayerStatistics {
 }
 
 export interface PlayerStatsResponse {
-    last7Days: PlayerStatistics;
     last30Days: PlayerStatistics;
     lastYear: PlayerStatistics;
+    allTime: PlayerStatistics;
 }
 
 // Leaderboard types
