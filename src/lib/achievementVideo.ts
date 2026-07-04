@@ -5,7 +5,14 @@ import type { TFunction } from 'i18next';
 import type { Achievement } from '@/types/achievements';
 import type { Club, User } from '@/types/user';
 
-const RENDER_BASE_URL = process.env.EXPO_PUBLIC_RENDER_BASE_URL ?? 'http://localhost:4000';
+// The pp-video Remotion render service. No production deployment exists yet, so
+// outside dev the feature is disabled entirely unless the env var is set —
+// never fall back to localhost in a store build.
+const RENDER_BASE_URL =
+  process.env.EXPO_PUBLIC_RENDER_BASE_URL ?? (__DEV__ ? 'http://localhost:4000' : null);
+
+/** Whether a render service is configured; gates the share-video UI. */
+export const isVideoShareAvailable = RENDER_BASE_URL != null;
 
 /**
  * The props contract of the pp-video `AchievementUnlock` composition. JSON only,
@@ -50,6 +57,7 @@ export function buildVideoProps(
  * no share capability.
  */
 export async function shareAchievementVideo(props: AchievementVideoProps): Promise<boolean> {
+  if (RENDER_BASE_URL == null) return false;
   if (!(await Sharing.isAvailableAsync())) return false;
 
   const res = await fetch(`${RENDER_BASE_URL}/render`, {

@@ -10,7 +10,7 @@ import { useReducedMotion } from 'react-native-reanimated';
 
 import { HolographicFoil } from '@/components/HolographicFoil';
 import { Text } from '@/components/ui';
-import { buildVideoProps, shareAchievementVideo } from '@/lib/achievementVideo';
+import { buildVideoProps, isVideoShareAvailable, shareAchievementVideo } from '@/lib/achievementVideo';
 import { ppEasing, ppSpring } from '@/lib/motion';
 import { LEGENDARY_SOUND, UNLOCK_SOUND } from '@/lib/sounds';
 import { useAuthStore } from '@/stores/useAuthStore';
@@ -207,21 +207,23 @@ export function AchievementCelebration({ show, achievement, onDismiss }: Achieve
             </Text>
 
             <View className="w-full gap-2.5">
-              <Pressable
-                onPress={onShare}
-                disabled={sharing}
-                accessibilityRole="button"
-                className="w-full flex-row items-center justify-center gap-2 rounded-full bg-pp-gold py-3"
-                style={{ opacity: sharing ? 0.7 : 1 }}>
-                {sharing ? (
-                  <ActivityIndicator size="small" color={colors.bg} />
-                ) : (
-                  <Ionicons name="share-outline" size={18} color={colors.bg} />
-                )}
-                <Text className="font-sans-semibold text-[14px] text-pp-bg">
-                  {sharing ? t('achievements.preparingShare') : t('achievements.shareVideo')}
-                </Text>
-              </Pressable>
+              {isVideoShareAvailable ? (
+                <Pressable
+                  onPress={onShare}
+                  disabled={sharing}
+                  accessibilityRole="button"
+                  className="w-full flex-row items-center justify-center gap-2 rounded-full bg-pp-gold py-3"
+                  style={{ opacity: sharing ? 0.7 : 1 }}>
+                  {sharing ? (
+                    <ActivityIndicator size="small" color={colors.bg} />
+                  ) : (
+                    <Ionicons name="share-outline" size={18} color={colors.bg} />
+                  )}
+                  <Text className="font-sans-semibold text-[14px] text-pp-bg">
+                    {sharing ? t('achievements.preparingShare') : t('achievements.shareVideo')}
+                  </Text>
+                </Pressable>
+              ) : null}
 
               {shareError ? (
                 <Text className="text-center text-[12px] text-red-400">

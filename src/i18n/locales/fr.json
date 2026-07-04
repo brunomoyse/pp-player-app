@@ -86,7 +86,8 @@
     "notYetAvailable": "Cette fonctionnalité n'est pas encore disponible",
     "language": "Langue",
     "back": "Retour",
-    "reconnecting": "Reconnexion…"
+    "reconnecting": "Reconnexion…",
+    "share": "Partager"
   },
   "home": {
     "welcome": "Bienvenue",
@@ -834,5 +835,9 @@
     "scopeTournament": "Tournoi",
     "scopeClub": "Club",
     "scopePlatform": "PocketPair"
+  },
+  "clubs": {
+    "allClubs": "Tous les clubs",
+    "selectClub": "Choisir un club"
   }
 }

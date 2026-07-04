@@ -479,7 +479,8 @@
     "notYetAvailable": "This feature is not yet available",
     "language": "Language",
     "back": "Back",
-    "reconnecting": "Reconnecting…"
+    "reconnecting": "Reconnecting…",
+    "share": "Share"
   },
   "qrScanner": {
     "scanTournament": "Scan QR Code",
@@ -833,5 +834,9 @@
     "scopeTournament": "Tournament",
     "scopeClub": "Club",
     "scopePlatform": "PocketPair"
+  },
+  "clubs": {
+    "allClubs": "All clubs",
+    "selectClub": "Select club"
   }
 }

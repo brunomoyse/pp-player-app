@@ -86,7 +86,8 @@
     "notYetAvailable": "Deze functie is nog niet beschikbaar",
     "language": "Taal",
     "back": "Terug",
-    "reconnecting": "Opnieuw verbinden…"
+    "reconnecting": "Opnieuw verbinden…",
+    "share": "Delen"
   },
   "home": {
     "welcome": "Welkom",
@@ -835,5 +836,9 @@
     "scopeTournament": "Toernooi",
     "scopeClub": "Club",
     "scopePlatform": "PocketPair"
+  },
+  "clubs": {
+    "allClubs": "Alle clubs",
+    "selectClub": "Kies een club"
   }
 }

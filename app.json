@@ -10,8 +10,16 @@
     "backgroundColor": "#18181a",
     "ios": {
       "bundleIdentifier": "com.pocketpair.app",
-      "supportsTablet": true,
-      "icon": "./assets/PocketPair.icon"
+      "supportsTablet": false,
+      "icon": "./assets/PocketPair.icon",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "CFBundleLocalizations": [
+          "en",
+          "fr",
+          "nl"
+        ]
+      }
     },
     "android": {
       "package": "com.pocketpair.app",
@@ -21,7 +29,11 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.MODIFY_AUDIO_SETTINGS"
+      ]
     },
     "web": {
       "output": "static",
@@ -49,14 +61,17 @@
       [
         "expo-camera",
         {
-          "cameraPermission": "PocketPair uses the camera to scan tournament check-in QR codes."
+          "cameraPermission": "PocketPair uses the camera to scan tournament check-in QR codes.",
+          "microphonePermission": false,
+          "recordAudioAndroid": false
         }
       ],
       [
         "expo-audio",
         {
           "microphonePermission": false,
-          "recordAudioAndroid": false
+          "recordAudioAndroid": false,
+          "enableBackgroundPlayback": false
         }
       ],
       "expo-sharing",
@@ -78,8 +93,14 @@
       "expo-asset"
     ],
     "experiments": {
-      "typedRoutes": true,
-      "reactCompiler": true
-    }
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "310027cb-3cb7-46fd-bae4-7d1d745e4077"
+      }
+    },
+    "owner": "brunomoyse"
   }
 }
