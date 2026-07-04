@@ -48,8 +48,7 @@
         "EXPO_PUBLIC_GRAPHQL_ENDPOINT": "https://pocketpair.app/api/graphql",
         "EXPO_PUBLIC_GRAPHQL_WS_ENDPOINT": "wss://pocketpair.app/api/graphql",
         "EXPO_PUBLIC_AUTH_BASE_URL": "https://pocketpair.app/api",
-        "EXPO_PUBLIC_SENTRY_DSN": "https://a1d59bf5172fdc74e05830a276fcce49@o4511241813819392.ingest.de.sentry.io/4511597216923728",
-        "SENTRY_DISABLE_AUTO_UPLOAD": "true"
+        "EXPO_PUBLIC_SENTRY_DSN": "https://a1d59bf5172fdc74e05830a276fcce49@o4511241813819392.ingest.de.sentry.io/4511597216923728"
       }
     }
   },
