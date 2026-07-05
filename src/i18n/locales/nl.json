@@ -165,6 +165,9 @@
       "bounty": "Bounty"
     },
     "status": {
+      "upcoming": "Aankomend",
+      "live": "Live",
+      "completed": "Afgerond",
       "not_started": "Niet gestart",
       "registration_open": "Registratie open",
       "late_registration": "Late registratie",
@@ -198,7 +201,7 @@
     "dateTime": "Datum & Tijd",
     "structure": "Structuur",
     "players": "Spelers",
-    "tournamentClock": "Clock",
+    "tournamentClock": "Klok",
     "timeRemaining": "Tijd Over",
     "smallBigBlind": "Small / Big Blind",
     "nextLevel": "Volgend Niveau",

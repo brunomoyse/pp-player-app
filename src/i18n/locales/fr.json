@@ -165,6 +165,9 @@
       "bounty": "Bounty"
     },
     "status": {
+      "upcoming": "À venir",
+      "live": "En direct",
+      "completed": "Terminé",
       "not_started": "Pas commencé",
       "registration_open": "Inscriptions ouvertes",
       "late_registration": "Inscription tardive",
@@ -198,7 +201,7 @@
     "dateTime": "Date et Heure",
     "structure": "Structure",
     "players": "Joueurs",
-    "tournamentClock": "Clock",
+    "tournamentClock": "Horloge",
     "timeRemaining": "Temps Restant",
     "smallBigBlind": "Petite / Grosse Blind",
     "nextLevel": "Niveau Suivant",
