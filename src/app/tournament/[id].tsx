@@ -67,9 +67,12 @@ export default function TournamentDetailScreen() {
   const stats = statsData?.tournamentEntryStats;
   // PKO / bounty format and the carried-over progressive-knockout head.
   const isBounty = !!tn?.bountyType && tn.bountyType !== 'NONE';
+  // No chips in play (e.g. nobody checked in yet) means the stat is unknown,
+  // not an average of zero — hide the row rather than showing "0".
+  const totalChips = Number(stats?.totalChips ?? 0);
   const avgStack =
-    stats && stats.playersRemaining && stats.playersRemaining > 0
-      ? Math.round(Number(stats.totalChips ?? 0) / stats.playersRemaining)
+    stats && stats.playersRemaining && stats.playersRemaining > 0 && totalChips > 0
+      ? Math.round(totalChips / stats.playersRemaining)
       : null;
   // Live clock + registration count over the WebSocket (Phase 6).
   const clock = useLiveClock(id, tn?.clock);
