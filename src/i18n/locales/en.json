@@ -123,6 +123,7 @@
     "unregister": "Unregister",
     "full": "Full",
     "buyIn": "Buy-in",
+    "club": "Club",
     "rake": "Rake",
     "guarantee": "Guarantee",
     "maxPlayers": "Max {count} players",

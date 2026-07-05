@@ -230,7 +230,7 @@ export default function TournamentDetailScreen() {
                 />
               ) : null}
               {tn.club ? (
-                <Fact icon="business-outline" label={t('home.selectClub')} value={tn.club.name} />
+                <Fact icon="business-outline" label={t('events.club')} value={tn.club.name} />
               ) : null}
             </Card>
 
@@ -286,8 +286,8 @@ export default function TournamentDetailScreen() {
             {/* Pre-game prep — who's registered + your notes (Pro). Renders only when eligible. */}
             <PreGameField tournamentId={id!} />
 
-            {/* Live clock (subscription-driven, Phase 6) */}
-            {tn.clock ? (
+            {/* Live clock (subscription-driven, Phase 6) — pointless once the tournament is over. */}
+            {tn.status !== 'COMPLETED' && tn.clock ? (
               <ClockDisplay
                 isLive={clock.isLive}
                 timeRemaining={clock.timeRemaining}
