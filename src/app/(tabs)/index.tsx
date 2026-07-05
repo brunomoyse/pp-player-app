@@ -202,12 +202,14 @@ export default function HomeScreen() {
                     {formatDate(tournament.startTime, i18n.language)}
                   </Text>
                 </View>
-                <View className="flex-row items-center gap-1">
-                  <Ionicons name="cash-outline" size={13} color={colors.success} />
-                  <Text className="font-mono-medium text-pp-success">
-                    {currencyCents(result.prizeCents)}
-                  </Text>
-                </View>
+                {result.prizeCents > 0 ? (
+                  <View className="flex-row items-center gap-1">
+                    <Ionicons name="cash-outline" size={13} color={colors.success} />
+                    <Text className="font-mono-medium text-pp-success">
+                      {currencyCents(result.prizeCents)}
+                    </Text>
+                  </View>
+                ) : null}
               </View>
             ))}
           </Card>
