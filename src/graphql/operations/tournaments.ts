@@ -41,6 +41,7 @@ export type TournamentListItem = Pick<
   | 'seatCap'
   | 'status'
   | 'liveStatus'
+  | 'registrationCount'
   | 'createdAt'
   | 'updatedAt'
 >;
@@ -77,6 +78,7 @@ export const GET_TOURNAMENTS: TypedDocumentNode<GetTournamentsResult, GetTournam
         seatCap
         status
         liveStatus
+        registrationCount
         createdAt
         updatedAt
       }

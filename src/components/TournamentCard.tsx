@@ -15,16 +15,14 @@ const STATUS_TONE: Record<TournamentStatus, BadgeTone> = {
 };
 
 export interface TournamentCardProps {
-  tournament: Pick<
-    Tournament,
-    'id' | 'title' | 'status' | 'startTime' | 'buyInCents' | 'seatCap' | 'registrations'
-  >;
+  tournament: Pick<Tournament, 'id' | 'title' | 'status' | 'startTime' | 'buyInCents' | 'seatCap'> &
+    Partial<Pick<Tournament, 'registrationCount' | 'registrations'>>;
   onPress?: () => void;
 }
 
 export function TournamentCard({ tournament, onPress }: TournamentCardProps) {
   const { t, i18n } = useTranslation();
-  const registered = tournament.registrations?.length ?? 0;
+  const registered = tournament.registrationCount ?? tournament.registrations?.length ?? 0;
 
   return (
     <Pressable

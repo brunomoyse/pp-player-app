@@ -35,6 +35,8 @@ export interface Tournament {
 
     clock?: TournamentClock | null;
     club?: Club;
+    /** Players taking part (excludes cancellations and no-shows). */
+    registrationCount?: number;
     registrations: TournamentRegistration[];
     structure: TournamentStructure[];
 }
