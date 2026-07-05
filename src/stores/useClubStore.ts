@@ -19,9 +19,11 @@ export const useClubStore = create<ClubState>()(
       setSelectedClub: (club) => set({ selectedClub: club }),
       setClubs: (clubs) => {
         // Auto-select the first club if none is chosen yet (mirrors the web app).
+        // Re-resolve the persisted selection by id so it picks up server-side
+        // changes (e.g. a club rename) instead of keeping the stale snapshot.
         const current = get().selectedClub;
-        const stillValid = current && clubs.some((c) => c.id === current.id);
-        set({ clubs, selectedClub: stillValid ? current : (clubs[0] ?? null) });
+        const fresh = current ? clubs.find((c) => c.id === current.id) : undefined;
+        set({ clubs, selectedClub: fresh ?? clubs[0] ?? null });
       },
     }),
     {
