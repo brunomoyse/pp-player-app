@@ -763,6 +763,18 @@
       "final_table_deal": {
         "name": "De Koek Verdelen",
         "description": "Sluit een deal aan de finaletafel"
+      },
+      "bridesmaid": {
+        "name": "Tweede Viool",
+        "description": "Eindig als vicekampioen in een toernooi"
+      },
+      "bubble_boy": {
+        "name": "Op de Bubbel",
+        "description": "Val net voor de prijzen af"
+      },
+      "club_pillar": {
+        "name": "Vaste Waarde",
+        "description": "Speel in 12 verschillende maanden"
       }
     },
     "locked": "Vergrendeld"

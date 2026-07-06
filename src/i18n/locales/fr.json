@@ -760,8 +760,20 @@
         "description": "Jouez dans 5 clubs différents"
       },
       "final_table_deal": {
-        "name": "La Poire en Deux",
+        "name": "Family Potes",
         "description": "Concluez un deal à la table finale"
+      },
+      "bridesmaid": {
+        "name": "Le Dauphin",
+        "description": "Terminez vice-champion d'un tournoi"
+      },
+      "bubble_boy": {
+        "name": "La Bulle",
+        "description": "Sautez juste avant les places payées"
+      },
+      "club_pillar": {
+        "name": "Pilier du Club",
+        "description": "Jouez sur 12 mois différents"
       }
     },
     "locked": "Verrouillé"

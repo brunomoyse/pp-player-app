@@ -758,6 +758,18 @@
       "final_table_deal": {
         "name": "Chop Chop",
         "description": "Agree to a deal at the final table"
+      },
+      "bridesmaid": {
+        "name": "Bridesmaid",
+        "description": "Finish runner-up in a tournament"
+      },
+      "bubble_boy": {
+        "name": "Bubble Boy",
+        "description": "Bust one spot out of the money"
+      },
+      "club_pillar": {
+        "name": "Club Fixture",
+        "description": "Play in 12 different months"
       }
     },
     "locked": "Locked"
