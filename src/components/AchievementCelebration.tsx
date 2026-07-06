@@ -5,10 +5,11 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { MotiView } from 'moti';
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, Modal, Pressable, useWindowDimensions, View } from 'react-native';
+import { ActivityIndicator, Modal, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { useReducedMotion } from 'react-native-reanimated';
 
 import { HolographicFoil } from '@/components/HolographicFoil';
+import { LottieBurst } from '@/components/motion/LottieBurst';
 import { Text } from '@/components/ui';
 import { buildVideoProps, isVideoShareAvailable, shareAchievementVideo } from '@/lib/achievementVideo';
 import { ppEasing, ppSpring } from '@/lib/motion';
@@ -155,46 +156,56 @@ export function AchievementCelebration({ show, achievement, onDismiss }: Achieve
             transition={reduce ? { type: 'timing', duration: 200 } : ppSpring}
             className="w-full max-w-[320px] items-center rounded-2xl border bg-pp-surface px-6 pb-6 pt-8"
             style={{ borderColor: 'rgba(254,231,138,0.35)' }}>
-            {isLegendary ? (
-              <View
-                style={{
-                  width: 104,
-                  height: 104,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: 16,
-                }}>
-                <View style={{ position: 'absolute' }}>
-                  <HolographicFoil size={104} animate={!reduce} />
+            <View style={{ alignItems: 'center', justifyContent: 'center', marginBottom: 16 }}>
+              {/* Lottie burst behind the icon (Skia/Skottie). Purely additive — if it
+                  can't render, the confetti/haptics/sound celebration is unaffected. */}
+              {!reduce ? (
+                <View
+                  pointerEvents="none"
+                  style={[StyleSheet.absoluteFill, { alignItems: 'center', justifyContent: 'center' }]}>
+                  <LottieBurst size={isLegendary ? 196 : 168} loop={isLegendary} />
                 </View>
+              ) : null}
+
+              {isLegendary ? (
                 <View
                   style={{
-                    width: 64,
-                    height: 64,
-                    borderRadius: 32,
+                    width: 104,
+                    height: 104,
                     alignItems: 'center',
                     justifyContent: 'center',
-                    backgroundColor: 'rgba(8,8,10,0.55)',
                   }}>
-                  <Ionicons name={iconName(achievement.icon)} size={34} color={colors.text} />
+                  <View style={{ position: 'absolute' }}>
+                    <HolographicFoil size={104} animate={!reduce} />
+                  </View>
+                  <View
+                    style={{
+                      width: 64,
+                      height: 64,
+                      borderRadius: 32,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      backgroundColor: 'rgba(8,8,10,0.55)',
+                    }}>
+                    <Ionicons name={iconName(achievement.icon)} size={34} color={colors.text} />
+                  </View>
                 </View>
-              </View>
-            ) : (
-              <LinearGradient
-                colors={[colors.gold, colors.goldStrong]}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                style={{
-                  width: 72,
-                  height: 72,
-                  borderRadius: 36,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginBottom: 16,
-                }}>
-                <Ionicons name={iconName(achievement.icon)} size={34} color={colors.bg} />
-              </LinearGradient>
-            )}
+              ) : (
+                <LinearGradient
+                  colors={[colors.gold, colors.goldStrong]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                  style={{
+                    width: 72,
+                    height: 72,
+                    borderRadius: 36,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}>
+                  <Ionicons name={iconName(achievement.icon)} size={34} color={colors.bg} />
+                </LinearGradient>
+              )}
+            </View>
 
             <Text className="font-mono text-[11px] uppercase tracking-[0.2em] text-pp-gold-deep">
               {t('achievements.unlockedTitle')}
