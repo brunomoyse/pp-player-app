@@ -5,17 +5,14 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { MotiView } from 'moti';
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ActivityIndicator, Modal, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
+import { Modal, Pressable, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { useReducedMotion } from 'react-native-reanimated';
 
 import { HolographicFoil } from '@/components/HolographicFoil';
 import { LottieBurst } from '@/components/motion/LottieBurst';
 import { Text } from '@/components/ui';
-import { buildVideoProps, isVideoShareAvailable, shareAchievementVideo } from '@/lib/achievementVideo';
 import { ppEasing, ppSpring } from '@/lib/motion';
 import { LEGENDARY_SOUND, UNLOCK_SOUND } from '@/lib/sounds';
-import { useAuthStore } from '@/stores/useAuthStore';
-import { useClubStore } from '@/stores/useClubStore';
 import { colors } from '@/theme/tokens';
 import type { Achievement } from '@/types/achievements';
 
@@ -65,25 +62,6 @@ export function AchievementCelebration({ show, achievement, onDismiss }: Achieve
   const reduce = useReducedMotion();
   const { width, height } = useWindowDimensions();
   const [burst, setBurst] = useState(0);
-
-  const user = useAuthStore((s) => s.currentUser);
-  const club = useClubStore((s) => s.selectedClub);
-  const [sharing, setSharing] = useState(false);
-  const [shareError, setShareError] = useState(false);
-
-  async function onShare() {
-    if (!achievement || sharing) return;
-    setShareError(false);
-    setSharing(true);
-    try {
-      const ok = await shareAchievementVideo(buildVideoProps(achievement, t, user, club));
-      if (!ok) setShareError(true);
-    } catch {
-      setShareError(true);
-    } finally {
-      setSharing(false);
-    }
-  }
 
   const isLegendary = achievement?.tier === 'LEGENDARY';
   const sound = isLegendary ? LEGENDARY_SOUND : UNLOCK_SOUND;
@@ -218,30 +196,6 @@ export function AchievementCelebration({ show, achievement, onDismiss }: Achieve
             </Text>
 
             <View className="w-full gap-2.5">
-              {isVideoShareAvailable ? (
-                <Pressable
-                  onPress={onShare}
-                  disabled={sharing}
-                  accessibilityRole="button"
-                  className="w-full flex-row items-center justify-center gap-2 rounded-full bg-pp-gold py-3"
-                  style={{ opacity: sharing ? 0.7 : 1 }}>
-                  {sharing ? (
-                    <ActivityIndicator size="small" color={colors.bg} />
-                  ) : (
-                    <Ionicons name="share-outline" size={18} color={colors.bg} />
-                  )}
-                  <Text className="font-sans-semibold text-[14px] text-pp-bg">
-                    {sharing ? t('achievements.preparingShare') : t('achievements.shareVideo')}
-                  </Text>
-                </Pressable>
-              ) : null}
-
-              {shareError ? (
-                <Text className="text-center text-[12px] text-red-400">
-                  {t('achievements.shareError')}
-                </Text>
-              ) : null}
-
               <Pressable onPress={onDismiss} accessibilityRole="button" className="w-full items-center py-2">
                 <Text variant="caption">
                   {t('common.nice')}

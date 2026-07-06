@@ -760,10 +760,7 @@
         "description": "Agree to a deal at the final table"
       }
     },
-    "locked": "Locked",
-    "shareVideo": "Share",
-    "preparingShare": "Preparing…",
-    "shareError": "Couldn't create the video. Try again."
+    "locked": "Locked"
   },
   "notes": {
     "title": "Opponent Notes",

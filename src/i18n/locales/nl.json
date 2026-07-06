@@ -765,10 +765,7 @@
         "description": "Sluit een deal aan de finaletafel"
       }
     },
-    "locked": "Vergrendeld",
-    "shareVideo": "Delen",
-    "preparingShare": "Voorbereiden…",
-    "shareError": "Kon de video niet maken. Probeer opnieuw."
+    "locked": "Vergrendeld"
   },
   "notes": {
     "title": "Tegenstandernotities",

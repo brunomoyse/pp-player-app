@@ -764,10 +764,7 @@
         "description": "Concluez un deal à la table finale"
       }
     },
-    "locked": "Verrouillé",
-    "shareVideo": "Partager",
-    "preparingShare": "Préparation…",
-    "shareError": "Impossible de créer la vidéo. Réessayez."
+    "locked": "Verrouillé"
   },
   "notes": {
     "title": "Notes sur les joueurs",
