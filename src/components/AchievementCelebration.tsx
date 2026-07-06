@@ -9,6 +9,7 @@ import { Modal, Pressable, StyleSheet, useWindowDimensions, View } from 'react-n
 import { useReducedMotion } from 'react-native-reanimated';
 
 import { HolographicFoil } from '@/components/HolographicFoil';
+import { tierBurstSource } from '@/components/motion/achievementLottie';
 import { LottieBurst } from '@/components/motion/LottieBurst';
 import { Text } from '@/components/ui';
 import { ppEasing, ppSpring } from '@/lib/motion';
@@ -141,7 +142,11 @@ export function AchievementCelebration({ show, achievement, onDismiss }: Achieve
                 <View
                   pointerEvents="none"
                   style={[StyleSheet.absoluteFill, { alignItems: 'center', justifyContent: 'center' }]}>
-                  <LottieBurst size={isLegendary ? 196 : 168} loop={isLegendary} />
+                  <LottieBurst
+                    size={isLegendary ? 196 : 168}
+                    loop={isLegendary}
+                    source={tierBurstSource(achievement.tier)}
+                  />
                 </View>
               ) : null}
 
