@@ -9,7 +9,6 @@ export interface User {
     phone?: string | null;
     isActive: boolean;
     role: Role;
-    isPro?: boolean;
     managedClub?: Club | null;
 }
 

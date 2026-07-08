@@ -33,7 +33,7 @@ export interface GetMySeasonPassVars {
   seasonId: string;
 }
 
-/** The current user's pass standing (XP/tier/premium) for a season. */
+/** The current user's pass standing (XP/tier) for a season. */
 export const GET_MY_SEASON_PASS: TypedDocumentNode<
   GetMySeasonPassResult,
   GetMySeasonPassVars

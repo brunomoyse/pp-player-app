@@ -54,7 +54,7 @@ export interface GetTournamentFieldNotesVars {
   tournamentId: string;
 }
 
-/** Pre-game prep: tonight's field with the viewer's notes attached (Pro only). */
+/** Pre-game prep: tonight's field with the viewer's notes attached. */
 export const GET_TOURNAMENT_FIELD_NOTES: TypedDocumentNode<
   GetTournamentFieldNotesResult,
   GetTournamentFieldNotesVars

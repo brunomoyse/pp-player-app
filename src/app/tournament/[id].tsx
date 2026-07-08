@@ -283,7 +283,7 @@ export default function TournamentDetailScreen() {
               />
             ) : null}
 
-            {/* Pre-game prep — who's registered + your notes (Pro). Renders only when eligible. */}
+            {/* Pre-game prep: who's registered + your notes. Renders only when the notes feature is on. */}
             <PreGameField tournamentId={id!} />
 
             {/* Live clock (subscription-driven, Phase 6) — pointless once the tournament is over. */}

@@ -6,7 +6,7 @@ export interface GetMyProAnalyticsResult {
   myProAnalytics: ProAnalytics;
 }
 
-/** Personal performance analytics (Pro only). */
+/** Personal performance analytics. */
 export const GET_MY_PRO_ANALYTICS: TypedDocumentNode<
   GetMyProAnalyticsResult,
   Record<string, never>
