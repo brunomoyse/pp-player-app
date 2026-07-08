@@ -8,19 +8,16 @@ import { PlayerNoteSheet } from '@/components/PlayerNoteSheet';
 import { Card, Text } from '@/components/ui';
 import { GET_TOURNAMENT_FIELD_NOTES } from '@/graphql/operations';
 import { useFeatureFlags } from '@/hooks/useFeatureFlags';
-import { useIsPro } from '@/hooks/useIsPro';
 import { colors } from '@/theme/tokens';
 
 /**
- * Pre-game prep (the Pro demo moment): everyone registered for a tournament,
- * with the viewer's own notes auto-surfaced. Renders nothing unless the viewer
- * is Pro and the notes feature is on.
+ * Pre-game prep: everyone registered for a tournament, with the viewer's own
+ * notes auto-surfaced. Renders nothing unless the notes feature is on.
  */
 export function PreGameField({ tournamentId }: { tournamentId: string }) {
   const { t } = useTranslation();
   const flags = useFeatureFlags();
-  const isPro = useIsPro();
-  const eligible = flags.notes && isPro;
+  const eligible = flags.notes;
   const [openSubject, setOpenSubject] = useState<{ id: string; name?: string } | null>(null);
 
   const { data, refetch } = useQuery(GET_TOURNAMENT_FIELD_NOTES, {

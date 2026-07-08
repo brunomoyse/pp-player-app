@@ -306,8 +306,8 @@ export default function ProfileScreen() {
           {flags.proAccount ? (
             <Setting
               icon="stats-chart-outline"
-              title={t('pro.analyticsTitle')}
-              subtitle={t('pro.analyticsSubtitle')}
+              title={t('analytics.title')}
+              subtitle={t('analytics.subtitle')}
               onPress={() => router.push('/analytics')}
             />
           ) : null}

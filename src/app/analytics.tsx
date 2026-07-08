@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/client/react';
-import { Ionicons } from '@expo/vector-icons';
 import { Redirect, Stack } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
@@ -8,19 +7,16 @@ import { BackButton, StatCard } from '@/components';
 import { Card, EmptyState, ErrorState, LoadingState, Screen, Text } from '@/components/ui';
 import { GET_MY_PRO_ANALYTICS } from '@/graphql/operations';
 import { useFeatureFlags } from '@/hooks/useFeatureFlags';
-import { useIsPro } from '@/hooks/useIsPro';
 import { useIsAuthenticated } from '@/stores/useAuthStore';
-import { colors } from '@/theme/tokens';
 import { currencyCents } from '@/utils/currency';
 
 export default function AnalyticsScreen() {
   const { t } = useTranslation();
   const isAuth = useIsAuthenticated();
   const flags = useFeatureFlags();
-  const isPro = useIsPro();
 
   const { data, loading, error, refetch, networkStatus } = useQuery(GET_MY_PRO_ANALYTICS, {
-    skip: !isAuth || !flags.proAccount || !isPro,
+    skip: !isAuth || !flags.proAccount,
     notifyOnNetworkStatusChange: true,
   });
 
@@ -41,21 +37,11 @@ export default function AnalyticsScreen() {
         contentClassName="gap-4">
         <View className="flex-row items-center gap-3">
           <BackButton />
-          <Text variant="title">{t('pro.analyticsTitle')}</Text>
+          <Text variant="title">{t('analytics.title')}</Text>
         </View>
 
         {!flags.proAccount ? (
           <EmptyState message={t('common.notYetAvailable')} />
-        ) : !isPro ? (
-          <Card highlighted className="items-center gap-3 py-6">
-            <Ionicons name="sparkles-outline" size={32} color={colors.gold} />
-            <Text variant="heading" className="text-center">
-              {t('pro.upsellTitle')}
-            </Text>
-            <Text variant="muted" className="text-center">
-              {t('pro.upsellBody')}
-            </Text>
-          </Card>
         ) : loading && !data ? (
           <LoadingState label={t('common.loading')} />
         ) : error ? (
@@ -70,23 +56,23 @@ export default function AnalyticsScreen() {
               <StatCard
                 icon="trending-up-outline"
                 value={currencyCents(netTotal)}
-                label={t('pro.netProfit')}
+                label={t('analytics.netProfit')}
               />
               <StatCard
                 icon="albums-outline"
                 value={tournamentsTotal}
-                label={t('pro.tournaments')}
+                label={t('analytics.tournaments')}
               />
             </View>
 
             {/* By club */}
             <Card className="gap-2">
               <Text variant="label" className="mb-1 text-pp-gold-deep">
-                {t('pro.byClub')}
+                {t('analytics.byClub')}
               </Text>
               {(a?.byClub ?? []).length === 0 ? (
                 <Text variant="dim">
-                  {t('pro.noData')}
+                  {t('analytics.noData')}
                 </Text>
               ) : (
                 (a?.byClub ?? []).map((c) => (
@@ -94,7 +80,7 @@ export default function AnalyticsScreen() {
                     <View className="flex-1">
                       <Text className="font-sans-semibold text-pp-text">{c.clubName}</Text>
                       <Text variant="dim">
-                        {c.tournaments} {t('pro.tournaments').toLowerCase()}
+                        {c.tournaments} {t('analytics.tournaments').toLowerCase()}
                       </Text>
                     </View>
                     <Text
@@ -109,11 +95,11 @@ export default function AnalyticsScreen() {
             {/* By buy-in */}
             <Card className="gap-2">
               <Text variant="label" className="mb-1 text-pp-gold-deep">
-                {t('pro.byBuyIn')}
+                {t('analytics.byBuyIn')}
               </Text>
               {(a?.byBuyIn ?? []).length === 0 ? (
                 <Text variant="dim">
-                  {t('pro.noData')}
+                  {t('analytics.noData')}
                 </Text>
               ) : (
                 (a?.byBuyIn ?? []).map((b) => (
@@ -123,7 +109,7 @@ export default function AnalyticsScreen() {
                         {currencyCents(b.buyInCents)}
                       </Text>
                       <Text variant="dim">
-                        {b.tournaments} {t('pro.tournaments').toLowerCase()}
+                        {b.tournaments} {t('analytics.tournaments').toLowerCase()}
                       </Text>
                     </View>
                     <Text

@@ -649,7 +649,7 @@
     "subtitle": "Scout spelers die zich aanmeldden",
     "searchPlaceholder": "Zoek spelers op naam",
     "quota": "{used}/{limit} gratis opzoekingen deze maand gebruikt",
-    "unlimited": "Onbeperkt opzoeken (Pro)",
+    "unlimited": "Onbeperkt opzoeken",
     "results": "Resultaten",
     "hint": "Typ minstens 2 tekens om te zoeken.",
     "noResults": "Geen spelers gevonden in de zoekpool.",
@@ -659,7 +659,7 @@
     "pnl": "Winst / verlies",
     "pnlPrivate": "Privé",
     "quotaReached": "Limiet gratis opzoekingen bereikt",
-    "quotaReachedBody": "Upgrade naar Pro (en sluit je aan bij de pool) voor onbeperkt opzoeken."
+    "quotaReachedBody": "Je hebt al je gratis zoekopdrachten voor deze maand gebruikt."
   },
   "achievements": {
     "title": "Prestaties",
@@ -791,11 +791,9 @@
       "tricky": "Lastig"
     }
   },
-  "pro": {
-    "analyticsTitle": "Prestatie-analyses",
-    "analyticsSubtitle": "Je resultaten, uitgesplitst",
-    "upsellTitle": "Een Pro-functie",
-    "upsellBody": "Ontgrendel volledige prestatie-analyses, onbeperkte tegenstandernotities en pre-game intel met Pro.",
+  "analytics": {
+    "title": "Prestatie-analyses",
+    "subtitle": "Je resultaten, uitgesplitst",
     "netProfit": "Nettowinst",
     "tournaments": "Toernooien",
     "byClub": "Per club",
