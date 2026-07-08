@@ -1,7 +1,0 @@
-query GetFeatureFlags {
-  featureFlags {
-    notes
-    proAccount
-    publicStats
-  }
-}

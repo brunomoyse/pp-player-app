@@ -7,25 +7,19 @@ import { Pressable, View } from 'react-native';
 import { PlayerNoteSheet } from '@/components/PlayerNoteSheet';
 import { Card, Text } from '@/components/ui';
 import { GET_TOURNAMENT_FIELD_NOTES } from '@/graphql/operations';
-import { useFeatureFlags } from '@/hooks/useFeatureFlags';
 import { colors } from '@/theme/tokens';
 
 /**
  * Pre-game prep: everyone registered for a tournament, with the viewer's own
- * notes auto-surfaced. Renders nothing unless the notes feature is on.
+ * notes auto-surfaced. Renders nothing until there is field data.
  */
 export function PreGameField({ tournamentId }: { tournamentId: string }) {
   const { t } = useTranslation();
-  const flags = useFeatureFlags();
-  const eligible = flags.notes;
   const [openSubject, setOpenSubject] = useState<{ id: string; name?: string } | null>(null);
 
   const { data, refetch } = useQuery(GET_TOURNAMENT_FIELD_NOTES, {
     variables: { tournamentId },
-    skip: !eligible,
   });
-
-  if (!eligible) return null;
 
   const field = data?.tournamentFieldNotes ?? [];
   if (field.length === 0) return null;

@@ -7,7 +7,6 @@ import { Pressable, View } from 'react-native';
 import { BackButton, PlayerNoteSheet } from '@/components';
 import { Badge, Card, EmptyState, ErrorState, LoadingState, Screen, Text } from '@/components/ui';
 import { GET_MY_PLAYER_NOTES } from '@/graphql/operations';
-import { useFeatureFlags } from '@/hooks/useFeatureFlags';
 import { useIsAuthenticated } from '@/stores/useAuthStore';
 
 const STYLE_LABEL: Record<string, string> = {
@@ -20,11 +19,10 @@ const STYLE_LABEL: Record<string, string> = {
 export default function NotesScreen() {
   const { t } = useTranslation();
   const isAuth = useIsAuthenticated();
-  const flags = useFeatureFlags();
   const [openSubject, setOpenSubject] = useState<{ id: string; name?: string } | null>(null);
 
   const { data, loading, error, refetch, networkStatus } = useQuery(GET_MY_PLAYER_NOTES, {
-    skip: !isAuth || !flags.notes,
+    skip: !isAuth,
     notifyOnNetworkStatusChange: true,
   });
 
@@ -44,9 +42,7 @@ export default function NotesScreen() {
           <Text variant="title">{t('notes.title')}</Text>
         </View>
 
-        {!flags.notes ? (
-          <EmptyState message={t('common.notYetAvailable')} />
-        ) : loading && !data ? (
+        {loading && !data ? (
           <LoadingState label={t('common.loading')} />
         ) : error ? (
           <ErrorState

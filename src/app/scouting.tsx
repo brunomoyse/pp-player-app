@@ -5,14 +5,13 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 
-import { Avatar, Badge, Card, EmptyState, Input, Screen, Text } from '@/components/ui';
+import { Avatar, Badge, Card, Input, Screen, Text } from '@/components/ui';
 import { BackButton } from '@/components';
 import {
   GET_MY_SCOUTING_QUOTA,
   SCOUTING_PROFILE,
   SCOUTING_SEARCH,
 } from '@/graphql/operations';
-import { useFeatureFlags } from '@/hooks/useFeatureFlags';
 import { useIsAuthenticated } from '@/stores/useAuthStore';
 import { colors } from '@/theme/tokens';
 import { currencyCents } from '@/utils/currency';
@@ -31,13 +30,12 @@ function Stat({ label, value }: { label: string; value: string }) {
 export default function ScoutingScreen() {
   const { t } = useTranslation();
   const isAuth = useIsAuthenticated();
-  const flags = useFeatureFlags();
   const [query, setQuery] = useState('');
 
-  const quotaQ = useQuery(GET_MY_SCOUTING_QUOTA, { skip: !isAuth || !flags.publicStats });
+  const quotaQ = useQuery(GET_MY_SCOUTING_QUOTA, { skip: !isAuth });
   const searchQ = useQuery(SCOUTING_SEARCH, {
     variables: { query: query.trim() },
-    skip: !isAuth || !flags.publicStats || query.trim().length < 2,
+    skip: !isAuth || query.trim().length < 2,
   });
 
   const [loadProfile, profileQ] = useLazyQuery(SCOUTING_PROFILE);
@@ -63,10 +61,7 @@ export default function ScoutingScreen() {
           <Text variant="title">{t('scouting.title')}</Text>
         </View>
 
-        {!flags.publicStats ? (
-          <EmptyState message={t('common.notYetAvailable')} />
-        ) : (
-          <>
+        <>
             {/* Quota */}
             {quota ? (
               <Text variant="dim">
@@ -159,8 +154,7 @@ export default function ScoutingScreen() {
                 ))
               )}
             </Card>
-          </>
-        )}
+        </>
       </Screen>
     </>
   );

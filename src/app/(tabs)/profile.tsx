@@ -21,7 +21,6 @@ import {
   UPDATE_NOTIFICATION_PREFERENCES,
   type NotificationPreferences,
 } from '@/graphql/operations';
-import { useFeatureFlags } from '@/hooks/useFeatureFlags';
 import { LOCALE_LABELS, useI18n } from '@/i18n/useI18n';
 import { openLegal } from '@/lib/legal';
 import { toast } from '@/lib/toast';
@@ -92,7 +91,6 @@ export default function ProfileScreen() {
   const user = useAuthStore((s) => s.currentUser);
   const logout = useAuthStore((s) => s.logout);
   const { locale } = useI18n();
-  const flags = useFeatureFlags();
   const [editing, setEditing] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
 
@@ -295,30 +293,24 @@ export default function ProfileScreen() {
           subtitle={t('drinkWallet.subtitle')}
           onPress={() => router.push('/drink-wallet')}
         />
-        {flags.notes ? (
-            <Setting
-              icon="reader-outline"
-              title={t('notes.title')}
-              subtitle={t('notes.privateSubtitle')}
-              onPress={() => router.push('/notes')}
-            />
-          ) : null}
-          {flags.proAccount ? (
-            <Setting
-              icon="stats-chart-outline"
-              title={t('analytics.title')}
-              subtitle={t('analytics.subtitle')}
-              onPress={() => router.push('/analytics')}
-            />
-          ) : null}
-          {flags.publicStats ? (
-            <Setting
-              icon="search-outline"
-              title={t('scouting.title')}
-              subtitle={t('scouting.subtitle')}
-              onPress={() => router.push('/scouting')}
-            />
-          ) : null}
+        <Setting
+          icon="reader-outline"
+          title={t('notes.title')}
+          subtitle={t('notes.privateSubtitle')}
+          onPress={() => router.push('/notes')}
+        />
+        <Setting
+          icon="stats-chart-outline"
+          title={t('analytics.title')}
+          subtitle={t('analytics.subtitle')}
+          onPress={() => router.push('/analytics')}
+        />
+        <Setting
+          icon="search-outline"
+          title={t('scouting.title')}
+          subtitle={t('scouting.subtitle')}
+          onPress={() => router.push('/scouting')}
+        />
       </Card>
 
       {/* Tournaments */}
@@ -387,14 +379,12 @@ export default function ProfileScreen() {
           subtitle={LOCALE_LABELS[locale]}
           onPress={() => setLangOpen(true)}
         />
-        {flags.publicStats ? (
-          <Setting
-            icon="shield-checkmark-outline"
-            title={t('privacy.title')}
-            subtitle={t('privacy.subtitle')}
-            onPress={() => router.push('/privacy')}
-          />
-        ) : null}
+        <Setting
+          icon="shield-checkmark-outline"
+          title={t('privacy.title')}
+          subtitle={t('privacy.subtitle')}
+          onPress={() => router.push('/privacy')}
+        />
       </Card>
 
       {/* Legal — links out to the marketing-site policy pages (18+ context). */}

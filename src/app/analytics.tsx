@@ -4,19 +4,17 @@ import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 
 import { BackButton, StatCard } from '@/components';
-import { Card, EmptyState, ErrorState, LoadingState, Screen, Text } from '@/components/ui';
+import { Card, ErrorState, LoadingState, Screen, Text } from '@/components/ui';
 import { GET_MY_PRO_ANALYTICS } from '@/graphql/operations';
-import { useFeatureFlags } from '@/hooks/useFeatureFlags';
 import { useIsAuthenticated } from '@/stores/useAuthStore';
 import { currencyCents } from '@/utils/currency';
 
 export default function AnalyticsScreen() {
   const { t } = useTranslation();
   const isAuth = useIsAuthenticated();
-  const flags = useFeatureFlags();
 
   const { data, loading, error, refetch, networkStatus } = useQuery(GET_MY_PRO_ANALYTICS, {
-    skip: !isAuth || !flags.proAccount,
+    skip: !isAuth,
     notifyOnNetworkStatusChange: true,
   });
 
@@ -40,9 +38,7 @@ export default function AnalyticsScreen() {
           <Text variant="title">{t('analytics.title')}</Text>
         </View>
 
-        {!flags.proAccount ? (
-          <EmptyState message={t('common.notYetAvailable')} />
-        ) : loading && !data ? (
+        {loading && !data ? (
           <LoadingState label={t('common.loading')} />
         ) : error ? (
           <ErrorState

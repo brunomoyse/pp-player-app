@@ -12,6 +12,5 @@ export * from './season';
 export * from './social';
 export * from './drinkWallet';
 export * from './scouting';
-export * from './system';
 export * from './subscriptions';
 export * from './notifications';

@@ -4,10 +4,9 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Switch, View } from 'react-native';
 
-import { Card, EmptyState, LoadingState, Screen, Text } from '@/components/ui';
+import { Card, LoadingState, Screen, Text } from '@/components/ui';
 import { BackButton } from '@/components';
 import { GET_MY_PRIVACY_SETTINGS, UPDATE_PRIVACY_SETTINGS } from '@/graphql/operations';
-import { useFeatureFlags } from '@/hooks/useFeatureFlags';
 import { useIsAuthenticated } from '@/stores/useAuthStore';
 import { colors } from '@/theme/tokens';
 import type { PrivacySettings } from '@/types/scouting';
@@ -83,10 +82,9 @@ function ConsentForm({ initial }: { initial: PrivacySettings }) {
 export default function PrivacyScreen() {
   const { t } = useTranslation();
   const isAuth = useIsAuthenticated();
-  const flags = useFeatureFlags();
 
   const { data, loading } = useQuery(GET_MY_PRIVACY_SETTINGS, {
-    skip: !isAuth || !flags.publicStats,
+    skip: !isAuth,
   });
 
   if (!isAuth) return <Redirect href="/login" />;
@@ -102,9 +100,7 @@ export default function PrivacyScreen() {
           <Text variant="title">{t('privacy.title')}</Text>
         </View>
 
-        {!flags.publicStats ? (
-          <EmptyState message={t('common.notYetAvailable')} />
-        ) : loading || !settings ? (
+        {loading || !settings ? (
           <LoadingState label={t('common.loading')} />
         ) : (
           <ConsentForm initial={settings} />
