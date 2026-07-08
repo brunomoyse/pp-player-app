@@ -12,7 +12,7 @@ import {
   StatCard,
   StreakCard,
 } from '@/components';
-import { Avatar, Badge, Button, Card, Screen, Text } from '@/components/ui';
+import { Avatar, Button, Card, Screen, Text } from '@/components/ui';
 import {
   DELETE_MY_ACCOUNT,
   GET_MY_ACHIEVEMENTS,
@@ -21,7 +21,6 @@ import {
   UPDATE_NOTIFICATION_PREFERENCES,
   type NotificationPreferences,
 } from '@/graphql/operations';
-import { useEquippedCosmetics } from '@/hooks/useEquippedCosmetics';
 import { useFeatureFlags } from '@/hooks/useFeatureFlags';
 import { LOCALE_LABELS, useI18n } from '@/i18n/useI18n';
 import { openLegal } from '@/lib/legal';
@@ -94,7 +93,6 @@ export default function ProfileScreen() {
   const logout = useAuthStore((s) => s.logout);
   const { locale } = useI18n();
   const flags = useFeatureFlags();
-  const equipped = useEquippedCosmetics();
   const [editing, setEditing] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
 
@@ -206,12 +204,10 @@ export default function ProfileScreen() {
           name={fullName(user?.firstName, user?.lastName, user?.username)}
           size={88}
           ring
-          frame={equipped.avatarFrame?.previewRef}
         />
         <View className="items-center gap-1">
           <Text variant="title">{fullName(user?.firstName, user?.lastName, user?.username)}</Text>
           <Text variant="muted">{user?.email}</Text>
-          {equipped.badge ? <Badge tone="gold" label={equipped.badge.name} /> : null}
         </View>
         <Button
           title={t('profile.editProfile')}
@@ -299,15 +295,7 @@ export default function ProfileScreen() {
           subtitle={t('drinkWallet.subtitle')}
           onPress={() => router.push('/drink-wallet')}
         />
-        {flags.cosmetics ? (
-            <Setting
-              icon="color-palette-outline"
-              title={t('cosmetics.title')}
-              subtitle={t('cosmetics.subtitle')}
-              onPress={() => router.push('/cosmetics')}
-            />
-          ) : null}
-          {flags.notes ? (
+        {flags.notes ? (
             <Setting
               icon="reader-outline"
               title={t('notes.title')}

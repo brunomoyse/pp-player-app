@@ -10,7 +10,6 @@ export * from './analytics';
 export * from './attendance';
 export * from './season';
 export * from './social';
-export * from './cosmetics';
 export * from './drinkWallet';
 export * from './scouting';
 export * from './system';

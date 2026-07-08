@@ -598,21 +598,6 @@
     "share": "Share my year",
     "shareHeader": "My {year} Year in Poker 🃏"
   },
-  "cosmetics": {
-    "title": "Cosmetics",
-    "subtitle": "Card backs, frames & themes",
-    "empty": "No cosmetics available yet.",
-    "buy": "Buy",
-    "equip": "Equip",
-    "equipped": "Equipped",
-    "confirmBuy": "Buy this item for {price}?",
-    "kinds": {
-      "card_back": "Card backs",
-      "avatar_frame": "Avatar frames",
-      "theme": "Table themes",
-      "badge": "Badges"
-    }
-  },
   "drinkWallet": {
     "title": "Drink Wallet",
     "subtitle": "Your bar credits at the club",
