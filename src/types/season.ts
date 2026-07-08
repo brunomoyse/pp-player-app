@@ -13,7 +13,6 @@ export interface SeasonPass {
   tier: number;
   xpIntoTier: number;
   xpPerTier: number;
-  isPremium: boolean;
 }
 
 export interface QuestProgress {

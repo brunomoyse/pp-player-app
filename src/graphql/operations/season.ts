@@ -45,7 +45,6 @@ export const GET_MY_SEASON_PASS: TypedDocumentNode<
       tier
       xpIntoTier
       xpPerTier
-      isPremium
     }
   }
 `;

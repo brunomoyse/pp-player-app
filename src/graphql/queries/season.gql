@@ -16,7 +16,6 @@ query GetMySeasonPass($seasonId: ID!) {
     tier
     xpIntoTier
     xpPerTier
-    isPremium
   }
 }
 

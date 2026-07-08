@@ -144,7 +144,6 @@ export default function SeasonScreen() {
                 <Text variant="label" className="text-pp-gold-deep">
                   {season.name}
                 </Text>
-                {pass?.isPremium ? <Badge tone="gold" label={t('season.premium')} /> : null}
               </View>
 
               <View className="flex-row items-end justify-between">
