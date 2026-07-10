@@ -1,27 +1,34 @@
 import { gql, type TypedDocumentNode } from '@apollo/client';
 
-import type { Friend, Rivalry, YearInPoker } from '@/types/social';
+import type { Friend, YearInPoker } from '@/types/social';
 import type { TournamentRegistration } from '@/types/tournament';
 
-export interface GetMyRivalriesResult {
-  myRivalries: Rivalry[];
+export interface PlayerSearchHit {
+  id: string;
+  username?: string | null;
+  firstName: string;
+  lastName?: string | null;
 }
-export interface GetMyRivalriesVars {
-  limit?: number;
+export interface SearchPlayersResult {
+  users: { items: PlayerSearchHit[] };
+}
+export interface SearchPlayersVars {
+  search: string;
 }
 
-/** Head-to-head records, most-played opponents first. */
-export const GET_MY_RIVALRIES: TypedDocumentNode<
-  GetMyRivalriesResult,
-  GetMyRivalriesVars
+/** Search app users by name to send a friend request. */
+export const SEARCH_PLAYERS: TypedDocumentNode<
+  SearchPlayersResult,
+  SearchPlayersVars
 > = gql`
-  query GetMyRivalries($limit: Int) {
-    myRivalries(limit: $limit) {
-      opponentId
-      opponentName
-      meetings
-      wins
-      losses
+  query SearchPlayers($search: String!) {
+    users(search: $search, isActive: true, pagination: { limit: 15, offset: 0 }) {
+      items {
+        id
+        username
+        firstName
+        lastName
+      }
     }
   }
 `;

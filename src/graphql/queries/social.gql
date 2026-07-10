@@ -1,13 +1,3 @@
-query GetMyRivalries($limit: Int) {
-  myRivalries(limit: $limit) {
-    opponentId
-    opponentName
-    meetings
-    wins
-    losses
-  }
-}
-
 fragment FriendFields on Friend {
   friendshipId
   userId

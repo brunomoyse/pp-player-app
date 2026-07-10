@@ -1,11 +1,3 @@
-export interface Rivalry {
-  opponentId: string;
-  opponentName: string;
-  meetings: number;
-  wins: number;
-  losses: number;
-}
-
 export interface MutualFlame {
   sharedNights: number;
   lastShared: string | null;

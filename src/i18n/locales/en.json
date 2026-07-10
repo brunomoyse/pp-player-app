@@ -548,16 +548,6 @@
       "description": "Check in at 3 different clubs this week"
     }
   },
-  "rivals": {
-    "title": "Rivals",
-    "subtitle": "Your head-to-head records",
-    "empty": "Play a few tournaments to build up rivalries.",
-    "nemesis": "Your Nemesis",
-    "nemesisLine": "Beat you {losses} times across {meetings} meetings",
-    "headToHead": "Head-to-head",
-    "recordLegend": "W-L",
-    "meetings": "{count} meetings"
-  },
   "friends": {
     "a11y": {
       "acceptHint": "Accepts this friend request",
@@ -571,7 +561,9 @@
     "decline": "Decline",
     "yourFriends": "Your friends",
     "empty": "No friends yet. Add someone you play with.",
-    "peopleYouPlay": "People you play",
+    "searchPlaceholder": "Search players by name",
+    "searchResults": "Players",
+    "noResults": "No players found.",
     "add": "Add",
     "remove": "Remove",
     "sent": "Sent",

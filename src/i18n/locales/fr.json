@@ -552,16 +552,6 @@
       "description": "Enregistrez-vous dans 3 clubs différents cette semaine"
     }
   },
-  "rivals": {
-    "title": "Rivaux",
-    "subtitle": "Vos confrontations directes",
-    "empty": "Jouez quelques tournois pour créer des rivalités.",
-    "nemesis": "Votre Némésis",
-    "nemesisLine": "Vous a battu {losses} fois en {meetings} rencontres",
-    "headToHead": "Face-à-face",
-    "recordLegend": "V-D",
-    "meetings": "{count} rencontres"
-  },
   "friends": {
     "a11y": {
       "acceptHint": "Accepte cette demande d’ami",
@@ -575,7 +565,9 @@
     "decline": "Refuser",
     "yourFriends": "Vos amis",
     "empty": "Pas encore d'amis. Ajoutez quelqu'un avec qui vous jouez.",
-    "peopleYouPlay": "Joueurs que vous croisez",
+    "searchPlaceholder": "Rechercher des joueurs par nom",
+    "searchResults": "Joueurs",
+    "noResults": "Aucun joueur trouvé.",
     "add": "Ajouter",
     "remove": "Retirer",
     "sent": "Envoyées",

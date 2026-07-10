@@ -263,12 +263,6 @@ export default function ProfileScreen() {
           onPress={() => router.push('/season')}
         />
         <Setting
-          icon="flash-outline"
-          title={t('rivals.title')}
-          subtitle={t('rivals.subtitle')}
-          onPress={() => router.push('/rivals')}
-        />
-        <Setting
           icon="people-outline"
           title={t('friends.title')}
           subtitle={t('friends.subtitle')}
