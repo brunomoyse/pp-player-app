@@ -81,7 +81,7 @@ function DrinkWalletCard({
           {clubName || t('drinkWallet.balanceLabel')}
         </Text>
         <Text className="font-sans-bold text-4xl text-pp-gold">
-          {showPlaceholder ? '—' : (wallet?.balance ?? 0)}
+          {showPlaceholder ? '–' : (wallet?.balance ?? 0)}
         </Text>
         <Text variant="muted">{t('drinkWallet.creditsUnit', { count: wallet?.balance ?? 0 })}</Text>
       </View>
