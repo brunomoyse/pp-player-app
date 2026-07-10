@@ -348,6 +348,17 @@
     "loginToCompete": "Login to Compete",
     "yourRank": "Your current rank",
     "points": "Points",
+    "scoring": {
+      "title": "How points work",
+      "intro": "Points reward deep runs in bigger, tougher events. A result scores more for:",
+      "finish": "Finishing higher",
+      "field": "A bigger field",
+      "buyin": "A higher buy-in",
+      "cap": "Each result is capped at {cap} points.",
+      "total": "Your rank uses the sum of your results over the selected period.",
+      "metrics": "Winnings ranks by total cashes, Volume by events played.",
+      "gotIt": "Got it"
+    },
     "periods": {
       "month": "Month",
       "year": "Year",

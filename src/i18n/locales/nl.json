@@ -372,6 +372,17 @@
     "title": "Ranglijst",
     "yourRank": "Je huidige ranking",
     "points": "Punten",
+    "scoring": {
+      "title": "Hoe punten werken",
+      "intro": "Punten belonen diepe finishes in grotere, sterkere toernooien. Een resultaat levert meer op voor:",
+      "finish": "Hoger eindigen",
+      "field": "Een groter field",
+      "buyin": "Een hogere buy-in",
+      "cap": "Elk resultaat is gemaximeerd op {cap} punten.",
+      "total": "Je ranking is de som van je resultaten in de gekozen periode.",
+      "metrics": "Winst rangschikt op totale cashes, Volume op gespeelde events.",
+      "gotIt": "Begrepen"
+    },
     "tournaments": "toernooien",
     "itm": "ITM",
     "avgFinish": "gem. finish",

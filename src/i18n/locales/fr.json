@@ -371,6 +371,17 @@
     "title": "Classement",
     "yourRank": "Votre classement actuel",
     "points": "Points",
+    "scoring": {
+      "title": "Comment les points fonctionnent",
+      "intro": "Les points récompensent les places profondes dans des tournois plus grands et plus relevés. Un résultat rapporte davantage pour :",
+      "finish": "Une meilleure place",
+      "field": "Un plus grand field",
+      "buyin": "Un buy-in plus élevé",
+      "cap": "Chaque résultat est plafonné à {cap} points.",
+      "total": "Votre classement additionne vos résultats sur la période sélectionnée.",
+      "metrics": "Gains classe par total des gains, Volume par nombre d'événements joués.",
+      "gotIt": "Compris"
+    },
     "tournaments": "tournois",
     "itm": "ITM",
     "avgFinish": "fin moy.",

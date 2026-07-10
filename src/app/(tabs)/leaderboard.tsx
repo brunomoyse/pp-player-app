@@ -1,11 +1,23 @@
 import { useQuery } from '@apollo/client/react';
+import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { View } from 'react-native';
+import { Modal, Pressable, View } from 'react-native';
 
 import { LeaderboardTable } from '@/components';
-import { Button, Card, EmptyState, ErrorState, LoadingState, Screen, Segment, Text } from '@/components/ui';
+import {
+  Button,
+  Card,
+  EmptyState,
+  ErrorState,
+  IconButton,
+  LoadingState,
+  Screen,
+  Segment,
+  Text,
+} from '@/components/ui';
+import { colors } from '@/theme/tokens';
 import { GET_LEADERBOARD, GET_LEADERBOARD_CONFIGS } from '@/graphql/operations';
 import { useClubs } from '@/hooks/useClubs';
 import { useClubStore } from '@/stores/useClubStore';
@@ -19,6 +31,9 @@ type Metric = 'overall' | 'winnings' | 'volume';
 
 /** Sentinel for the default (period-based) leaderboard, where no league is selected. */
 const DEFAULT_LEAGUE = '__default__';
+
+/** Max points a single result can score (mirrors the backend ScoringFormula default). */
+const POINTS_CAP = 60;
 
 const PERIOD_ENUM: Record<Period, LeaderboardPeriod> = {
   month: 'LAST_30_DAYS',
@@ -40,6 +55,7 @@ export default function LeaderboardScreen() {
   const [period, setPeriod] = useState<Period>('month');
   const [metric, setMetric] = useState<Metric>('overall');
   const [league, setLeague] = useState<string>(DEFAULT_LEAGUE);
+  const [scoringOpen, setScoringOpen] = useState(false);
 
   // Configurable leaderboards (leagues) for the selected club. Empty -> selector hidden.
   const { data: configsData } = useQuery(GET_LEADERBOARD_CONFIGS, {
@@ -83,7 +99,15 @@ export default function LeaderboardScreen() {
       refreshing={networkStatus === 4}
       onRefresh={() => void refetch()}
       contentClassName="gap-4">
-      <Text variant="title">{t('leaderboard.title')}</Text>
+      <View className="flex-row items-center justify-between">
+        <Text variant="title">{t('leaderboard.title')}</Text>
+        <IconButton
+          name="information-circle-outline"
+          size={22}
+          accessibilityLabel={t('leaderboard.scoring.title')}
+          onPress={() => setScoringOpen(true)}
+        />
+      </View>
 
       {isAuth && me ? (
         <Card highlighted className="flex-row items-center justify-between">
@@ -143,6 +167,47 @@ export default function LeaderboardScreen() {
           />
         </View>
       )}
+
+      <Modal
+        visible={scoringOpen}
+        transparent
+        animationType="slide"
+        onRequestClose={() => setScoringOpen(false)}>
+        <Pressable
+          onPress={() => setScoringOpen(false)}
+          className="flex-1 justify-end"
+          style={{ backgroundColor: 'rgba(10,10,12,0.6)' }}>
+          <View
+            onStartShouldSetResponder={() => true}
+            accessibilityViewIsModal
+            className="gap-4 rounded-t-2xl border-t border-pp-border bg-pp-surface px-5 pb-8 pt-5">
+            <Text variant="heading">{t('leaderboard.scoring.title')}</Text>
+            <Text variant="muted">{t('leaderboard.scoring.intro')}</Text>
+            <View className="gap-2.5">
+              {(
+                [
+                  { icon: 'trophy-outline', key: 'finish' },
+                  { icon: 'people-outline', key: 'field' },
+                  { icon: 'cash-outline', key: 'buyin' },
+                ] as const
+              ).map((row) => (
+                <View key={row.key} className="flex-row items-center gap-3">
+                  <Ionicons name={row.icon} size={18} color={colors.gold} />
+                  <Text className="flex-1 text-pp-text">
+                    {t(`leaderboard.scoring.${row.key}`)}
+                  </Text>
+                </View>
+              ))}
+            </View>
+            <View className="gap-1.5 rounded-xl bg-white/5 p-3">
+              <Text variant="dim">{t('leaderboard.scoring.cap', { cap: POINTS_CAP })}</Text>
+              <Text variant="dim">{t('leaderboard.scoring.total')}</Text>
+              <Text variant="dim">{t('leaderboard.scoring.metrics')}</Text>
+            </View>
+            <Button title={t('leaderboard.scoring.gotIt')} onPress={() => setScoringOpen(false)} />
+          </View>
+        </Pressable>
+      </Modal>
     </Screen>
   );
 }
