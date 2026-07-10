@@ -657,8 +657,8 @@
     "best": "Beste",
     "pnl": "Winst / verlies",
     "pnlPrivate": "Privé",
-    "quotaReached": "Limiet gratis opzoekingen bereikt",
-    "quotaReachedBody": "Je hebt al je gratis zoekopdrachten voor deze maand gebruikt."
+    "lookupError": "Kan dit profiel niet laden",
+    "lookupErrorBody": "Er ging iets mis bij het laden van deze speler. Probeer opnieuw."
   },
   "achievements": {
     "title": "Prestaties",

@@ -83,10 +83,10 @@ export default function ScoutingScreen() {
             {profileQ.error ? (
               <Card className="gap-1">
                 <Text className="font-sans-semibold text-pp-danger">
-                  {t('scouting.quotaReached')}
+                  {t('scouting.lookupError')}
                 </Text>
                 <Text variant="dim">
-                  {t('scouting.quotaReachedBody')}
+                  {t('scouting.lookupErrorBody')}
                 </Text>
               </Card>
             ) : profile ? (

@@ -652,8 +652,8 @@
     "best": "Best",
     "pnl": "Profit / loss",
     "pnlPrivate": "Private",
-    "quotaReached": "Free lookup limit reached",
-    "quotaReachedBody": "You've used all your free lookups for this month."
+    "lookupError": "Couldn't load this profile",
+    "lookupErrorBody": "Something went wrong loading this player. Please try again."
   },
   "achievements": {
     "title": "Achievements",

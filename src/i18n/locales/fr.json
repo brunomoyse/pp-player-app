@@ -656,8 +656,8 @@
     "best": "Meilleur",
     "pnl": "Gains / pertes",
     "pnlPrivate": "Privé",
-    "quotaReached": "Limite de recherches gratuites atteinte",
-    "quotaReachedBody": "Vous avez utilisé toutes vos recherches gratuites ce mois-ci."
+    "lookupError": "Impossible de charger ce profil",
+    "lookupErrorBody": "Une erreur est survenue lors du chargement de ce joueur. Réessayez."
   },
   "achievements": {
     "title": "Succès",
