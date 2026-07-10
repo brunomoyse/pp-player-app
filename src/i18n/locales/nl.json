@@ -64,7 +64,7 @@
     "sectionTitle": "Juridisch",
     "termsOfService": "Gebruiksvoorwaarden",
     "privacyPolicy": "Privacybeleid",
-    "responsibleGaming": "Speel verantwoord. Alleen 18+ — poker is entertainment."
+    "responsibleGaming": "Speel verantwoord. Alleen 18+. Poker is entertainment."
   },
   "common": {
     "ok": "OK",
@@ -237,8 +237,8 @@
       "subtitle": "Kom later terug voor nieuwe evenementen"
     },
     "toast": {
-      "registered": "Stoel bevestigd — je bent ingeschreven!",
-      "waitlisted": "Toernooi is vol — je staat nu op de wachtlijst",
+      "registered": "Stoel bevestigd. Je bent ingeschreven!",
+      "waitlisted": "Toernooi is vol. Je staat nu op de wachtlijst",
       "registerFailed": "Inschrijving mislukt. Probeer het opnieuw.",
       "cancelled": "Inschrijving geannuleerd",
       "cancelFailed": "Kon je inschrijving niet annuleren. Probeer het opnieuw.",
@@ -779,6 +779,7 @@
   "notes": {
     "title": "Tegenstandernotities",
     "privateSubtitle": "Privé. Alleen jij kunt deze zien",
+    "color": "Kleurlabel",
     "style": "Speelstijl",
     "tagsLabel": "Snelle labels",
     "bodyLabel": "Notities",
@@ -788,10 +789,23 @@
     "add": "Toevoegen",
     "save": "Notitie opslaan",
     "saving": "Opslaan…",
+    "delete": "Notitie verwijderen",
+    "deleteTitle": "Deze notitie verwijderen?",
+    "deleteMessage": "Dit verwijdert je notitie, labels en showdowns voor deze speler. Dit kan niet ongedaan worden gemaakt.",
+    "deleteConfirm": "Verwijderen",
+    "deleted": "Notitie verwijderd",
     "empty": "Nog geen notities. Voeg er een toe bij een speler om te beginnen.",
     "unknownPlayer": "Onbekende speler",
     "whosHere": "Wie is er",
     "notedCount": "{noted}/{total} genoteerd",
+    "colors": {
+      "red": "Rood",
+      "orange": "Oranje",
+      "yellow": "Geel",
+      "green": "Groen",
+      "blue": "Blauw",
+      "purple": "Paars"
+    },
     "tags": {
       "tight": "Tight",
       "loose": "Loose",
@@ -824,7 +838,7 @@
     }
   },
   "notifications": {
-    "seatAssigned": "Stoel toegewezen — bekijk je tafel in Mijn Stoelen",
+    "seatAssigned": "Stoel toegewezen. Bekijk je tafel in Mijn Stoelen",
     "playerMoved": "Je bent verplaatst naar een nieuwe stoel",
     "eliminated": "Je bent uitgeschakeld uit het toernooi",
     "qualifiedForDay2": "Je bent gekwalificeerd voor Day 2!",

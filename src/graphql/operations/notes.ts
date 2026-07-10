@@ -2,6 +2,7 @@ import { gql, type TypedDocumentNode } from '@apollo/client';
 
 import type {
   FieldPlayerNote,
+  NoteColor,
   NoteTagKind,
   PlayerNote,
   PlayerNoteTag,
@@ -14,6 +15,7 @@ const NOTE_FIELDS = `
   subjectClubPlayerId
   body
   style
+  color
   createdAt
   updatedAt
   subject {
@@ -69,6 +71,7 @@ export const GET_TOURNAMENT_FIELD_NOTES: TypedDocumentNode<
         id
         body
         style
+        color
         tags {
           id
           kind
@@ -100,6 +103,7 @@ export interface UpsertPlayerNoteVars {
     subjectClubPlayerId: string;
     body?: string | null;
     style?: PlayerStyle | null;
+    color?: NoteColor | null;
   };
 }
 

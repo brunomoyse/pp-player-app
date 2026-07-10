@@ -2,6 +2,8 @@ import type { ClubPlayer } from './identity';
 
 export type PlayerStyle = 'TAG' | 'LAG' | 'TIGHT_PASSIVE' | 'LOOSE_PASSIVE';
 export type NoteTagKind = 'TAG' | 'TELL';
+/** HUD-style color a player is bucketed into (red = tough, blue = fish, etc.). */
+export type NoteColor = 'RED' | 'ORANGE' | 'YELLOW' | 'GREEN' | 'BLUE' | 'PURPLE';
 
 export interface PlayerNoteTag {
   id: string;
@@ -23,6 +25,7 @@ export interface FieldPlayerNote {
     id: string;
     body: string;
     style?: PlayerStyle | null;
+    color?: NoteColor | null;
     tags?: PlayerNoteTag[];
   } | null;
 }
@@ -36,6 +39,7 @@ export interface TableSeatNote {
     id: string;
     body: string;
     style?: PlayerStyle | null;
+    color?: NoteColor | null;
     tags?: PlayerNoteTag[];
   } | null;
 }
@@ -53,6 +57,7 @@ export interface PlayerNote {
   subjectClubPlayerId: string;
   body: string;
   style?: PlayerStyle | null;
+  color?: NoteColor | null;
   createdAt: string;
   updatedAt: string;
   subject?: ClubPlayer | null;

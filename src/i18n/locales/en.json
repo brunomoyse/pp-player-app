@@ -64,7 +64,7 @@
     "sectionTitle": "Legal",
     "termsOfService": "Terms of Service",
     "privacyPolicy": "Privacy Policy",
-    "responsibleGaming": "Play responsibly. 18+ only — poker is entertainment."
+    "responsibleGaming": "Play responsibly. 18+ only. Poker is entertainment."
   },
   "home": {
     "welcome": "Welcome",
@@ -214,8 +214,8 @@
     "player": "Player",
     "loadingDetails": "Loading tournament details...",
     "toast": {
-      "registered": "Seat confirmed — you are registered!",
-      "waitlisted": "Tournament is full — you have been added to the waitlist",
+      "registered": "Seat confirmed. You are registered!",
+      "waitlisted": "Tournament is full. You have been added to the waitlist",
       "registerFailed": "Registration failed. Please try again.",
       "cancelled": "Registration cancelled",
       "cancelFailed": "Could not cancel your registration. Please try again.",
@@ -774,6 +774,7 @@
   "notes": {
     "title": "Opponent Notes",
     "privateSubtitle": "Private. Only you can see these",
+    "color": "Color tag",
     "style": "Playing style",
     "tagsLabel": "Quick tags",
     "bodyLabel": "Notes",
@@ -783,10 +784,23 @@
     "add": "Add",
     "save": "Save note",
     "saving": "Saving…",
+    "delete": "Delete note",
+    "deleteTitle": "Delete this note?",
+    "deleteMessage": "This removes your note, tags and showdowns for this player. This can't be undone.",
+    "deleteConfirm": "Delete",
+    "deleted": "Note deleted",
     "empty": "No notes yet. Add one on a player to get started.",
     "unknownPlayer": "Unknown player",
     "whosHere": "Who's here",
     "notedCount": "{noted}/{total} noted",
+    "colors": {
+      "red": "Red",
+      "orange": "Orange",
+      "yellow": "Yellow",
+      "green": "Green",
+      "blue": "Blue",
+      "purple": "Purple"
+    },
     "tags": {
       "tight": "Tight",
       "loose": "Loose",
@@ -819,7 +833,7 @@
     }
   },
   "notifications": {
-    "seatAssigned": "Seat assigned — check your table in My Seats",
+    "seatAssigned": "Seat assigned. Check your table in My Seats",
     "playerMoved": "You've been moved to a new seat",
     "eliminated": "You've been eliminated from the tournament",
     "qualifiedForDay2": "You've qualified for Day 2!",

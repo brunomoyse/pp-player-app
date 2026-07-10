@@ -29,6 +29,7 @@ export const GET_MY_TABLE_NOTES: TypedDocumentNode<
           id
           body
           style
+          color
           tags {
             id
             kind

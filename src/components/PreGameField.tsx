@@ -7,6 +7,7 @@ import { Pressable, View } from 'react-native';
 import { PlayerNoteSheet } from '@/components/PlayerNoteSheet';
 import { Card, Text } from '@/components/ui';
 import { GET_TOURNAMENT_FIELD_NOTES } from '@/graphql/operations';
+import { noteColorHex } from '@/lib/noteColors';
 import { colors } from '@/theme/tokens';
 
 /**
@@ -35,18 +36,26 @@ export function PreGameField({ tournamentId }: { tournamentId: string }) {
         </Text>
       </View>
       <Card className="gap-1 p-2">
-        {field.map((f) => (
+        {field.map((f) => {
+          const dot = noteColorHex(f.note?.color);
+          return (
           <Pressable
             key={f.clubPlayer.id}
             onPress={() =>
               setOpenSubject({ id: f.clubPlayer.id, name: f.clubPlayer.displayName })
             }
             className="flex-row items-center gap-3 rounded-xl px-2 py-2">
-            <View className="h-8 w-8 items-center justify-center rounded-full bg-white/5">
+            <View
+              className="h-8 w-8 items-center justify-center rounded-full"
+              style={{
+                backgroundColor: dot ? `${dot}22` : 'rgba(255,255,255,0.05)',
+                borderWidth: dot ? 1.5 : 0,
+                borderColor: dot ?? 'transparent',
+              }}>
               <Ionicons
                 name={f.note ? 'document-text' : 'person-outline'}
                 size={15}
-                color={f.note ? colors.gold : colors.textDim}
+                color={dot ?? (f.note ? colors.gold : colors.textDim)}
               />
             </View>
             <View className="flex-1">
@@ -63,9 +72,15 @@ export function PreGameField({ tournamentId }: { tournamentId: string }) {
                 </Text>
               ) : null}
             </View>
-            {f.note ? <View className="h-2 w-2 rounded-full bg-pp-gold" /> : null}
+            {f.note ? (
+              <View
+                className="h-2.5 w-2.5 rounded-full"
+                style={{ backgroundColor: dot ?? colors.gold }}
+              />
+            ) : null}
           </Pressable>
-        ))}
+          );
+        })}
       </Card>
 
       {openSubject ? (

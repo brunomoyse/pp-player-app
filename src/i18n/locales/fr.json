@@ -64,7 +64,7 @@
     "sectionTitle": "Mentions légales",
     "termsOfService": "Conditions générales",
     "privacyPolicy": "Politique de confidentialité",
-    "responsibleGaming": "Jouez de manière responsable. Réservé aux 18 ans et plus — le poker est un divertissement."
+    "responsibleGaming": "Jouez de manière responsable. Réservé aux 18 ans et plus. Le poker est un divertissement."
   },
   "common": {
     "ok": "OK",
@@ -237,8 +237,8 @@
       "subtitle": "Revenez plus tard pour de nouveaux événements"
     },
     "toast": {
-      "registered": "Siège confirmé — vous êtes inscrit !",
-      "waitlisted": "Tournoi complet — vous avez été ajouté à la liste d'attente",
+      "registered": "Siège confirmé. Vous êtes inscrit !",
+      "waitlisted": "Tournoi complet. Vous avez été ajouté à la liste d'attente",
       "registerFailed": "L'inscription a échoué. Veuillez réessayer.",
       "cancelled": "Inscription annulée",
       "cancelFailed": "Impossible d'annuler votre inscription. Veuillez réessayer.",
@@ -778,6 +778,7 @@
   "notes": {
     "title": "Notes sur les joueurs",
     "privateSubtitle": "Privé. Vous seul pouvez les voir",
+    "color": "Étiquette couleur",
     "style": "Style de jeu",
     "tagsLabel": "Étiquettes rapides",
     "bodyLabel": "Notes",
@@ -787,10 +788,23 @@
     "add": "Ajouter",
     "save": "Enregistrer la note",
     "saving": "Enregistrement…",
+    "delete": "Supprimer la note",
+    "deleteTitle": "Supprimer cette note ?",
+    "deleteMessage": "Cela supprime votre note, vos étiquettes et vos abattages pour ce joueur. Action irréversible.",
+    "deleteConfirm": "Supprimer",
+    "deleted": "Note supprimée",
     "empty": "Aucune note pour l'instant. Ajoutez-en une sur un joueur pour commencer.",
     "unknownPlayer": "Joueur inconnu",
     "whosHere": "Qui est là",
     "notedCount": "{noted}/{total} notés",
+    "colors": {
+      "red": "Rouge",
+      "orange": "Orange",
+      "yellow": "Jaune",
+      "green": "Vert",
+      "blue": "Bleu",
+      "purple": "Violet"
+    },
     "tags": {
       "tight": "Serré",
       "loose": "Large",
@@ -823,7 +837,7 @@
     }
   },
   "notifications": {
-    "seatAssigned": "Siège attribué — consultez votre table dans Mes Sièges",
+    "seatAssigned": "Siège attribué. Consultez votre table dans Mes Sièges",
     "playerMoved": "Vous avez été déplacé vers un nouveau siège",
     "eliminated": "Vous avez été éliminé du tournoi",
     "qualifiedForDay2": "Vous êtes qualifié pour le Day 2 !",

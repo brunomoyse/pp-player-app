@@ -1,17 +1,22 @@
 import { useMutation, useQuery } from '@apollo/client/react';
+import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Modal, Pressable, ScrollView, View } from 'react-native';
+import { Alert, Modal, Pressable, ScrollView, View } from 'react-native';
 
 import { Button, Chip, IconButton, Input, LoadingState, Segment, Text } from '@/components/ui';
 import {
   ADD_PLAYER_NOTE_TAG,
   ADD_SHOWDOWN_OBSERVATION,
+  DELETE_PLAYER_NOTE,
   GET_PLAYER_NOTE,
   REMOVE_PLAYER_NOTE_TAG,
   UPSERT_PLAYER_NOTE,
 } from '@/graphql/operations';
-import type { PlayerNote, PlayerStyle } from '@/types/notes';
+import { toast } from '@/lib/toast';
+import { NOTE_COLORS } from '@/lib/noteColors';
+import { colors } from '@/theme/tokens';
+import type { NoteColor, PlayerNote, PlayerStyle } from '@/types/notes';
 
 export interface PlayerNoteSheetProps {
   visible: boolean;
@@ -80,7 +85,7 @@ export function PlayerNoteSheet({
             </View>
           ) : (
             // Remount the form when the underlying note identity changes so initial
-            // values come straight from props — no prop→state effect needed.
+            // values come straight from props, no prop-to-state effect needed.
             <NoteForm
               key={note?.id ?? 'new'}
               note={note}
@@ -108,6 +113,7 @@ function NoteForm({ note, subjectId, tournamentId, onClose, refetch }: NoteFormP
   const { t } = useTranslation();
   const [body, setBody] = useState(note?.body ?? '');
   const [style, setStyle] = useState<PlayerStyle | null>(note?.style ?? null);
+  const [color, setColor] = useState<NoteColor | null>(note?.color ?? null);
   const [showdown, setShowdown] = useState('');
   const [error, setError] = useState<string | null>(null);
 
@@ -115,13 +121,14 @@ function NoteForm({ note, subjectId, tournamentId, onClose, refetch }: NoteFormP
   const [addTag] = useMutation(ADD_PLAYER_NOTE_TAG);
   const [removeTag] = useMutation(REMOVE_PLAYER_NOTE_TAG);
   const [addShowdown] = useMutation(ADD_SHOWDOWN_OBSERVATION);
+  const [deleteNote, { loading: deleting }] = useMutation(DELETE_PLAYER_NOTE);
 
   // Ensure a note row exists (tags/showdowns need a note id), returning it.
   async function ensureNoteId(): Promise<string | null> {
     if (note?.id) return note.id;
     try {
       const res = await upsert({
-        variables: { input: { subjectClubPlayerId: subjectId, body, style } },
+        variables: { input: { subjectClubPlayerId: subjectId, body, style, color } },
       });
       refetch();
       return res.data?.upsertPlayerNote.id ?? null;
@@ -135,13 +142,34 @@ function NoteForm({ note, subjectId, tournamentId, onClose, refetch }: NoteFormP
     setError(null);
     try {
       await upsert({
-        variables: { input: { subjectClubPlayerId: subjectId, body, style } },
+        variables: { input: { subjectClubPlayerId: subjectId, body, style, color } },
       });
       refetch();
       onClose();
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     }
+  }
+
+  function confirmDelete() {
+    if (!note?.id) return;
+    Alert.alert(t('notes.deleteTitle'), t('notes.deleteMessage'), [
+      { text: t('common.cancel'), style: 'cancel' },
+      {
+        text: t('notes.deleteConfirm'),
+        style: 'destructive',
+        onPress: async () => {
+          try {
+            await deleteNote({ variables: { noteId: note.id } });
+            refetch();
+            toast.success(t('notes.deleted'));
+            onClose();
+          } catch (e) {
+            setError(e instanceof Error ? e.message : String(e));
+          }
+        },
+      },
+    ]);
   }
 
   async function toggleTag(tag: string) {
@@ -170,6 +198,35 @@ function NoteForm({ note, subjectId, tournamentId, onClose, refetch }: NoteFormP
 
   return (
     <ScrollView contentContainerClassName="gap-4 px-5 pt-1">
+      {/* Color tag: a quick visual bucket the author groups players into. */}
+      <View className="gap-1.5">
+        <Text variant="label" className="text-pp-text-muted">
+          {t('notes.color')}
+        </Text>
+        <View className="flex-row items-center gap-2.5">
+          {NOTE_COLORS.map((c) => {
+            const active = color === c.value;
+            return (
+              <Pressable
+                key={c.value}
+                onPress={() => setColor(active ? null : c.value)}
+                accessibilityRole="button"
+                accessibilityState={{ selected: active }}
+                accessibilityLabel={t(c.labelKey)}
+                hitSlop={6}
+                className="h-9 w-9 items-center justify-center rounded-full"
+                style={{
+                  backgroundColor: c.hex,
+                  borderWidth: active ? 2 : 0,
+                  borderColor: colors.text,
+                }}>
+                {active ? <Ionicons name="checkmark" size={18} color="#18181a" /> : null}
+              </Pressable>
+            );
+          })}
+        </View>
+      </View>
+
       {/* Style quadrant */}
       <View className="gap-1.5">
         <Text variant="label" className="text-pp-text-muted">
@@ -246,6 +303,19 @@ function NoteForm({ note, subjectId, tournamentId, onClose, refetch }: NoteFormP
         disabled={saving}
         className="mt-1"
       />
+
+      {/* Delete: only for a note that already exists */}
+      {note?.id ? (
+        <Pressable
+          onPress={confirmDelete}
+          disabled={deleting}
+          accessibilityRole="button"
+          className="mt-1 flex-row items-center justify-center gap-1.5 py-2"
+          style={{ opacity: deleting ? 0.5 : 1 }}>
+          <Ionicons name="trash-outline" size={16} color={colors.danger} />
+          <Text className="font-sans-medium text-pp-danger">{t('notes.delete')}</Text>
+        </Pressable>
+      ) : null}
     </ScrollView>
   );
 }

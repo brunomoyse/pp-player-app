@@ -9,6 +9,7 @@ import { BackButton } from '@/components';
 import { PlayerNoteSheet } from '@/components/PlayerNoteSheet';
 import { Card, EmptyState, ErrorState, LoadingState, Screen, Text } from '@/components/ui';
 import { GET_MY_TABLE_NOTES, TOURNAMENT_SEATING_CHANGES } from '@/graphql/operations';
+import { noteColorHex } from '@/lib/noteColors';
 import { useIsAuthenticated } from '@/stores/useAuthStore';
 import { colors } from '@/theme/tokens';
 
@@ -70,7 +71,9 @@ export default function MyTableScreen() {
               {seats.length === 0 ? (
                 <Text variant="dim">{t('myTable.alone')}</Text>
               ) : (
-                seats.map((s) => (
+                seats.map((s) => {
+                  const dot = noteColorHex(s.note?.color);
+                  return (
                   <Pressable
                     key={s.clubPlayer.id}
                     onPress={() =>
@@ -79,8 +82,14 @@ export default function MyTableScreen() {
                     accessibilityRole="button"
                     accessibilityHint={t('myTable.editHint')}
                     className="flex-row items-center gap-3 rounded-xl px-2 py-2">
-                    <View className="h-8 w-8 items-center justify-center rounded-full bg-white/5">
-                      <Text variant="mono" className="text-pp-gold">
+                    <View
+                      className="h-8 w-8 items-center justify-center rounded-full"
+                      style={{
+                        backgroundColor: dot ? `${dot}22` : 'rgba(255,255,255,0.05)',
+                        borderWidth: dot ? 1.5 : 0,
+                        borderColor: dot ?? 'transparent',
+                      }}>
+                      <Text variant="mono" style={dot ? { color: dot } : undefined} className={dot ? '' : 'text-pp-gold'}>
                         {s.seatNumber}
                       </Text>
                     </View>
@@ -101,12 +110,16 @@ export default function MyTableScreen() {
                       )}
                     </View>
                     {s.note ? (
-                      <View className="h-2 w-2 rounded-full bg-pp-gold" />
+                      <View
+                        className="h-2.5 w-2.5 rounded-full"
+                        style={{ backgroundColor: dot ?? colors.gold }}
+                      />
                     ) : (
                       <Ionicons name="add-circle-outline" size={18} color={colors.textDim} />
                     )}
                   </Pressable>
-                ))
+                  );
+                })
               )}
             </Card>
           </>
