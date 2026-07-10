@@ -766,6 +766,16 @@
     },
     "locked": "Vergrendeld"
   },
+  "myTable": {
+    "title": "Mijn tafel",
+    "cta": "Bekijk je tafelgenoten en notities",
+    "header": "Tafel {table} · Stoel {seat}",
+    "notSeated": "Je zit nog niet aan een tafel.",
+    "alone": "Er zit nog niemand anders aan je tafel.",
+    "noNote": "Nog geen notitie, tik om er een toe te voegen",
+    "openHint": "Opent de spelers aan je tafel",
+    "editHint": "Opent de notitie voor deze speler"
+  },
   "notes": {
     "title": "Tegenstandernotities",
     "privateSubtitle": "Privé. Alleen jij kunt deze zien",

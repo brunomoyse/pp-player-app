@@ -765,6 +765,16 @@
     },
     "locked": "Verrouillé"
   },
+  "myTable": {
+    "title": "Ma table",
+    "cta": "Voir vos voisins de table et vos notes",
+    "header": "Table {table} · Siège {seat}",
+    "notSeated": "Vous n'êtes pas encore assis à une table.",
+    "alone": "Personne d'autre n'est encore assis à votre table.",
+    "noNote": "Pas encore de note, touchez pour en ajouter une",
+    "openHint": "Ouvre les joueurs de votre table",
+    "editHint": "Ouvre la note de ce joueur"
+  },
   "notes": {
     "title": "Notes sur les joueurs",
     "privateSubtitle": "Privé. Vous seul pouvez les voir",

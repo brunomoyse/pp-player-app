@@ -761,6 +761,16 @@
     },
     "locked": "Locked"
   },
+  "myTable": {
+    "title": "My table",
+    "cta": "See your tablemates and notes",
+    "header": "Table {table} · Seat {seat}",
+    "notSeated": "You're not seated at a table yet.",
+    "alone": "No one else is seated at your table yet.",
+    "noNote": "No note yet, tap to add one",
+    "openHint": "Opens the players at your table",
+    "editHint": "Opens the note for this player"
+  },
   "notes": {
     "title": "Opponent Notes",
     "privateSubtitle": "Private. Only you can see these",

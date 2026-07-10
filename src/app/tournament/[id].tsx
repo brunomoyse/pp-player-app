@@ -4,7 +4,7 @@ import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 import { Stack, router, useLocalSearchParams } from 'expo-router';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, Share, View } from 'react-native';
+import { Alert, Pressable, Share, View } from 'react-native';
 
 import { BackButton, ClockDisplay, PreGameField, RegistrationStatusBadge } from '@/components';
 import { FadeUp } from '@/components/motion';
@@ -283,8 +283,27 @@ export default function TournamentDetailScreen() {
               />
             ) : null}
 
-            {/* Pre-game prep: who's registered + your notes. Renders only when the notes feature is on. */}
-            <PreGameField tournamentId={id!} />
+            {/* Once seated, focus on the viewer's own table; before that, the
+                whole field is the useful view. */}
+            {myRegistration?.status === 'SEATED' ? (
+              <Pressable
+                onPress={() => router.push(`/tournament/${id}/table`)}
+                accessibilityRole="button"
+                accessibilityHint={t('myTable.openHint')}>
+                <Card className="flex-row items-center gap-3">
+                  <View className="h-10 w-10 items-center justify-center rounded-xl bg-white/5">
+                    <Ionicons name="people-outline" size={20} color={colors.gold} />
+                  </View>
+                  <View className="flex-1">
+                    <Text className="font-sans-semibold text-pp-text">{t('myTable.title')}</Text>
+                    <Text variant="dim">{t('myTable.cta')}</Text>
+                  </View>
+                  <Ionicons name="chevron-forward" size={18} color={colors.textDim} />
+                </Card>
+              </Pressable>
+            ) : (
+              <PreGameField tournamentId={id!} />
+            )}
 
             {/* Live clock (subscription-driven, Phase 6) — pointless once the tournament is over. */}
             {tn.status !== 'COMPLETED' && tn.clock ? (

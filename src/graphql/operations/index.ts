@@ -11,6 +11,7 @@ export * from './attendance';
 export * from './season';
 export * from './social';
 export * from './profile';
+export * from './table';
 export * from './drinkWallet';
 export * from './scouting';
 export * from './subscriptions';

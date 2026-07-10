@@ -19,6 +19,8 @@ export interface PlayerNoteSheetProps {
   /** The club_player this note is about. */
   subjectId: string;
   subjectName?: string;
+  /** When opened from a live tournament, tags new showdowns to it. */
+  tournamentId?: string;
 }
 
 const STYLE_OPTIONS: { value: PlayerStyle; label: string }[] = [
@@ -40,7 +42,13 @@ const TAG_PRESETS = [
   'tricky',
 ];
 
-export function PlayerNoteSheet({ visible, onClose, subjectId, subjectName }: PlayerNoteSheetProps) {
+export function PlayerNoteSheet({
+  visible,
+  onClose,
+  subjectId,
+  subjectName,
+  tournamentId,
+}: PlayerNoteSheetProps) {
   const { t } = useTranslation();
   const { data, loading, refetch } = useQuery(GET_PLAYER_NOTE, {
     variables: { subjectClubPlayerId: subjectId },
@@ -77,6 +85,7 @@ export function PlayerNoteSheet({ visible, onClose, subjectId, subjectName }: Pl
               key={note?.id ?? 'new'}
               note={note}
               subjectId={subjectId}
+              tournamentId={tournamentId}
               onClose={onClose}
               refetch={() => void refetch()}
             />
@@ -90,11 +99,12 @@ export function PlayerNoteSheet({ visible, onClose, subjectId, subjectName }: Pl
 interface NoteFormProps {
   note: PlayerNote | null;
   subjectId: string;
+  tournamentId?: string;
   onClose: () => void;
   refetch: () => void;
 }
 
-function NoteForm({ note, subjectId, onClose, refetch }: NoteFormProps) {
+function NoteForm({ note, subjectId, tournamentId, onClose, refetch }: NoteFormProps) {
   const { t } = useTranslation();
   const [body, setBody] = useState(note?.body ?? '');
   const [style, setStyle] = useState<PlayerStyle | null>(note?.style ?? null);
@@ -151,7 +161,7 @@ function NoteForm({ note, subjectId, onClose, refetch }: NoteFormProps) {
     if (!description) return;
     const noteId = await ensureNoteId();
     if (!noteId) return;
-    await addShowdown({ variables: { input: { noteId, description } } });
+    await addShowdown({ variables: { input: { noteId, tournamentId, description } } });
     setShowdown('');
     refetch();
   }

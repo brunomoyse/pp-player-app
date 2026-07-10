@@ -88,6 +88,33 @@ export const TOURNAMENT_REGISTRATIONS: TypedDocumentNode<RegistrationsResult, Re
   }
 `;
 
+export interface SeatingChangeEvent {
+  eventType: string;
+  tournamentId: string;
+  timestamp: string;
+}
+export interface TournamentSeatingResult {
+  tournamentSeatingChanges: SeatingChangeEvent;
+}
+export interface TournamentSeatingVars {
+  tournamentId: string;
+}
+
+/** Per-tournament seating changes (player-accessible). Used to refetch the
+ *  viewer's table view live as seats are assigned, moved, or busted. */
+export const TOURNAMENT_SEATING_CHANGES: TypedDocumentNode<
+  TournamentSeatingResult,
+  TournamentSeatingVars
+> = gql`
+  subscription TournamentSeatingChanges($tournamentId: ID!) {
+    tournamentSeatingChanges(tournamentId: $tournamentId) {
+      eventType
+      tournamentId
+      timestamp
+    }
+  }
+`;
+
 export interface UserNotificationsResult {
   userNotifications: UserNotification;
 }
