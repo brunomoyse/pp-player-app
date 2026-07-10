@@ -552,6 +552,17 @@
       "description": "Enregistrez-vous dans 3 clubs différents cette semaine"
     }
   },
+  "playerProfile": {
+    "title": "Joueur",
+    "earnings": "Gains",
+    "net": "Net",
+    "tournaments": "Tournois",
+    "itm": "ITM",
+    "friends": "Amis",
+    "recent": "Résultats récents",
+    "noRecent": "Aucun résultat pour l'instant.",
+    "noAchievements": "Aucun succès débloqué pour l'instant."
+  },
   "friends": {
     "a11y": {
       "acceptHint": "Accepte cette demande d’ami",

@@ -553,6 +553,17 @@
       "description": "Check deze week in bij 3 verschillende clubs"
     }
   },
+  "playerProfile": {
+    "title": "Speler",
+    "earnings": "Winst",
+    "net": "Netto",
+    "tournaments": "Toernooien",
+    "itm": "ITM",
+    "friends": "Vrienden",
+    "recent": "Recente resultaten",
+    "noRecent": "Nog geen resultaten.",
+    "noAchievements": "Nog geen prestaties ontgrendeld."
+  },
   "friends": {
     "a11y": {
       "acceptHint": "Accepteert dit vriendschapsverzoek",

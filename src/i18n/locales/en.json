@@ -548,6 +548,17 @@
       "description": "Check in at 3 different clubs this week"
     }
   },
+  "playerProfile": {
+    "title": "Player",
+    "earnings": "Winnings",
+    "net": "Net",
+    "tournaments": "Tournaments",
+    "itm": "ITM",
+    "friends": "Friends",
+    "recent": "Recent finishes",
+    "noRecent": "No finishes yet.",
+    "noAchievements": "No achievements unlocked yet."
+  },
   "friends": {
     "a11y": {
       "acceptHint": "Accepts this friend request",
