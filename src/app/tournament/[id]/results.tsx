@@ -7,7 +7,9 @@ import { View } from 'react-native';
 import { Avatar, Card, EmptyState, LoadingState, Screen, Text } from '@/components/ui';
 import { BackButton } from '@/components';
 import { GET_TOURNAMENT_BOUNTIES, GET_TOURNAMENT_RESULTS } from '@/graphql/operations';
+import { useNoteColorMap } from '@/hooks/useNoteColors';
 import { cn } from '@/lib/cn';
+import { noteColorHex } from '@/lib/noteColors';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { currencyCents } from '@/utils/currency';
 
@@ -23,6 +25,7 @@ export default function TournamentResultsScreen() {
   const { t } = useTranslation();
   const { id } = useLocalSearchParams<{ id: string }>();
   const currentUser = useAuthStore((s) => s.currentUser);
+  const colorMap = useNoteColorMap();
 
   const { data, loading, refetch, networkStatus } = useQuery(GET_TOURNAMENT_RESULTS, {
     variables: { tournamentId: id! },
@@ -76,7 +79,12 @@ export default function TournamentResultsScreen() {
                       )}>
                       {r.finalPosition}
                     </Text>
-                    <Avatar name={r.displayName} size={36} ring={r.finalPosition === 1} />
+                    <Avatar
+                      name={r.displayName}
+                      size={36}
+                      ring={r.finalPosition === 1}
+                      ringColor={noteColorHex(colorMap[r.clubPlayerId])}
+                    />
                     <View className="flex-1">
                       <Text className="font-sans-semibold text-pp-text" numberOfLines={1}>
                         {r.displayName}

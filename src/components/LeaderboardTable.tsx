@@ -4,8 +4,10 @@ import { Pressable, View } from 'react-native';
 import { useReducedMotion } from 'react-native-reanimated';
 
 import { Avatar, Card, Text } from '@/components/ui';
+import { useNoteColorMap } from '@/hooks/useNoteColors';
 import { cn } from '@/lib/cn';
 import { ppEasing } from '@/lib/motion';
+import { noteColorHex } from '@/lib/noteColors';
 import type { LeaderboardEntry } from '@/types/tournament';
 
 function fullName(e: LeaderboardEntry): string {
@@ -35,12 +37,14 @@ export function LeaderboardTable({ entries, currentUserId, metric = 'points' }: 
 
   const router = useRouter();
   const reduce = useReducedMotion();
+  const colorMap = useNoteColorMap();
   return (
     <Card className="gap-1 p-2">
       {entries.map((e, i) => {
         const me = currentUserId != null && e.user?.id === currentUserId;
         // Only account-linked players have a profile to open.
         const profileId = e.user?.id;
+        const ringColor = noteColorHex(colorMap[e.clubPlayerId]);
         return (
           <MotiView
             key={e.clubPlayerId}
@@ -63,7 +67,7 @@ export function LeaderboardTable({ entries, currentUserId, metric = 'points' }: 
               <Text className={cn('w-7 text-center font-mono-medium', rankColor(e.rank))}>
                 {e.rank}
               </Text>
-              <Avatar name={fullName(e)} size={36} ring={e.rank === 1} />
+              <Avatar name={fullName(e)} size={36} ring={e.rank === 1} ringColor={ringColor} />
               <View className="flex-1">
                 <Text className="font-sans-semibold text-pp-text" numberOfLines={1}>
                   {fullName(e)}

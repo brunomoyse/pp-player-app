@@ -7,6 +7,7 @@ import { Pressable, View } from 'react-native';
 import { BackButton, PlayerNoteSheet } from '@/components';
 import { Badge, Card, EmptyState, ErrorState, LoadingState, Screen, Text } from '@/components/ui';
 import { GET_MY_PLAYER_NOTES } from '@/graphql/operations';
+import { noteColorHex } from '@/lib/noteColors';
 import { useIsAuthenticated } from '@/stores/useAuthStore';
 
 const STYLE_LABEL: Record<string, string> = {
@@ -53,7 +54,9 @@ export default function NotesScreen() {
         ) : notes.length === 0 ? (
           <EmptyState message={t('notes.empty')} />
         ) : (
-          notes.map((note) => (
+          notes.map((note) => {
+            const hex = noteColorHex(note.color);
+            return (
             <Pressable
               key={note.id}
               onPress={() =>
@@ -62,11 +65,21 @@ export default function NotesScreen() {
                   name: note.subject?.displayName,
                 })
               }>
-              <Card className="gap-2">
+              <Card
+                className="gap-2"
+                style={hex ? { borderLeftWidth: 3, borderLeftColor: hex } : undefined}>
                 <View className="flex-row items-center justify-between">
-                  <Text variant="heading" className="flex-1">
-                    {note.subject?.displayName ?? t('notes.unknownPlayer')}
-                  </Text>
+                  <View className="flex-1 flex-row items-center gap-2">
+                    {hex ? (
+                      <View
+                        className="h-2.5 w-2.5 rounded-full"
+                        style={{ backgroundColor: hex }}
+                      />
+                    ) : null}
+                    <Text variant="heading" className="flex-1">
+                      {note.subject?.displayName ?? t('notes.unknownPlayer')}
+                    </Text>
+                  </View>
                   {note.style ? <Badge label={STYLE_LABEL[note.style] ?? note.style} /> : null}
                 </View>
                 {note.body ? (
@@ -81,7 +94,8 @@ export default function NotesScreen() {
                 ) : null}
               </Card>
             </Pressable>
-          ))
+            );
+          })
         )}
       </Screen>
 

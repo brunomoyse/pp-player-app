@@ -95,6 +95,25 @@ export const GET_MY_PLAYER_NOTES: TypedDocumentNode<
   }
 `;
 
+export interface GetMyNoteColorsResult {
+  myPlayerNotes: { id: string; subjectClubPlayerId: string; color?: NoteColor | null }[];
+}
+
+/** Lightweight projection: just enough to color a player's avatar wherever they
+ * appear. Shares the myPlayerNotes cache with GET_MY_PLAYER_NOTES via `id`. */
+export const GET_MY_NOTE_COLORS: TypedDocumentNode<
+  GetMyNoteColorsResult,
+  Record<string, never>
+> = gql`
+  query GetMyNoteColors {
+    myPlayerNotes {
+      id
+      subjectClubPlayerId
+      color
+    }
+  }
+`;
+
 export interface UpsertPlayerNoteResult {
   upsertPlayerNote: PlayerNote;
 }
