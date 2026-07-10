@@ -176,6 +176,13 @@
     "players": "Players",
     "registration": "Registration",
     "registrationCloses": "Registration Closes",
+    "tabs": {
+      "info": "Info",
+      "structure": "Structure",
+      "players": "Players"
+    },
+    "noStructure": "No blind structure published yet",
+    "noPlayers": "No players registered yet",
     "blindsStructure": "Blinds Structure",
     "level": "Level",
     "smallBlind": "Small Blind",

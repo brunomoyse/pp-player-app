@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Pressable, View } from 'react-native';
 
 import { PlayerNoteSheet } from '@/components/PlayerNoteSheet';
-import { Card, Text } from '@/components/ui';
+import { Card, EmptyState, Text } from '@/components/ui';
 import { GET_TOURNAMENT_FIELD_NOTES } from '@/graphql/operations';
 import { noteColorHex } from '@/lib/noteColors';
 import { colors } from '@/theme/tokens';
@@ -18,12 +18,15 @@ export function PreGameField({ tournamentId }: { tournamentId: string }) {
   const { t } = useTranslation();
   const [openSubject, setOpenSubject] = useState<{ id: string; name?: string } | null>(null);
 
-  const { data, refetch } = useQuery(GET_TOURNAMENT_FIELD_NOTES, {
+  const { data, loading, refetch } = useQuery(GET_TOURNAMENT_FIELD_NOTES, {
     variables: { tournamentId },
   });
 
   const field = data?.tournamentFieldNotes ?? [];
-  if (field.length === 0) return null;
+  if (field.length === 0) {
+    // Blank while the first load is in flight; a friendly empty state after.
+    return loading ? null : <EmptyState icon="people-outline" message={t('events.noPlayers')} />;
+  }
 
   const noted = field.filter((f) => f.note).length;
 

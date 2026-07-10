@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@apollo/client/react';
 import { Ionicons } from '@expo/vector-icons';
 import { activateKeepAwakeAsync, deactivateKeepAwake } from 'expo-keep-awake';
 import { Stack, router, useLocalSearchParams } from 'expo-router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Pressable, Share, View } from 'react-native';
 
@@ -15,10 +15,12 @@ import {
   type BadgeTone,
   Button,
   Card,
+  EmptyState,
   ErrorState,
   IconButton,
   LoadingState,
   Screen,
+  Segment,
   Text,
 } from '@/components/ui';
 import {
@@ -41,6 +43,8 @@ const STATUS_TONE: Record<TournamentStatus, BadgeTone> = {
   IN_PROGRESS: 'live',
   COMPLETED: 'completed',
 };
+
+type TabKey = 'info' | 'structure' | 'players';
 
 export default function TournamentDetailScreen() {
   const { t, i18n } = useTranslation();
@@ -92,6 +96,14 @@ export default function TournamentDetailScreen() {
   const myRegistration = tn?.registrations?.find(
     (r) => r.userId === currentUser?.id && r.status !== 'CANCELLED' && r.status !== 'NO_SHOW'
   );
+
+  const [tab, setTab] = useState<TabKey>('info');
+  const isSeated = myRegistration?.status === 'SEATED';
+  const tabOptions: { value: TabKey; label: string }[] = [
+    { value: 'info', label: t('events.tabs.info') },
+    { value: 'structure', label: t('events.tabs.structure') },
+    { value: 'players', label: t('events.tabs.players') },
+  ];
 
   const onRegister = async () => {
     if (!tn) return;
@@ -181,6 +193,7 @@ export default function TournamentDetailScreen() {
           />
         ) : (
           <>
+            {/* Title + status */}
             <FadeUp>
               <View className="gap-3">
                 <View className="flex-row items-start justify-between gap-3">
@@ -199,42 +212,70 @@ export default function TournamentDetailScreen() {
               </View>
             </FadeUp>
 
-            {/* Key facts */}
-            <Card className="gap-3">
-              <Fact icon="time-outline" label={t('events.dateTime')} value={formatDateTime(tn.startTime, i18n.language)} />
-              <Fact icon="cash-outline" label={t('events.buyIn')} value={currencyCents(tn.buyInCents)} />
-              <Fact
-                icon="people-outline"
-                label={t('events.players')}
-                value={tn.seatCap ? `${regCount} / ${tn.seatCap}` : `${regCount}`}
+            {/* Adaptive hero: the one thing that matters at this stage of the event. */}
+            {tn.status === 'IN_PROGRESS' ? (
+              <View className="gap-3">
+                {tn.clock ? (
+                  <ClockDisplay
+                    isLive={clock.isLive}
+                    timeRemaining={clock.timeRemaining}
+                    currentLevel={clock.currentLevel}
+                    nextLevel={clock.nextLevel}
+                  />
+                ) : null}
+                {isSeated ? (
+                  <Pressable
+                    onPress={() => router.push(`/tournament/${id}/table`)}
+                    accessibilityRole="button"
+                    accessibilityHint={t('myTable.openHint')}>
+                    <Card className="flex-row items-center gap-3">
+                      <View className="h-10 w-10 items-center justify-center rounded-xl bg-white/5">
+                        <Ionicons name="people-outline" size={20} color={colors.gold} />
+                      </View>
+                      <View className="flex-1">
+                        <Text className="font-sans-semibold text-pp-text">
+                          {t('myTable.title')}
+                        </Text>
+                        <Text variant="dim">{t('myTable.cta')}</Text>
+                      </View>
+                      <Ionicons name="chevron-forward" size={18} color={colors.textDim} />
+                    </Card>
+                  </Pressable>
+                ) : null}
+              </View>
+            ) : tn.status === 'COMPLETED' ? (
+              <Button
+                title={t('events.viewFinalResults')}
+                variant="secondary"
+                onPress={() => router.push(`/tournament/${id}/results`)}
               />
-              {isBounty ? (
-                <Fact
-                  icon="skull-outline"
-                  label={t('events.bounty.perKnockout')}
-                  value={currencyCents(tn.bountyAmountCents ?? 0)}
+            ) : myRegistration ? (
+              <View className="gap-3">
+                <View className="flex-row items-center justify-between">
+                  <Text variant="muted">{t('events.yourStatus')}</Text>
+                  <RegistrationStatusBadge
+                    status={myRegistration.status}
+                    waitlistPosition={myRegistration.waitlistPosition}
+                  />
+                </View>
+                <Button
+                  title={t('events.unregister')}
+                  variant="danger"
+                  onPress={onUnregister}
+                  loading={cancelling}
+                  testID="unregister-cta"
                 />
-              ) : null}
-              {tn.status === 'IN_PROGRESS' && stats?.playersRemaining != null ? (
-                <Fact
-                  icon="person-outline"
-                  label={t('events.playersLeft')}
-                  value={`${stats.playersRemaining}`}
-                />
-              ) : null}
-              {tn.status === 'IN_PROGRESS' && avgStack != null ? (
-                <Fact
-                  icon="layers-outline"
-                  label={t('events.averageStack')}
-                  value={avgStack.toLocaleString(i18n.language)}
-                />
-              ) : null}
-              {tn.club ? (
-                <Fact icon="business-outline" label={t('events.club')} value={tn.club.name} />
-              ) : null}
-            </Card>
+              </View>
+            ) : (
+              <Button
+                title={t('events.register')}
+                onPress={onRegister}
+                loading={registering}
+                testID="register-cta"
+              />
+            )}
 
-            {/* Day 2 qualification — survived a flight, carrying a stack into the final day. */}
+            {/* Live highlights stay out of the tabs so they can't be missed. */}
             {tn.isFinalDay && myRegistration?.startingStack != null ? (
               <FadeUp>
                 <Card className="flex-row items-center gap-3 border border-pp-gold/40 bg-pp-gold/10">
@@ -253,7 +294,6 @@ export default function TournamentDetailScreen() {
               </FadeUp>
             ) : null}
 
-            {/* Progressive knockout — your live bounty head, climbs with each elimination. */}
             {tn.bountyType === 'PROGRESSIVE' &&
             myRegistration?.currentBountyCents != null &&
             myRegistration.currentBountyCents > 0 ? (
@@ -274,51 +314,55 @@ export default function TournamentDetailScreen() {
               </FadeUp>
             ) : null}
 
-            {/* Final results — finishing order, prizes and (PKO) knockout feed. */}
-            {tn.status === 'COMPLETED' ? (
-              <Button
-                title={t('events.viewFinalResults')}
-                variant="secondary"
-                onPress={() => router.push(`/tournament/${id}/results`)}
-              />
+            {/* Section tabs */}
+            <Segment options={tabOptions} value={tab} onChange={setTab} />
+
+            {tab === 'info' ? (
+              <Card className="gap-3">
+                <Fact
+                  icon="time-outline"
+                  label={t('events.dateTime')}
+                  value={formatDateTime(tn.startTime, i18n.language)}
+                />
+                <Fact
+                  icon="cash-outline"
+                  label={t('events.buyIn')}
+                  value={currencyCents(tn.buyInCents)}
+                />
+                <Fact
+                  icon="people-outline"
+                  label={t('events.players')}
+                  value={tn.seatCap ? `${regCount} / ${tn.seatCap}` : `${regCount}`}
+                />
+                {isBounty ? (
+                  <Fact
+                    icon="skull-outline"
+                    label={t('events.bounty.perKnockout')}
+                    value={currencyCents(tn.bountyAmountCents ?? 0)}
+                  />
+                ) : null}
+                {tn.status === 'IN_PROGRESS' && stats?.playersRemaining != null ? (
+                  <Fact
+                    icon="person-outline"
+                    label={t('events.playersLeft')}
+                    value={`${stats.playersRemaining}`}
+                  />
+                ) : null}
+                {tn.status === 'IN_PROGRESS' && avgStack != null ? (
+                  <Fact
+                    icon="layers-outline"
+                    label={t('events.averageStack')}
+                    value={avgStack.toLocaleString(i18n.language)}
+                  />
+                ) : null}
+                {tn.club ? (
+                  <Fact icon="business-outline" label={t('events.club')} value={tn.club.name} />
+                ) : null}
+              </Card>
             ) : null}
 
-            {/* Once seated, focus on the viewer's own table; before that, the
-                whole field is the useful view. */}
-            {myRegistration?.status === 'SEATED' ? (
-              <Pressable
-                onPress={() => router.push(`/tournament/${id}/table`)}
-                accessibilityRole="button"
-                accessibilityHint={t('myTable.openHint')}>
-                <Card className="flex-row items-center gap-3">
-                  <View className="h-10 w-10 items-center justify-center rounded-xl bg-white/5">
-                    <Ionicons name="people-outline" size={20} color={colors.gold} />
-                  </View>
-                  <View className="flex-1">
-                    <Text className="font-sans-semibold text-pp-text">{t('myTable.title')}</Text>
-                    <Text variant="dim">{t('myTable.cta')}</Text>
-                  </View>
-                  <Ionicons name="chevron-forward" size={18} color={colors.textDim} />
-                </Card>
-              </Pressable>
-            ) : (
-              <PreGameField tournamentId={id!} />
-            )}
-
-            {/* Live clock (subscription-driven, Phase 6) — pointless once the tournament is over. */}
-            {tn.status !== 'COMPLETED' && tn.clock ? (
-              <ClockDisplay
-                isLive={clock.isLive}
-                timeRemaining={clock.timeRemaining}
-                currentLevel={clock.currentLevel}
-                nextLevel={clock.nextLevel}
-              />
-            ) : null}
-
-            {/* Blind structure */}
-            {tn.structure?.length ? (
-              <View className="gap-2">
-                <Text variant="heading">{t('events.blindsStructure')}</Text>
+            {tab === 'structure' ? (
+              tn.structure?.length ? (
                 <Card className="gap-1 p-2">
                   {tn.structure.map((s) => (
                     <View
@@ -328,7 +372,9 @@ export default function TournamentDetailScreen() {
                         {s.isBreak ? t('events.break') : `${t('events.level')} ${s.levelNumber}`}
                       </Text>
                       <Text variant="mono" className="flex-1 text-center text-pp-text">
-                        {s.isBreak ? '-' : `${s.smallBlind}/${s.bigBlind}${s.ante ? ` (${s.ante})` : ''}`}
+                        {s.isBreak
+                          ? '-'
+                          : `${s.smallBlind}/${s.bigBlind}${s.ante ? ` (${s.ante})` : ''}`}
                       </Text>
                       <Text variant="dim" className="w-16 text-right text-[12px]">
                         {t('events.minutes', { count: s.durationMinutes })}
@@ -336,37 +382,12 @@ export default function TournamentDetailScreen() {
                     </View>
                   ))}
                 </Card>
-              </View>
-            ) : null}
-
-            {/* Register / unregister CTA */}
-            {tn.status === 'UPCOMING' ? (
-              myRegistration ? (
-                <View className="gap-3">
-                  <View className="flex-row items-center justify-between">
-                    <Text variant="muted">{t('events.yourStatus')}</Text>
-                    <RegistrationStatusBadge
-                      status={myRegistration.status}
-                      waitlistPosition={myRegistration.waitlistPosition}
-                    />
-                  </View>
-                  <Button
-                    title={t('events.unregister')}
-                    variant="danger"
-                    onPress={onUnregister}
-                    loading={cancelling}
-                    testID="unregister-cta"
-                  />
-                </View>
               ) : (
-                <Button
-                  title={t('events.register')}
-                  onPress={onRegister}
-                  loading={registering}
-                  testID="register-cta"
-                />
+                <EmptyState icon="list-outline" message={t('events.noStructure')} />
               )
             ) : null}
+
+            {tab === 'players' ? <PreGameField tournamentId={id!} /> : null}
           </>
         )}
       </Screen>

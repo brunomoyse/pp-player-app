@@ -192,6 +192,13 @@
     "results": "Résultats",
     "registration": "Inscription",
     "registrationCloses": "Inscription ferme",
+    "tabs": {
+      "info": "Infos",
+      "structure": "Structure",
+      "players": "Joueurs"
+    },
+    "noStructure": "Aucune structure de blinds publiée pour l'instant",
+    "noPlayers": "Aucun joueur inscrit pour l'instant",
     "blindsStructure": "Structure des Blinds",
     "level": "Niveau",
     "smallBlind": "Petite Blind",

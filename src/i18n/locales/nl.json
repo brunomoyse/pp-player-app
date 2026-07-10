@@ -192,6 +192,13 @@
     "results": "Resultaten",
     "registration": "Registratie",
     "registrationCloses": "Registratie sluit",
+    "tabs": {
+      "info": "Info",
+      "structure": "Structuur",
+      "players": "Spelers"
+    },
+    "noStructure": "Nog geen blindsstructuur gepubliceerd",
+    "noPlayers": "Nog geen spelers ingeschreven",
     "blindsStructure": "Blinds Structuur",
     "level": "Niveau",
     "smallBlind": "Small Blind",
