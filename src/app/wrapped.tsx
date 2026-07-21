@@ -45,7 +45,7 @@ export default function WrappedScreen() {
     const lines = [
       t('wrapped.shareHeader', { year: recap.year }),
       t('wrapped.tournaments') + ': ' + recap.tournaments,
-      t('wrapped.net') + ': ' + currencyCents(recap.netCents),
+      t('wrapped.winnings') + ': ' + currencyCents(recap.winningsCents),
       t('wrapped.itm') + ': ' + recap.itmCount,
       recap.longestStreak ? t('wrapped.streak') + ': ' + recap.longestStreak : null,
     ].filter(Boolean);
@@ -75,9 +75,9 @@ export default function WrappedScreen() {
                 {t('wrapped.yourYear', { year: w!.year })}
               </Text>
               <Text className="font-sans-bold text-4xl text-pp-gold">
-                {currencyCents(w!.netCents)}
+                {currencyCents(w!.winningsCents)}
               </Text>
-              <Text variant="muted">{t('wrapped.net')}</Text>
+              <Text variant="muted">{t('wrapped.winnings')}</Text>
             </Card>
 
             {/* Stats */}
@@ -86,11 +86,6 @@ export default function WrappedScreen() {
                 icon="albums-outline"
                 label={t('wrapped.tournaments')}
                 value={String(w!.tournaments)}
-              />
-              <StatLine
-                icon="cash-outline"
-                label={t('wrapped.winnings')}
-                value={currencyCents(w!.winningsCents)}
               />
               <StatLine icon="trophy-outline" label={t('wrapped.itm')} value={String(w!.itmCount)} />
               {w!.bestFinish ? (

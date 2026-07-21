@@ -174,9 +174,7 @@ export const GET_MY_YEAR_IN_POKER: TypedDocumentNode<
     myYearInPoker(year: $year) {
       year
       tournaments
-      buyinsCents
       winningsCents
-      netCents
       itmCount
       bestFinish
       checkIns

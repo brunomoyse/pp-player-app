@@ -14,8 +14,6 @@ export interface ScoutingProfile {
   tournaments: number;
   itmPercentage: number;
   bestFinish: number | null;
-  sharesPnl: boolean;
-  netCents: number | null;
 }
 
 export interface ScoutingQuota {

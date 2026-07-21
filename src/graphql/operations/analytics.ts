@@ -17,21 +17,12 @@ export const GET_MY_PRO_ANALYTICS: TypedDocumentNode<
         clubId
         clubName
         tournaments
-        buyinsCents
         winningsCents
-        netCents
       }
       byBuyIn {
         buyInCents
         tournaments
-        buyinsCents
         winningsCents
-        netCents
-      }
-      cumulativePnl {
-        day
-        netCents
-        cumulativeCents
       }
     }
   }

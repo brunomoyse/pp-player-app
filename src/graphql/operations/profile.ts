@@ -25,9 +25,7 @@ export const GET_PLAYER_PROFILE: TypedDocumentNode<
         totalItm
         totalTournaments
         totalWinnings
-        totalBuyIns
         itmPercentage
-        roiPercentage
       }
       recentResults {
         result {

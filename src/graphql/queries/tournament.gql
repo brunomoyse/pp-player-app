@@ -233,10 +233,8 @@ query GetLeaderboard($period: LeaderboardPeriod, $pagination: PaginationInput, $
       totalTournaments
       totalBuyIns
       totalWinnings
-      netProfit
       totalItm
       itmPercentage
-      roiPercentage
       averageFinish
       firstPlaces
       finalTables
@@ -255,25 +253,19 @@ query GetMyTournamentStatistics {
       totalItm
       totalTournaments
       totalWinnings
-      totalBuyIns
       itmPercentage
-      roiPercentage
     }
     lastYear {
       totalItm
       totalTournaments
       totalWinnings
-      totalBuyIns
       itmPercentage
-      roiPercentage
     }
     allTime {
       totalItm
       totalTournaments
       totalWinnings
-      totalBuyIns
       itmPercentage
-      roiPercentage
     }
   }
 }

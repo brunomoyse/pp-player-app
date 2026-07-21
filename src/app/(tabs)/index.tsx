@@ -120,12 +120,12 @@ export default function HomeScreen() {
                 }
               />
               <StatCard
-                icon="trending-up-outline"
-                label={t('home.kpis.roi')}
+                icon="wallet-outline"
+                label={t('home.kpis.winnings')}
                 value={
                   <AnimatedNumber
-                    value={statBlock?.roiPercentage ?? 0}
-                    suffix="%"
+                    value={statBlock?.totalWinnings ?? 0}
+                    format={currencyCents}
                     variant="title"
                     className="text-pp-gold"
                   />

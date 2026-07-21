@@ -21,9 +21,7 @@ export default function AnalyticsScreen() {
   if (!isAuth) return <Redirect href="/login" />;
 
   const a = data?.myProAnalytics;
-  const netTotal = a?.cumulativePnl.length
-    ? a.cumulativePnl[a.cumulativePnl.length - 1].cumulativeCents
-    : 0;
+  const winningsTotal = (a?.byClub ?? []).reduce((sum, c) => sum + c.winningsCents, 0);
   const tournamentsTotal = (a?.byClub ?? []).reduce((sum, c) => sum + c.tournaments, 0);
 
   return (
@@ -50,9 +48,9 @@ export default function AnalyticsScreen() {
           <>
             <View className="flex-row gap-3">
               <StatCard
-                icon="trending-up-outline"
-                value={currencyCents(netTotal)}
-                label={t('analytics.netProfit')}
+                icon="cash-outline"
+                value={currencyCents(winningsTotal)}
+                label={t('analytics.totalWinnings')}
               />
               <StatCard
                 icon="albums-outline"
@@ -79,9 +77,8 @@ export default function AnalyticsScreen() {
                         {c.tournaments} {t('analytics.tournaments').toLowerCase()}
                       </Text>
                     </View>
-                    <Text
-                      className={c.netCents >= 0 ? 'font-sans-semibold text-pp-success' : 'font-sans-semibold text-pp-danger'}>
-                      {currencyCents(c.netCents)}
+                    <Text className="font-sans-semibold text-pp-gold">
+                      {currencyCents(c.winningsCents)}
                     </Text>
                   </View>
                 ))
@@ -108,9 +105,8 @@ export default function AnalyticsScreen() {
                         {b.tournaments} {t('analytics.tournaments').toLowerCase()}
                       </Text>
                     </View>
-                    <Text
-                      className={b.netCents >= 0 ? 'font-sans-semibold text-pp-success' : 'font-sans-semibold text-pp-danger'}>
-                      {currencyCents(b.netCents)}
+                    <Text className="font-sans-semibold text-pp-gold">
+                      {currencyCents(b.winningsCents)}
                     </Text>
                   </View>
                 ))

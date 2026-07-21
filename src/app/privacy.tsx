@@ -44,14 +44,16 @@ function ConsentRow({
  *  straight from props (no setState-in-effect). */
 function ConsentForm({ initial }: { initial: PrivacySettings }) {
   const { t } = useTranslation();
-  const [shareNamedPl, setShareNamedPl] = useState(initial.shareNamedPl);
   const [inPool, setInPool] = useState(initial.inScoutingPool);
   const [update] = useMutation(UPDATE_PRIVACY_SETTINGS);
 
-  const persist = (shareNamedPlNext: boolean, inPoolNext: boolean) => {
-    setShareNamedPl(shareNamedPlNext);
+  const persist = (inPoolNext: boolean) => {
     setInPool(inPoolNext);
-    void update({ variables: { shareNamedPl: shareNamedPlNext, inScoutingPool: inPoolNext } });
+    // shareNamedPl is no longer user-facing (the app doesn't show P&L); the
+    // required mutation arg round-trips the stored value unchanged.
+    void update({
+      variables: { shareNamedPl: initial.shareNamedPl, inScoutingPool: inPoolNext },
+    });
   };
 
   return (
@@ -62,14 +64,7 @@ function ConsentForm({ initial }: { initial: PrivacySettings }) {
           title={t('privacy.poolTitle')}
           body={t('privacy.poolBody')}
           value={inPool}
-          onChange={(v) => persist(shareNamedPl, v)}
-        />
-        <View className="h-px bg-pp-border" />
-        <ConsentRow
-          title={t('privacy.pnlTitle')}
-          body={t('privacy.pnlBody')}
-          value={shareNamedPl}
-          onChange={(v) => persist(v, inPool)}
+          onChange={persist}
         />
       </Card>
       <Text variant="dim" className="text-[11px] leading-[16px]">

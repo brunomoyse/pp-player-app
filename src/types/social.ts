@@ -39,9 +39,7 @@ export interface Friend {
 export interface YearInPoker {
   year: number;
   tournaments: number;
-  buyinsCents: number;
   winningsCents: number;
-  netCents: number;
   itmCount: number;
   bestFinish: number | null;
   checkIns: number;

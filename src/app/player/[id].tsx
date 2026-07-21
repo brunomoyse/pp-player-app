@@ -127,17 +127,10 @@ export default function PlayerProfileScreen() {
                 value={s?.totalTournaments ?? 0}
                 label={t('playerProfile.tournaments')}
               />
-            </View>
-            <View className="flex-row gap-3">
               <StatCard
                 icon="trophy-outline"
                 value={`${Math.round(s?.itmPercentage ?? 0)}%`}
                 label={t('playerProfile.itm')}
-              />
-              <StatCard
-                icon="trending-up-outline"
-                value={currencyCents((s?.totalWinnings ?? 0) - (s?.totalBuyIns ?? 0))}
-                label={t('playerProfile.net')}
               />
             </View>
 

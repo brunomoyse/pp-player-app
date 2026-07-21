@@ -100,7 +100,7 @@
     "selectClub": "Selecteer club",
     "kpis": {
       "itm": "ITM",
-      "roi": "ROI",
+      "winnings": "Winsten",
       "cashes": "Winsten"
     },
     "actions": {
@@ -232,7 +232,6 @@
     "yourResult": "Jouw Resultaat",
     "payout": "Uitbetaling",
     "noPayout": "Geen uitbetaling",
-    "netProfit": "Netto Winst",
     "completeResults": "Complete Resultaten",
     "showLess": "Minder Tonen",
     "showAll": "Alles Tonen",
@@ -534,7 +533,6 @@
   "playerProfile": {
     "title": "Speler",
     "earnings": "Winst",
-    "net": "Netto",
     "tournaments": "Toernooien",
     "itm": "ITM",
     "friends": "Vrienden",
@@ -571,7 +569,6 @@
     "subtitle": "Je deelbare jaaroverzicht",
     "empty": "Speel dit jaar enkele toernooien om je overzicht te ontgrendelen.",
     "yourYear": "Jouw {year}",
-    "net": "Nettoresultaat",
     "tournaments": "Toernooien",
     "winnings": "Winst",
     "itm": "In the money",
@@ -617,8 +614,6 @@
     "intro": "Jij bepaalt wat je deelt. Beide opties staan uit tot je ze aanzet, en je kunt ze altijd wijzigen.",
     "poolTitle": "Verschijnen in tegenstander-zoeken",
     "poolBody": "Laat andere spelers je op naam vinden en je toernooistaat zien (gespeelde events, ITM-percentage, beste resultaat). Zet uit om privé te blijven.",
-    "pnlTitle": "Mijn winst / verlies tonen",
-    "pnlBody": "Koppel ook je nettowinst aan je profiel wanneer iemand je opzoekt. Dit staat los, alleen gedeeld als je het aanzet.",
     "footer": "Je privénotities worden nooit gedeeld of getoond, ongeacht deze instellingen."
   },
   "scouting": {
@@ -636,8 +631,6 @@
     "tournaments": "Toernooien",
     "itm": "ITM",
     "best": "Beste",
-    "pnl": "Winst / verlies",
-    "pnlPrivate": "Privé",
     "lookupError": "Kan dit profiel niet laden",
     "lookupErrorBody": "Er ging iets mis bij het laden van deze speler. Probeer opnieuw."
   },
@@ -798,7 +791,7 @@
   "analytics": {
     "title": "Prestatie-analyses",
     "subtitle": "Je resultaten, uitgesplitst",
-    "netProfit": "Nettowinst",
+    "totalWinnings": "Totale Winsten",
     "tournaments": "Toernooien",
     "byClub": "Per club",
     "byBuyIn": "Per buy-in",

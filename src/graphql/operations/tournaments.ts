@@ -298,10 +298,8 @@ export const GET_LEADERBOARD: TypedDocumentNode<GetLeaderboardResult, GetLeaderb
         totalTournaments
         totalBuyIns
         totalWinnings
-        netProfit
         totalItm
         itmPercentage
-        roiPercentage
         averageFinish
         firstPlaces
         finalTables
@@ -351,25 +349,19 @@ export const GET_MY_STATISTICS: TypedDocumentNode<GetMyStatsResult, Record<strin
         totalItm
         totalTournaments
         totalWinnings
-        totalBuyIns
         itmPercentage
-        roiPercentage
       }
       lastYear {
         totalItm
         totalTournaments
         totalWinnings
-        totalBuyIns
         itmPercentage
-        roiPercentage
       }
       allTime {
         totalItm
         totalTournaments
         totalWinnings
-        totalBuyIns
         itmPercentage
-        roiPercentage
       }
     }
   }

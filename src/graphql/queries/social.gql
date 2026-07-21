@@ -35,9 +35,7 @@ query GetMyYearInPoker($year: Int) {
   myYearInPoker(year: $year) {
     year
     tournaments
-    buyinsCents
     winningsCents
-    netCents
     itmCount
     bestFinish
     checkIns

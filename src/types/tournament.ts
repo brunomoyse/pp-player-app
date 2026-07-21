@@ -187,9 +187,7 @@ export interface PlayerStatistics {
     totalItm: number;
     totalTournaments: number;
     totalWinnings: number;
-    totalBuyIns: number;
     itmPercentage: number;
-    roiPercentage: number;
 }
 
 export interface PlayerStatsResponse {
@@ -209,10 +207,8 @@ export interface LeaderboardEntry {
     totalTournaments: number;
     totalBuyIns: number;
     totalWinnings: number;
-    netProfit: number;
     totalItm: number;
     itmPercentage: number;
-    roiPercentage: number;
     averageFinish: number;
     firstPlaces: number;
     finalTables: number;

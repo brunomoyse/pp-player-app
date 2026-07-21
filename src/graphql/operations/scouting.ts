@@ -78,8 +78,6 @@ export const SCOUTING_PROFILE: TypedDocumentNode<ScoutingProfileResult, Scouting
       tournaments
       itmPercentage
       bestFinish
-      sharesPnl
-      netCents
     }
   }
 `;

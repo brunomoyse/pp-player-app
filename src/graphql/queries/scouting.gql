@@ -19,8 +19,6 @@ query ScoutingProfile($userId: ID!) {
     tournaments
     itmPercentage
     bestFinish
-    sharesPnl
-    netCents
   }
 }
 

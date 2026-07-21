@@ -100,7 +100,7 @@
     "selectClub": "Sélectionner un club",
     "kpis": {
       "itm": "ITM",
-      "roi": "ROI",
+      "winnings": "Gains",
       "cashes": "Gains"
     },
     "actions": {
@@ -232,7 +232,6 @@
     "yourResult": "Votre Résultat",
     "payout": "Gain",
     "noPayout": "Aucun gain",
-    "netProfit": "Profit Net",
     "completeResults": "Résultats Complets",
     "showLess": "Voir Moins",
     "showAll": "Voir Tout",
@@ -533,7 +532,6 @@
   "playerProfile": {
     "title": "Joueur",
     "earnings": "Gains",
-    "net": "Net",
     "tournaments": "Tournois",
     "itm": "ITM",
     "friends": "Amis",
@@ -570,7 +568,6 @@
     "subtitle": "Votre rétrospective annuelle à partager",
     "empty": "Jouez quelques tournois cette année pour débloquer votre rétro.",
     "yourYear": "Votre année {year}",
-    "net": "Résultat net",
     "tournaments": "Tournois",
     "winnings": "Gains",
     "itm": "Places payées",
@@ -616,8 +613,6 @@
     "intro": "Vous décidez de ce que vous partagez. Les deux options sont désactivées tant que vous ne les activez pas, et vous pouvez les modifier à tout moment.",
     "poolTitle": "Apparaître dans la recherche d'adversaires",
     "poolBody": "Permettez aux autres joueurs de vous trouver par votre nom et de voir votre palmarès (tournois joués, taux ITM, meilleure place). Désactivez pour rester privé.",
-    "pnlTitle": "Afficher mes gains / pertes",
-    "pnlBody": "Associez aussi vos gains nets à votre profil lorsqu'on vous recherche. C'est distinct, partagé uniquement si vous l'activez.",
     "footer": "Vos notes privées ne sont jamais partagées ni montrées à qui que ce soit, quels que soient ces réglages."
   },
   "scouting": {
@@ -635,8 +630,6 @@
     "tournaments": "Tournois",
     "itm": "ITM",
     "best": "Meilleur",
-    "pnl": "Gains / pertes",
-    "pnlPrivate": "Privé",
     "lookupError": "Impossible de charger ce profil",
     "lookupErrorBody": "Une erreur est survenue lors du chargement de ce joueur. Réessayez."
   },
@@ -797,7 +790,7 @@
   "analytics": {
     "title": "Analyses de performance",
     "subtitle": "Vos résultats, détaillés",
-    "netProfit": "Profit net",
+    "totalWinnings": "Total Gains",
     "tournaments": "Tournois",
     "byClub": "Par club",
     "byBuyIn": "Par buy-in",
