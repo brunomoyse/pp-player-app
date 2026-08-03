@@ -1,0 +1,39 @@
+# Reusable login subflow.
+#
+# EMAIL and PASSWORD are REQUIRED from the caller — no defaults here, because a
+# subflow's own `env:` block shadows what `runFlow` passes in, so a default
+# would silently win. The harness seeds native-e2e@pocketpair.test / Passw0rd!
+#
+# Fields are addressed by testID, not by `below: "Password"` — the login screen
+# also carries a "Show password" link, so the relative selector resolved to the
+# wrong element and silently left the password box empty.
+appId: com.pocketpair.app
+---
+- openLink: pocketpair://login
+- assertVisible: "Welcome back"
+- tapOn: { id: "login-email" }
+- inputText: ${EMAIL}
+# Drop the keyboard before moving to the next field. Tapping a second input
+# while the keyboard is already up lands on the keyboard, not the field, and
+# the text silently goes nowhere. `hideKeyboard` is unsupported on recent iOS
+# simulators (Maestro finds no standard dismiss action), so tap the headline.
+- tapOn: "Welcome back"
+# Maestro's iOS driver can't type into a `secureTextEntry` field — the tap
+# lands, the text goes nowhere, and the flow fails later with an unhelpful
+# "not logged in". Toggling the app's own Show password control makes it a
+# plain field first.
+- tapOn: "Show password"
+- tapOn: { id: "login-password" }
+- inputText: ${PASSWORD}
+- tapOn: "Welcome back"
+- tapOn: { id: "login-submit" }
+# iOS offers to store the credential in the keychain after a successful login.
+# The system sheet covers the tab bar, so dismiss it when it shows up.
+- tapOn:
+    text: "Not Now"
+    optional: true
+# Login lands back on the tabs; My Seats only exists once authenticated, so its
+# presence is the signal that the session is live.
+- extendedWaitUntil:
+    visible: { id: "tab-my-seats" }
+    timeout: 20000

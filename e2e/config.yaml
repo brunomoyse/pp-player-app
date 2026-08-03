@@ -1,0 +1,5 @@
+# Maestro workspace config. Only top-level files are flows — `helpers/` holds
+# subflows meant to be pulled in with `runFlow`, and running them standalone
+# would fail (they assume an already-launched app).
+flows:
+  - "*.yaml"

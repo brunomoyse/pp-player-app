@@ -12,6 +12,7 @@ env:
 ---
 - launchApp:
     clearState: true
+    clearKeychain: true
     permissions: { all: allow }
 
 # --- Guest profile: brand-led hero (was the bare "Login" title before) ---
@@ -20,34 +21,39 @@ env:
 - assertVisible: "PocketPair"          # brand mark (accessibilityLabel) + headline
 - assertVisible: "Create Account"      # Button titles surface to a11y
 - assertVisible: "Login"
-- takeScreenshot: guest-profile-redesign
+- takeScreenshot: shot-guest-profile
 
 # --- Log in through the dedicated route ---
-- openLink: pocketpair://login
-- assertVisible: "Welcome back"
-- tapOn:
-    below: "Email"
-- inputText: ${EMAIL}
-- tapOn:
-    below: "Password"
-- inputText: ${PASSWORD}
-- hideKeyboard
-- tapOn: "Login"
+- runFlow:
+    file: helpers/login.yaml
+    env:
+      EMAIL: ${EMAIL}
+      PASSWORD: ${PASSWORD}
 
 # --- Authenticated profile: settings split into three grouped cards ---
-# (previously one ~13-row card). Tools card is feature-flag gated and may be absent.
-- tapOn: { id: "tab-profile" }
-- assertVisible: "Quick Actions"
-- assertVisible: "Tournaments"
-- assertVisible: "My Registrations"
-- assertVisible: "Browse Tournaments"
+# (previously one ~13-row card). Tools card is feature-flag gated and may be
+# absent. Reached by deep link — Maestro reports a tab-bar tap as COMPLETED
+# without switching tabs (see e2e/README.md).
+- openLink: pocketpair://profile
+- extendedWaitUntil:
+    visible: "Quick Actions"
+    timeout: 15000
+# Asserted on the section headers, not the row titles inside them: each row is
+# a Pressable, and iOS collapses its children into one accessibility element,
+# so "Achievements" / "My Registrations" are not matchable by text.
+#
+# The cards sit below the fold — scroll to each rather than asserting into the
+# viewport, which is what made this flow stale as the screen grew.
+- scrollUntilVisible:
+    element:
+      text: "Notifications"
+    direction: DOWN
 - scrollUntilVisible:
     element:
       text: "Settings"
     direction: DOWN
-- assertVisible: "Settings"
 - scrollUntilVisible:
     element:
       text: "Logout"
     direction: DOWN
-- takeScreenshot: profile-grouped-sections
+- takeScreenshot: shot-profile-sections

@@ -1,0 +1,128 @@
+# Native e2e: the path a store reviewer actually walks, end to end, in one run.
+#
+# Google's Broken Functionality rejection came from a reviewer opening the app
+# cold, browsing to a tournament and tapping the primary button. This flow does
+# the same and then keeps going through every tab and every primary action a
+# player can reach, asserting each screen reaches content rather than an error
+# or empty state. It is the "no dead buttons anywhere" sweep.
+#
+# It deliberately covers the guest state first: a reviewer who does not create
+# an account still has to find a working app.
+appId: com.pocketpair.app
+env:
+  EMAIL: native-e2e@pocketpair.test
+  PASSWORD: Passw0rd!
+  OPEN_TOURNAMENT: Friday Night Fever
+---
+- launchApp:
+    clearState: true
+    # The auth tokens live in the iOS keychain, which survives clearState — a
+    # token for a user the harness has since reseeded away makes the app boot
+    # into a failed GetMe and (in dev) a LogBox overlay that blocks every tap.
+    clearKeychain: true
+    permissions: { all: allow }
+
+# ---------------------------------------------------------------- guest state
+- extendedWaitUntil:
+    visible: { id: "tab-home" }
+    timeout: 30000
+- assertVisible: "Explore PocketPair"
+- assertNotVisible: "Something went wrong"
+
+# Events list loads real data without an account. Navigated by deep link:
+# Maestro reports a tab-bar tap as COMPLETED without switching tabs (a tap at
+# the same coordinates via `point:` does work, so the tab bar itself is fine).
+- openLink: pocketpair://tournaments
+- extendedWaitUntil:
+    visible: "Tournaments"
+    timeout: 15000
+- assertVisible: { id: "tournament-card", index: 0 }
+
+# A guest can open a tournament and read it.
+- tapOn: { id: "tournament-card", index: 0 }
+- assertVisible: "Info"
+- tapOn: "Structure"
+- tapOn: "Players"
+# Tapped by accessibility label: Maestro reports a tap on the back
+# button's testID as successful without actually delivering it.
+- tapOn: "Back"
+
+# Leaderboard renders its guest CTA rather than a blank screen.
+- openLink: pocketpair://leaderboard
+- extendedWaitUntil:
+    visible: "Join the Competition"
+    timeout: 15000
+
+# Guest profile offers the two ways in.
+- openLink: pocketpair://profile
+- extendedWaitUntil:
+    visible: "Create Account"
+    timeout: 15000
+- assertVisible: "Login"
+
+# ------------------------------------------------------------ authenticated
+- runFlow:
+    file: helpers/login.yaml
+    env:
+      EMAIL: ${EMAIL}
+      PASSWORD: ${PASSWORD}
+
+- openLink: pocketpair://
+- extendedWaitUntil:
+    visible: "ITM Rate"
+    timeout: 20000
+
+# The primary action of the whole app: take a seat.
+- runFlow:
+    file: helpers/open-tournament.yaml
+    env:
+      CATEGORY: upcoming
+      NAME: ${OPEN_TOURNAMENT}
+- assertVisible: { id: "register-cta" }
+- tapOn: { id: "register-cta" }
+- extendedWaitUntil:
+    visible: { id: "unregister-cta" }
+    timeout: 20000
+- assertNotVisible: "Registration failed. Please try again."
+
+# It is visible where the player expects to find it. Asserted on the status
+# badge's testID: the seat card is a Pressable, and iOS collapses its children
+# into one accessibility element, so the title inside it is not matchable.
+- openLink: pocketpair://my-seats
+- extendedWaitUntil:
+    visible: "My Seats"
+    timeout: 15000
+- extendedWaitUntil:
+    visible: { id: "registration-status-REGISTERED" }
+    timeout: 20000
+
+# Leaderboard has real content once signed in.
+- openLink: pocketpair://leaderboard
+- extendedWaitUntil:
+    notVisible: "Join the Competition"
+    timeout: 15000
+
+# Profile: the account is real and its sections render.
+- openLink: pocketpair://profile
+- extendedWaitUntil:
+    visible: ${EMAIL}
+    timeout: 15000
+- assertVisible: "Quick Actions"
+- scrollUntilVisible:
+    element:
+      text: "Settings"
+    direction: DOWN
+
+# ------------------------------------------------------------------- cleanup
+# Give the seat back so the flow can be re-run without reseeding.
+- runFlow:
+    file: helpers/open-tournament.yaml
+    env:
+      CATEGORY: upcoming
+      NAME: ${OPEN_TOURNAMENT}
+- tapOn: { id: "unregister-cta" }
+- assertVisible: "Cancel Registration"
+- tapOn: "Yes"
+- extendedWaitUntil:
+    visible: { id: "register-cta" }
+    timeout: 20000

@@ -1,0 +1,77 @@
+# Native e2e: every tournament lifecycle state renders a CTA that does what it
+# says. Google's rejection warned the issue "may also occur in other areas", so
+# this walks all four states a player can open and asserts the call to action
+# matches the state rather than failing on tap.
+#
+# States and expected CTA:
+#   registration_open -> live "Register" button
+#   not_started       -> disabled "Registration not open yet" (NO register-cta)
+#   in_progress       -> live clock, no register CTA
+#   finished          -> "View Final Results"
+#
+# Fixture names come from pp-service/fixtures/05_tournaments.sql.
+appId: com.pocketpair.app
+env:
+  EMAIL: native-e2e@pocketpair.test
+  PASSWORD: Passw0rd!
+  OPEN_TOURNAMENT: Friday Night Fever
+  NOT_OPEN_TOURNAMENT: Saturday Superstack
+  LIVE_TOURNAMENT: Thursday Live Action
+  FINISHED_TOURNAMENT: Liège Monday Classic
+---
+- launchApp:
+    clearState: true
+    # The auth tokens live in the iOS keychain, which survives clearState — a
+    # token for a user the harness has since reseeded away makes the app boot
+    # into a failed GetMe and (in dev) a LogBox overlay that blocks every tap.
+    clearKeychain: true
+    permissions: { all: allow }
+
+- runFlow:
+    file: helpers/login.yaml
+    env:
+      EMAIL: ${EMAIL}
+      PASSWORD: ${PASSWORD}
+
+# --- registration_open: a real Register button ---
+- runFlow:
+    file: helpers/open-tournament.yaml
+    env:
+      CATEGORY: upcoming
+      NAME: ${OPEN_TOURNAMENT}
+- assertVisible: { id: "register-cta" }
+
+# --- not_started: the CTA is present but disabled, and explains itself.
+#     The old build showed a live Register button here whose only possible
+#     outcome was an error toast. ---
+- runFlow:
+    file: helpers/open-tournament.yaml
+    env:
+      CATEGORY: upcoming
+      NAME: ${NOT_OPEN_TOURNAMENT}
+- assertVisible: "Registration not open yet"
+- assertNotVisible: { id: "register-cta" }
+
+# --- in_progress: the live screen, no registration CTA at all ---
+- runFlow:
+    file: helpers/open-tournament.yaml
+    env:
+      CATEGORY: live
+      NAME: ${LIVE_TOURNAMENT}
+- assertNotVisible: { id: "register-cta" }
+- assertVisible: "Info"
+- tapOn: "Structure"
+- tapOn: "Players"
+
+# --- finished: results, not registration ---
+- runFlow:
+    file: helpers/open-tournament.yaml
+    env:
+      CATEGORY: completed
+      NAME: ${FINISHED_TOURNAMENT}
+- assertVisible: "View Final Results"
+- assertNotVisible: { id: "register-cta" }
+- tapOn: "View Final Results"
+- extendedWaitUntil:
+    visible: "Final Results"
+    timeout: 15000

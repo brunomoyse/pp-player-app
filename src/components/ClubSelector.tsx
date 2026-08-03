@@ -26,6 +26,7 @@ export function ClubSelector() {
       <Pressable
         onPress={() => setOpen(true)}
         accessibilityRole="button"
+        testID="club-selector"
         className="h-9 flex-row items-center gap-2 self-start rounded-full border border-pp-border px-3">
         <Ionicons name="location-outline" size={16} color={colors.textMuted} />
         <Text className="font-sans-medium text-[14px] text-pp-text" numberOfLines={1}>

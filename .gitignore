@@ -46,7 +46,8 @@ example
 /ios
 /android
 
-# Maestro e2e screenshots (written to CWD)
-[A-Z]-*.png
+# Maestro e2e artifacts. `takeScreenshot` writes to the CWD, so every flow
+# names its shots `shot-*` to keep them out of the tree.
+shot-*.png
 
 .env

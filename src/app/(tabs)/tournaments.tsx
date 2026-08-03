@@ -125,8 +125,14 @@ export default function TournamentsScreen() {
         value={search}
         onChangeText={setSearch}
         autoCorrect={false}
+        testID="tournament-search"
       />
-      <Segment options={segments} value={category} onChange={setCategory} />
+      <Segment
+        options={segments}
+        value={category}
+        onChange={setCategory}
+        testIDPrefix="events-category"
+      />
 
       {loading && !data ? (
         <SkeletonList />

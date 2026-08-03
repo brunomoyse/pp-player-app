@@ -1,40 +1,58 @@
 # Native e2e: guest browse of live data + login + authenticated screens.
 # Runs against the real pp-service (no CORS on native).
+#
+# Tabs are reached by deep link, not by tapping the tab bar: Maestro's iOS
+# driver reports `tapOn: { id: "tab-…" }` as COMPLETED without switching tabs
+# (a tap at the same coordinates via `point:` does work, so the tab bar itself
+# is fine). See e2e/README.md.
 appId: com.pocketpair.app
+env:
+  EMAIL: native-e2e@pocketpair.test
+  PASSWORD: Passw0rd!
 ---
 - launchApp:
     clearState: true
+    clearKeychain: true
     permissions: { all: allow }
 
 # --- Guest home renders real data from the live API ---
+- extendedWaitUntil:
+    visible: { id: "tab-home" }
+    timeout: 30000
 - assertVisible: "Explore PocketPair"
 - assertVisible: "Next Tournaments"
 
 # --- Events tab: real tournament list (no auth needed) ---
-- tapOn: { id: "tab-events" }
-- assertVisible: "Tournaments"
+- openLink: pocketpair://tournaments
+- extendedWaitUntil:
+    visible: "Tournaments"
+    timeout: 15000
 - assertVisible: "Upcoming"
 
 # --- Leaderboard tab: guest CTA + period segments ---
-- tapOn: { id: "tab-leaderboard" }
-- assertVisible: "Join the Competition"
+- openLink: pocketpair://leaderboard
+- extendedWaitUntil:
+    visible: "Join the Competition"
+    timeout: 15000
 
 # --- Log in through the dedicated route ---
-- openLink: pocketpair://login
-- assertVisible: "Welcome back"
-- tapOn:
-    below: "Email"
-- inputText: "native-e2e@pocketpair.test"
-- tapOn:
-    below: "Password"
-- inputText: "Passw0rd!"
-- hideKeyboard
-- tapOn: "Login"
+- runFlow:
+    file: helpers/login.yaml
+    env:
+      EMAIL: ${EMAIL}
+      PASSWORD: ${PASSWORD}
 
 # --- Authenticated: Home shows KPIs, My Seats tab now exists, profile shows the user ---
-- tapOn: { id: "tab-home" }
-- assertVisible: "ITM Rate"
-- tapOn: { id: "tab-my-seats" }
-- assertVisible: "Registered"
-- tapOn: { id: "tab-profile" }
-- assertVisible: "native-e2e@pocketpair.test"
+- openLink: pocketpair://
+- extendedWaitUntil:
+    visible: "ITM Rate"
+    timeout: 20000
+- assertVisible: { id: "tab-my-seats" }
+- openLink: pocketpair://my-seats
+- extendedWaitUntil:
+    visible: "My Seats"
+    timeout: 15000
+- openLink: pocketpair://profile
+- extendedWaitUntil:
+    visible: ${EMAIL}
+    timeout: 15000

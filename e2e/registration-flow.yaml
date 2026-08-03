@@ -1,44 +1,95 @@
-# Native e2e: log in, open a tournament, register, and see it under My Seats.
-# Runs against the real pp-service. Grounded in stable hooks: tab-* tabBar ids,
-# tournament-card (Events list), register-cta (tournament detail).
+# Native e2e: the full registration lifecycle — register, cancel, register
+# AGAIN, cancel. Both of the bugs that got version code 2 rejected by Google
+# under the Broken Functionality policy ("unresponsive UI elements") lived on
+# this path, and each one showed up as a Register button that did nothing:
 #
-# UNVERIFIED PENDING SIMULATOR: authored from the real screens + testIDs but not
-# yet run on a device (needs an iOS simulator + dev build). Register mutates
-# state; ./e2e-harness.sh seed resets it.
+#   1. the app sent its own userId, which the server read as "a manager is
+#      registering somebody else" and denied for every player;
+#   2. cancelling left the registration row behind, so signing up again tripped
+#      the (tournament, player) unique index.
+#
+# The second tap of `register-cta` below is what catches (2) — a flow that only
+# registers once passes with the bug still in place.
+#
+# Deterministic by construction: it searches for the fixture tournament that
+# ./e2e-harness.sh seeds as `registration_open`, rather than tapping whichever
+# card happens to sort first.
 appId: com.pocketpair.app
 env:
   EMAIL: native-e2e@pocketpair.test
   PASSWORD: Passw0rd!
+  OPEN_TOURNAMENT: Friday Night Fever
 ---
 - launchApp:
     clearState: true
+    # The auth tokens live in the iOS keychain, which survives clearState — a
+    # token for a user the harness has since reseeded away makes the app boot
+    # into a failed GetMe and (in dev) a LogBox overlay that blocks every tap.
+    clearKeychain: true
     permissions: { all: allow }
 
-# --- Log in through the dedicated route ---
-- openLink: pocketpair://login
-- assertVisible: "Welcome back"
-- tapOn:
-    below: "Email"
-- inputText: ${EMAIL}
-- tapOn:
-    below: "Password"
-- inputText: ${PASSWORD}
-- hideKeyboard
-- tapOn: "Login"
+- runFlow:
+    file: helpers/login.yaml
+    env:
+      EMAIL: ${EMAIL}
+      PASSWORD: ${PASSWORD}
 
-# --- Events tab → open the first tournament ---
-- tapOn: { id: "tab-events" }
-- assertVisible: "Tournaments"
-- tapOn: { id: "tournament-card", index: 0 }
+# --- Find the tournament whose registration is actually open ---
+- runFlow:
+    file: helpers/open-tournament.yaml
+    env:
+      CATEGORY: upcoming
+      NAME: ${OPEN_TOURNAMENT}
 
-# --- Register (CTA only shows for UPCOMING tournaments) ---
+# --- Register ---
 - assertVisible: { id: "register-cta" }
 - tapOn: { id: "register-cta" }
-# After registering, the CTA flips to unregister and a status badge appears.
+# The CTA flips to Unregister only after the mutation succeeds — this is the
+# assertion the old code could never reach.
 - extendedWaitUntil:
     visible: { id: "unregister-cta" }
-    timeout: 15000
+    timeout: 20000
+- assertNotVisible: "Registration failed. Please try again."
+- assertVisible: "Seat confirmed. You are registered!"
 
-# --- My Seats reflects the registration ---
-- tapOn: { id: "tab-my-seats" }
-- assertVisible: "Registered"
+# --- My Seats reflects it. Navigated by deep link: Maestro reports a tab-bar
+#     tap as COMPLETED without switching tabs. ---
+- openLink: pocketpair://my-seats
+- extendedWaitUntil:
+    visible: "My Seats"
+    timeout: 15000
+# Asserted on the status badge's testID, not the tournament name: the seat card
+# is a Pressable, and iOS collapses its children into one accessibility element,
+# so the title inside it is not matchable by text.
+- extendedWaitUntil:
+    visible: { id: "registration-status-REGISTERED" }
+    timeout: 20000
+
+# --- Cancel from the tournament screen ---
+- runFlow:
+    file: helpers/open-tournament.yaml
+    env:
+      CATEGORY: upcoming
+      NAME: ${OPEN_TOURNAMENT}
+- tapOn: { id: "unregister-cta" }
+- assertVisible: "Cancel Registration"
+- tapOn: "Yes"
+- extendedWaitUntil:
+    visible: { id: "register-cta" }
+    timeout: 20000
+
+# --- Register AGAIN. This is the regression guard for bug (2): the row from the
+#     cancelled registration is still there and has to be revived, not
+#     re-inserted. Before the fix this tap did nothing but raise a toast. ---
+- tapOn: { id: "register-cta" }
+- extendedWaitUntil:
+    visible: { id: "unregister-cta" }
+    timeout: 20000
+- assertNotVisible: "Registration failed. Please try again."
+
+# --- Leave the fixture as we found it so the flow is re-runnable ---
+- tapOn: { id: "unregister-cta" }
+- tapOn: "Yes"
+- extendedWaitUntil:
+    visible: { id: "register-cta" }
+    timeout: 20000

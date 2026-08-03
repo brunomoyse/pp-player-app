@@ -1,0 +1,41 @@
+# Open a specific tournament from the Events tab, by category + name.
+#
+# CATEGORY (upcoming | live | completed) and NAME are REQUIRED from the caller.
+# They are deliberately not given defaults here: a subflow's own `env:` block
+# shadows the values passed via `runFlow`, so defaults silently win and every
+# call opens the same tournament while still reporting success.
+#
+# Navigation uses a deep link rather than a tab-bar tap. Maestro's iOS driver
+# reports `tapOn: { id: "tab-…" }` as COMPLETED without switching tabs (a tap at
+# the same coordinates via `point:` does work, so the tab bar itself is fine) —
+# and a deep link also resets from a pushed detail screen, so this helper is
+# callable from anywhere.
+#
+# The tournament is chosen by name, never by list index: order depends on
+# start_time and fixture volume, so `tapOn: { id: "tournament-card", index: 0 }`
+# silently drifts onto a different tournament — that is how the original flow
+# ended up tapping a `not_started` event whose Register button could never work.
+#
+# The Events list is filtered by the selected club, which the flows do NOT
+# touch: Maestro cannot see inside a React Native `Modal`, and the club picker
+# is one (the hierarchy comes back empty while it is open). They rely on the
+# default instead — the store selects `clubs[0]` and the API sorts clubs by
+# name, so a freshly launched app is on "Liège Poker Club", and every
+# tournament these flows name belongs to it (pp-service/fixtures/05_*.sql).
+appId: com.pocketpair.app
+---
+- openLink: pocketpair://tournaments
+- extendedWaitUntil:
+    visible: { id: "tournament-search" }
+    timeout: 15000
+
+- tapOn: { id: "events-category-${CATEGORY}" }
+- tapOn: { id: "tournament-search" }
+- eraseText
+- inputText: ${NAME}
+- hideKeyboard
+- extendedWaitUntil:
+    visible: { id: "tournament-card", index: 0 }
+    timeout: 15000
+- tapOn: { id: "tournament-card", index: 0 }
+- assertVisible: ${NAME}
