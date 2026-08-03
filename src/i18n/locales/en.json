@@ -120,6 +120,7 @@
     },
     "title": "Tournaments",
     "register": "Register",
+    "registrationNotOpenYet": "Registration not open yet",
     "unregister": "Unregister",
     "full": "Full",
     "buyIn": "Buy-in",
@@ -225,7 +226,10 @@
       "registerFailed": "Registration failed. Please try again.",
       "cancelled": "Registration cancelled",
       "cancelFailed": "Could not cancel your registration. Please try again.",
-      "waitlistedPosition": "You're #{position} on the waitlist"
+      "waitlistedPosition": "You're #{position} on the waitlist",
+      "registrationNotOpen": "Registration isn't open for this tournament yet.",
+      "tournamentUnavailable": "This tournament isn't available in the app.",
+      "sessionExpired": "Your session expired. Please log in again."
     },
     "yourStatus": "Your registration",
     "qualifiedForDay2Title": "Qualified for Day 2",

@@ -187,6 +187,7 @@
     "waitlistPosition": "Position {position} en file d'attente",
     "full": "Complet",
     "register": "S'inscrire",
+    "registrationNotOpenYet": "Inscriptions pas encore ouvertes",
     "unregister": "Se désinscrire",
     "viewLive": "Voir en direct",
     "results": "Résultats",
@@ -248,7 +249,10 @@
       "registerFailed": "L'inscription a échoué. Veuillez réessayer.",
       "cancelled": "Inscription annulée",
       "cancelFailed": "Impossible d'annuler votre inscription. Veuillez réessayer.",
-      "waitlistedPosition": "Vous êtes n°{position} sur la liste d'attente"
+      "waitlistedPosition": "Vous êtes n°{position} sur la liste d'attente",
+      "registrationNotOpen": "Les inscriptions à ce tournoi ne sont pas encore ouvertes.",
+      "tournamentUnavailable": "Ce tournoi n'est pas disponible dans l'application.",
+      "sessionExpired": "Votre session a expiré. Veuillez vous reconnecter."
     },
     "yourStatus": "Votre inscription",
     "qualifiedForDay2Title": "Qualifié pour le Day 2",

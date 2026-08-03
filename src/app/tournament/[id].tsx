@@ -29,12 +29,14 @@ import {
   GET_TOURNAMENT_ENTRY_STATS,
   REGISTER_FOR_TOURNAMENT,
 } from '@/graphql/operations';
+import { serverErrorMessage } from '@/lib/errors';
 import { toast } from '@/lib/toast';
 import { useAuthStore, useIsAuthenticated } from '@/stores/useAuthStore';
 import { colors } from '@/theme/tokens';
 import type { TournamentStatus } from '@/types/tournament';
 import { currencyCents } from '@/utils/currency';
 import { formatDateTime } from '@/utils/datetime';
+import { isRegistrationOpen } from '@/utils/registration';
 
 const KEEP_AWAKE_TAG = 'tournament-live-clock';
 
@@ -105,6 +107,19 @@ export default function TournamentDetailScreen() {
     { value: 'players', label: t('events.tabs.players') },
   ];
 
+  // Say what actually went wrong. Anything we don't recognise stays behind the
+  // caller's generic copy rather than leaking raw server/database text — but a
+  // silent, unexplained failure is what makes a button look broken.
+  const failureCopy = (e: unknown, fallback: string) => {
+    const message = serverErrorMessage(e)?.toLowerCase() ?? '';
+    if (message.includes('registration is not open')) return t('events.toast.registrationNotOpen');
+    if (message.includes("isn't available")) return t('events.toast.tournamentUnavailable');
+    if (message.includes('logged in') || message.includes('insufficient permissions')) {
+      return t('events.toast.sessionExpired');
+    }
+    return fallback;
+  };
+
   const onRegister = async () => {
     if (!tn) return;
     if (!isAuth) {
@@ -112,9 +127,10 @@ export default function TournamentDetailScreen() {
       return;
     }
     try {
-      const result = await register({
-        variables: { input: { tournamentId: tn.id, userId: currentUser?.id } },
-      });
+      // Self-registration only — the server derives the player from the JWT.
+      // Passing our own userId made the server treat this as a manager
+      // registering somebody else and reject every player.
+      const result = await register({ variables: { input: { tournamentId: tn.id } } });
       await refetch();
       const reg = result.data?.registerForTournament;
       if (reg?.status === 'WAITLISTED') {
@@ -126,8 +142,8 @@ export default function TournamentDetailScreen() {
       } else {
         toast.success(t('events.toast.registered'));
       }
-    } catch {
-      toast.error(t('events.toast.registerFailed'));
+    } catch (e) {
+      toast.error(failureCopy(e, t('events.toast.registerFailed')));
     }
   };
 
@@ -148,8 +164,8 @@ export default function TournamentDetailScreen() {
               });
               await refetch();
               toast.success(t('events.toast.cancelled'));
-            } catch {
-              toast.error(t('events.toast.cancelFailed'));
+            } catch (e) {
+              toast.error(failureCopy(e, t('events.toast.cancelFailed')));
             }
           },
         },
@@ -266,12 +282,23 @@ export default function TournamentDetailScreen() {
                   testID="unregister-cta"
                 />
               </View>
-            ) : (
+            ) : isRegistrationOpen(tn.liveStatus) ? (
               <Button
                 title={t('events.register')}
                 onPress={onRegister}
                 loading={registering}
                 testID="register-cta"
+              />
+            ) : (
+              // The club hasn't opened registration yet. Show why instead of a
+              // live button whose only possible outcome is an error.
+              <Button
+                title={t('events.registrationNotOpenYet')}
+                variant="secondary"
+                disabled
+                // Deliberately not a `register-cta*` id — Maestro matches
+                // testIDs as substrings, so a sibling would shadow the real CTA.
+                testID="registration-closed-cta"
               />
             )}
 

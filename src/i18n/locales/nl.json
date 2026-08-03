@@ -187,6 +187,7 @@
     "waitlistPosition": "Positie {position} op wachtlijst",
     "full": "Vol",
     "register": "Registreren",
+    "registrationNotOpenYet": "Inschrijvingen nog niet open",
     "unregister": "Uitschrijven",
     "viewLive": "Bekijk Live",
     "results": "Resultaten",
@@ -248,7 +249,10 @@
       "registerFailed": "Inschrijving mislukt. Probeer het opnieuw.",
       "cancelled": "Inschrijving geannuleerd",
       "cancelFailed": "Kon je inschrijving niet annuleren. Probeer het opnieuw.",
-      "waitlistedPosition": "Je staat op plek {position} van de wachtlijst"
+      "waitlistedPosition": "Je staat op plek {position} van de wachtlijst",
+      "registrationNotOpen": "De inschrijvingen voor dit toernooi zijn nog niet open.",
+      "tournamentUnavailable": "Dit toernooi is niet beschikbaar in de app.",
+      "sessionExpired": "Je sessie is verlopen. Log opnieuw in."
     },
     "yourStatus": "Jouw inschrijving",
     "qualifiedForDay2Title": "Gekwalificeerd voor Day 2",
