@@ -6,6 +6,7 @@ import { Pressable, View } from 'react-native';
 
 import { Button, IconButton, Input, Screen, Text } from '@/components/ui';
 import { openLegal } from '@/lib/legal';
+import { goBack } from '@/lib/navigation';
 import { useAuthStore } from '@/stores/useAuthStore';
 import { colors } from '@/theme/tokens';
 
@@ -81,7 +82,7 @@ export default function RegisterScreen() {
               size={26}
               color={colors.text}
               accessibilityLabel={t('common.close')}
-              onPress={() => router.back()}
+              onPress={goBack}
             />
           ),
         }}

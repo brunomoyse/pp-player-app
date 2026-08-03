@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Image, Pressable, View } from 'react-native';
 
 import { Button, Input, Screen, Text } from '@/components/ui';
+import { goBack } from '@/lib/navigation';
 import { useAuthStore } from '@/stores/useAuthStore';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -23,7 +24,7 @@ export default function LoginScreen() {
   const onSubmit = async () => {
     if (!valid) return;
     const user = await login({ email: email.trim(), password });
-    if (user) router.back();
+    if (user) goBack();
   };
 
   return (
@@ -52,6 +53,7 @@ export default function LoginScreen() {
           keyboardType="email-address"
           textContentType="emailAddress"
           placeholder="you@example.com"
+          testID="login-email"
         />
 
         <View className="gap-1.5">
@@ -62,6 +64,7 @@ export default function LoginScreen() {
             secureTextEntry={!show}
             textContentType="password"
             placeholder="••••••••"
+            testID="login-password"
           />
           <Pressable onPress={() => setShow((s) => !s)} hitSlop={8} className="self-end">
             <Text variant="dim">
@@ -78,6 +81,7 @@ export default function LoginScreen() {
 
         <Button
           title={t('auth.login')}
+          testID="login-submit"
           onPress={onSubmit}
           loading={isLoading}
           disabled={!valid}
