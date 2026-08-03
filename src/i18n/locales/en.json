@@ -260,20 +260,10 @@
       "investment": "Investment",
       "upcoming": "Upcoming"
     },
-    "filters": {
-      "upcoming": "Upcoming",
-      "live": "Live",
-      "completed": "Completed"
-    },
     "categories": {
       "upcoming": "Upcoming",
       "live": "Live",
       "completed": "Completed"
-    },
-    "types": {
-      "deepstack": "Deepstack",
-      "turbo": "Turbo",
-      "bounty": "Bounty"
     },
     "status": {
       "upcoming": "Upcoming",
@@ -371,11 +361,6 @@
       "overall": "Overall",
       "winnings": "Winnings",
       "volume": "Volume"
-    },
-    "filters": {
-      "verified": "Verified",
-      "vip": "VIP",
-      "club": "Same Club"
     },
     "tournaments": "tournaments",
     "itm": "ITM",

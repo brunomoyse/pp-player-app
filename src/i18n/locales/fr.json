@@ -283,23 +283,10 @@
       "investment": "Investissement",
       "upcoming": "À venir"
     },
-    "filters": {
-      "canCancel": "Annulable",
-      "lateReg": "Inscr. tardive",
-      "highStakes": "Grosses Mises",
-      "deepstack": "Deepstack",
-      "turbo": "Turbo"
-    },
     "categories": {
       "upcoming": "À venir",
       "live": "En direct",
       "completed": "Terminés"
-    },
-    "types": {
-      "deepstack": "Deepstack",
-      "turbo": "Turbo",
-      "freezeout": "Freezeout",
-      "bounty": "Bounty"
     },
     "status": {
       "upcoming": "À venir",
@@ -397,12 +384,6 @@
       "overall": "Général",
       "winnings": "Gains",
       "volume": "Volume"
-    },
-    "filters": {
-      "verified": "Vérifiés",
-      "club": "Même Club",
-      "highVolume": "Gros Volume",
-      "recent": "Récents"
     },
     "loadMore": "Charger Plus de Joueurs",
     "empty": {

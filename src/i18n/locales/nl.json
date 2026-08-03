@@ -283,29 +283,15 @@
       "investment": "Investering",
       "upcoming": "Komend"
     },
-    "filters": {
-      "canCancel": "Annuleerbaar",
-      "lateReg": "Late Reg",
-      "highStakes": "Hoge Inzet",
-      "deepstack": "Deepstack",
-      "turbo": "Turbo"
-    },
     "categories": {
       "upcoming": "Komend",
       "live": "Live",
       "completed": "Afgerond"
     },
-    "types": {
-      "deepstack": "Deepstack",
-      "turbo": "Turbo",
-      "freezeout": "Freezeout",
-      "bounty": "Bounty"
-    },
     "status": {
       "upcoming": "Komend",
       "live": "Live",
       "completed": "Afgerond",
-      "FINISHED": "Afgerond",
       "not_started": "Niet gestart",
       "registration_open": "Registratie open",
       "late_registration": "Late registratie",
@@ -398,12 +384,6 @@
       "overall": "Algemeen",
       "winnings": "Winsten",
       "volume": "Volume"
-    },
-    "filters": {
-      "verified": "Geverifieerd",
-      "club": "Zelfde Club",
-      "highVolume": "Hoog Volume",
-      "recent": "Recent"
     },
     "loadMore": "Meer Spelers Laden",
     "empty": {
