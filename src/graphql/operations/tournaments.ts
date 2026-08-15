@@ -203,7 +203,6 @@ export const GET_TOURNAMENT_ENTRY_STATS: TypedDocumentNode<
     tournamentEntryStats(tournamentId: $tournamentId) {
       tournamentId
       totalEntries
-      totalAmountCents
       uniquePlayers
       initialCount
       rebuyCount

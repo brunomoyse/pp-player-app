@@ -179,7 +179,6 @@ query GetTournamentEntryStats($tournamentId: ID!) {
   tournamentEntryStats(tournamentId: $tournamentId) {
     tournamentId
     totalEntries
-    totalAmountCents
     uniquePlayers
     initialCount
     rebuyCount

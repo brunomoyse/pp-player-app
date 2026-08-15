@@ -120,7 +120,6 @@ export interface TournamentEntry {
 export interface TournamentEntryStats {
     tournamentId: string;
     totalEntries: number;
-    totalAmountCents: number;
     uniquePlayers: number;
     initialCount: number;
     rebuyCount: number;
