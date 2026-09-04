@@ -44,6 +44,11 @@ updates:
         update-types: ["version-update:semver-major"]
       - dependency-name: "@expo/*"
         update-types: ["version-update:semver-major"]
+      # jest-expo's major tracks the Expo SDK (57 targets SDK 57 / RN 0.86) but
+      # its name matches none of the patterns above. On SDK 56 it can't resolve:
+      # jest-expo@57 peers on @react-native/jest-preset 0.86 while RN is 0.85.
+      - dependency-name: "jest-expo"
+        update-types: ["version-update:semver-major"]
 
       # --- React Native runtime: version is dictated by the installed Expo SDK.
       # Ignore entirely (incl. patch) — `expo install --fix` is the source of
