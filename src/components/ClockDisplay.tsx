@@ -24,24 +24,23 @@ export interface ClockDisplayProps {
 }
 
 /**
- * The blinds share the clock body with a fixed-width timer, leaving them roughly
- * 190pt. At 28px JetBrains Mono that is about 11 characters, so a late level
- * ("25000 / 50000 (5000)") used to wrap mid-number — the big blind dropped onto
- * a second line. Step the size down by length, and let the platform shrink
- * further on narrow devices.
+ * Blinds get a full-width row of their own, so on a 390pt device they have about
+ * 315pt to work with — roughly 18 characters at 28px JetBrains Mono. A deep late
+ * level ("25000 / 50000 (5000)") still runs past that, so step the size down by
+ * length rather than let it wrap, and keep the platform shrink as a floor for
+ * narrower devices.
  */
 const BLIND_SIZE_STEPS: readonly (readonly [maxChars: number, fontSize: number])[] = [
-  [11, 28],
-  [13, 24],
-  [17, 19],
-  [21, 15],
+  [18, 28],
+  [20, 25],
+  [24, 21],
 ] as const;
 
 function blindsFontSize(text: string): number {
   for (const [maxChars, fontSize] of BLIND_SIZE_STEPS) {
     if (text.length <= maxChars) return fontSize;
   }
-  return 13;
+  return 18;
 }
 
 /** "1000 / 2000", or "1000 / 2000 (200)" with an ante — bare parens for the ante
@@ -111,13 +110,13 @@ export function ClockDisplay({ currentLevel, nextLevel, timeRemaining, isLive }:
         </View>
       </View>
 
-      {/* Body */}
-      <View className="mb-4 flex-row gap-4">
-        {/* The timer is fixed-width ("MM:SS"), so it sizes to content and hands the
-            rest of the row to the blinds, which are what actually overflow. With
-            no level to show alongside it, it stretches so it stays centred. */}
-        <View className={cn('items-center', currentLevel ? undefined : 'flex-1')}>
-          <Text className="font-mono-medium text-[36px] text-pp-danger" style={{ fontVariant: ['tabular-nums'] }}>
+      {/* Body — the timer and the blinds each take a full-width row instead of
+          splitting one. Side by side, the blinds got roughly half the card and
+          a long level had to shrink to stay on one line; stacked, both numbers
+          read at their natural size. */}
+      <View className="mb-4">
+        <View className="items-center">
+          <Text className="font-mono-medium text-[44px] text-pp-danger" style={{ fontVariant: ['tabular-nums'] }}>
             {formatDuration(timeRemaining)}
           </Text>
           <Text variant="muted" className="text-[11px] uppercase tracking-wide">
@@ -126,7 +125,7 @@ export function ClockDisplay({ currentLevel, nextLevel, timeRemaining, isLive }:
         </View>
 
         {currentLevel && !onBreak ? (
-          <View className="flex-1 items-center">
+          <View className="mt-4 items-center border-t border-pp-border pt-4">
             <Text
               className="font-mono-medium text-pp-gold"
               numberOfLines={1}
@@ -140,7 +139,7 @@ export function ClockDisplay({ currentLevel, nextLevel, timeRemaining, isLive }:
             </Text>
           </View>
         ) : onBreak ? (
-          <View className="flex-1 items-center justify-center">
+          <View className="mt-4 items-center border-t border-pp-border pt-4">
             <Text className="text-[24px] font-sans-bold text-pp-gold-strong">{t('events.onBreak')}</Text>
           </View>
         ) : null}
