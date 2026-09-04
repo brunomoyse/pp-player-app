@@ -16,6 +16,8 @@ export { Segment } from './Segment';
 export type { SegmentOption, SegmentProps } from './Segment';
 export { Avatar } from './Avatar';
 export type { AvatarProps } from './Avatar';
+export { FacePile } from './FacePile';
+export type { FacePileProps } from './FacePile';
 export { Input } from './Input';
 export type { InputProps } from './Input';
 export { LoadingState, ErrorState, EmptyState } from './States';

@@ -6,7 +6,13 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, Pressable, Share, View } from 'react-native';
 
-import { BackButton, ClockDisplay, PreGameField, RegistrationStatusBadge } from '@/components';
+import {
+  BackButton,
+  ClockDisplay,
+  EventHero,
+  PreGameField,
+  RegistrationStatusBadge,
+} from '@/components';
 import { FadeUp } from '@/components/motion';
 import { useLiveClock } from '@/hooks/useLiveClock';
 import { useLiveRegistrations } from '@/hooks/useLiveRegistrations';
@@ -173,12 +179,47 @@ export default function TournamentDetailScreen() {
     );
   };
 
+  // The upcoming hero owns the header (back/share float over its cover), so the
+  // controls are built once and mounted in whichever layout is active.
+  const useHero = tn?.status === 'UPCOMING';
+  const statusBadges = tn ? (
+    <>
+      <Badge
+        label={t(`events.status.${tn.status.toLowerCase()}`, tn.status)}
+        tone={STATUS_TONE[tn.status]}
+      />
+      {isBounty ? <Badge label={t('events.pko')} tone="bounty" /> : null}
+    </>
+  ) : null;
+
+  // Names for the hero's face pile. Cancelled/no-show registrations are not part
+  // of the field, so they must not pad the count the pile is drawn from.
+  const fieldNames =
+    tn?.registrations
+      ?.filter((r) => r.status !== 'CANCELLED' && r.status !== 'NO_SHOW')
+      .map((r) => r.displayName ?? r.user?.firstName ?? r.user?.username ?? null)
+      .filter((n): n is string => !!n) ?? [];
+
   const onShare = () => {
     if (!tn) return;
     void Share.share({ message: `${tn.title} - PocketPair` }).catch(() =>
       Alert.alert(t('common.notYetAvailable'))
     );
   };
+
+  const headerControls = (
+    <>
+      <BackButton />
+      {tn ? (
+        <IconButton
+          name="share-outline"
+          size={22}
+          accessibilityLabel={t('common.share')}
+          onPress={onShare}
+        />
+      ) : null}
+    </>
+  );
 
   return (
     <>
@@ -187,17 +228,9 @@ export default function TournamentDetailScreen() {
         refreshing={networkStatus === 4}
         onRefresh={() => void refetch()}
         contentClassName="gap-4">
-        <View className="flex-row items-center justify-between">
-          <BackButton />
-          {tn ? (
-            <IconButton
-              name="share-outline"
-              size={22}
-              accessibilityLabel={t('common.share')}
-              onPress={onShare}
-            />
-          ) : null}
-        </View>
+        {useHero ? null : (
+          <View className="flex-row items-center justify-between">{headerControls}</View>
+        )}
 
         {loading && !data ? (
           <LoadingState label={t('events.loadingDetails')} />
@@ -209,24 +242,38 @@ export default function TournamentDetailScreen() {
           />
         ) : (
           <>
-            {/* Title + status */}
-            <FadeUp>
-              <View className="gap-3">
-                <View className="flex-row items-start justify-between gap-3">
-                  <Text variant="title" className="flex-1">
-                    {tn.title}
-                  </Text>
-                  <View className="items-end gap-1">
-                    <Badge
-                      label={t(`events.status.${tn.status.toLowerCase()}`, tn.status)}
-                      tone={STATUS_TONE[tn.status]}
-                    />
-                    {isBounty ? <Badge label={t('events.pko')} tone="bounty" /> : null}
+            {/* Upcoming gets the full identity hero; once the clock is running the
+                compact title block keeps it above the fold. Not wrapped in FadeUp
+                — a full-bleed cover sliding in from below reads as a glitch. */}
+            {useHero ? (
+              <EventHero
+                title={tn.title}
+                description={tn.description}
+                clubId={tn.club?.id}
+                clubName={tn.club?.name}
+                clubCity={tn.club?.city}
+                startTime={tn.startTime}
+                buyInCents={tn.buyInCents}
+                registeredCount={regCount}
+                seatCap={tn.seatCap}
+                playerNames={fieldNames}
+                badges={statusBadges}
+                header={headerControls}
+                onPressField={() => setTab('players')}
+              />
+            ) : (
+              <FadeUp>
+                <View className="gap-3">
+                  <View className="flex-row items-start justify-between gap-3">
+                    <Text variant="title" className="flex-1">
+                      {tn.title}
+                    </Text>
+                    <View className="items-end gap-1">{statusBadges}</View>
                   </View>
+                  {tn.description ? <Text variant="muted">{tn.description}</Text> : null}
                 </View>
-                {tn.description ? <Text variant="muted">{tn.description}</Text> : null}
-              </View>
-            </FadeUp>
+              </FadeUp>
+            )}
 
             {/* Adaptive hero: the one thing that matters at this stage of the event. */}
             {tn.status === 'IN_PROGRESS' ? (

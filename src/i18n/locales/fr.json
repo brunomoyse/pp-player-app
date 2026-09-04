@@ -198,6 +198,11 @@
       "structure": "Structure",
       "players": "Joueurs"
     },
+    "hero": {
+      "registered_one": "{count} inscrit",
+      "registered_other": "{count} inscrits",
+      "viewFieldHint": "Voir la liste complète des joueurs"
+    },
     "noStructure": "Aucune structure de blinds publiée pour l'instant",
     "noPlayers": "Aucun joueur inscrit pour l'instant",
     "blindsStructure": "Structure des Blinds",

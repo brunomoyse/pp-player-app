@@ -182,6 +182,11 @@
       "structure": "Structure",
       "players": "Players"
     },
+    "hero": {
+      "registered_one": "{count} registered",
+      "registered_other": "{count} registered",
+      "viewFieldHint": "View the full player list"
+    },
     "noStructure": "No blind structure published yet",
     "noPlayers": "No players registered yet",
     "blindsStructure": "Blinds Structure",

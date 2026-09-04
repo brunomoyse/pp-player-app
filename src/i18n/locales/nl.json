@@ -198,6 +198,11 @@
       "structure": "Structuur",
       "players": "Spelers"
     },
+    "hero": {
+      "registered_one": "{count} ingeschreven",
+      "registered_other": "{count} ingeschreven",
+      "viewFieldHint": "Bekijk de volledige spelerslijst"
+    },
     "noStructure": "Nog geen blindsstructuur gepubliceerd",
     "noPlayers": "Nog geen spelers ingeschreven",
     "blindsStructure": "Blinds Structuur",

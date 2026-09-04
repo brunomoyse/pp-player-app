@@ -19,6 +19,8 @@ export { PlayerNoteSheet } from './PlayerNoteSheet';
 export type { PlayerNoteSheetProps } from './PlayerNoteSheet';
 export { PreGameField } from './PreGameField';
 export { ClubSelector } from './ClubSelector';
+export { EventHero } from './EventHero';
+export type { EventHeroProps } from './EventHero';
 export { ClockDisplay } from './ClockDisplay';
 export type { ClockDisplayProps, ClockLevel } from './ClockDisplay';
 export { SeatingCard } from './SeatingCard';
