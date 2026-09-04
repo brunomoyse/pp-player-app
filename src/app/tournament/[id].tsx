@@ -182,6 +182,11 @@ export default function TournamentDetailScreen() {
   // The upcoming hero owns the header (back/share float over its cover), so the
   // controls are built once and mounted in whichever layout is active.
   const useHero = tn?.status === 'UPCOMING';
+
+  // Chip counts read better grouped ("12 000"), and the unit has to travel with
+  // the number so an add-on can render as "12 000 chips · 20,00 €".
+  const chipCount = (n: number) =>
+    t('events.chipsCount', { chips: n.toLocaleString(i18n.language) });
   const statusBadges = tn ? (
     <>
       <Badge
@@ -393,26 +398,59 @@ export default function TournamentDetailScreen() {
 
             {tab === 'info' ? (
               <Card className="gap-3">
-                <Fact
-                  icon="time-outline"
-                  label={t('events.dateTime')}
-                  value={formatDateTime(tn.startTime, i18n.language)}
-                />
-                <Fact
-                  icon="cash-outline"
-                  label={t('events.buyIn')}
-                  value={currencyCents(tn.buyInCents)}
-                />
-                <Fact
-                  icon="people-outline"
-                  label={t('events.players')}
-                  value={tn.seatCap ? `${regCount} / ${tn.seatCap}` : `${regCount}`}
-                />
+                {/* The hero already states the date, buy-in, field and club for an
+                    upcoming event, so repeating them here would be the same card
+                    twice. What stays is what the hero cannot say: the rules a
+                    player weighs before putting money in. */}
+                {useHero ? null : (
+                  <>
+                    <Fact
+                      icon="time-outline"
+                      label={t('events.dateTime')}
+                      value={formatDateTime(tn.startTime, i18n.language)}
+                    />
+                    <Fact
+                      icon="cash-outline"
+                      label={t('events.buyIn')}
+                      value={currencyCents(tn.buyInCents)}
+                    />
+                    <Fact
+                      icon="people-outline"
+                      label={t('events.players')}
+                      value={tn.seatCap ? `${regCount} / ${tn.seatCap}` : `${regCount}`}
+                    />
+                  </>
+                )}
                 {isBounty ? (
                   <Fact
                     icon="skull-outline"
                     label={t('events.bounty.perKnockout')}
                     value={currencyCents(tn.bountyAmountCents ?? 0)}
+                  />
+                ) : null}
+                {tn.rebuyMax != null && tn.rebuyMax > 0 ? (
+                  <Fact
+                    icon="refresh-outline"
+                    label={t('events.reentries')}
+                    value={t('events.upToCount', { max: tn.rebuyMax })}
+                  />
+                ) : null}
+                {tn.addonChips != null && tn.addonChips > 0 ? (
+                  <Fact
+                    icon="add-circle-outline"
+                    label={t('events.addon')}
+                    value={
+                      tn.addonPriceCents
+                        ? `${chipCount(tn.addonChips)} · ${currencyCents(tn.addonPriceCents)}`
+                        : chipCount(tn.addonChips)
+                    }
+                  />
+                ) : null}
+                {tn.levelTwoBonusChips != null && tn.levelTwoBonusChips > 0 ? (
+                  <Fact
+                    icon="gift-outline"
+                    label={t('events.levelTwoBonus')}
+                    value={chipCount(tn.levelTwoBonusChips)}
                   />
                 ) : null}
                 {tn.status === 'IN_PROGRESS' && stats?.playersRemaining != null ? (
@@ -429,9 +467,9 @@ export default function TournamentDetailScreen() {
                     value={avgStack.toLocaleString(i18n.language)}
                   />
                 ) : null}
-                {tn.club ? (
+                {useHero || !tn.club ? null : (
                   <Fact icon="business-outline" label={t('events.club')} value={tn.club.name} />
-                ) : null}
+                )}
               </Card>
             ) : null}
 
