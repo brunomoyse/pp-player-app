@@ -199,6 +199,7 @@
     "tournamentClock": "Clock",
     "timeRemaining": "Time Remaining",
     "smallBigBlind": "Small / Big Blind",
+    "blindsAnte": "Small / Big / Ante",
     "nextLevel": "Next Level",
     "tableAssignment": "Table Assignment",
     "viewAllTables": "View All Tables",

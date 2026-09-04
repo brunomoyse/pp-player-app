@@ -23,10 +23,39 @@ export interface ClockDisplayProps {
   isLive?: boolean;
 }
 
+/**
+ * The blinds share the clock body with a fixed-width timer, leaving them roughly
+ * 190pt. At 28px JetBrains Mono that is about 11 characters, so a late level
+ * ("25000 / 50000 (5000)") used to wrap mid-number — the big blind dropped onto
+ * a second line. Step the size down by length, and let the platform shrink
+ * further on narrow devices.
+ */
+const BLIND_SIZE_STEPS: readonly (readonly [maxChars: number, fontSize: number])[] = [
+  [11, 28],
+  [13, 24],
+  [17, 19],
+  [21, 15],
+] as const;
+
+function blindsFontSize(text: string): number {
+  for (const [maxChars, fontSize] of BLIND_SIZE_STEPS) {
+    if (text.length <= maxChars) return fontSize;
+  }
+  return 13;
+}
+
+/** "1000 / 2000", or "1000 / 2000 (200)" with an ante — bare parens for the ante
+ *  matches how the structure list already writes a level. */
+function formatBlinds(level: ClockLevel): string {
+  const base = `${level.smallBlind} / ${level.bigBlind}`;
+  return level.ante ? `${base} (${level.ante})` : base;
+}
+
 export function ClockDisplay({ currentLevel, nextLevel, timeRemaining, isLive }: ClockDisplayProps) {
   const { t } = useTranslation();
   const reduce = useReducedMotion();
   const onBreak = !!currentLevel?.isBreak;
+  const blinds = currentLevel ? formatBlinds(currentLevel) : '';
 
   // Flash the clock briefly each time the blind level advances, so the change
   // is noticeable on a glanced-at screen. Keyed counter restarts the animation.
@@ -84,7 +113,10 @@ export function ClockDisplay({ currentLevel, nextLevel, timeRemaining, isLive }:
 
       {/* Body */}
       <View className="mb-4 flex-row gap-4">
-        <View className="flex-1 items-center">
+        {/* The timer is fixed-width ("MM:SS"), so it sizes to content and hands the
+            rest of the row to the blinds, which are what actually overflow. With
+            no level to show alongside it, it stretches so it stays centred. */}
+        <View className={cn('items-center', currentLevel ? undefined : 'flex-1')}>
           <Text className="font-mono-medium text-[36px] text-pp-danger" style={{ fontVariant: ['tabular-nums'] }}>
             {formatDuration(timeRemaining)}
           </Text>
@@ -96,20 +128,16 @@ export function ClockDisplay({ currentLevel, nextLevel, timeRemaining, isLive }:
         {currentLevel && !onBreak ? (
           <View className="flex-1 items-center">
             <Text
-              className="font-mono-medium text-[28px] text-pp-gold"
-              style={{ fontVariant: ['tabular-nums'] }}>
-              {currentLevel.smallBlind}
-              <Text className="text-pp-text-muted"> / </Text>
-              {currentLevel.bigBlind}
+              className="font-mono-medium text-pp-gold"
+              numberOfLines={1}
+              adjustsFontSizeToFit
+              minimumFontScale={0.5}
+              style={{ fontSize: blindsFontSize(blinds), fontVariant: ['tabular-nums'] }}>
+              {blinds}
             </Text>
             <Text variant="muted" className="text-[11px] uppercase tracking-wide">
-              {t('events.smallBigBlind')}
+              {currentLevel.ante ? t('events.blindsAnte') : t('events.smallBigBlind')}
             </Text>
-            {currentLevel.ante ? (
-              <Text variant="muted" className="mt-0.5 font-mono text-[12px]">
-                {t('events.ante')}: {currentLevel.ante}
-              </Text>
-            ) : null}
           </View>
         ) : onBreak ? (
           <View className="flex-1 items-center justify-center">
