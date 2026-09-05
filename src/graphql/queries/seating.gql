@@ -29,8 +29,8 @@ query GetTournamentSeatingChart($tournamentId: UUID!) {
   }
 }
 
-query GetTableSeatAssignments($clubTableId: UUID!) {
-  tableSeatAssignments(clubTableId: $clubTableId) {
+query GetTableSeatAssignments($tournamentId: UUID!, $clubTableId: UUID!) {
+  tableSeatAssignments(tournamentId: $tournamentId, clubTableId: $clubTableId) {
     assignment {
       id
       seatNumber
